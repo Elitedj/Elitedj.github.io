@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[【本站搭建】利用Hexo+Github搭建属于你的Blog]]></title>
+    <url>%2F2019%2F02%2F21%2F%E3%80%90%E6%9C%AC%E7%AB%99%E6%90%AD%E5%BB%BA%E3%80%91%E5%88%A9%E7%94%A8Hexo-Github%E6%90%AD%E5%BB%BA%E5%B1%9E%E4%BA%8E%E4%BD%A0%E7%9A%84Blog%2F</url>
+    <content type="text"><![CDATA[利用Hexo+Github轻轻松松搭建酷炫的个人Blog！本人环境： Ubantu 18.04 Hexo 3.8.0 Node.js 8.10.0 NexT 7.0.0 下面正式开始： 1.安装Hexo准备工作： 安装Node.js 安装Git 安装Node.js：在终端输入： curl https://raw.github.com/creationix/nvm/v0.33.11/install.sh | sh or wget -qO- https://raw.github.com/creationix/nvm/v0.33.11/install.sh | sh 安装完成后输入: nvm install stable 输入 node -v 查看是否安装成功，成功如下图：]]></content>
+      <categories>
+        <category>关于本站</category>
+      </categories>
+      <tags>
+        <tag>-关于本站 -Hexo -Github</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Hello World]]></title>
     <url>%2F2019%2F02%2F21%2Fhello-world%2F</url>
     <content type="text"><![CDATA[Hello World!熟悉的开头方式很久之前就希望有一个自己搭建的个人Blog，奈何自己没技术(哭泣)，偶然间在某论坛看到有人用Hexo+Github来搭建静态的Blog，于是自己也心血来潮折腾了一番，就有了本站的诞生(撒花)。本人打算用来记录学习生活中学到的一些技术、遇到的Bug、生活中的趣事等～ 最后flag还是要立的：希望自己能坚持更新！]]></content>
