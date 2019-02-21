@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-02-21T03:46:24.433Z</updated>
+  <updated>2019-02-21T04:10:50.728Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,17 +20,16 @@
     <title>Hello World</title>
     <link href="http://yoursite.com/2019/02/21/hello-world/"/>
     <id>http://yoursite.com/2019/02/21/hello-world/</id>
-    <published>2019-02-21T03:46:24.457Z</published>
-    <updated>2019-02-21T03:46:24.433Z</updated>
+    <published>2019-02-21T04:10:50.756Z</published>
+    <updated>2019-02-21T04:10:50.728Z</updated>
     
-    <content type="html"><![CDATA[<p>Hello World!<br>熟悉的开头方式</p>]]></content>
+    <content type="html"><![CDATA[<p>Hello World!<br>熟悉的开头方式<br>很久之前就希望有一个自己搭建的个人Blog，奈何自己没技术(哭泣)，偶然间在某论坛看到有人用Hexo+Github来搭建静态的Blog，于是自己也心血来潮折腾了一番，就有了本站的诞生(撒花)。本人打算用来记录学习生活中学到的一些技术、遇到的Bug、生活中的趣事等～  </p><p>最后flag还是要立的：希望自己能坚持更新！  </p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;p&gt;Hello World!&lt;br&gt;熟悉的开头方式&lt;/p&gt;
-
+        &lt;p&gt;Hello World!&lt;br&gt;熟悉的开头方式&lt;br&gt;很久之前就希望有一个自己搭建的个人Blog，奈何自己没技术(哭泣)，偶然间在某论坛看到有人用Hexo+Github来搭建静态的Blog，于是自己也心血来潮折腾了一番，就有了本站的诞生(撒花)。本人打算用来记录学习生活中学
       
     
     </summary>
