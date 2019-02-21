@@ -1140,7 +1140,8 @@ pre .javascript .function {
   bottom: 19px;
 }
 .header {
-  background: transparent;
+  background: url("../images/bg.jpg") no-repeat;
+  background-size: 100% 100%;
 }
 .header-inner {
   position: relative;
@@ -1716,13 +1717,14 @@ pre .javascript .function {
   width: 0;
   z-index: 1040;
   box-shadow: inset 0 2px 6px #000;
-  background: #222;
+  background: url("../images/sbg.jpeg") no-repeat;
+  background-size: 100% 100%;
   -webkit-transform: translateZ(0);
 }
 .sidebar a,
 .sidebar .exturl {
-  color: #999;
-  border-bottom-color: #555;
+  color: #fff;
+  border-bottom-color: #fff;
 }
 .sidebar a:hover,
 .sidebar .exturl:hover {
@@ -1741,7 +1743,7 @@ pre .javascript .function {
 .sidebar-inner {
   position: relative;
   padding: 20px 10px;
-  color: #999;
+  color: #fff;
   text-align: center;
 }
 .site-overview-wrap {
@@ -1898,7 +1900,7 @@ pre .javascript .function {
   vertical-align: middle;
   margin-right: 10px;
   margin-bottom: 10px;
-  border-bottom-color: #555;
+  border-bottom-color: #fff;
   font-size: 13px;
 }
 .links-of-author a:before,
@@ -1910,7 +1912,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #e9ffcb;
+  background: #6f6ecd;
 }
 .links-of-blogroll {
   font-size: 13px;
