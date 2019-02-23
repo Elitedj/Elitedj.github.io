@@ -654,7 +654,7 @@
   
 </div>
 
-<span id="timeDate">\n载入天数...</span><span id="times">载入时分秒...</span>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span><br>
 <script>
     var now = new Date();
     function createtime() {
@@ -669,7 +669,7 @@
         document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
         document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
     }
-setInterval("createtime()\n",250);
+setInterval("createtime()",250);
 </script>
 
 
