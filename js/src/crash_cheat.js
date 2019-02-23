@@ -8,7 +8,7 @@ document.addEventListener('visibilitychange', function () {
     clearTimeout(titleTime);
   }
   else {
-    $('[rel="svg"]').attr('href', "./MyBlog/themes/next/source/images/logo.svg");
+    $('[rel="svg"]').attr('href', "../next/source/images/logo.svg");
     document.title = '(ฅ>ω<*ฅ) 噫又好了~' + OriginTitle;
     titleTime = setTimeout(function () {
       document.title = OriginTitle;
