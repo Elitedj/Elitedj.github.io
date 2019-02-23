@@ -936,7 +936,7 @@ NexT 7.0.0
 <script>
     var now = new Date();
     function createtime() {
-        var grt= new Date("02/14/2018 12:49:00");//此处修改你的建站时间或者网站上线时间
+        var grt= new Date("02/21/2019 13:00:00");//此处修改你的建站时间或者网站上线时间
         now.setTime(now.getTime()+250);
         days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
         hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
@@ -947,7 +947,7 @@ NexT 7.0.0
         document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
         document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
     }
-setInterval("createtime()",250);
+setInterval(\n + "createtime()",250);
 </script>
 
         
