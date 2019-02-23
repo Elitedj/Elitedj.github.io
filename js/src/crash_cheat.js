@@ -9,7 +9,7 @@ document.addEventListener('visibilitychange', function () {
   }
   else {
     $('[rel="svg"]').attr('href', "../next/source/images/logo.svg");
-    document.title = '(ฅ>ω<*ฅ) 噫又好了~' + OriginTitle;
+    document.title = '(ฅ>ω<*ฅ) 噫又好了~';
     titleTime = setTimeout(function () {
       document.title = OriginTitle;
     }, 2000);
