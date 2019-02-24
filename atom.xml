@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-02-24T08:09:39.421Z</updated>
+  <updated>2019-02-24T08:15:56.010Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://yoursite.com/2019/02/24/%E3%80%90Hexo%E3%80%91%E4%B8%AA%E6%80%A7%E5%8C%962-0%E9%9C%87%E6%92%BC%E6%9D%A5%E8%A2%AD/"/>
     <id>http://yoursite.com/2019/02/24/【Hexo】个性化2-0震撼来袭/</id>
     <published>2019-02-24T07:29:02.000Z</published>
-    <updated>2019-02-24T08:09:39.421Z</updated>
+    <updated>2019-02-24T08:15:56.010Z</updated>
     
     <summary type="html">
     
@@ -70,9 +70,9 @@
       <category term="Hexo" scheme="http://yoursite.com/categories/Hexo/"/>
     
     
-      <category term="Hexo" scheme="http://yoursite.com/tags/Hexo/"/>
-    
       <category term="关于本站" scheme="http://yoursite.com/tags/%E5%85%B3%E4%BA%8E%E6%9C%AC%E7%AB%99/"/>
+    
+      <category term="Hexo" scheme="http://yoursite.com/tags/Hexo/"/>
     
       <category term="Github" scheme="http://yoursite.com/tags/Github/"/>
     
