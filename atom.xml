@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-02-24T13:08:16.740Z</updated>
+  <updated>2019-02-25T11:18:01.026Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>【Hexo】3.0！为Blog增加相册页面</title>
+    <link href="http://yoursite.com/2019/02/25/%E3%80%90Hexo%E3%80%913-0%EF%BC%81%E4%B8%BABlog%E5%A2%9E%E5%8A%A0%E7%9B%B8%E5%86%8C%E9%A1%B5%E9%9D%A2/"/>
+    <id>http://yoursite.com/2019/02/25/【Hexo】3-0！为Blog增加相册页面/</id>
+    <published>2019-02-25T09:44:08.000Z</published>
+    <updated>2019-02-25T11:18:01.026Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;本次的个性化设置是添加相册页面，具体效果可以查看&lt;a href=&quot;http://elitedj.me/photos/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;我的相册&lt;/a&gt;&lt;br&gt;本篇教程是参考的&lt;a
+        
+      
+    
+    </summary>
+    
+      <category term="Hexo" scheme="http://yoursite.com/categories/Hexo/"/>
+    
+    
+      <category term="Hexo" scheme="http://yoursite.com/tags/Hexo/"/>
+    
+  </entry>
   
   <entry>
     <title>【Hexo】个性化2.0震撼来袭</title>
