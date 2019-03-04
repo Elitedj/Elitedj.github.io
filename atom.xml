@@ -96,9 +96,9 @@
       <category term="Hexo" scheme="http://yoursite.com/categories/Hexo/"/>
     
     
-      <category term="关于本站" scheme="http://yoursite.com/tags/%E5%85%B3%E4%BA%8E%E6%9C%AC%E7%AB%99/"/>
-    
       <category term="Hexo" scheme="http://yoursite.com/tags/Hexo/"/>
+    
+      <category term="关于本站" scheme="http://yoursite.com/tags/%E5%85%B3%E4%BA%8E%E6%9C%AC%E7%AB%99/"/>
     
       <category term="Github" scheme="http://yoursite.com/tags/Github/"/>
     
