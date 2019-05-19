@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-05-19T11:28:34.209Z</updated>
+  <updated>2019-05-19T16:54:44.703Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[2019GDCPC]柠檬精的双鸭山大学两日游</title>
+    <link href="http://yoursite.com/2019/05/19/2019GDCPC-%E6%9F%A0%E6%AA%AC%E7%B2%BE%E7%9A%84%E5%8F%8C%E9%B8%AD%E5%B1%B1%E5%A4%A7%E5%AD%A6%E4%B8%A4%E6%97%A5%E6%B8%B8/"/>
+    <id>http://yoursite.com/2019/05/19/2019GDCPC-柠檬精的双鸭山大学两日游/</id>
+    <published>2019-05-19T12:04:02.000Z</published>
+    <updated>2019-05-19T16:54:44.703Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;距离2019GDCPC结束也有一周了，再不写总结估计发生了什么都忘得差不多了。  &lt;/p&gt;
+&lt;p&gt;首先我们队是随便组的，没有专门的训练过，也没有什么配合之类的，运气好校赛第六拿到了今年GDCPC的名额，让我能去中大吃柠檬。&lt;/p&gt;
+&lt;h2 id=&quot;赛前准备&quot;&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+      <category term="GDCPC" scheme="http://yoursite.com/categories/GDCPC/"/>
+    
+    
+      <category term="GDCPC" scheme="http://yoursite.com/tags/GDCPC/"/>
+    
+  </entry>
   
   <entry>
     <title>[c/c++]关于输入输出</title>
