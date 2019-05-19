@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-03-31T06:48:33.034Z</updated>
+  <updated>2019-05-19T11:25:10.848Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[c/c++]关于输入输出</title>
+    <link href="http://yoursite.com/2019/05/08/c-c-%E5%85%B3%E4%BA%8E%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/"/>
+    <id>http://yoursite.com/2019/05/08/c-c-关于输入输出/</id>
+    <published>2019-05-08T08:16:53.000Z</published>
+    <updated>2019-05-19T11:25:10.848Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;这篇文章很久之前就想写了，可是一直都很忙，现在终于可以开始慢慢的写啦～&lt;/p&gt;
+&lt;p&gt;因为拿到了GDCPC的名额，所以在4.19晚上打了一场双鸭山大学的ACM校赛重现赛，先来看一道水题吧&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;timu.jpg&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="c/c++" scheme="http://yoursite.com/categories/c-c/"/>
+    
+    
+      <category term="c/c++" scheme="http://yoursite.com/tags/c-c/"/>
+    
+  </entry>
   
   <entry>
     <title>【总结】关于第十届蓝桥杯和第四届CCCC字符串大赛的体验</title>
