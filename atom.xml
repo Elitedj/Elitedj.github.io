@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-05-19T16:54:44.703Z</updated>
+  <updated>2019-07-25T17:50:04.702Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>线段树基础</title>
+    <link href="http://yoursite.com/2019/07/25/%E7%BA%BF%E6%AE%B5%E6%A0%91%E5%9F%BA%E7%A1%80/"/>
+    <id>http://yoursite.com/2019/07/25/线段树基础/</id>
+    <published>2019-07-25T12:30:10.000Z</published>
+    <updated>2019-07-25T17:50:04.702Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;最近几天都在瞎搞线段树，学会了如何轻松愉快的写线段树模板题，于是想写一个线段树入门的总结。如果你是像上海全能王csl一样会&lt;strong&gt;ac自动机fail树上dfs序建可持久化线段树&lt;/strong&gt;的神犇，那么你可以无视这一篇没什么用的blog了。&lt;/p&gt;
+&lt;h1
+        
+      
+    
+    </summary>
+    
+      <category term="Algorithm" scheme="http://yoursite.com/categories/Algorithm/"/>
+    
+    
+      <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
+    
+  </entry>
   
   <entry>
     <title>[2019GDCPC]柠檬精的双鸭山大学两日游</title>
