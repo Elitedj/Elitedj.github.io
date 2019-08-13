@@ -1,0 +1,1436 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<script src="/js/src/photoswipe.min.js?v="></script>
+<script src="/js/src/photoswipe-ui-default.min.js?v="></script>
+
+<html class="theme-next muse use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.0.0',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="最近几天都在瞎搞线段树，学会了如何轻松愉快的写线段树模板题，于是想写一个线段树入门的总结。如果你是像上海全能王csl一样会ac自动机fail树上dfs序建可持久化线段树的神犇，那么你可以无视这一篇没什么用的blog了。 引子考虑这样一个问题：有一个50000大的数组，然后有50000个询问，每个询问让你求区间l到r的和。这个问题好像没什么难度，用一个循环将每次询问的区间求和输出就好，比如下面这样。">
+<meta name="keywords" content="Algorithm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="线段树基础">
+<meta property="og:url" content="http://yoursite.com/posts/6d219c98/index.html">
+<meta property="og:site_name" content="Elitedj">
+<meta property="og:description" content="最近几天都在瞎搞线段树，学会了如何轻松愉快的写线段树模板题，于是想写一个线段树入门的总结。如果你是像上海全能王csl一样会ac自动机fail树上dfs序建可持久化线段树的神犇，那么你可以无视这一篇没什么用的blog了。 引子考虑这样一个问题：有一个50000大的数组，然后有50000个询问，每个询问让你求区间l到r的和。这个问题好像没什么难度，用一个循环将每次询问的区间求和输出就好，比如下面这样。">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://yoursite.com/posts/6d219c98/xds.png">
+<meta property="og:image" content="http://yoursite.com/posts/6d219c98/ttof.png">
+<meta property="og:image" content="http://yoursite.com/posts/6d219c98/query.png">
+<meta property="og:image" content="http://yoursite.com/posts/6d219c98/hdu1166.png">
+<meta property="og:image" content="http://yoursite.com/posts/6d219c98/poj3468.png">
+<meta property="og:image" content="http://yoursite.com/posts/6d219c98/poj2777.png">
+<meta property="og:updated_time" content="2019-07-25T18:11:51.966Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="线段树基础">
+<meta name="twitter:description" content="最近几天都在瞎搞线段树，学会了如何轻松愉快的写线段树模板题，于是想写一个线段树入门的总结。如果你是像上海全能王csl一样会ac自动机fail树上dfs序建可持久化线段树的神犇，那么你可以无视这一篇没什么用的blog了。 引子考虑这样一个问题：有一个50000大的数组，然后有50000个询问，每个询问让你求区间l到r的和。这个问题好像没什么难度，用一个循环将每次询问的区间求和输出就好，比如下面这样。">
+<meta name="twitter:image" content="http://yoursite.com/posts/6d219c98/xds.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Elitedj" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/posts/6d219c98/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>线段树基础 | Elitedj</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Elitedj</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-photos">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/photos" rel="section"><i class="menu-item-icon fa fa-fw fa-camera"></i> <br>photos</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/6d219c98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Elitedj">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/timg.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elitedj">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">线段树基础
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-07-25 20:30:10" itemprop="dateCreated datePublished" datetime="2019-07-25T20:30:10+08:00">2019-07-25</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-26 02:11:51" itemprop="dateModified" datetime="2019-07-26T02:11:51+08:00">2019-07-26</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/posts/6d219c98/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/posts/6d219c98/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最近几天都在瞎搞线段树，学会了如何轻松愉快的写线段树模板题，于是想写一个线段树入门的总结。如果你是像上海全能王csl一样会<strong>ac自动机fail树上dfs序建可持久化线段树</strong>的神犇，那么你可以无视这一篇没什么用的blog了。</p>
+<h1 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h1><p>考虑这样一个问题：有一个50000大的数组，然后有50000个询问，每个询问让你求区间l到r的和。这个问题好像没什么难度，用一个循环将每次询问的区间求和输出就好，比如下面这样。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> num[<span class="number">50005</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n,q;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n&gt;&gt;q;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i)</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;num[i];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=q;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> x,y;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;x&gt;&gt;y;</span><br><span class="line">        ll ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=x;j&lt;=y;++j)</span><br><span class="line">            ans += num[j];</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;ans&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这样暴力求解实在是太慢了，有一种更快的方式是前缀和，如下。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line">ll num[<span class="number">50005</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n,q;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n&gt;&gt;q;</span><br><span class="line">    num[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;num[i];</span><br><span class="line">        num[i] += num[i<span class="number">-1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=q;j++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> x,y;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;x&gt;&gt;y;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;num[y]-num[x<span class="number">-1</span>]&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如果将问题改为这样：有一个长度的50000的数组，有50000次操作，操作分为两种，第一种操作是将第i个数加上一个值x，另一种操作是询问区间l到r的和。对于这个问题，暴力和前缀和都不那么好使了。线段树有一个弟弟叫树状数组，能够解决这一个问题，树状数组能够解决的问题一定能够用线段树解决。树状数组较为简单，核心代码也就十行左右，但是本篇blog不打算讲树状数组。</p>
+<p>再将问题改一改，同样那么大的数组，那么多次的询问，询问区间l到r的最大值是多少？暴力会TLE，前缀和搞不定，树状数组也不行，这时候线段树就应运而生了。</p>
+<h1 id="线段树"><a href="#线段树" class="headerlink" title="线段树"></a>线段树</h1><p>线段树是一种树型的数据结构，主要用于维护一段连续区间的某种性质，并支持对连续区间进行一些操作。每一次操作的时间复杂度都为logn级别。大概分为四种类型：<br><strong>单点修改，单点查询</strong><br><strong>单点修改，区间查询</strong><br><strong>区间修改，单点查询</strong><br><strong>区间修改，区间查询</strong>  </p>
+<h2 id="线段树的模样"><a href="#线段树的模样" class="headerlink" title="线段树的模样"></a>线段树的模样</h2><p>说那么多也没用，还不如看看线段树长什么样子。<br><img src="xds.png" alt="xds"></p>
+<p>这是一个[1, 8]区间的线段树，每一个结点代表一个线段，结点存的值为区间的某种特性，比如区间和、区间最大值、区间最小值等，根据实际情况不同而不同。</p>
+<p>查询区间[2, 5]如下图所示</p>
+<p><img src="ttof.png" alt="ttof"></p>
+<p>只需要访问代表[2]、[3, 4]、[5]这三个区间的结点就可以了。</p>
+<p>修改区间[2, 5]的过程如下图所示(单点修改为区间修改的特殊情况)，递归向下(PushDown)修改，同时递归向上(PushUp)维护父结点。</p>
+<p><img src="query.png" alt="query"></p>
+<p>其实修改和查询的操作有点类似。</p>
+<h2 id="线段树的表示形式"><a href="#线段树的表示形式" class="headerlink" title="线段树的表示形式"></a>线段树的表示形式</h2><p>线段树的表示形式有很多种，有用结构体的、数组等等。这一篇blog用数组来表示线段树，其实都大同小异，没有太大的区别。</p>
+<p>为什么能够用数组来表示线段树呢？线段树是一颗<a href="https://baike.baidu.com/item/%E4%BA%8C%E5%8F%89%E6%A0%91" target="_blank" rel="noopener">二叉树</a>,所以能够用1～n来标记结点，对于序号为p的结点，它的左孩子序号为2p，右孩子序号为2p+1。</p>
+<p>在使用线段树的时候，需要开辟<strong>4倍</strong>的空间，比如要为长度为8的线段构建一颗线段树，那么数组大小至少要为32才行。</p>
+<p>假设N为2^n，则最后一个结点的编号F(N)=2^(n+1)-1<br>若N为2^(n+1),则F(N)=2^(n+2)-1<br>所以对于2^n &lt;= N &lt;= 2^(n+1)，2^(n+1)-1 &lt;= F(N) &lt;= 2^(n+2)<br>所以要开4倍空间</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tepydef <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">10000</span>; <span class="comment">//最大的结点数</span></span><br><span class="line"><span class="keyword">int</span> num[maxn+<span class="number">5</span>];        <span class="comment">//记录单个结点的数据</span></span><br><span class="line">ll tree[<span class="number">4</span>*maxn+<span class="number">5</span>];      <span class="comment">//线段树</span></span><br></pre></td></tr></table></figure>
+<p>在讲解线段树的时候，我用维护<strong>区间和</strong>作为例子。</p>
+<h2 id="建树"><a href="#建树" class="headerlink" title="建树"></a>建树</h2><p>在具体展示线段树的代码前，先简单介绍几个位运算的操作。  </p>
+<p>若当前结点为p，那么它的左孩子就为2p，右孩子就为2p+1，对于乘2，可以用左移一位表示，即2p和p&lt;&lt;1相等，那么2p+1就和p&lt;&lt;1|1(先将p左移一位，即乘二，然后在二进制中，偶数的最低位为0，这时候再或上一个1，最低位就变成1，相当于加一操作)相等。  </p>
+<p>线段树的建树过程是用递归二分的方式，具体代码如下:<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//p:当前结点序号, 当前的区间范围是[l, r]</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(l==r)<span class="comment">//表示走到叶子节点，将当前序号为p的结点赋值为数组中第l个值，然后return结束递归</span></span><br><span class="line">    &#123;</span><br><span class="line">        tree[p] = num[l];</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> mid = (l+r) &gt;&gt; <span class="number">1</span>;<span class="comment">//取区间中点，然后二分建树</span></span><br><span class="line">    build(p&lt;&lt;<span class="number">1</span>, l, mid);</span><br><span class="line">    build(p&lt;&lt;<span class="number">1</span>|<span class="number">1</span>, mid+<span class="number">1</span>, r);</span><br><span class="line">    <span class="comment">//PushUp操作，因为用区间和为例，所以当前结点的值就为左右孩子的和</span></span><br><span class="line">    tree[p] = tree[p&lt;&lt;<span class="number">1</span>] + tree[p&lt;&lt;<span class="number">1</span>|<span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//根节点序号为1，线段树的区间为[1, n]</span></span><br><span class="line">build(<span class="number">1</span>, <span class="number">1</span>, n);</span><br></pre></td></tr></table></figure></p>
+<h2 id="单点修改"><a href="#单点修改" class="headerlink" title="单点修改"></a>单点修改</h2><p>以将某个节点加上某个数值为例</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//p:当前结点序号，当前区间范围是[l, r]，修改的结点位置是原始数组的ind位置，将ind这个结点加上v这个值</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> ind, <span class="keyword">int</span> v)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(l==r)<span class="comment">//走到叶子结点，也就说明走到了线段树中代表ind的这个结点</span></span><br><span class="line">    &#123;</span><br><span class="line">        tree[p] += v;<span class="comment">//更新值</span></span><br><span class="line">        <span class="keyword">return</span> ;<span class="comment">//返回</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> mid = (l+r) &gt;&gt; <span class="number">1</span>; <span class="comment">//取区间中点，同二分思想</span></span><br><span class="line">    <span class="keyword">if</span>(ind &lt;= mid)<span class="comment">//要修改的结点在当前线段的左半边</span></span><br><span class="line">        update(p&lt;&lt;<span class="number">1</span>, l, mid, ind, v);<span class="comment">//递归更新，左孩子的序号为p&lt;&lt;1，区间变为[l, mid]</span></span><br><span class="line">    <span class="keyword">else</span><span class="comment">//要修改的结点在右半边</span></span><br><span class="line">        update(p&lt;&lt;<span class="number">1</span>|<span class="number">1</span>, mid+<span class="number">1</span>, r, ind, v);<span class="comment">//递归更新，右孩子序号为p&lt;&lt;1|1，区间变为[mid+1, r]</span></span><br><span class="line">    tree[p] = tree[p&lt;&lt;<span class="number">1</span>] + tree[p&lt;&lt;<span class="number">1</span>|<span class="number">1</span>];<span class="comment">//PushUp操作，维护[l, r]的区间和</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="区间查询一"><a href="#区间查询一" class="headerlink" title="区间查询一"></a>区间查询一</h2><p>查询某段区间的和</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//p:当前结点序号，当前结点表示的区间为[l, r]，要查询[x, y]的区间和</span></span><br><span class="line"><span class="function">ll <span class="title">query</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//若要查询的区间完全覆盖当前结点表示的区间，就返回当前结点维护的值</span></span><br><span class="line">    <span class="comment">//例如上面介绍的图中查询到区间[3, 4]的时候</span></span><br><span class="line">    <span class="keyword">if</span>(x &lt;= l &amp;&amp; r &lt;= y)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> tree[p];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//当前表示的区间大于要查询的区间，就二分的去查询</span></span><br><span class="line">    <span class="keyword">int</span> mid = (l+r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="comment">//ans记录结果</span></span><br><span class="line">    ll ans = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">//若当前左半段区间有需要查询的部分，递归查询左半段区间</span></span><br><span class="line">    <span class="keyword">if</span>(x &lt;= mid)</span><br><span class="line">        ans += query(p&lt;&lt;<span class="number">1</span>, l, mid, x, y);</span><br><span class="line">    <span class="comment">//右半段同理</span></span><br><span class="line">    <span class="keyword">if</span>(y &gt; mid)</span><br><span class="line">        ans += query(p&lt;&lt;<span class="number">1</span>|<span class="number">1</span>, mid+<span class="number">1</span>, r, x, y);</span><br><span class="line">    <span class="comment">//最后返回总的值就行</span></span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="单点修改，区间查询例题"><a href="#单点修改，区间查询例题" class="headerlink" title="单点修改，区间查询例题"></a>单点修改，区间查询例题</h2><p>其实线段树模板的代码挺好理解的，我也加了详细的注释，新手理解起来应该问题不大，下面通过一道例题来展示线段树的使用。</p>
+<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1166" target="_blank" rel="noopener">hdu1166 排兵布阵</a><br><img src="hdu1166.png" alt="hdu1166"></p>
+<p>题目的大意就是有N个工兵营地，然后营地会增加或删减掉一些兵，会询问营地i到j的总人数。</p>
+<p>AC代码如下<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> num[<span class="number">50005</span>];</span><br><span class="line">ll tree[<span class="number">4</span> * <span class="number">50000</span> + <span class="number">5</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(l == r)</span><br><span class="line">    &#123;</span><br><span class="line">        tree[p] = num[l];</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = (r+l) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        build(p&lt;&lt;<span class="number">1</span>, l, mid);</span><br><span class="line">        build(p&lt;&lt;<span class="number">1</span>|<span class="number">1</span>, mid+<span class="number">1</span>, r);</span><br><span class="line">        tree[p] = tree[p&lt;&lt;<span class="number">1</span>] + tree[p&lt;&lt;<span class="number">1</span>|<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> ind, <span class="keyword">int</span> v)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(l == r)</span><br><span class="line">    &#123;</span><br><span class="line">        tree[p] += v;</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = (r+l) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(ind &lt;= mid) add(p&lt;&lt;<span class="number">1</span>, l, mid, ind, v);</span><br><span class="line">        <span class="keyword">else</span> add(p&lt;&lt;<span class="number">1</span>|<span class="number">1</span>, mid+<span class="number">1</span>, r, ind, v);</span><br><span class="line">        tree[p] = tree[p&lt;&lt;<span class="number">1</span>] + tree[p&lt;&lt;<span class="number">1</span>|<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">query</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x &lt;= l &amp;&amp; r &lt;= y)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> tree[p];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = (l+r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        ll ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>(x &lt;= mid)</span><br><span class="line">            ans += query(p&lt;&lt;<span class="number">1</span>, l, mid, x, y);</span><br><span class="line">        <span class="keyword">if</span>(mid &lt; y)</span><br><span class="line">            ans += query(p&lt;&lt;<span class="number">1</span>|<span class="number">1</span>, mid+<span class="number">1</span>, r, x, y);</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;t);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=t;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> n;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n;j++)</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;num[j]);</span><br><span class="line">        build(<span class="number">1</span>, <span class="number">1</span>, n);</span><br><span class="line">        <span class="built_in">string</span> s;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Case %d:\n"</span>, i);</span><br><span class="line">        <span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;s &amp;&amp; s[<span class="number">0</span>] != <span class="string">'E'</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(s[<span class="number">0</span>] == <span class="string">'Q'</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">int</span> x, y;</span><br><span class="line">                <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;x, &amp;y);</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, query(<span class="number">1</span>, <span class="number">1</span>, n, x, y));</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(s[<span class="number">0</span>] == <span class="string">'A'</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">int</span> x, y;</span><br><span class="line">                <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;x, &amp;y);</span><br><span class="line">                add(<span class="number">1</span>, <span class="number">1</span>, n, x, y);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">int</span> x, y;</span><br><span class="line">                <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;x, &amp;y);</span><br><span class="line">                add(<span class="number">1</span>, <span class="number">1</span>, n, x, -y);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>代码应该不难理解，和上面介绍的模板都差不多，这就是最简单的线段树模板题了，基本的使用方法类似。</p>
+<h2 id="Lazy思想"><a href="#Lazy思想" class="headerlink" title="Lazy思想"></a>Lazy思想</h2><p>刚刚介绍的只是简单的单点修改，其实区间修改差别也不大，对于区间修改常常会用到Lazy思想。例如[1, 8]区间的值都加上5，那么只需要将表示区间[1, 8]的Lazy标记加上5，并更新表示区间[1, 8]结点的值即可，即加5操作不继续向下传递，只有当需要用到的时候才继续向下传递。比如当前区间[1, 8]的Lazy标记为5，当我们需要查询区间[5, 8]的和时，才将[1, 8]的Lazy标记向下传递到表示区间[5, 8]的结点，同时将[1, 8]的Lazy标记改为0。</p>
+<p>Lazy就如它的名字一样，懒狗一条，只有需要的时候才向下传递，这样就可以节省时间了。如果没有Lazy，每次区间更新都对区间的每个节点进行更新，那么岂不是慢死了，和暴力差不多了，TLE警告！</p>
+<p>那么如何利用Lazy的思想呢？其实只需要加一个Lazy数组就好，在更新和查询的时候修改一点代码即可，同时还多了一个PushDown的操作。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Lazy数组的如下</span></span><br><span class="line"><span class="keyword">int</span> lazy[<span class="number">4</span>*maxn+<span class="number">5</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">//PushDown操作，就是操作Lazy值</span></span><br><span class="line"><span class="comment">//p:当前结点的序号，表示区间[l, r]</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pushdown</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//当lazy[p]不为0时</span></span><br><span class="line">    <span class="keyword">if</span>(lazy[p])</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//因为要向左右孩子传递，所以取个中值</span></span><br><span class="line">        <span class="keyword">int</span> mid = (l+r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="comment">//更新左孩子的Lazy结点值</span></span><br><span class="line">        lazy[p&lt;&lt;<span class="number">1</span>] += lazy[p];</span><br><span class="line">        <span class="comment">//更新右孩子的Lazy结点值</span></span><br><span class="line">        lazy[p&lt;&lt;<span class="number">1</span>|<span class="number">1</span>] += lazy[p];</span><br><span class="line">        <span class="comment">//更新左孩子的区间和，左孩子的区间值的个数为mid-l+1,和就多了lazy[p] * (mid-l+1)</span></span><br><span class="line">        tree[p&lt;&lt;<span class="number">1</span>] += lazy[p] * (mid-l+<span class="number">1</span>);</span><br><span class="line">        <span class="comment">//更新右孩子的区间和，同理左孩子</span></span><br><span class="line">        tree[p&lt;&lt;<span class="number">1</span>|<span class="number">1</span>] += lazy[p] * (r-mid);</span><br><span class="line">        <span class="comment">//将p的Lazy标记清0</span></span><br><span class="line">        lazy[p] = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>下面就介绍一下使用Lazy思想的区间更新和区间查询代码，同样以求区间和为例</p>
+<h2 id="区间更新"><a href="#区间更新" class="headerlink" title="区间更新"></a>区间更新</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//p:当前结点序号，表示的区间为[l ,r]，要更新的区间为[x, y]，将每个结点加上v</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> v)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//当前区间被要更新的区间完全覆盖</span></span><br><span class="line">    <span class="keyword">if</span>(x &lt;= l &amp;&amp; r &lt;= y)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//修改lazy值和当前区间和就可以了，不需要继续向下传递</span></span><br><span class="line">        lazy[p] += v;</span><br><span class="line">        tree[p] += v * (r-l+<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//二分</span></span><br><span class="line">    <span class="keyword">int</span> mid = (l+r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="comment">//记得要PushDown，因为要查询的区间为[l ,r]的部分，所以需要向下传递lazy值</span></span><br><span class="line">    pushdown(p, l, r);</span><br><span class="line">    <span class="comment">//左右更新，没什么好说的</span></span><br><span class="line">    <span class="keyword">if</span>(x &lt;= mid)</span><br><span class="line">        update(p&lt;&lt;<span class="number">1</span>, l, mid, x, y, v);</span><br><span class="line">    <span class="keyword">if</span>(y &gt; mid)</span><br><span class="line">        update(p&lt;&lt;<span class="number">1</span>|<span class="number">1</span>, mid+<span class="number">1</span>, r, x, y, v);</span><br><span class="line">    <span class="comment">//记得要更新当前的区间和</span></span><br><span class="line">    tree[p] = tree[p&lt;&lt;<span class="number">1</span>] + tree[p&lt;&lt;<span class="number">1</span>|<span class="number">1</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="区间查询二"><a href="#区间查询二" class="headerlink" title="区间查询二"></a>区间查询二</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x &lt;= l &amp;&amp; r &lt;= y)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> tree[p];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> mid = (l+r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="comment">//就多了一步PushDown操作而已，其它的和上面的类似</span></span><br><span class="line">    pushdown(p, l, r);</span><br><span class="line">    ll ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(x &lt;= mid)</span><br><span class="line">        ans += query(p&lt;&lt;<span class="number">1</span>, l, mid, x, y);</span><br><span class="line">    <span class="keyword">if</span>(y &gt; mid)</span><br><span class="line">        ans += query(p&lt;&lt;<span class="number">1</span>|q, mid+<span class="number">1</span>, r, x, y);</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="区间更新例题"><a href="#区间更新例题" class="headerlink" title="区间更新例题"></a>区间更新例题</h2><p><a href="http://poj.org/problem?id=3468" target="_blank" rel="noopener">poj3465</a><br><img src="poj3468.png" alt="poj3468"><br>题意就是对某个区间加或减一个值，然后询问某个区间的区间和。<br>AC代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line">ll num[<span class="number">100005</span>];</span><br><span class="line">ll tree[<span class="number">4</span> * <span class="number">100000</span> + <span class="number">5</span>];</span><br><span class="line">ll lazy[<span class="number">4</span> * <span class="number">100000</span> + <span class="number">5</span>]=&#123;<span class="number">0</span>&#125;;</span><br><span class="line"><span class="keyword">int</span> n,m;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(l == r)</span><br><span class="line">        tree[p] = num[l];</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = (l+r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        build(p&lt;&lt;<span class="number">1</span>, l, mid);</span><br><span class="line">        build(p&lt;&lt;<span class="number">1</span>|<span class="number">1</span>, mid+<span class="number">1</span>, r);</span><br><span class="line">        tree[p]  = tree[p&lt;&lt;<span class="number">1</span>] + tree[p&lt;&lt;<span class="number">1</span>|<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pushdown</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(lazy[p])</span><br><span class="line">    &#123;</span><br><span class="line">        lazy[p&lt;&lt;<span class="number">1</span>] += lazy[p];</span><br><span class="line">        lazy[p&lt;&lt;<span class="number">1</span>|<span class="number">1</span>] += lazy[p];</span><br><span class="line">        tree[p&lt;&lt;<span class="number">1</span>] += lazy[p] * (((l+r)&gt;&gt;<span class="number">1</span>) - l + <span class="number">1</span>);</span><br><span class="line">        tree[p&lt;&lt;<span class="number">1</span>|<span class="number">1</span>] += lazy[p] * (r - ((l+r)&gt;&gt;<span class="number">1</span>));</span><br><span class="line">        lazy[p] = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> x, <span class="keyword">int</span> y, ll v)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x &lt;= l &amp;&amp; r &lt;= y)</span><br><span class="line">    &#123;</span><br><span class="line">        lazy[p] += v;</span><br><span class="line">        tree[p] += v * (r-l+<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = (l+r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        pushdown(p, l, r);</span><br><span class="line">        <span class="keyword">if</span>(x &lt;= mid)</span><br><span class="line">            add(p&lt;&lt;<span class="number">1</span>, l, mid, x, y, v);</span><br><span class="line">        <span class="keyword">if</span>(y &gt; mid)</span><br><span class="line">            add(p&lt;&lt;<span class="number">1</span>|<span class="number">1</span>, mid+<span class="number">1</span>, r, x, y, v);</span><br><span class="line">        tree[p] = tree[p&lt;&lt;<span class="number">1</span>] + tree[p&lt;&lt;<span class="number">1</span>|<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">query</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x &lt;= l &amp;&amp; r &lt;= y)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> tree[p];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = (l+r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        ll ans = <span class="number">0</span>;</span><br><span class="line">        pushdown(p, l, r);</span><br><span class="line">        <span class="keyword">if</span>(x &lt;= mid)</span><br><span class="line">            ans += query(p&lt;&lt;<span class="number">1</span>, l, mid, x, y);</span><br><span class="line">        <span class="keyword">if</span>(y &gt; mid)</span><br><span class="line">            ans += query(p&lt;&lt;<span class="number">1</span>|<span class="number">1</span>, mid+<span class="number">1</span>, r, x, y);</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;num[i];</span><br><span class="line">    build(<span class="number">1</span>, <span class="number">1</span>, n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">char</span> a;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;a;</span><br><span class="line">        <span class="keyword">if</span>(a == <span class="string">'Q'</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> x, y;</span><br><span class="line">            <span class="built_in">cin</span>&gt;&gt;x&gt;&gt;y;</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;query(<span class="number">1</span>, <span class="number">1</span>, n, x, y)&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> x, y;</span><br><span class="line">            ll c;</span><br><span class="line">            <span class="built_in">cin</span>&gt;&gt;x&gt;&gt;y&gt;&gt;c;</span><br><span class="line">            add(<span class="number">1</span>, <span class="number">1</span>, n, x, y, c);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Easy！</p>
+<h2 id="染色问题"><a href="#染色问题" class="headerlink" title="染色问题"></a>染色问题</h2><p>线段树还有一类经典的问题就是对区间染色，然后问你某区间有多少种颜色这样的题目。对于染色问题，一般的套路如下，若某个区间完全被一种颜色覆盖，那么tree[p]的值就为表示这种颜色的数字，若这个区间有多种颜色，则用-1表示。<br><a href="http://poj.org/problem?id=2777" target="_blank" rel="noopener">poj2777</a></p>
+<p><img src="poj2777.png" alt="poj2777">  </p>
+<p>题目的意思简洁明了，是最简单的染色问题，解法就是用-1表示杂色区间，纯色区间用颜色的数字表示。在计算时，用一个颜色种类大小的bool数组标记是否计算过该种颜色就可以了。该问题并不难解决，如果理解了上面所讲的线段树内容，这一题是可以自己想到方法AC的。具体的代码就不贴了，网上也有很多题解。</p>
+<h1 id="推荐"><a href="#推荐" class="headerlink" title="推荐"></a>推荐</h1><p>其实线段树并不难理解，想到如何维护需要的东西才是难的地方，如果你看了这一篇blog还是懵懵懂懂的话，可以看一下下面的这个线段树入门视频，个人觉得讲得还不错。  </p>
+<p><a href="https://www.bilibili.com/video/av40000095?from=search&amp;seid=65778144885354606" target="_blank" rel="noopener">雨巨的 ACM 入门课之线段树</a>  </p>
+<p>如果你理解了线段树的基本思想，想要找一些水题爽一爽，那么下面的题目应该是能够满足你。  </p>
+<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1754" target="_blank" rel="noopener">hdu1754</a><br><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1698" target="_blank" rel="noopener">hdu1698</a><br><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1540" target="_blank" rel="noopener">hdu1540</a><br><a href="http://poj.org/problem?id=2528" target="_blank" rel="noopener">poj2528</a><br><a href="http://acm.zju.edu.cn/onlinejudge/showProblem.do?problemCode=1610" target="_blank" rel="noopener">hdu1610</a>  </p>
+<h1 id="结尾"><a href="#结尾" class="headerlink" title="结尾"></a>结尾</h1><p>部分代码(例题代码除外的其余所有代码)是裸敲的，没有编译和调试，如有错误请评论指出。<br>有什么不懂得也可以评论交流。</p>
+<p>END！</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/99e32afd/" rel="next" title="[2019GDCPC]柠檬精的双鸭山大学两日游">
+                <i class="fa fa-chevron-left"></i> [2019GDCPC]柠檬精的双鸭山大学两日游
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/cc617711/" rel="prev" title="图论——最短路径">
+                图论——最短路径 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/timg.jpeg" alt="Elitedj">
+            
+              <p class="site-author-name" itemprop="name">Elitedj</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Elitedj" title="GitHub &rarr; https://github.com/Elitedj" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="/elite@m.scnu.edu.cn" title="E-Mail &rarr; elite@m.scnu.edu.cn"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blog.tover.xyz" title="http://blog.tover.xyz" rel="noopener" target="_blank">Tover</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://ariacx.me" title="https://ariacx.me" rel="noopener" target="_blank">xk</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引子"><span class="nav-number">1.</span> <span class="nav-text">引子</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线段树"><span class="nav-number">2.</span> <span class="nav-text">线段树</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#线段树的模样"><span class="nav-number">2.1.</span> <span class="nav-text">线段树的模样</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线段树的表示形式"><span class="nav-number">2.2.</span> <span class="nav-text">线段树的表示形式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#建树"><span class="nav-number">2.3.</span> <span class="nav-text">建树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单点修改"><span class="nav-number">2.4.</span> <span class="nav-text">单点修改</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#区间查询一"><span class="nav-number">2.5.</span> <span class="nav-text">区间查询一</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单点修改，区间查询例题"><span class="nav-number">2.6.</span> <span class="nav-text">单点修改，区间查询例题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lazy思想"><span class="nav-number">2.7.</span> <span class="nav-text">Lazy思想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#区间更新"><span class="nav-number">2.8.</span> <span class="nav-text">区间更新</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#区间查询二"><span class="nav-number">2.9.</span> <span class="nav-text">区间查询二</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#区间更新例题"><span class="nav-number">2.10.</span> <span class="nav-text">区间更新例题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#染色问题"><span class="nav-number">2.11.</span> <span class="nav-text">染色问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#推荐"><span class="nav-number">3.</span> <span class="nav-text">推荐</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#结尾"><span class="nav-number">4.</span> <span class="nav-text">结尾</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Elitedj</span>
+
+  
+
+  
+</div>
+
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span><br>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("02/21/2019 13:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.0.0</div>
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="Total Visitors">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="Total Views">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.0"></script>
+
+  <script src="/js/src/motion.js?v=7.0.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.0"></script>
+<script src="/js/src/post-details.js?v=7.0.0"></script>
+<script type="text/javascript" src="/js/src/photoswipe-ui-default.min.js?v="></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.0"></script>
+
+
+
+  
+  
+
+<script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+
+
+
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'zOEvCRaHczqQkvn7g5bk2d9c-gzGzoHsz',
+    appKey: 'JJQvXVH4XIDyjJaIK2HWeTY3',
+    placeholder: 'comment something',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+</script>
+
+
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+
+<!--崩溃欺骗-->
+<script type="text/javascript" src="/js/src/crash_cheat.js"></script>
