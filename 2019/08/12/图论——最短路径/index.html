@@ -1,0 +1,1472 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<script src="/js/src/photoswipe.min.js?v="></script>
+<script src="/js/src/photoswipe-ui-default.min.js?v="></script>
+
+<html class="theme-next muse use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.0.0',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="前言最短路径是图论的经典问题之一，主要是为了寻找源点到终点的最短路径长度是多少。“最短”这一词在面对不同的问题时含义不同，可以代表路径长度最短、花费最少等，视不同问题而定。   这篇blog主要记录了几个求解最短路径的经典算法。 图的存储在求解图论问题时，一般都需要将图存储起来，图的存储形式主要有邻接矩阵、邻接表、链式前向星等，根据图特征不同，不同的存储结构有着各自的优点。  邻接矩阵邻接矩阵使用">
+<meta name="keywords" content="Algorithm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图论——最短路径">
+<meta property="og:url" content="http://yoursite.com/2019/08/12/图论——最短路径/index.html">
+<meta property="og:site_name" content="Elitedj">
+<meta property="og:description" content="前言最短路径是图论的经典问题之一，主要是为了寻找源点到终点的最短路径长度是多少。“最短”这一词在面对不同的问题时含义不同，可以代表路径长度最短、花费最少等，视不同问题而定。   这篇blog主要记录了几个求解最短路径的经典算法。 图的存储在求解图论问题时，一般都需要将图存储起来，图的存储形式主要有邻接矩阵、邻接表、链式前向星等，根据图特征不同，不同的存储结构有着各自的优点。  邻接矩阵邻接矩阵使用">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://yoursite.com/2019/08/12/图论——最短路径/dij.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/08/12/图论——最短路径/ljjz.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/12/图论——最短路径/ljb.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/08/12/图论——最短路径/fqhl.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/08/12/图论——最短路径/bfs.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/08/12/图论——最短路径/dij.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/08/12/图论——最短路径/dij1.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/08/12/图论——最短路径/dij2.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/08/12/图论——最短路径/dij3.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/08/12/图论——最短路径/dij4.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/08/12/图论——最短路径/dij5.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/08/12/图论——最短路径/dij6.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/08/12/图论——最短路径/sj.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/08/12/图论——最短路径/cfysbds.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/12/图论——最短路径/cfys.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/08/12/图论——最短路径/fqhl.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/08/12/图论——最短路径/wxdj.jpg">
+<meta property="og:updated_time" content="2019-08-13T01:58:56.541Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="图论——最短路径">
+<meta name="twitter:description" content="前言最短路径是图论的经典问题之一，主要是为了寻找源点到终点的最短路径长度是多少。“最短”这一词在面对不同的问题时含义不同，可以代表路径长度最短、花费最少等，视不同问题而定。   这篇blog主要记录了几个求解最短路径的经典算法。 图的存储在求解图论问题时，一般都需要将图存储起来，图的存储形式主要有邻接矩阵、邻接表、链式前向星等，根据图特征不同，不同的存储结构有着各自的优点。  邻接矩阵邻接矩阵使用">
+<meta name="twitter:image" content="http://yoursite.com/2019/08/12/图论——最短路径/dij.jpg">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Elitedj" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/08/12/图论——最短路径/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>图论——最短路径 | Elitedj</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Elitedj</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-photos">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/photos" rel="section"><i class="menu-item-icon fa fa-fw fa-camera"></i> <br>photos</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/12/图论——最短路径/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Elitedj">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/timg.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elitedj">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">图论——最短路径
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-08-12 09:51:53" itemprop="dateCreated datePublished" datetime="2019-08-12T09:51:53+08:00">2019-08-12</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-08-13 09:58:56" itemprop="dateModified" datetime="2019-08-13T09:58:56+08:00">2019-08-13</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/2019/08/12/图论——最短路径/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/12/图论——最短路径/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最短路径是图论的经典问题之一，主要是为了寻找源点到终点的最短路径长度是多少。“最短”这一词在面对不同的问题时含义不同，可以代表路径长度最短、花费最少等，视不同问题而定。  </p>
+<p>这篇blog主要记录了几个求解最短路径的经典算法。</p>
+<h2 id="图的存储"><a href="#图的存储" class="headerlink" title="图的存储"></a>图的存储</h2><p>在求解图论问题时，一般都需要将图存储起来，图的存储形式主要有邻接矩阵、邻接表、链式前向星等，根据图特征不同，不同的存储结构有着各自的优点。</p>
+<p><img src="dij.jpg" alt="tu"></p>
+<h3 id="邻接矩阵"><a href="#邻接矩阵" class="headerlink" title="邻接矩阵"></a>邻接矩阵</h3><p>邻接矩阵使用二维矩阵来描述结点之间的关系，例如用m[i][j]描述结点i与结点j的关系，若i和j没有直接相连的边，则用一个较大的值表示即可，例如∞。邻接矩阵适合用于稠密图和无重边的图，特点是取边非常的快，只需要O(1)的复杂度，缺点是无法存储重边，对于稀疏图会浪费大量的空间。</p>
+<p><img src="ljjz.png" alt="ljjz"></p>
+<p>在编程时，一般直接用二维数组对图进行存储。</p>
+<h3 id="邻接表"><a href="#邻接表" class="headerlink" title="邻接表"></a>邻接表</h3><p>邻接表是用链表的形式对图进行存储。每一个结点i都有一个头指针head[i]，头指针连着每一个与结点i相连的结点的信息。邻接表适合存储稀疏图，可以存储重边，每次需要时才动态分配空间，不会赵成大量的空间浪费，但是取边时需要遍历结点i的链，取边较慢。</p>
+<p><img src="ljb.jpg" alt="ljb"></p>
+<p>在编程时，可以用指针的方式或者vector来实现邻接表。vector在使用时比指针简单，但是vector在存储不下时会重新开辟两倍空间，会花费一些时间，还有可能导致内存超限。</p>
+<h3 id="链式前向星"><a href="#链式前向星" class="headerlink" title="链式前向星"></a>链式前向星</h3><p>链式前向星就是用数组模拟邻接表，将所有的边都存在一个数组里面，每一个结点i都有一个head[i]代表头结点，具体如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">1e4</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="comment">//u-&gt;v有权值为w的边，next是下一结点的坐标</span></span><br><span class="line">    <span class="keyword">int</span> u, v, w, next;</span><br><span class="line">    Edge(<span class="keyword">int</span> uu, <span class="keyword">int</span> vv, <span class="keyword">int</span> ww, <span class="keyword">int</span> n)&#123; u=uu; v=vv; w=ww; next=n; &#125;</span><br><span class="line">    Edge()&#123;&#125;</span><br><span class="line">&#125;e[maxn * maxn];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> head[maxn];</span><br><span class="line"><span class="keyword">int</span> edgecnt = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//u-&gt;v有一条权值为w的边</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">addEdge</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> v, <span class="keyword">int</span> w)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    e[edgecnt] = Edge(u, v, w, head[u]);</span><br><span class="line">    head[u] = edgecnt++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//head数组初始化为-1</span></span><br><span class="line">    <span class="built_in">memset</span>(head, <span class="number">-1</span>, <span class="keyword">sizeof</span>(head));</span><br><span class="line">    <span class="keyword">int</span> n, m;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> u, v, w;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;u&gt;&gt;v&gt;&gt;w;</span><br><span class="line">        addEdge(u, v, w);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//对结点1进行遍历</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=head[<span class="number">1</span>]; ~i; i=e[i].next)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//Your code</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="最短路径"><a href="#最短路径" class="headerlink" title="最短路径"></a>最短路径</h2><p>要求解最短路径，就要保证图中没有负权回路，因为有负权回路的话，是无解的，每经过一次负权回路最短距离都会减小，经过无限多次那么就无限小了，永无止境。<br>比如下面这样的图就是无解的。</p>
+<p><img src="fqhl.jpg" alt="fqhl"></p>
+<h3 id="BFS"><a href="#BFS" class="headerlink" title="BFS"></a>BFS</h3><p><strong>BFS</strong>是Breadth First Search的缩写，翻译成中文叫做<strong>广度优先搜索</strong>，若图的边权都为1时，可以用BFS来寻找最短路径，比较常见的是用于一些迷宫问题。BFS是用一个队列来维护的，若源点s到i结点的最短路径长度确定，那么与i相连的j结点最短路径也就被确定了(前提是j结点还未被更新过)。</p>
+<p><img src="bfs.jpg" alt="bfs"></p>
+<p>BFS的执行过程很像一个水波，从源点s开始，一圈圈的向外搜索所有的点。代码实现如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">1e4</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> inf = <span class="number">0x3f3f3f3f</span>; <span class="comment">//常用于表示无穷大</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> g[maxn][maxn]; <span class="comment">// 邻接矩阵存图，g[i][j] == 1 表示结点i和j相连，否则为inf</span></span><br><span class="line"><span class="keyword">int</span> d[maxn];    <span class="comment">//d[i]表示源点s到i的最短距离</span></span><br><span class="line"><span class="keyword">int</span> n;  <span class="comment">//结点的数量</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//s表示源点</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bfs</span><span class="params">(<span class="keyword">int</span> s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//d数组初始化为inf</span></span><br><span class="line">    <span class="built_in">memset</span>(d, inf, <span class="keyword">sizeof</span>(inf));</span><br><span class="line">    <span class="comment">//源点s到自己的距离当然为0啦</span></span><br><span class="line">    d[s] = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">//维护用的队列，并将源点s入队</span></span><br><span class="line">    <span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; q;</span><br><span class="line">    q.push(s);</span><br><span class="line">    <span class="comment">//当队列不空</span></span><br><span class="line">    <span class="keyword">while</span>(!q.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//取队列的第一个元素，并pop掉它</span></span><br><span class="line">        <span class="keyword">int</span> x = q.front();</span><br><span class="line">        q.pop();</span><br><span class="line">        <span class="comment">//寻找所有与x相邻并且还未被更新的点</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(g[x][i]==<span class="number">1</span> &amp;&amp; d[i]==inf)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">//与x相邻的点i的最短距离为d[x] + 1</span></span><br><span class="line">                d[i] = d[x] + <span class="number">1</span>;</span><br><span class="line">                <span class="comment">//将更新的结点入队</span></span><br><span class="line">                q.push(i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Dijkstra"><a href="#Dijkstra" class="headerlink" title="Dijkstra"></a>Dijkstra</h3><p>Dijkstra’s algorithm译为迪杰斯特拉算法，是一个叫迪杰斯特拉的荷兰计算机科学家提出的，据老师说这是他有一天逛街的时候想到的算法(膜拜orz)，Dijkstra算法是一个非常经典的算法，他能够处理<strong>不含负权的图</strong>，找出从源点s到其他任一顶点的最短路径。</p>
+<p>Dijkstra算法将顶点分成两部分，一部分是已经确定最短路径的顶点集S，另一部分是还未确定最短路径的顶点集U。最开始的时候顶点集S只包含源点s，之后每一次都在顶点集U中选取一个顶点i，使得源点s到i的距离是最短的，那么i顶点的最短路径就确定了，将i顶点加入到顶点集S中，直到最后所有的顶点都在S中就停止。</p>
+<p>Dijkstra算法的图示如下：<br>以下图为例，红色的是边的权值<br><img src="dij.jpg" alt="dij"></p>
+<p>刚开始执行，蓝色的代表源点s到顶点的最短距离，此时源点为1。</p>
+<p><img src="dij1.jpg" alt="dij1"></p>
+<p>用顶点1更新相邻顶点的最短距离，d[2]变为1，d[3]变为5，然后选取顶点2加入到顶点集S中。</p>
+<p><img src="dij2.jpg" alt="dij2"></p>
+<p>用顶点2去更新相邻且不在顶点集S中的顶点，此时将顶点3加入到顶点集S中。</p>
+<p><img src="dij3.jpg" alt="dij3"></p>
+<p>将顶点4加入到顶点集S中</p>
+<p><img src="dij4.jpg" alt="dij4"></p>
+<p>选取顶点5加入到顶点集S中</p>
+<p><img src="dij5.jpg" alt="dij5"></p>
+<p>选取顶点6加入到顶点集S中，所有更新完毕，算法结束。</p>
+<p><img src="dij6.jpg" alt="dij6"></p>
+<p>代码实现如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">1e4</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> inf = <span class="number">0x3f3f3f3f</span>; <span class="comment">//常用于表示无穷大</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//d数组用来记录源点s到顶点i的最短距离</span></span><br><span class="line"><span class="comment">//v表示该顶点是否在顶点集S中</span></span><br><span class="line"><span class="comment">//g邻接矩阵存图，g[i][j]表示i到j的边的权值，无边时为inf</span></span><br><span class="line"><span class="comment">//n为顶点数量</span></span><br><span class="line"><span class="keyword">int</span> d[maxn], v[maxn];</span><br><span class="line"><span class="keyword">int</span> g[maxn][maxn];</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dij</span><span class="params">(<span class="keyword">int</span> s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//初始化v数组，全部为0，表示都不在顶点集S中</span></span><br><span class="line">    <span class="built_in">memset</span>(v, <span class="number">0</span>, <span class="keyword">sizeof</span>(v));</span><br><span class="line">    <span class="comment">//d数组初始化为s到i的距离</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        d[i] = g[s][i];</span><br><span class="line">    <span class="comment">//将源点加入顶点集S中</span></span><br><span class="line">    v[s] = <span class="number">1</span>;</span><br><span class="line">    <span class="comment">//循环n次</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> u = <span class="number">0</span>;  <span class="comment">//记录不在顶点集S中且距离最小的顶点</span></span><br><span class="line">        <span class="comment">//遍历寻找</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(!v[j] &amp;&amp; (u==<span class="number">0</span> || d[j] &lt; d[u]))</span><br><span class="line">                u = j;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//u为0表示所有顶点的最短路径都确定，算法结束</span></span><br><span class="line">        <span class="keyword">if</span>(u==<span class="number">0</span>)<span class="keyword">return</span> ;</span><br><span class="line">        <span class="comment">//将顶点u加入到顶点集S中</span></span><br><span class="line">        v[u] = <span class="number">1</span>;</span><br><span class="line">        <span class="comment">//更新与顶点u相连且不在顶点集S中的最短距离</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            d[j] = min(d[j], d[u]+g[u][j]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>用这种方式实现Dijkstra算法的时间复杂度为O(n²)</p>
+<h3 id="Dijkstra优化"><a href="#Dijkstra优化" class="headerlink" title="Dijkstra优化"></a>Dijkstra优化</h3><p>其实Dijkstra算法能够用优先队列进行优化，每次取新加入到顶点集S的顶点u不需要遍历所有的顶点。优先队列维护的是一对值，用pair存储，first存储的是该顶点的最短距离，second存储的是该顶点的编号，优先队列每次取first最小的对出来，相当于找到了要新加入到顶点集S的顶点。但是有一种情况需要注意，有可能在优先队列的结点i的最短距离被更新了，即优先队列里面记录的信息已经过时了，这时候取出来的话就要抛弃它。具体代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">1e4</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> inf = <span class="number">0x3f3f3f3f</span>; <span class="comment">//常用于表示无穷大</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; P; <span class="comment">//first表示最短距离，second表示顶点编号</span></span><br><span class="line"><span class="comment">//边：to表示这条边指向的顶点，权值为w</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> to, w;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//用vector实现邻接表</span></span><br><span class="line"><span class="built_in">vector</span>&lt;Edge&gt; g[maxn];</span><br><span class="line"><span class="keyword">int</span> d[maxn]; <span class="comment">//记录源点到顶点i的最短距离</span></span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dij</span><span class="params">(<span class="keyword">int</span> s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//优先队列，根据p的first从小到大排序</span></span><br><span class="line">    priority_queue&lt;P, <span class="built_in">vector</span>&lt;P&gt;, greater&lt;P&gt; &gt; q;</span><br><span class="line">    <span class="built_in">memset</span>(d, inf, <span class="keyword">sizeof</span>(d));</span><br><span class="line">    d[s] = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">//将最短距离0，顶点编号为源点压入优先队列中</span></span><br><span class="line">    q.push(P(<span class="number">0</span>, s));</span><br><span class="line">    <span class="comment">//队列非空</span></span><br><span class="line">    <span class="keyword">while</span>(!q.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//取第一个顶点</span></span><br><span class="line">        P p = q.top();</span><br><span class="line">        q.pop();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//u表示顶点编号</span></span><br><span class="line">        <span class="keyword">int</span> u = p.second;</span><br><span class="line">        <span class="comment">//若当前顶点u的最短距离比当初入队时小，则抛弃它，进入下一次循环</span></span><br><span class="line">        <span class="keyword">if</span>(d[u] &lt; p.first) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="comment">//否则的话u就是要新加入到确定最短距离的顶点集S中的顶点</span></span><br><span class="line">        <span class="comment">//对与u相连的顶点进行松弛更新</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;=g[u].size(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            Edge e = g[u][i];</span><br><span class="line">            <span class="comment">//可更新结点e.to的最短距离，并且将d[e.to],e.to压入优先队列中:w</span></span><br><span class="line">            <span class="comment">//</span></span><br><span class="line">            <span class="keyword">if</span>(d[e.to] &gt; d[u] + e.w)</span><br><span class="line">            &#123;</span><br><span class="line">                d[e.to] = d[u] + e.w;</span><br><span class="line">                q.push(P(d[e.to], e.to));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>该算法的复杂度被降到了O(m+nlogn)</p>
+<h3 id="Floyd"><a href="#Floyd" class="headerlink" title="Floyd"></a>Floyd</h3><p>Floyd-Warshall的算法翻译过来称为弗洛伊德算法，是用于求解任意两点间的最短距离的算法，并且能够处理带负权的图。时间复杂度为O(n³)。</p>
+<p>Floyd的基本思想是，判断i-&gt;j的最短路径是否需要经过k点，即若d[i][j] &gt; d[i][k] + d[k][j]，则进行更新。代码写起来也非常的简单，如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> g[maxn][maxn];</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">floyd</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">1</span>;k&lt;=n;k++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n;j++)</span><br><span class="line">                g[i][j] = min(g[i][j], g[i][k] + g[k][j]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>虽然Floyd写起来简单，但是当顶点数一大时，这算法耗费的时间就感人了。</p>
+<h3 id="Bellman-Ford"><a href="#Bellman-Ford" class="headerlink" title="Bellman-Ford"></a>Bellman-Ford</h3><p>Bellman–Ford算法中文名为贝尔曼-福特算法，是由理查德·贝尔曼和莱斯特·福特共同创立的，所以这个算法将两个人的名字一部分结合起来命名。因为对于一个含有n个顶点的图，最短路径中除源点s外的最大顶点数为n-1，所以最多需要进行n-1次松弛(更新)，并且Bellman-Ford可以处理带负权的图，并且可以用于判断图中是否含有负权回路。因为含有负权回路的话能够进行无限次松弛操作，当第n次遍历时仍有顶点能够被松弛，则说明这个图含有负权回路。</p>
+<p>算法的具体执行过程可以看这个<a href="https://www.bilibili.com/video/av9621366?from=search&amp;seid=508717988493312839" target="_blank" rel="noopener">video</a>。</p>
+<p>代码实现如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">1e4</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> inf = <span class="number">0x3f3f3f3f</span>; <span class="comment">//常用于表示无穷大</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//边结构体，记录u-&gt;v的边，权值为w</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> u, v, w;</span><br><span class="line">    Edge(<span class="keyword">int</span> uu, <span class="keyword">int</span> vv, <span class="keyword">int</span> ww) &#123; u=uu; v=vv; w=ww; &#125;</span><br><span class="line">    Edge()&#123;&#125;</span><br><span class="line">&#125;e[maxn];</span><br><span class="line"><span class="keyword">int</span> edgecnt; <span class="comment">// 边的数量</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//加边操作</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">addEdge</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> v, <span class="keyword">int</span> w)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    e[edgecnt++] = Edge(u, v, w);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n; <span class="comment">//顶点总数</span></span><br><span class="line"><span class="keyword">int</span> d[maxn]; <span class="comment">//记录最短距离的数组</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//存在负权回路则返回true，否则返回false</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">bellman_ford</span><span class="params">(<span class="keyword">int</span> s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//初始化</span></span><br><span class="line">    <span class="built_in">memset</span>(d, inf, <span class="keyword">sizeof</span>(d));</span><br><span class="line">    d[s] = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">//进行n-1次松弛操作,第n次检查是否含有负权回路</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//标记是否有更新</span></span><br><span class="line">        <span class="keyword">int</span> flag = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;edgecnt; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//取边</span></span><br><span class="line">            Edge t = e[j];</span><br><span class="line">            <span class="keyword">int</span> u, v, w;</span><br><span class="line">            u = t.u; v = t.v; w = t.w;</span><br><span class="line">            <span class="comment">//若可以更新</span></span><br><span class="line">            <span class="keyword">if</span>(d[v] &gt; d[u] + w)</span><br><span class="line">            &#123;</span><br><span class="line">                d[v] = d[u] + w;</span><br><span class="line">                flag = <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//若没有更新，则表示都是最短距离了，也不存在负权回路</span></span><br><span class="line">        <span class="keyword">if</span>(!flag) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="comment">//如果第n次松弛还有更新则存在负权回路</span></span><br><span class="line">        <span class="keyword">if</span>(i==n &amp;&amp; flag) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Bellman-Ford算法的时间复杂度是O(n*m),还是比较慢的</p>
+<h3 id="SPFA"><a href="#SPFA" class="headerlink" title="SPFA"></a>SPFA</h3><p>SPFA是Shortest Path Faster Algorithm的缩写，翻译成中文是最短路径快速算法，其实就是用队列优化的Bellman-Ford算法，那既然是优化的Bellman-Frod算法，那么肯定也能处理带有负权边的图，并且判断是否含有负权回路。SPFA在随机数据的稀疏图中表现出色，但是在一些竞赛中，会有出题人可以出数据卡掉SPFA算法，使得SPFA算法的时间复杂度达到最坏情况。SPFA与BFS也非常的类似，本质上其实和BFS没太多的区别。</p>
+<p>对于一个含有n个顶点的图，在执行SPFA时，每一个结点最多入队n次，若一个顶点入队次数大于n时，则表明含有负权回路。</p>
+<p>SPFA具体实现如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">1e4</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> inf = <span class="number">0x3f3f3f3f</span>; <span class="comment">//常用于表示无穷大</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//边结构体，to表示边指向的顶点编号，权值为w</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> to, w;</span><br><span class="line">    Edge(<span class="keyword">int</span> tt, <span class="keyword">int</span> ww) &#123; to = tt; w = ww; &#125;</span><br><span class="line">    Edge()&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//vector实现的邻接表</span></span><br><span class="line"><span class="built_in">vector</span>&lt;Edge&gt; g[maxn];</span><br><span class="line"><span class="keyword">int</span> n;<span class="comment">//顶点数</span></span><br><span class="line"><span class="comment">//d表示最短距离， inq[i]表示结点是否在队列中，为1则在，cnt[i]记录i入队的次数</span></span><br><span class="line"><span class="keyword">int</span> d[maxn], inq[maxn], cnt[maxn];</span><br><span class="line"><span class="comment">//初始化</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(d, inf, <span class="keyword">sizeof</span>(d));</span><br><span class="line">    <span class="built_in">memset</span>(inq, <span class="number">0</span>, <span class="keyword">sizeof</span>(inq));</span><br><span class="line">    <span class="built_in">memset</span>(cnt, <span class="number">0</span>, <span class="keyword">sizeof</span>(cnt));</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//返回true表示存在负权回路</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">spfa</span><span class="params">(<span class="keyword">int</span> s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    init();</span><br><span class="line">    <span class="comment">//源点的距离为0， 入队， 次数为1</span></span><br><span class="line">    d[s] = <span class="number">0</span>;</span><br><span class="line">    inq[s] = <span class="number">1</span>;</span><br><span class="line">    cnt[s] = <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; q;</span><br><span class="line">    q.push(s);</span><br><span class="line">    <span class="comment">//当队列非空时</span></span><br><span class="line">    <span class="keyword">while</span>(!q.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//取顶点，并更新inq</span></span><br><span class="line">        <span class="keyword">int</span> u = q.front();</span><br><span class="line">        inq[u] = <span class="number">0</span>;</span><br><span class="line">        q.pop();</span><br><span class="line">        <span class="comment">//遍历相连的顶点</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i &lt; g[u].size(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            Edge e = g[u][i];</span><br><span class="line">            <span class="comment">//若可以松弛</span></span><br><span class="line">            <span class="keyword">if</span>(d[e.to] &gt; d[u] + e.w)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">//更新</span></span><br><span class="line">                d[e.to] = d[u] + e.w;</span><br><span class="line">                <span class="comment">//若e.to顶点未在队列中，将它入队，并入队次数加一</span></span><br><span class="line">                <span class="keyword">if</span>(inq[e.to] == <span class="number">0</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    inq[e.to] = <span class="number">1</span>;</span><br><span class="line">                    q.push(e.to);</span><br><span class="line">                    cnt[e.to]++;</span><br><span class="line">                    <span class="comment">//若入队次数大于n则存在负权回路</span></span><br><span class="line">                    <span class="keyword">if</span>(cnt[e.to] &gt; n) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="差分约束"><a href="#差分约束" class="headerlink" title="差分约束"></a>差分约束</h2><p>求解最短路径的本质就是求解差分约束。</p>
+<h3 id="三角不等式"><a href="#三角不等式" class="headerlink" title="三角不等式"></a>三角不等式</h3><p>考虑下面的不等式组,求解C - A 的最大值</p>
+<center>B - A &lt;= c      (1)</center><br><center>C - B &lt;= a      (2)</center><br><center>C - A &lt;= b      (3)</center>
+
+<p>根据不等式的性质，我们可以构造出C - A 的式子有(2)+(1)和(3)，那么C - A的最大值就是min(a+c, b)，仔细想想是这样没错。我们利用这三个不等式组来建图，对于所有的a - b &lt;= c 这样的不等式，我们构造一条顶点b指向a且权值为c的边，那么这三个不等式构造出来的图就如下。</p>
+<p><img src="sj.jpg" alt="sj"></p>
+<p>那么C - A的最大值其实就是求A到C的最短路径！将问题拓展到n个变量，m条不等式也是如此。</p>
+<h3 id="差分约束系统"><a href="#差分约束系统" class="headerlink" title="差分约束系统"></a>差分约束系统</h3><p>差分约束系统（System of Difference Constraints），是求解关于一组变数的特殊不等式组之方法。如果一个系统由n个变量和m个约束条件组成，其中每个约束条件形如Xj - Xi &lt;= Bk (i,j in [1, n], k in [1, m]),则称其为差分约束系统。亦即，差分约束系统是求解关于一组变量的特殊不等式组的方法。</p>
+<p>考虑下面这一组不等式，并求解x3 - x0的最大值</p>
+<p><center>x1 - x0 &lt;= 2    (1)</center></p>
+<p><center>x2 - x0 &lt;= 7    (2)</center></p>
+<p><center>x3 - x0 &lt;= 8    (3)</center></p>
+<p><center>x2 - x1 &lt;= 3    (4)</center></p>
+<p><center>x3 - x2 &lt;= 2    (5)</center></p>
+<p>不等式组的表示如下：</p>
+<p><img src="cfysbds.png" alt="cfysbds"></p>
+<p>回到单个不等式上来，观察 x[i] - x[j] &lt;= a[k]， 将这个不等式稍稍变形，将x[j]移到不等式右边，则有x[i] &lt;= x[j] + a[k]，然后我们令a[k] = w(j, i)，再将不等式中的i和j变量替换掉，i = v， j = u，将x数组的名字改成d（以上都是等价变换，不会改变原有不等式的性质），则原先的不等式变成了以下形式：d[u] + w(u, v) &gt;= d[v]。</p>
+<p>这时候联想到SPFA中的一个松弛操作：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(d[u] + w(u, v) &lt; d[v])</span><br><span class="line">&#123;</span><br><span class="line">    d[v] = d[u] + w(u, v);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>对比上面的不等式，两个不等式的不等号正好相反，但是再仔细一想，其实它们的逻辑是一致的，因为SPFA的松弛操作是在满足小于的情况下进行松弛，力求达到d[u] + w(u, v) &gt;= d[v]，而我们之前令a[k] = w(j, i)，所以我们可以将每个不等式转化成图上的有向边。</p>
+<p>对不等式组建图，如下所示：</p>
+<p><img src="cfys.jpg" alt="cfys"></p>
+<p>所以求解x3 - x0 的最大值就是求上图x0到x3的最短路径！</p>
+<h3 id="最大值变最小值"><a href="#最大值变最小值" class="headerlink" title="最大值变最小值"></a>最大值变最小值</h3><p>如果将不等式组的 &lt;= 换成 &gt;=号，其实就是求最长路罢了，稍微变换一下算法就能够求解了，或者利用不等式的性质，将所有的&gt;=换成&lt;=，然后跑一边最短路，再将结果乘个-1就行。</p>
+<h3 id="不等式标准化"><a href="#不等式标准化" class="headerlink" title="不等式标准化"></a>不等式标准化</h3><p>如果不等式组即存在&lt;=又存在&gt;=，只要将符号都变为一样的即可。<br>如果不等式符号为&lt;号，那么只需要将不等式改写成a - b &lt;= c - 1的形式就可以了。</p>
+<h3 id="解的存在性"><a href="#解的存在性" class="headerlink" title="解的存在性"></a>解的存在性</h3><p>若图中存在负权回路，则不等式无解</p>
+<p><img src="fqhl.jpg" alt="fqhl"></p>
+<p>若源点和终点不属于同一个连通分量，那么将无法到达，那么距离就为inf，就会出现无穷多的解。</p>
+<p><img src="wxdj.jpg" alt="wxdj"></p>
+<p>若没有负权回路和可到达，则存在解。<br>所以差分约束求解有三种情况：无解、有解、无穷多解。</p>
+<h2 id="END"><a href="#END" class="headerlink" title="END"></a>END</h2><p>溜了溜了～</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/25/线段树基础/" rel="next" title="线段树基础">
+                <i class="fa fa-chevron-left"></i> 线段树基础
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/timg.jpeg" alt="Elitedj">
+            
+              <p class="site-author-name" itemprop="name">Elitedj</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Elitedj" title="GitHub &rarr; https://github.com/Elitedj" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="/elite@m.scnu.edu.cn" title="E-Mail &rarr; elite@m.scnu.edu.cn"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blog.tover.xyz" title="http://blog.tover.xyz" rel="noopener" target="_blank">Tover</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://ariacx.me" title="https://ariacx.me" rel="noopener" target="_blank">xk</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图的存储"><span class="nav-number">2.</span> <span class="nav-text">图的存储</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#邻接矩阵"><span class="nav-number">2.1.</span> <span class="nav-text">邻接矩阵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#邻接表"><span class="nav-number">2.2.</span> <span class="nav-text">邻接表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#链式前向星"><span class="nav-number">2.3.</span> <span class="nav-text">链式前向星</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最短路径"><span class="nav-number">3.</span> <span class="nav-text">最短路径</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#BFS"><span class="nav-number">3.1.</span> <span class="nav-text">BFS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dijkstra"><span class="nav-number">3.2.</span> <span class="nav-text">Dijkstra</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dijkstra优化"><span class="nav-number">3.3.</span> <span class="nav-text">Dijkstra优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Floyd"><span class="nav-number">3.4.</span> <span class="nav-text">Floyd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bellman-Ford"><span class="nav-number">3.5.</span> <span class="nav-text">Bellman-Ford</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SPFA"><span class="nav-number">3.6.</span> <span class="nav-text">SPFA</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#差分约束"><span class="nav-number">4.</span> <span class="nav-text">差分约束</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#三角不等式"><span class="nav-number">4.1.</span> <span class="nav-text">三角不等式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#差分约束系统"><span class="nav-number">4.2.</span> <span class="nav-text">差分约束系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最大值变最小值"><span class="nav-number">4.3.</span> <span class="nav-text">最大值变最小值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不等式标准化"><span class="nav-number">4.4.</span> <span class="nav-text">不等式标准化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解的存在性"><span class="nav-number">4.5.</span> <span class="nav-text">解的存在性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#END"><span class="nav-number">5.</span> <span class="nav-text">END</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Elitedj</span>
+
+  
+
+  
+</div>
+
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span><br>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("02/21/2019 13:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.0.0</div>
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="Total Visitors">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="Total Views">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.0"></script>
+
+  <script src="/js/src/motion.js?v=7.0.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.0"></script>
+<script src="/js/src/post-details.js?v=7.0.0"></script>
+<script type="text/javascript" src="/js/src/photoswipe-ui-default.min.js?v="></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.0"></script>
+
+
+
+  
+  
+
+<script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+
+
+
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'zOEvCRaHczqQkvn7g5bk2d9c-gzGzoHsz',
+    appKey: 'JJQvXVH4XIDyjJaIK2HWeTY3',
+    placeholder: 'comment something',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+</script>
+
+
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+
+<!--崩溃欺骗-->
+<script type="text/javascript" src="/js/src/crash_cheat.js"></script>
