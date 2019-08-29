@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<script src="/js/src/photoswipe.min.js?v="></script>
+<script src="/js/src/photoswipe-ui-default.min.js?v="></script>
+
+<html class="theme-next muse use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.0.0',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="前言可持久化线段树是线段树的高级应用，如果不会线段树的话是看不懂这一篇blog的，可以先去看线段树基础。可持久化的意思就是可以保存历史版本的线段树。可持久化线段树又被称为主席树，这是因为发明这个数据结构的大神的拼音缩写为HJT，所以也被称为主席树。 学习主席树之前要先点亮前缀和以及权值线段树的技能点。 前缀和前缀和(prefix sum)也非常的常用，能够快速求某一段区间的和。具体如下图所示：">
+<meta name="keywords" content="Algorithm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="可持久化线段树(主席树)">
+<meta property="og:url" content="http://yoursite.com/2019/08/29/可持久化线段树-主席树/index.html">
+<meta property="og:site_name" content="Elitedj">
+<meta property="og:description" content="前言可持久化线段树是线段树的高级应用，如果不会线段树的话是看不懂这一篇blog的，可以先去看线段树基础。可持久化的意思就是可以保存历史版本的线段树。可持久化线段树又被称为主席树，这是因为发明这个数据结构的大神的拼音缩写为HJT，所以也被称为主席树。 学习主席树之前要先点亮前缀和以及权值线段树的技能点。 前缀和前缀和(prefix sum)也非常的常用，能够快速求某一段区间的和。具体如下图所示：">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://yoursite.com/2019/08/29/可持久化线段树-主席树/prefix.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/29/可持久化线段树-主席树/qzxds.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/29/可持久化线段树-主席树/qzxds1.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/29/可持久化线段树-主席树/qzxds2.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/29/可持久化线段树-主席树/qzxds3.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/29/可持久化线段树-主席树/qzxds4.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/29/可持久化线段树-主席树/qzxds5.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/29/可持久化线段树-主席树/qzxds1.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/29/可持久化线段树-主席树/qzxds5.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/29/可持久化线段树-主席树/zxs.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/29/可持久化线段树-主席树/poj2104.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/29/可持久化线段树-主席树/hdu4417.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/29/可持久化线段树-主席树/zoj1.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/29/可持久化线段树-主席树/zoj2.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/29/可持久化线段树-主席树/szsz1.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/29/可持久化线段树-主席树/szsz2.png">
+<meta property="og:updated_time" content="2019-08-29T05:55:35.955Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="可持久化线段树(主席树)">
+<meta name="twitter:description" content="前言可持久化线段树是线段树的高级应用，如果不会线段树的话是看不懂这一篇blog的，可以先去看线段树基础。可持久化的意思就是可以保存历史版本的线段树。可持久化线段树又被称为主席树，这是因为发明这个数据结构的大神的拼音缩写为HJT，所以也被称为主席树。 学习主席树之前要先点亮前缀和以及权值线段树的技能点。 前缀和前缀和(prefix sum)也非常的常用，能够快速求某一段区间的和。具体如下图所示：">
+<meta name="twitter:image" content="http://yoursite.com/2019/08/29/可持久化线段树-主席树/prefix.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Elitedj" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/08/29/可持久化线段树-主席树/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>可持久化线段树(主席树) | Elitedj</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Elitedj</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-photos">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/photos" rel="section"><i class="menu-item-icon fa fa-fw fa-camera"></i> <br>photos</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/29/可持久化线段树-主席树/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Elitedj">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/timg.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elitedj">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">可持久化线段树(主席树)
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-08-29 09:39:11 / Modified: 13:55:35" itemprop="dateCreated datePublished" datetime="2019-08-29T09:39:11+08:00">2019-08-29</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/2019/08/29/可持久化线段树-主席树/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/29/可持久化线段树-主席树/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>可持久化线段树是线段树的高级应用，如果不会线段树的话是看不懂这一篇blog的，可以先去看<a href="http://elitedj.me/2019/07/25/%E7%BA%BF%E6%AE%B5%E6%A0%91%E5%9F%BA%E7%A1%80/" target="_blank" rel="noopener">线段树基础</a>。可持久化的意思就是可以保存历史版本的线段树。可持久化线段树又被称为主席树，这是因为发明这个数据结构的大神的拼音缩写为<strong>HJT</strong>，所以也被称为主席树。</p>
+<p>学习主席树之前要先点亮前缀和以及权值线段树的技能点。</p>
+<h2 id="前缀和"><a href="#前缀和" class="headerlink" title="前缀和"></a>前缀和</h2><p><strong>前缀和(prefix sum)</strong>也非常的常用，能够快速求某一段区间的和。具体如下图所示：</p>
+<p><img src="prefix.png" alt="prefix"></p>
+<p>数组为0的位置要空出来并且赋值为0。求区间[L, R]的和时，直接用prefix[R] - prefix[L-1]即可，注意这里一定是<strong>L-1</strong>。可以自行验证。</p>
+<h2 id="权值线段树"><a href="#权值线段树" class="headerlink" title="权值线段树"></a>权值线段树</h2><p>权值线段树就是记录权值的线段树。权值就是某一个数字出现的次数。比如现在对数组[1, 3, 4, 2, 5]构建权值线段树，如下所示。<br>ps：结点里面空的值为0，因为懒所以没加上去。</p>
+<p>先构建一颗空的线段树，然后依次插入数组中的元素。</p>
+<p><img src="qzxds.png" alt="qzxds"></p>
+<p>插入1之后</p>
+<p><img src="qzxds1.png" alt="qzxds1"></p>
+<p>插入3之后</p>
+<p><img src="qzxds2.png" alt="qzxds2"></p>
+<p>插入4之后</p>
+<p><img src="qzxds3.png" alt="qzxds3"></p>
+<p>插入2之后</p>
+<p><img src="qzxds4.png" alt="qzxds4"></p>
+<p>插入5之后</p>
+<p><img src="qzxds5.png" alt="qzxds5"></p>
+<p>这样就构建完一颗权值线段树了。好像不是很难的样子。</p>
+<h2 id="离散化"><a href="#离散化" class="headerlink" title="离散化"></a>离散化</h2><p>离散化是将大区间映射到小区间上面。有的时候数据范围太大，但是数量很少，这时候就可以考虑离散化。比如数组中的数字为[999, 12445, 356745674567, 2345235]，如果直接对这数组中的数字构建线段树，内存就爆炸了。这时候将数组中的数字排序，然后用数组下标代替他们本身来构建线段树，排序好之后的数组为[999, 12445, 2345235, 356745674567]，2345235就可以用3代替，这样只用对1~4构建线段树，空间小了很多很多。</p>
+<p>一般做法是用另外的一个数组copy原数组，并进行离散化操作，每次取原数组中的数字时，都要找到在新数组中的位置。看起来蛮麻烦的，其实写起来就几行。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// a[]存放原数据, b[]存放对a[]进行离散化之后的结果</span></span><br><span class="line"><span class="comment">// 数组中元素从1开始存储</span></span><br><span class="line"><span class="comment">// 离散化记得对数据去重</span></span><br><span class="line"><span class="comment">// cnt 为原数组中的元素个数</span></span><br><span class="line">sort(b+<span class="number">1</span>, b+cnt+<span class="number">1</span>);</span><br><span class="line">cnt = unique(b+<span class="number">1</span>, b+cnt+<span class="number">1</span>) - (b+<span class="number">1</span>); <span class="comment">//计算原数组中不相同的元素个数，即去重，记得要先排序</span></span><br><span class="line"><span class="comment">// 这时候离散化就完成了，b[i], 1 &lt;= i &lt;= cnt</span></span><br><span class="line"><span class="comment">// 求数组a中的元素映射</span></span><br><span class="line"><span class="keyword">int</span> ind = lower_bound(b+<span class="number">1</span>, b+cnt+<span class="number">1</span>, a[i]) - b;</span><br></pre></td></tr></table></figure>
+<h2 id="主席树"><a href="#主席树" class="headerlink" title="主席树"></a>主席树</h2><p>主席树常常用来解决的问题是求区间[l, r]的第k大的数字，容易想到将区间[l, r]中的数字排序再输出区间第k个位置的元素即可，但是这种做法太慢了。</p>
+<p>主席树其实就是先构建一颗空的权值线段树，然后每插入一个元素，就保存当前新的权值线段树，若数组中有n个元素，主席树就构建了n+1颗权值线段树，分别记为T[i]。例如要求区间[2, 5]的第2大数是多少时，就需要用到T[5]和T[1]（注意这里是T[1]而不是T[2]，前缀和思想，之后解释）这两颗权值线段树，就是插入第一个元素和插入第五个元素保存的权值线段树。</p>
+<p>用上文讲到的权值线段树的图来解释主席树是如何求区间第k大的吧(但是图有一点点小变化，就是叶子结点表示的数字要重新排序一下，原图中为1、 3、 4、 2、 5， 主席树是1、 2、 3、 4、 5，因为我懒，所以没有画新图，大家脑补一下就好啦)。如果你忘了图长什么样可以翻回去看看。下面是T[1]和T[5]</p>
+<p><img src="qzxds1.png" alt="qzxds1"></p>
+<p><img src="qzxds5.png" alt="qzxds5"></p>
+<p>将这两颗权值线段树的对应结点相减，就可以得到对应区间中数字的个数，请自行手动将相减之后的图画出来，不然可能会不知道下面在讲什么。</p>
+<p>现在区间[1, 5]中包含的数字个数为4，即区间[2, 5]对应的那4个数字，我们要找区间第2大的数，现在[1, 5]这个区间包含的数字个数大于2，所以我们现在要向下走，先看左子树，即区间[1, 3]，包含了2个数字，刚好大于等于k，所以我们往左子树走。然后再看区间[1, 2]，包含了一个数字，小于2，说明前面只剩一个数字了，我们要找第2大的，显然要往右子树走，寻找右子树中第<strong>2-1</strong>大的数字。走到[3, 3]返回，区间[3, 3]代表的数字3，3是离散化之后的位置，就是b[3]，对应原数组中的元素3，就是我们要的结果，倒回去看3确实是区间[2, 5]的第2大的值（原区间[2, 5]的值为3、 4、 2、 5）。</p>
+<p>主席树就是利用权值线段树和前缀和来快速求区间第k大，但是现在还有一个问题就是我们真的要构建那么多的权值线段树吗，要知道对长度为n的数组构建线段树就要开辟4n的空间，如果我们有1e5个数，那岂不是要开辟1e5 × 1e5 × 4那么大的空间？？？内存直接爆炸。</p>
+<p>仔细观察权值线段树的插入过程，我们真的有必要完全复制一颗一样的权值线段树然后再修改吗？完全没有必要！当插入一个新值时，只有少数的顶点需要更新，所以我们只需要动态的生成新的顶点就好了，每一次插入最多新生成logn个顶点。</p>
+<p>这里以T[1]变化到T[2]为例，图画的有点魔性，但是确实如此。</p>
+<p><img src="zxs.png" alt="zxs"></p>
+<p>主席树的原理大概就是这样。Talk is cheap， show me the code。下面用例题来看看代码怎么写。</p>
+<h2 id="POJ-2104-K-th-Number"><a href="#POJ-2104-K-th-Number" class="headerlink" title="POJ 2104 K-th Number"></a>POJ 2104 K-th Number</h2><p><a href="http://poj.org/problem?id=2104" target="_blank" rel="noopener">POJ 2104</a></p>
+<p><img src="poj2104.png" alt="poj2104"></p>
+<p>主席树模板题</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="comment">//#include&lt;bits/stdc++.h&gt;</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> inf 0x3f3f3f3f</span></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; P;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">1e6</span>+<span class="number">5</span>;</span><br><span class="line"><span class="keyword">const</span> ll mod = <span class="number">1e9</span>+<span class="number">7</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 顶点，代表区间[l, r]中有v个数字</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> l, r, v;</span><br><span class="line">&#125;tree[maxn*<span class="number">20</span>]; <span class="comment">// 空间开大一点，因为要动态开点</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// edit[i]存的是第i颗权值线段树的根节点在tree数组中的位置</span></span><br><span class="line"><span class="comment">// a是存放原数据的数组， b是离散化后的数组， tot表示顶点的个数</span></span><br><span class="line"><span class="keyword">int</span> edit[maxn], a[maxn], b[maxn], tot=<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 建树</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 这里就是动态开辟新的结点，就是将tot加一</span></span><br><span class="line">    <span class="keyword">int</span> pos = ++tot;</span><br><span class="line">    tree[pos].v = <span class="number">0</span>; <span class="comment">//初始化为0</span></span><br><span class="line">    <span class="keyword">if</span>(l==r)<span class="keyword">return</span> pos; <span class="comment">//到根节点了，返回</span></span><br><span class="line">    <span class="comment">// 二分建树没什么好说的</span></span><br><span class="line">    <span class="keyword">int</span> mid = (l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">    tree[pos].l = build(l, mid);</span><br><span class="line">    tree[pos].r = build(mid+<span class="number">1</span>, r);</span><br><span class="line">    <span class="comment">//要返回pos的位置，因为edit数组要存新根的位置</span></span><br><span class="line">    <span class="keyword">return</span> pos;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 就是插入操作，插入新的元素</span></span><br><span class="line"><span class="comment">// ed是前一版本的结点在tree的位置， 更新区间[l, r]， 位置为v</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> ed, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> v)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 动态开点</span></span><br><span class="line">    <span class="keyword">int</span> pos = ++tot;</span><br><span class="line">    <span class="comment">//先将新一版本的当前结点复制为上一个版本的对应结点</span></span><br><span class="line">    tree[pos] = tree[ed]; tree[pos].v++; <span class="comment">//新一版本的结点的v要加一，因为对应区间插入了一个数</span></span><br><span class="line">    <span class="keyword">if</span>(l==r) <span class="keyword">return</span> pos; <span class="comment">//到叶子节点了，返回</span></span><br><span class="line">    <span class="comment">// 二分</span></span><br><span class="line">    <span class="keyword">int</span> mid = (l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">    <span class="comment">// 如果更新位置v在左子树中，递归更新即可，在右子树中同理，最后要返回pos</span></span><br><span class="line">    <span class="keyword">if</span>(v&lt;=mid) tree[pos].l = update(tree[ed].l, l, mid, v);</span><br><span class="line">    <span class="keyword">else</span> tree[pos].r = update(tree[ed].r, mid+<span class="number">1</span>, r, v);</span><br><span class="line">    <span class="keyword">return</span> pos;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 查询区间[l, r]第k大的数字，pre对应l-1版本的权值线段树的节点位置， ed代表r版本的权值线段树的节点位置</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> pre, <span class="keyword">int</span> ed, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 到叶子节点就返回</span></span><br><span class="line">    <span class="keyword">if</span>(l==r) <span class="keyword">return</span> l;</span><br><span class="line">    <span class="comment">// 二分</span></span><br><span class="line">    <span class="keyword">int</span> mid = (l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">    <span class="comment">// 先计算左子树的数字个数</span></span><br><span class="line">    <span class="keyword">int</span> x = tree[tree[ed].l].v - tree[tree[pre].l].v;</span><br><span class="line">    <span class="comment">// 若左子树的数字个数大于等于k，说明我们要找的数字在左子树中，递归走到左子树继续寻找</span></span><br><span class="line">    <span class="keyword">if</span>(x&gt;=k) <span class="keyword">return</span> query(tree[pre].l, tree[ed].l, l, mid, k);</span><br><span class="line">    <span class="comment">// 否则就在右子树中，我们要在右子树中寻找k-x大的数字，递归寻找就好</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> query(tree[pre].r, tree[ed].r, mid+<span class="number">1</span>, r, k-x);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n, q; <span class="comment">// n个数字， q次询问</span></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;n, &amp;q); <span class="comment">// 这一题cin/cout会被卡</span></span><br><span class="line">    <span class="comment">// 输入数据，并copy到b数组中</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;a[i]);</span><br><span class="line">        b[i] = a[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 离散化</span></span><br><span class="line">    sort(b+<span class="number">1</span>, b+<span class="number">1</span>+n);</span><br><span class="line">    <span class="keyword">int</span> m = unique(b+<span class="number">1</span>, b+n+<span class="number">1</span>) - b<span class="number">-1</span>;</span><br><span class="line">    <span class="comment">// 构建一颗空的权值线段树，edit[0]存放的就是这颗空树的根节点的位置</span></span><br><span class="line">    edit[<span class="number">0</span>] = build(<span class="number">1</span>, m);</span><br><span class="line">    <span class="comment">// 插入n个数据</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 找到a[i]离散化后对应的位置</span></span><br><span class="line">        a[i] = lower_bound(b+<span class="number">1</span>, b+m+<span class="number">1</span>, a[i]) - b;</span><br><span class="line">        <span class="comment">// edit[i]存放第i版本的权值线段树的根节点位置</span></span><br><span class="line">        edit[i] = update(edit[i<span class="number">-1</span>], <span class="number">1</span>, m, a[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 处理q次询问</span></span><br><span class="line">    <span class="keyword">while</span>(q--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> x, y, k;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>, &amp;x, &amp;y, &amp;k);</span><br><span class="line">        <span class="comment">// pos对应的是离散化后的位置，所以最后输出b[pos]即可</span></span><br><span class="line">        <span class="keyword">int</span> pos = query(edit[x<span class="number">-1</span>], edit[y], <span class="number">1</span>, m, k);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, b[pos]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>主席树的模板，蛮好理解的，不懂得可以多看几遍。</p>
+<h2 id="HDU-4417-Super-Mario"><a href="#HDU-4417-Super-Mario" class="headerlink" title="HDU 4417 Super Mario"></a>HDU 4417 Super Mario</h2><p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=4417" target="_blank" rel="noopener">HDU 4417</a></p>
+<p><img src="hdu4417.png" alt="hdu4417"></p>
+<p>这一题是给你一个h，让你求区间[l, r]中有多少个数字小于等于h。二分枚举区间第k大然后计数即可，代码和模板差不多，就是最后多了一个二分枚举。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="comment">//#include&lt;bits/stdc++.h&gt;</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> inf 0x3f3f3f3f</span></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; P;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">1e5</span>+<span class="number">5</span>;</span><br><span class="line"><span class="keyword">const</span> ll mod = <span class="number">1e9</span>+<span class="number">7</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ndoe</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> l, r, v;</span><br><span class="line">&#125;tree[maxn*<span class="number">20</span>];</span><br><span class="line"><span class="keyword">int</span> edit[maxn], a[maxn], b[maxn], tot=<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> pos = ++tot;</span><br><span class="line">    tree[pos].v=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(l==r)<span class="keyword">return</span> pos;</span><br><span class="line">    <span class="keyword">int</span> mid = (l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">    tree[pos].l = build(l, mid);</span><br><span class="line">    tree[pos].r = build(mid+<span class="number">1</span>, r);</span><br><span class="line">    <span class="keyword">return</span> pos;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> ed, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> v)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> pos = ++tot;</span><br><span class="line">    tree[pos] = tree[ed];</span><br><span class="line">    tree[pos].v++;</span><br><span class="line">    <span class="keyword">if</span>(l==r)<span class="keyword">return</span> pos;</span><br><span class="line">    <span class="keyword">int</span> mid = (l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(v&lt;=mid) tree[pos].l = update(tree[ed].l, l, mid, v);</span><br><span class="line">    <span class="keyword">else</span> tree[pos].r = update(tree[ed].r, mid+<span class="number">1</span>, r, v);</span><br><span class="line">    <span class="keyword">return</span> pos;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> pre, <span class="keyword">int</span> ed, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(l==r)<span class="keyword">return</span> l;</span><br><span class="line">    <span class="keyword">int</span> mid = (l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> x = tree[tree[ed].l].v - tree[tree[pre].l].v;</span><br><span class="line">    <span class="keyword">if</span>(x&gt;=k) <span class="keyword">return</span> query(tree[pre].l, tree[ed].l, l, mid, k);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> query(tree[pre].r, tree[ed].r, mid+<span class="number">1</span>, r, k-x);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;t);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=t;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Case %d:\n"</span>,i);</span><br><span class="line">        <span class="keyword">int</span> n, q;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;n, &amp;q);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;a[i]);</span><br><span class="line">            b[i]=a[i];</span><br><span class="line">        &#125;</span><br><span class="line">        sort(b+<span class="number">1</span>, b+<span class="number">1</span>+n);</span><br><span class="line">        <span class="keyword">int</span> m = unique(b+<span class="number">1</span>, b+n+<span class="number">1</span>) - b<span class="number">-1</span>;</span><br><span class="line">        <span class="built_in">memset</span>(tree, <span class="number">0</span>, <span class="keyword">sizeof</span>(tree));</span><br><span class="line">        edit[<span class="number">0</span>] = build(<span class="number">1</span>, m);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            a[i] = lower_bound(b+<span class="number">1</span>, b+<span class="number">1</span>+m, a[i]) - b;</span><br><span class="line">            edit[i] = update(edit[i<span class="number">-1</span>], <span class="number">1</span>, m, a[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(q--)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> x, y, h;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>, &amp;x, &amp;y, &amp;h);</span><br><span class="line">            <span class="comment">// 将x， y加一，因为我是从下标为1开始算的，题目是从0开始的</span></span><br><span class="line">            x++;y++;</span><br><span class="line">            <span class="keyword">int</span> ans = <span class="number">0</span>; <span class="comment">// 计数</span></span><br><span class="line">            <span class="comment">// 在[l, r]区间中枚举k</span></span><br><span class="line">            <span class="keyword">int</span> l=<span class="number">1</span>, r=y-x+<span class="number">1</span>;</span><br><span class="line">            <span class="comment">// 二分</span></span><br><span class="line">            <span class="keyword">while</span>(l&lt;=r)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">int</span> mid = (l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">                <span class="comment">//cout&lt;&lt;b[query(edit[x-1], edit[y], 1, m , mid)]&lt;&lt;endl;</span></span><br><span class="line">                <span class="comment">//如果h比当前第mid大的数字还大，那ans就加上mid</span></span><br><span class="line">                <span class="keyword">if</span>(h &gt;= b[query(edit[x<span class="number">-1</span>], edit[y], <span class="number">1</span>, m , mid)])</span><br><span class="line">                &#123;</span><br><span class="line">                    ans += mid-l+<span class="number">1</span>;</span><br><span class="line">                    l=mid+<span class="number">1</span>; <span class="comment">// 调整区间大小</span></span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 否则的话就向左缩小枚举区间</span></span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    r=mid<span class="number">-1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, ans);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>主席树+二分枚举搞定</p>
+<h2 id="带修改的区间第k大查询"><a href="#带修改的区间第k大查询" class="headerlink" title="带修改的区间第k大查询"></a>带修改的区间第k大查询</h2><p><a href="https://zoj.pintia.cn/problem-sets/91827364500/submissions?show_all=true&amp;&amp;problem_set_problem_id=91827365611" target="_blank" rel="noopener">ZOJ 2112</a></p>
+<p><img src="zoj1.png" alt="zoj1"><br><img src="zoj2.png" alt="zoj2"></p>
+<p>前面讲的都是静态的主席树，就是不带修改操作的。如果我们有两种操作，一种是求区间[l, r]的第k大，另一种是修改a[i]的值。这样的话要怎么做呢？将T[i]以及之后的权值线段树相关的结点全部修改？？明显不可能这么做，及其麻烦。</p>
+<p>假设要将a[i]从a修改为b，那么就要消除a的影响并加上b的影响，消除影响就是-1，加上影响就是+1，然后主席树是利用前缀和的思想来求区间第k大的，如果有修改操作的话，自然是需要重新求和的。修改和求和？？树状数组！！！我们先和之前一样构建一颗静态的主席树，然后构建长度为n的树状数组，只不过树状数组的每一个结点代表的都是一颗空的权值线段树。然后修改操作就作用在树状数组中对应的权值线段树，然后利用原始的静态主席树和树状数组中部分权值线段树就可以实现带修改的区间第k大查询了。</p>
+<p>我觉得写这一题还是很蛋疼的，毕竟用到了树套树，也可能是我太菜了，看了蛮久题解才弄懂，特别是树状数组维护那一部分。</p>
+<p>以题目中的第一个样例来讲解吧。原数组中有5个数字，分别为3、 2、 1、 4、 7，然后修改操作将2这个位置的数修改为6，即将2修改为6，那么所需要的数字有1、 2、 3、 4、 6、 7。我们要对这些数字构建主席树和权值线段树树状数组（要记得将修改后的数字也一起加到数组中）。</p>
+<p>我们用S[i]表示树状数组中第i颗权值线段树的根节点位置。现在要将位置为2的数修改为6，根据树状数组的思想，我们要修改位置S[2]和S[4]，再加lowbit就超过6了。</p>
+<p>首先我们要消除位置2原先数的影响，位置2原先的数值也为2，修改如下图所示</p>
+<p><img src="szsz1.png" alt="szsz1"></p>
+<p>然后加上6的影响，同样是在S[2]和S[4]上进行操作，如下图所示</p>
+<p><img src="szsz2.png" alt="szsz2"></p>
+<p>修改完之后就是这样。之后求区间第k大时，还要利用树状数组的思想快速求出区间[l, r]中的和。</p>
+<p>大概就是这样做吧，如果没搞懂树状数组是怎么维护修改的，代码可能有一些难理解。</p>
+<p>版本一：函数用递归实现<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="comment">//#include&lt;bits/stdc++.h&gt;</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> inf 0x3f3f3f3f</span></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; P;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">60010</span>;</span><br><span class="line"><span class="keyword">const</span> ll mod = <span class="number">1e9</span>+<span class="number">7</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> M = <span class="number">2500010</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, m, q, tot;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> l, r, v;</span><br><span class="line">&#125;tree[M];</span><br><span class="line"></span><br><span class="line"><span class="comment">// T是主席树，与上面代码的edit作用一样， S数组就是树状数组， use数组是树状数组求和时用的，记录的是树状数组中哪一些权值线段树要被用来求和</span></span><br><span class="line"><span class="keyword">int</span> T[maxn], S[maxn], use[maxn], a[maxn], b[maxn];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 记录询问，因为要将修改后的值一起构建主席树，所以将在线转为离线</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Q</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="comment">// 对于查询区间[l, r]第k大的询问来说，flag为1</span></span><br><span class="line">    <span class="comment">//若是修改操作，l记录修改的位置，r记录新值，flag为0</span></span><br><span class="line">    <span class="keyword">int</span> l, r, k, flag;</span><br><span class="line">&#125;query[<span class="number">10010</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 快速找出x在离散化后的位置</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">HASH</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> lower_bound(b+<span class="number">1</span>, b+m+<span class="number">1</span>, x) - b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 建静态主席树，和之前的一样</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> pos = ++tot;</span><br><span class="line">    tree[pos].v = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(l==r) <span class="keyword">return</span> pos;</span><br><span class="line">    <span class="keyword">int</span> mid = (l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">    tree[pos].l = build(l, mid);</span><br><span class="line">    tree[pos].r = build(mid+<span class="number">1</span>, r);</span><br><span class="line">    <span class="keyword">return</span> pos;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 和之前的静态主席树update差不多，只不过不是直接将tree[pos].v+1,而是加参数v</span></span><br><span class="line"><span class="comment">//消除影响v就为-1， 添加影响v就为1， 其他没什么不同</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> ed, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> p, <span class="keyword">int</span> v)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> pos = ++tot;</span><br><span class="line">    tree[pos] = tree[ed];</span><br><span class="line">    tree[pos].v += v;</span><br><span class="line">    <span class="keyword">if</span>(l==r) <span class="keyword">return</span> pos;</span><br><span class="line">    <span class="keyword">int</span> mid = (l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(p&lt;=mid) tree[pos].l = update(tree[ed].l, l, mid, p, v);</span><br><span class="line">    <span class="keyword">else</span> tree[pos].r = update(tree[ed].r, mid+<span class="number">1</span>, r, p, v);</span><br><span class="line">    <span class="keyword">return</span> pos;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 树状数组的lowbit</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lowbit</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123; <span class="keyword">return</span> x&amp;(-x); &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 修改操作，修改位置x的影响</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> v)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 找出a[x]在离散化后的位置p</span></span><br><span class="line">    <span class="keyword">int</span> p = HASH(a[x]);</span><br><span class="line">    <span class="keyword">while</span>(x&lt;=n)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 修改操作，对树状数组中相应的权值线段树进行修改，消除影响：v=-1， 添加影响：v=1</span></span><br><span class="line">        <span class="comment">// 因为树状数组中的权值线段树不需要可持久化，所以直接在原版本上修改就可以了</span></span><br><span class="line">        S[x] = update(S[x], <span class="number">1</span>, m, p, v);</span><br><span class="line">        x+=lowbit(x);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 树状数组求和， 求左子树包含的数字个数，和静态主席树一样的思想，都是先求左子树</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sum</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ret = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(x)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// use[i]记录的就是树状数组中相应的权值线段树的结点位置</span></span><br><span class="line">        <span class="comment">// 似乎这一句有一点点难以理解，结合整体代码多看几遍吧</span></span><br><span class="line">        ret += tree[tree[use[x]].l].v;</span><br><span class="line">        x-=lowbit(x);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 询问操作。树状数组求[pre, ed]的和， tpre和ted是静态主席树的区间左右顶点的位置， 区间[l, r]第k大</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Query</span><span class="params">(<span class="keyword">int</span> pre, <span class="keyword">int</span> ed, <span class="keyword">int</span> tpre, <span class="keyword">int</span> ted, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(l==r)<span class="keyword">return</span> l;</span><br><span class="line">    <span class="keyword">int</span> mid = (l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">    <span class="comment">// sum就是树状数组的求和，相对于静态主席树，多了sum求修改操作的影响</span></span><br><span class="line">    <span class="comment">// tmp为当前左子树的数字个数</span></span><br><span class="line">    <span class="keyword">int</span> tmp = sum(ed) - sum(pre) + tree[tree[ted].l].v - tree[tree[tpre].l].v;</span><br><span class="line">    <span class="comment">// 若左子树的数字个数大于等于k就往左子树继续走，这里和主席树没什么区别</span></span><br><span class="line">    <span class="keyword">if</span>(tmp &gt;= k)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 两个for循环是更新左子树需要用到的树状数组中的权值线段树的位置，有那么一丢丢难以理解，多看几遍？</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=ed; i; i-=lowbit(i)) use[i] = tree[use[i]].l;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=pre; i; i-=lowbit(i)) use[i] = tree[use[i]].l;</span><br><span class="line">        <span class="keyword">return</span> Query(pre, ed, tree[tpre].l, tree[ted].l, l, mid, k);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 走右子树同理</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=ed; i; i-=lowbit(i)) use[i] = tree[use[i]].r;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=pre; i; i-=lowbit(i)) use[i] = tree[use[i]].r;</span><br><span class="line">        <span class="keyword">return</span> Query(pre, ed, tree[tpre].r, tree[ted].r, mid+<span class="number">1</span>, r, k-tmp);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t; <span class="comment">// t个case</span></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;t);</span><br><span class="line">    <span class="keyword">while</span>(t--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;n, &amp;q);</span><br><span class="line">        m = tot = <span class="number">0</span>; <span class="comment">// 记得初始化</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;a[i]);</span><br><span class="line">            b[++m] = a[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">char</span> op[<span class="number">5</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=q;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%s"</span>, op);</span><br><span class="line">            <span class="comment">// 查询操作</span></span><br><span class="line">            <span class="keyword">if</span>(op[<span class="number">0</span>]==<span class="string">'Q'</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>, &amp;query[i].l, &amp;query[i].r, &amp;query[i].k);</span><br><span class="line">                query[i].flag = <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;query[i].l, &amp;query[i].r);</span><br><span class="line">                b[++m] = query[i].r; <span class="comment">// 注意要将修改后的新值加入到待离散化的b数组</span></span><br><span class="line">                query[i].flag = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 离散化</span></span><br><span class="line">        sort(b+<span class="number">1</span>, b+m+<span class="number">1</span>);</span><br><span class="line">        m = unique(b+<span class="number">1</span>, b+m+<span class="number">1</span>) - b<span class="number">-1</span>;</span><br><span class="line">        <span class="comment">// 构建主席树</span></span><br><span class="line">        T[<span class="number">0</span>] = build(<span class="number">1</span>, m);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">            T[i] = update(T[i<span class="number">-1</span>], <span class="number">1</span>, m, HASH(a[i]), <span class="number">1</span>);</span><br><span class="line">        <span class="comment">// 构建树状数组，每一个节点都是一颗空的权值线段树</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">            S[i] = T[<span class="number">0</span>];</span><br><span class="line">        <span class="comment">// 离线处理q个询问</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=q;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(query[i].flag) <span class="comment">// 查询</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">// 两个for循环标记区间[l, r]要使用的树状数组中的权值线段树的位置</span></span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> j=query[i].r; j; j-=lowbit(j)) use[j] = S[j];</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> j=query[i].l<span class="number">-1</span>; j; j-=lowbit(j)) use[j] = S[j];</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, b[Query(query[i].l<span class="number">-1</span>, query[i].r, T[query[i].l<span class="number">-1</span>], T[query[i].r], <span class="number">1</span>, m, query[i].k)]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">// 先消除影响</span></span><br><span class="line">                add(query[i].l, <span class="number">-1</span>);</span><br><span class="line">                <span class="comment">// 在原数组中更新值</span></span><br><span class="line">                a[query[i].l] = query[i].r;</span><br><span class="line">                <span class="comment">// 添加新值的影响</span></span><br><span class="line">                add(query[i].l, <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>版本二：部分函数将递归改为迭代了，版本一和版本二代码对着看，其实没有很多区别，所以就不加注释了。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="comment">//#include&lt;bits/stdc++.h&gt;</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> inf 0x3f3f3f3f</span></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; P;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">60010</span>;</span><br><span class="line"><span class="keyword">const</span> ll mod = <span class="number">1e9</span>+<span class="number">7</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> M = <span class="number">2500010</span>;</span><br><span class="line"><span class="keyword">int</span> n, m, q, tot;</span><br><span class="line"><span class="keyword">int</span> a[maxn], t[maxn];</span><br><span class="line"><span class="keyword">int</span> T[maxn], S[maxn], tree[M], lson[M], rson[M], use[maxn];</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Query</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> l, r, k, flag;</span><br><span class="line">&#125;query[<span class="number">10010</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init_hash</span><span class="params">(<span class="keyword">int</span> k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    sort(t, t+k);</span><br><span class="line">    m = unique(t, t+k) - t;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Hash</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> lower_bound(t, t+m, x) - t;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> pos = tot++;</span><br><span class="line">    tree[pos] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(l==r)<span class="keyword">return</span> pos;</span><br><span class="line">    <span class="keyword">int</span> mid = (l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">    lson[pos] = build(l, mid);</span><br><span class="line">    rson[pos] = build(mid+<span class="number">1</span>, r);</span><br><span class="line">    <span class="keyword">return</span> pos;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Insert</span><span class="params">(<span class="keyword">int</span> root, <span class="keyword">int</span> pos, <span class="keyword">int</span> val)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> newroot = tot++, tmp = newroot;</span><br><span class="line">    <span class="keyword">int</span> l=<span class="number">0</span>, r=m<span class="number">-1</span>;</span><br><span class="line">    tree[newroot] = tree[root] + val;</span><br><span class="line">    <span class="keyword">while</span>(l &lt; r)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = (l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(pos&lt;=mid)</span><br><span class="line">        &#123;</span><br><span class="line">            lson[newroot] = tot++; rson[newroot] = rson[root];</span><br><span class="line">            newroot = lson[newroot]; root = lson[root];</span><br><span class="line">            r = mid;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            rson[newroot] = tot++; lson[newroot] = lson[root];</span><br><span class="line">            newroot = rson[newroot]; root = rson[root];</span><br><span class="line">            l = mid+<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        tree[newroot] = tree[root] + val;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> tmp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lowbit</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123; <span class="keyword">return</span> x&amp;(-x); &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sum</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ret = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(x&gt;<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        ret += tree[lson[use[x]]];</span><br><span class="line">        x -= lowbit(x);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Query</span><span class="params">(<span class="keyword">int</span> left, <span class="keyword">int</span> right, <span class="keyword">int</span> k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> left_root = T[left<span class="number">-1</span>];</span><br><span class="line">    <span class="keyword">int</span> right_root = T[right];</span><br><span class="line">    <span class="keyword">int</span> l = <span class="number">0</span>, r = m<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=left<span class="number">-1</span>; i; i-=lowbit(i)) use[i] = S[i];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=right; i; i-=lowbit(i)) use[i] = S[i];</span><br><span class="line">    <span class="keyword">while</span>(l&lt;r)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = (l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> tmp = sum(right) - sum(left<span class="number">-1</span>) + tree[lson[right_root]] - tree[lson[left_root]];</span><br><span class="line">        <span class="keyword">if</span>(tmp &gt;= k)</span><br><span class="line">        &#123;</span><br><span class="line">            r = mid;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=left<span class="number">-1</span>; i; i-=lowbit(i)) use[i] = lson[use[i]];</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=right; i; i-=lowbit(i)) use[i] = lson[use[i]];</span><br><span class="line">            left_root = lson[left_root];</span><br><span class="line">            right_root = lson[right_root];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            l = mid+<span class="number">1</span>;</span><br><span class="line">            k-=tmp;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=left<span class="number">-1</span>; i; i-=lowbit(i)) use[i] = rson[use[i]];</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=right; i; i-=lowbit(i)) use[i] = rson[use[i]];</span><br><span class="line">            left_root = rson[left_root];</span><br><span class="line">            right_root = rson[right_root];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> l;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> p, <span class="keyword">int</span> d)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(x&lt;=n)</span><br><span class="line">    &#123;</span><br><span class="line">        S[x] = Insert(S[x], p, d);</span><br><span class="line">        x += lowbit(x);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> tt;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;tt);</span><br><span class="line">    <span class="keyword">while</span>(tt--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;n, &amp;q);</span><br><span class="line">        tot = m = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;a[i]);</span><br><span class="line">            t[m++] = a[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">char</span> op[<span class="number">5</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=q;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%s"</span>, op);</span><br><span class="line">            <span class="keyword">if</span>(op[<span class="number">0</span>]==<span class="string">'Q'</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                query[i].flag = <span class="number">1</span>;</span><br><span class="line">                <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>, &amp;query[i].l, &amp;query[i].r, &amp;query[i].k);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                query[i].flag = <span class="number">0</span>;</span><br><span class="line">                <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;query[i].l, &amp;query[i].r);</span><br><span class="line">                t[m++] = query[i].r;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        init_hash(m);</span><br><span class="line">        T[<span class="number">0</span>] = build(<span class="number">0</span>, m<span class="number">-1</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) T[i] = Insert(T[i<span class="number">-1</span>], Hash(a[i]), <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) S[i] = T[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=q;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(query[i].flag)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, t[Query(query[i].l, query[i].r, query[i].k)]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                add(query[i].l, Hash(a[query[i].l]), <span class="number">-1</span>);</span><br><span class="line">                add(query[i].l, Hash(query[i].r), <span class="number">1</span>);</span><br><span class="line">                a[query[i].l] = query[i].r;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="END"><a href="#END" class="headerlink" title="END"></a>END</h2><p>感觉动态的主席树难理解一点点，静态的主席树还是ok的啦，溜啦溜啦～</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/12/图论——最短路径/" rel="next" title="图论——最短路径">
+                <i class="fa fa-chevron-left"></i> 图论——最短路径
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/timg.jpeg" alt="Elitedj">
+            
+              <p class="site-author-name" itemprop="name">Elitedj</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Elitedj" title="GitHub &rarr; https://github.com/Elitedj" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="/elite@m.scnu.edu.cn" title="E-Mail &rarr; elite@m.scnu.edu.cn"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blog.tover.xyz" title="http://blog.tover.xyz" rel="noopener" target="_blank">Tover</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://ariacx.me" title="https://ariacx.me" rel="noopener" target="_blank">xk</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前缀和"><span class="nav-number">2.</span> <span class="nav-text">前缀和</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#权值线段树"><span class="nav-number">3.</span> <span class="nav-text">权值线段树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#离散化"><span class="nav-number">4.</span> <span class="nav-text">离散化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主席树"><span class="nav-number">5.</span> <span class="nav-text">主席树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#POJ-2104-K-th-Number"><span class="nav-number">6.</span> <span class="nav-text">POJ 2104 K-th Number</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HDU-4417-Super-Mario"><span class="nav-number">7.</span> <span class="nav-text">HDU 4417 Super Mario</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#带修改的区间第k大查询"><span class="nav-number">8.</span> <span class="nav-text">带修改的区间第k大查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#END"><span class="nav-number">9.</span> <span class="nav-text">END</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Elitedj</span>
+
+  
+
+  
+</div>
+
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span><br>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("02/21/2019 13:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.0.0</div>
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="Total Visitors">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="Total Views">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.0"></script>
+
+  <script src="/js/src/motion.js?v=7.0.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.0"></script>
+<script src="/js/src/post-details.js?v=7.0.0"></script>
+<script type="text/javascript" src="/js/src/photoswipe-ui-default.min.js?v="></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.0"></script>
+
+
+
+  
+  
+
+<script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+
+
+
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'zOEvCRaHczqQkvn7g5bk2d9c-gzGzoHsz',
+    appKey: 'JJQvXVH4XIDyjJaIK2HWeTY3',
+    placeholder: 'comment something',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+</script>
+
+
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+
+<!--崩溃欺骗-->
+<script type="text/javascript" src="/js/src/crash_cheat.js"></script>
