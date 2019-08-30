@@ -1169,7 +1169,7 @@ pre .javascript .function {
   display: inline-block;
   vertical-align: top;
   line-height: 36px;
-  font-size: 36px;
+  font-size: 28px;
   font-weight: normal;
   font-family: 'Italianno', "PingFang SC", "Microsoft YaHei", sans-serif;
   color: #fff;
@@ -1903,7 +1903,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #c9fe18;
+  background: #79831b;
 }
 .links-of-blogroll {
   font-size: 13px;
