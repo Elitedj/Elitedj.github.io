@@ -1159,6 +1159,18 @@ pre .javascript .function {
     text-align: center;
   }
 }
+.brand {
+/*
+  position: relative;
+  display: inline-block;
+  padding: 0 40px;
+  color: $brand-color;
+  background: $brand-bg;
+  border-bottom: none;
+  &:hover { color: $brand-hover-color; }
+  */
+  border-bottom: none;
+}
 .logo {
   display: inline-block;
   margin-right: 5px;
@@ -1246,16 +1258,13 @@ pre .javascript .function {
   display: block;
   font-size: 13px;
   line-height: inherit;
-  border-bottom: 1px solid transparent;
+  border-bottom: 0px none transparent;
   transition-property: border-color;
   color: #fff;
   transition-duration: 0.2s;
   transition-timing-function: ease-in-out;
   transition-delay: 0s;
-}
-.menu .menu-item a:hover,
-.menu .menu-item span.exturl:hover {
-  border-bottom-color: #fff;
+/*&:hover { border-bottom-color: #fff;}*/
 }
 .menu .menu-item .fa {
   margin-right: 5px;
@@ -1903,7 +1912,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #79831b;
+  background: #e5036a;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2036,7 +2045,7 @@ pre .javascript .function {
 .with-love {
   display: inline-block;
   margin: 0 5px;
-  color: #808080;
+  color: #000;
 }
 .powered-by,
 .theme-info {
