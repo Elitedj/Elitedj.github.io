@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-10-02T15:41:25.930Z</updated>
+  <updated>2019-10-13T06:47:45.072Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>网络流之dinic</title>
+    <link href="http://yoursite.com/2019/10/13/%E7%BD%91%E7%BB%9C%E6%B5%81%E4%B9%8Bdinic/"/>
+    <id>http://yoursite.com/2019/10/13/网络流之dinic/</id>
+    <published>2019-10-13T01:30:54.000Z</published>
+    <updated>2019-10-13T06:47:45.072Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;网络流&quot;&gt;&lt;a href=&quot;#网络流&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="Algorithm" scheme="http://yoursite.com/categories/Algorithm/"/>
+    
+    
+      <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
+    
+  </entry>
   
   <entry>
     <title>Tarjan求解强连通分量、割点、桥</title>
