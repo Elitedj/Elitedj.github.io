@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-10-13T06:47:45.072Z</updated>
+  <updated>2019-11-11T13:30:31.604Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[游记]2019 ICPC Regional NC</title>
+    <link href="http://yoursite.com/2019/11/11/%E6%B8%B8%E8%AE%B0-2019-ICPC-Regional-NC/"/>
+    <id>http://yoursite.com/2019/11/11/游记-2019-ICPC-Regional-NC/</id>
+    <published>2019-11-11T12:17:15.000Z</published>
+    <updated>2019-11-11T13:30:31.604Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;第一次参加ICPC区域赛，虽然结果不如人意，但总得留下点什么……&lt;/p&gt;
+&lt;h2 id=&quot;废话&quot;&gt;&lt;a href=&quot;#废话&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="ICPC" scheme="http://yoursite.com/categories/ICPC/"/>
+    
+    
+      <category term="ICPC" scheme="http://yoursite.com/tags/ICPC/"/>
+    
+  </entry>
   
   <entry>
     <title>网络流之dinic</title>
