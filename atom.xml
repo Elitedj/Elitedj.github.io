@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-02-03T15:17:03.721Z</updated>
+  <updated>2020-02-04T11:58:01.366Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>字典树(Trie)</title>
+    <link href="http://yoursite.com/2020/02/04/%E5%AD%97%E5%85%B8%E6%A0%91-Trie/"/>
+    <id>http://yoursite.com/2020/02/04/字典树-Trie/</id>
+    <published>2020-02-04T11:35:29.000Z</published>
+    <updated>2020-02-04T11:58:01.366Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;字典树简介&quot;&gt;&lt;a href=&quot;#字典树简介&quot; class=&quot;headerlink&quot; title=&quot;字典树简介&quot;&gt;&lt;/a&gt;字典树简介&lt;/h2&gt;&lt;p&gt;字典树(Trie)，又称为前缀树，和编译原理里面的DFA很像。它长下面这个样子&lt;/p&gt;
+&lt;p&gt;&lt;img
+        
+      
+    
+    </summary>
+    
+      <category term="Algorithm" scheme="http://yoursite.com/categories/Algorithm/"/>
+    
+    
+      <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
+    
+  </entry>
   
   <entry>
     <title>字符串哈希</title>
