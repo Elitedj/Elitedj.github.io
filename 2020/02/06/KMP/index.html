@@ -126,13 +126,35 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Elitedj">
-<meta property="og:url" content="http://yoursite.com/archives/2019/11/index.html">
+  <meta name="description" content="有的时候我们会面临这样的一个问题：有一个文本串s和一个模式串p，我们要在s中找p出现的位置要怎么做呢？ 朴素做法最简单最容易想到的就是暴力匹配。 假设文本串匹配到i位置，模式串匹配到j位置。  若j==len(p)，则找到，退出即可 若s[i]==p[j]，则i++, j++继续匹配下一个字符 若s[i]!=p[j]，则i=i-j+1, j=0  12345678910111213141516bo">
+<meta name="keywords" content="Algorithm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="KMP">
+<meta property="og:url" content="http://yoursite.com/2020/02/06/KMP/index.html">
 <meta property="og:site_name" content="Elitedj">
+<meta property="og:description" content="有的时候我们会面临这样的一个问题：有一个文本串s和一个模式串p，我们要在s中找p出现的位置要怎么做呢？ 朴素做法最简单最容易想到的就是暴力匹配。 假设文本串匹配到i位置，模式串匹配到j位置。  若j==len(p)，则找到，退出即可 若s[i]==p[j]，则i++, j++继续匹配下一个字符 若s[i]!=p[j]，则i=i-j+1, j=0  12345678910111213141516bo">
 <meta property="og:locale" content="en">
+<meta property="og:image" content="http://yoursite.com/2020/02/06/KMP/1.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/02/06/KMP/2.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/02/06/KMP/3.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/02/06/KMP/4.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/02/06/KMP/5.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/02/06/KMP/6.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/02/06/KMP/8.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/02/06/KMP/9.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/02/06/KMP/10.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/02/06/KMP/1.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/02/06/KMP/2.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/02/06/KMP/3.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/02/06/KMP/4.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/02/06/KMP/5.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/02/06/KMP/6.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/02/06/KMP/7.jpg">
+<meta property="og:updated_time" content="2020-02-06T15:33:27.289Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Elitedj">
+<meta name="twitter:title" content="KMP">
+<meta name="twitter:description" content="有的时候我们会面临这样的一个问题：有一个文本串s和一个模式串p，我们要在s中找p出现的位置要怎么做呢？ 朴素做法最简单最容易想到的就是暴力匹配。 假设文本串匹配到i位置，模式串匹配到j位置。  若j==len(p)，则找到，退出即可 若s[i]==p[j]，则i++, j++继续匹配下一个字符 若s[i]!=p[j]，则i=i-j+1, j=0  12345678910111213141516bo">
+<meta name="twitter:image" content="http://yoursite.com/2020/02/06/KMP/1.jpg">
 
 
 
@@ -141,7 +163,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/2019/11/">
+  <link rel="canonical" href="http://yoursite.com/2020/02/06/KMP/">
 
 
 
@@ -151,7 +173,7 @@
   };
 </script>
 
-  <title>Archive | Elitedj</title>
+  <title>KMP | Elitedj</title>
   
 
 
@@ -199,7 +221,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -303,7 +325,7 @@
         
         
           
-          <li class="menu-item menu-item-archives menu-item-active">
+          <li class="menu-item menu-item-archives">
 
     
     
@@ -350,31 +372,6 @@
   
     
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
   
 
   
@@ -420,78 +417,285 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
 
-      
-      <span class="archive-page-counter">
-        
-        
-        
-          
-        
-        Um..! 18 posts in total. Keep on posting.
-      </span>
-      
-
-      
-
-        
-        
-        
-
-        
-          
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2019">2019</h1>
-          </div>
-        
-        
-
-        
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/06/KMP/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Elitedj">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/tou.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elitedj">
+    </span>
+
+    
+      <header class="post-header">
+
         
-          <a class="post-title-link" href="/2019/11/11/游记-2019-ICPC-Regional-NC/" itemprop="url">
-            
-              <span itemprop="name">[游记]2019 ICPC Regional NC</span>
-            
-          </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">KMP
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-11-11T20:17:15+08:00" content="2019-11-11">
-          11-11
-        </time>
-      </div>
+              
+            
+          </h1>
+        
 
-    </header>
-  </article>
+        <div class="post-meta">
+          <span class="post-time">
 
+            
+            
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2020-02-06 20:41:26 / Modified: 23:33:27" itemprop="dateCreated datePublished" datetime="2020-02-06T20:41:26+08:00">2020-02-06</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/2020/02/06/KMP/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/02/06/KMP/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
+      
 
+      
+        <p>有的时候我们会面临这样的一个问题：有一个文本串s和一个模式串p，我们要在s中找p出现的位置要怎么做呢？</p>
+<h2 id="朴素做法"><a href="#朴素做法" class="headerlink" title="朴素做法"></a>朴素做法</h2><p>最简单最容易想到的就是暴力匹配。</p>
+<p>假设文本串匹配到i位置，模式串匹配到j位置。</p>
+<ul>
+<li>若j==len(p)，则找到，退出即可</li>
+<li>若s[i]==p[j]，则i++, j++继续匹配下一个字符</li>
+<li>若s[i]!=p[j]，则i=i-j+1, j=0</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">violentMatch</span><span class="params">(<span class="keyword">char</span> *s, <span class="keyword">char</span> *p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> slen=<span class="built_in">strlen</span>(s), plen=<span class="built_in">strlen</span>(p);</span><br><span class="line">    <span class="keyword">int</span> i=<span class="number">0</span>, j=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(i&lt;slen &amp;&amp; j&lt;plen)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(s[i] == p[j])</span><br><span class="line">            i++, j++;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            i=i-j+<span class="number">1</span>, j=<span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(j == plen)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这种暴力做法的时间复杂度为O(n*m)的，n为文本串的长度，m为模式串的长度。</p>
+<p>暴力匹配在当前字符匹配失败的时候，只将模式串往后移了一个位置，这样实在是太慢了，能不能一次多移几个位置？</p>
+<h2 id="KMP"><a href="#KMP" class="headerlink" title="KMP"></a>KMP</h2><p>Knuth-Morris-Pratt算法，这个算法由Donald Knuth、Vaughan Pratt、James H. Morris三人于1977年联合发表。</p>
+<p>我们先来看看KMP算法的匹配过程吧，看看是怎么跳多几步的。</p>
+<p><img src="1.jpg" alt="1"></p>
+<p>一开始的A与BBC都不匹配，一步一步到第四个的A</p>
+<p><img src="2.jpg" alt="2"></p>
+<p>这时候ABCDAB都匹配上了，但是最后的D和A不匹配，我们能够快速跳到下面的样子</p>
+<p><img src="3.jpg" alt="3"></p>
+<p>观察到上面的AB已经匹配上了，我们是从第2个图直接跳到第3个图的，这就是KMP算法的奇妙之处，我们不需要再一次慢慢匹配前面的AB了，因为我们知道它可以匹配上</p>
+<p>这时候C和A匹配不上，我们就跳到下图</p>
+<p><img src="4.jpg" alt="4"></p>
+<p>跳到A和A匹配，这时候匹配上了，继续一个个比较，直到最后一个字母D</p>
+<p><img src="5.jpg" alt="5"></p>
+<p>D又没有匹配上，继续往后跳，变成下图</p>
+<p><img src="6.jpg" alt="6"></p>
+<p>最后成功匹配上了。</p>
+<p>多看看几遍KMP算法的匹配过程图，或许能够发现一些奥妙。</p>
+<h3 id="前缀函数"><a href="#前缀函数" class="headerlink" title="前缀函数"></a>前缀函数</h3><p>KMP算法在失配的时候的“跳”和前缀函数有着密切的关系。</p>
+<p>前缀函数的定义：给定一个长度为n的字符串s，前缀函数是一个长度为n的数组。其中π[i]为既是子串[0…i]的前缀同时是这个子串的后缀的最长<strong>真前缀</strong>长度。一个字符串的真前缀是指其不等于其自身的前缀。根据定义，π[0]=0。</p>
+<p><img src="8.jpg" alt="8"></p>
+<p>所以ABCDABD的前缀函数为[0, 0, 0, 0, 1, 2, 0]</p>
+<p><img src="9.jpg" alt="9"></p>
+<h3 id="next数组"><a href="#next数组" class="headerlink" title="next数组"></a>next数组</h3><p>next数组是和前缀函数很类似的东西，next数组也是长度为n的数组。next数组等于前缀函数每个位置往右移一位，再将next[0]设置为-1。</p>
+<p>ABCDABD的前缀函数和next数组如下</p>
+<p><img src="10.jpg" alt="10"></p>
+<p>KMP每次的跳都是根据next数组里面的值所决定的。</p>
+<p>我们再一次回顾一下KMP算法的匹配过程吧，上面的文本串用s表示，下面的模式串用p表示，且字符串都<strong>从0开始编号</strong></p>
+<p><img src="1.jpg" alt="1"></p>
+<p>首先我们一个个匹配A，一开始的BBC都不匹配，直到s[3]的A才和p[0]的A匹配上</p>
+<p>这时候一位位匹配，直到p[6]与s[9]失配</p>
+<p><img src="2.jpg" alt="2"></p>
+<p>这时候我们查next数组所对应失配位的值，即next[6]的值，为2，我们将模式串的指针j(这时候j为6)变为next[j]，即j=2。也就是我们下一次比较的是p[2]和s[9]，即跳到下图的样子</p>
+<p><img src="3.jpg" alt="3"></p>
+<p>这时候我们发现p[2]和s[9]失配了，我们查next数组，发现next[2]=0，所有将模式串的指针j变为0，下一次用p[0]和s[9]匹配。</p>
+<p><img src="4.jpg" alt="4"></p>
+<p>这时候p[0]和s[9]匹配上了，后面慢慢的匹配，直到p[6]和s[15]失配了</p>
+<p><img src="5.jpg" alt="5"></p>
+<p>我们查next数组，next[6]=2，将模式串的指针j变为2，下一次匹配p[2]和s[15]</p>
+<p>发现p[2]和s[15]匹配上了，我们就一位位往后匹配，发现最后成功匹配上了所有的字符</p>
+<p><img src="6.jpg" alt="6"></p>
+<p>成功！</p>
+<p>先不管next数组是如何求来的，多看几次图示的匹配过程，体会每次失配时，next数组是如何帮助我们“跳”的。</p>
+<p>这个“跳”就和上面讲的前缀函数密切相关了，π[i]就是子串s[0…i]的最长的共同前后缀的长度。</p>
+<p>比如ABCDABD这一个模式串，我们在D失配的时候，观察D前面的串ABCDAB，发现这个串的最长公共前缀后缀为AB，我们在匹配到D的时候才失配，说明前面的ABCDAB都和文本串匹配上了，所以我们可以将<strong>前缀AB挪到后缀AB的位置</strong>，可以知道这个时候前缀AB和文本串是匹配的，所以我们的模式串直接从C开始下一次的匹配，即模式串的指针j变为next[j]，还记得next[6]为多少吗？对！next[6]=2，我们的j变为了2，刚好是p[2]我们想要的C的位置(字符串从0开始编号)</p>
+<p>不知道到这里能否明白next的妙用了？但是神奇的next数组如何求呢？</p>
+<h3 id="next的求解"><a href="#next的求解" class="headerlink" title="next的求解"></a>next的求解</h3><p>我们利用next数组在文本串中寻找模式串p，即文本串和模式串匹配。求解next数组的时候就像是模式串和模式串匹配。</p>
+<p>假设我们求出了next[0…j]，如何求解next[j+1]呢？</p>
+<p>设k为next[j]</p>
+<ul>
+<li>若p[k]==p[j+1]，则next[j+1] = next[j]+1 = k+1</li>
+<li>若p[k]!=p[j+1]，则令k=next[k]，一直递归这个过程。这个过程相当于，在p[j+1]之前不存在一个长度为k+1的前缀”p0, p1, p2, … ,pk”和长度为k+1的后缀”Pj-k, pj-k+1, pj-k+2, …, pj+1”相等，所以我门令k=next[k]继续往前找，直到找到一个更短的前缀使得也是子串p[0…j+1]的后缀。如果实在没有的话，则next[j+1]=0</li>
+</ul>
+<p>这个过程很抽象，很难理解，我们先看看代码吧。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> nxt[maxn];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getNext</span><span class="params">(<span class="keyword">char</span> *p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> plen=<span class="built_in">strlen</span>(p);</span><br><span class="line">    <span class="keyword">int</span> k=<span class="number">-1</span>, j=<span class="number">0</span>;</span><br><span class="line">    nxt[<span class="number">0</span>]=<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">while</span>(j&lt;plen)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(k==<span class="number">-1</span> || p[k]==p[j])</span><br><span class="line">        &#123;</span><br><span class="line">            j++, k++;</span><br><span class="line">            nxt[j] = k;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            k = nxt[k];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可能看到这更懵了，k=nxt[k]？？？可能看了下面这个图能稍微理解这一步。</p>
+<p><img src="7.jpg" alt="7"></p>
+<p><center>勘误：图上的两个虚线括号不包括Pk和Pj</center><br><br></p>
+<p>若p[j]==p[k]，则next[j+1]就为k+1。若p[j]!=p[k]，则让k=next[k]，第一个蓝色块和第四个蓝色块是匹配上的，只需判断两个绿色的块是否相同即可，类似一种递归的过程。</p>
+<p>四个蓝色块画的大小不太一样，但是它们所代表的子字符串都是相同的。</p>
+<h3 id="KMP模板"><a href="#KMP模板" class="headerlink" title="KMP模板"></a>KMP模板</h3><p>请确保真的理解了next数组的含义及求解！！！</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> nxt[maxn];</span><br><span class="line"><span class="keyword">char</span> s[maxn], p[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getNext</span><span class="params">(<span class="keyword">char</span> *p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> len=<span class="built_in">strlen</span>(p);</span><br><span class="line">    <span class="keyword">int</span> j=<span class="number">0</span>, k=<span class="number">-1</span>, nxt[<span class="number">0</span>]=<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">while</span>(j&lt;len)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(k==<span class="number">-1</span> || p[j]==p[k])</span><br><span class="line">            nxt[++j] = ++k;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            k=nxt[k];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回模式串p在s中首次出现的位置</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">kmp</span><span class="params">(<span class="keyword">char</span> *s, <span class="keyword">char</span> *p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i=<span class="number">0</span>, j=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> slen=<span class="built_in">strlen</span>(s), plen=<span class="built_in">strlen</span>(p);</span><br><span class="line">    getNext(p);</span><br><span class="line">    <span class="keyword">while</span>(i&lt;slen &amp;&amp; j&lt;plen)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(j==<span class="number">-1</span> || s[i]==p[j])</span><br><span class="line">            i++, j++;</span><br><span class="line">        eles</span><br><span class="line">            j=nxt[j];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(j==plen)</span><br><span class="line">        <span class="keyword">return</span> i-plen;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回模式串p在s中出现的次数</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">kmp</span><span class="params">(<span class="keyword">char</span> *s, <span class="keyword">char</span> *p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans=<span class="number">0</span>, i=<span class="number">0</span>, j=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> slen=<span class="built_in">strlen</span>(s), plen=<span class="built_in">strlen</span>(p);</span><br><span class="line">    getNext(p);</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;slen; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span>(j&gt;<span class="number">0</span> &amp;&amp; s[i]!=p[j])</span><br><span class="line">            j=nxt[j];</span><br><span class="line">        <span class="keyword">if</span>(s[i]==p[j])</span><br><span class="line">            j++;</span><br><span class="line">        <span class="keyword">if</span>(j==plen)</span><br><span class="line">        &#123;</span><br><span class="line">            ans++;</span><br><span class="line">            j=<span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
     </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/02/04/字典树-Trie/" rel="next" title="字典树(Trie)">
+                <i class="fa fa-chevron-left"></i> 字典树(Trie)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+  </div>
 
 
           </div>
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
 
         </div>
         
@@ -512,8 +716,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -668,6 +881,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#朴素做法"><span class="nav-number">1.</span> <span class="nav-text">朴素做法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#KMP"><span class="nav-number">2.</span> <span class="nav-text">KMP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前缀函数"><span class="nav-number">2.1.</span> <span class="nav-text">前缀函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#next数组"><span class="nav-number">2.2.</span> <span class="nav-text">next数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#next的求解"><span class="nav-number">2.3.</span> <span class="nav-text">next的求解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#KMP模板"><span class="nav-number">2.4.</span> <span class="nav-text">KMP模板</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
@@ -843,6 +1073,11 @@ setInterval("createtime()",250);
 
 
   
+  <script src="/js/src/scrollspy.js?v=7.0.0"></script>
+<script src="/js/src/post-details.js?v=7.0.0"></script>
+<script type="text/javascript" src="/js/src/photoswipe-ui-default.min.js?v="></script>
+
+
 
   
 
@@ -882,6 +1117,8 @@ setInterval("createtime()",250);
 
 
 
+
+  
 
 
   

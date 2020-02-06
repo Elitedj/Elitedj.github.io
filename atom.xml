@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-02-04T11:58:01.366Z</updated>
+  <updated>2020-02-06T15:33:27.289Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>KMP</title>
+    <link href="http://yoursite.com/2020/02/06/KMP/"/>
+    <id>http://yoursite.com/2020/02/06/KMP/</id>
+    <published>2020-02-06T12:41:26.000Z</published>
+    <updated>2020-02-06T15:33:27.289Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;有的时候我们会面临这样的一个问题：有一个文本串s和一个模式串p，我们要在s中找p出现的位置要怎么做呢？&lt;/p&gt;
+&lt;h2 id=&quot;朴素做法&quot;&gt;&lt;a href=&quot;#朴素做法&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="Algorithm" scheme="http://yoursite.com/categories/Algorithm/"/>
+    
+    
+      <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
+    
+  </entry>
   
   <entry>
     <title>字典树(Trie)</title>
