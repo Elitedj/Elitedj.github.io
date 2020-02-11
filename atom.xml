@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-02-08T14:07:38.837Z</updated>
+  <updated>2020-02-11T14:46:18.065Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>扩展KMP</title>
+    <link href="http://yoursite.com/2020/02/11/%E6%89%A9%E5%B1%95KMP/"/>
+    <id>http://yoursite.com/2020/02/11/扩展KMP/</id>
+    <published>2020-02-11T13:14:49.000Z</published>
+    <updated>2020-02-11T14:46:18.065Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;给两个字符串S和T，长度分别为n和m。且从0开始编号。&lt;/p&gt;
+&lt;p&gt;定义&lt;strong&gt;next&lt;/strong&gt;数组：next[i]表示T[i…m-1]和T的最长公共前缀。&lt;/p&gt;
+&lt;p&gt;定义&lt;strong&gt;extend&lt;/strong&gt;数组：extend[i]表示S[
+        
+      
+    
+    </summary>
+    
+      <category term="Algorithm" scheme="http://yoursite.com/categories/Algorithm/"/>
+    
+    
+      <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
+    
+  </entry>
   
   <entry>
     <title>除法分块</title>
