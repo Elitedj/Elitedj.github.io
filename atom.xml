@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-02-11T14:46:18.065Z</updated>
+  <updated>2020-02-15T10:02:13.593Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,11 +17,42 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Manacher</title>
+    <link href="http://yoursite.com/2020/02/15/Manacher/"/>
+    <id>http://yoursite.com/2020/02/15/Manacher/</id>
+    <published>2020-02-15T02:48:32.000Z</published>
+    <updated>2020-02-15T10:02:13.593Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;在处理字符串问题时，常常会遇到回文串。回文串是正着和反着都一样的字符串，比如”aba”, “baab”等。&lt;/p&gt;
+&lt;h2 id=&quot;朴素做法&quot;&gt;&lt;a href=&quot;#朴素做法&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="Algorithm" scheme="http://yoursite.com/categories/Algorithm/"/>
+    
+      <category term="String" scheme="http://yoursite.com/categories/Algorithm/String/"/>
+    
+    
+      <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
+    
+      <category term="String" scheme="http://yoursite.com/tags/String/"/>
+    
+  </entry>
+  
+  <entry>
     <title>扩展KMP</title>
     <link href="http://yoursite.com/2020/02/11/%E6%89%A9%E5%B1%95KMP/"/>
     <id>http://yoursite.com/2020/02/11/扩展KMP/</id>
     <published>2020-02-11T13:14:49.000Z</published>
-    <updated>2020-02-11T14:46:18.065Z</updated>
+    <updated>2020-02-15T02:59:31.031Z</updated>
     
     <summary type="html">
     
@@ -39,8 +70,12 @@
     
       <category term="Algorithm" scheme="http://yoursite.com/categories/Algorithm/"/>
     
+      <category term="String" scheme="http://yoursite.com/categories/Algorithm/String/"/>
+    
     
       <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
+    
+      <category term="String" scheme="http://yoursite.com/tags/String/"/>
     
   </entry>
   
@@ -49,7 +84,7 @@
     <link href="http://yoursite.com/2020/02/08/%E9%99%A4%E6%B3%95%E5%88%86%E5%9D%97/"/>
     <id>http://yoursite.com/2020/02/08/除法分块/</id>
     <published>2020-02-08T13:29:29.000Z</published>
-    <updated>2020-02-08T14:07:38.837Z</updated>
+    <updated>2020-02-15T03:11:53.489Z</updated>
     
     <summary type="html">
     
@@ -66,8 +101,12 @@
     
       <category term="Algorithm" scheme="http://yoursite.com/categories/Algorithm/"/>
     
+      <category term="Math" scheme="http://yoursite.com/categories/Algorithm/Math/"/>
+    
     
       <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
+    
+      <category term="Math" scheme="http://yoursite.com/tags/Math/"/>
     
   </entry>
   
@@ -76,7 +115,7 @@
     <link href="http://yoursite.com/2020/02/06/KMP/"/>
     <id>http://yoursite.com/2020/02/06/KMP/</id>
     <published>2020-02-06T12:41:26.000Z</published>
-    <updated>2020-02-06T15:33:27.289Z</updated>
+    <updated>2020-02-15T03:03:31.790Z</updated>
     
     <summary type="html">
     
@@ -93,8 +132,12 @@
     
       <category term="Algorithm" scheme="http://yoursite.com/categories/Algorithm/"/>
     
+      <category term="String" scheme="http://yoursite.com/categories/Algorithm/String/"/>
+    
     
       <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
+    
+      <category term="String" scheme="http://yoursite.com/tags/String/"/>
     
   </entry>
   
@@ -103,7 +146,7 @@
     <link href="http://yoursite.com/2020/02/04/%E5%AD%97%E5%85%B8%E6%A0%91-Trie/"/>
     <id>http://yoursite.com/2020/02/04/字典树-Trie/</id>
     <published>2020-02-04T11:35:29.000Z</published>
-    <updated>2020-02-04T11:58:01.366Z</updated>
+    <updated>2020-02-15T03:10:23.326Z</updated>
     
     <summary type="html">
     
@@ -120,8 +163,12 @@
     
       <category term="Algorithm" scheme="http://yoursite.com/categories/Algorithm/"/>
     
+      <category term="Data Structure" scheme="http://yoursite.com/categories/Algorithm/Data-Structure/"/>
+    
     
       <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
+    
+      <category term="Data Structure" scheme="http://yoursite.com/tags/Data-Structure/"/>
     
   </entry>
   
@@ -130,7 +177,7 @@
     <link href="http://yoursite.com/2020/02/03/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%93%88%E5%B8%8C/"/>
     <id>http://yoursite.com/2020/02/03/字符串哈希/</id>
     <published>2020-02-03T14:28:10.000Z</published>
-    <updated>2020-02-03T15:17:03.721Z</updated>
+    <updated>2020-02-15T03:10:42.218Z</updated>
     
     <summary type="html">
     
@@ -146,8 +193,12 @@
     
       <category term="Algorithm" scheme="http://yoursite.com/categories/Algorithm/"/>
     
+      <category term="String" scheme="http://yoursite.com/categories/Algorithm/String/"/>
+    
     
       <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
+    
+      <category term="String" scheme="http://yoursite.com/tags/String/"/>
     
   </entry>
   
@@ -210,7 +261,7 @@
     <link href="http://yoursite.com/2019/10/13/%E7%BD%91%E7%BB%9C%E6%B5%81%E4%B9%8Bdinic/"/>
     <id>http://yoursite.com/2019/10/13/网络流之dinic/</id>
     <published>2019-10-13T01:30:54.000Z</published>
-    <updated>2019-10-13T06:47:45.072Z</updated>
+    <updated>2020-02-15T03:11:31.817Z</updated>
     
     <summary type="html">
     
@@ -226,8 +277,12 @@
     
       <category term="Algorithm" scheme="http://yoursite.com/categories/Algorithm/"/>
     
+      <category term="Graph" scheme="http://yoursite.com/categories/Algorithm/Graph/"/>
+    
     
       <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
+    
+      <category term="Graph" scheme="http://yoursite.com/tags/Graph/"/>
     
   </entry>
   
@@ -236,7 +291,7 @@
     <link href="http://yoursite.com/2019/10/01/Tarjan%E6%B1%82%E8%A7%A3%E5%BC%BA%E8%BF%9E%E9%80%9A%E5%88%86%E9%87%8F%E3%80%81%E5%89%B2%E7%82%B9%E3%80%81%E6%A1%A5/"/>
     <id>http://yoursite.com/2019/10/01/Tarjan求解强连通分量、割点、桥/</id>
     <published>2019-10-01T13:55:29.000Z</published>
-    <updated>2019-10-02T15:41:25.930Z</updated>
+    <updated>2020-02-15T03:06:06.962Z</updated>
     
     <summary type="html">
     
@@ -252,8 +307,12 @@
     
       <category term="Algorithm" scheme="http://yoursite.com/categories/Algorithm/"/>
     
+      <category term="Graph" scheme="http://yoursite.com/categories/Algorithm/Graph/"/>
+    
     
       <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
+    
+      <category term="Graph" scheme="http://yoursite.com/tags/Graph/"/>
     
   </entry>
   
@@ -288,7 +347,7 @@
     <link href="http://yoursite.com/2019/08/29/%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96%E7%BA%BF%E6%AE%B5%E6%A0%91-%E4%B8%BB%E5%B8%AD%E6%A0%91/"/>
     <id>http://yoursite.com/2019/08/29/可持久化线段树-主席树/</id>
     <published>2019-08-29T01:39:11.000Z</published>
-    <updated>2019-08-29T05:55:35.955Z</updated>
+    <updated>2020-02-15T03:09:34.018Z</updated>
     
     <summary type="html">
     
@@ -304,8 +363,12 @@
     
       <category term="Algorithm" scheme="http://yoursite.com/categories/Algorithm/"/>
     
+      <category term="Data Structure" scheme="http://yoursite.com/categories/Algorithm/Data-Structure/"/>
+    
     
       <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
+    
+      <category term="Data Structure" scheme="http://yoursite.com/tags/Data-Structure/"/>
     
   </entry>
   
@@ -314,7 +377,7 @@
     <link href="http://yoursite.com/2019/08/12/%E5%9B%BE%E8%AE%BA%E2%80%94%E2%80%94%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/"/>
     <id>http://yoursite.com/2019/08/12/图论——最短路径/</id>
     <published>2019-08-12T01:51:53.000Z</published>
-    <updated>2019-09-10T08:16:35.978Z</updated>
+    <updated>2020-02-15T03:09:54.718Z</updated>
     
     <summary type="html">
     
@@ -330,8 +393,12 @@
     
       <category term="Algorithm" scheme="http://yoursite.com/categories/Algorithm/"/>
     
+      <category term="Graph" scheme="http://yoursite.com/categories/Algorithm/Graph/"/>
+    
     
       <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
+    
+      <category term="Graph" scheme="http://yoursite.com/tags/Graph/"/>
     
   </entry>
   
@@ -340,7 +407,7 @@
     <link href="http://yoursite.com/2019/07/25/%E7%BA%BF%E6%AE%B5%E6%A0%91%E5%9F%BA%E7%A1%80/"/>
     <id>http://yoursite.com/2019/07/25/线段树基础/</id>
     <published>2019-07-25T12:30:10.000Z</published>
-    <updated>2019-08-13T02:17:44.165Z</updated>
+    <updated>2020-02-15T03:11:09.593Z</updated>
     
     <summary type="html">
     
@@ -357,8 +424,12 @@
     
       <category term="Algorithm" scheme="http://yoursite.com/categories/Algorithm/"/>
     
+      <category term="Data Structure" scheme="http://yoursite.com/categories/Algorithm/Data-Structure/"/>
+    
     
       <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
+    
+      <category term="Data Structure" scheme="http://yoursite.com/tags/Data-Structure/"/>
     
   </entry>
   
@@ -367,7 +438,7 @@
     <link href="http://yoursite.com/2019/05/19/2019GDCPC-%E6%9F%A0%E6%AA%AC%E7%B2%BE%E7%9A%84%E5%8F%8C%E9%B8%AD%E5%B1%B1%E5%A4%A7%E5%AD%A6%E4%B8%A4%E6%97%A5%E6%B8%B8/"/>
     <id>http://yoursite.com/2019/05/19/2019GDCPC-柠檬精的双鸭山大学两日游/</id>
     <published>2019-05-19T12:04:02.000Z</published>
-    <updated>2019-08-13T02:17:44.141Z</updated>
+    <updated>2020-02-15T03:07:11.859Z</updated>
     
     <summary type="html">
     
@@ -383,7 +454,7 @@
     
     </summary>
     
-      <category term="GDCPC" scheme="http://yoursite.com/categories/GDCPC/"/>
+      <category term="总结" scheme="http://yoursite.com/categories/%E6%80%BB%E7%BB%93/"/>
     
     
       <category term="GDCPC" scheme="http://yoursite.com/tags/GDCPC/"/>
@@ -395,7 +466,7 @@
     <link href="http://yoursite.com/2019/05/08/c-c-%E5%85%B3%E4%BA%8E%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/"/>
     <id>http://yoursite.com/2019/05/08/c-c-关于输入输出/</id>
     <published>2019-05-08T08:16:53.000Z</published>
-    <updated>2019-08-13T02:17:44.161Z</updated>
+    <updated>2020-02-15T03:13:32.058Z</updated>
     
     <summary type="html">
     
@@ -411,10 +482,10 @@
     
     </summary>
     
-      <category term="c/c++" scheme="http://yoursite.com/categories/c-c/"/>
+      <category term="C/C++" scheme="http://yoursite.com/categories/C-C/"/>
     
     
-      <category term="c/c++" scheme="http://yoursite.com/tags/c-c/"/>
+      <category term="C/C++" scheme="http://yoursite.com/tags/C-C/"/>
     
   </entry>
   
@@ -423,7 +494,7 @@
     <link href="http://yoursite.com/2019/03/31/%E3%80%90%E6%80%BB%E7%BB%93%E3%80%91%E5%85%B3%E4%BA%8E%E7%AC%AC%E5%8D%81%E5%B1%8A%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%92%8C%E7%AC%AC%E5%9B%9B%E5%B1%8ACCCC%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%A7%E8%B5%9B%E7%9A%84%E4%BD%93%E9%AA%8C/"/>
     <id>http://yoursite.com/2019/03/31/【总结】关于第十届蓝桥杯和第四届CCCC字符串大赛的体验/</id>
     <published>2019-03-31T01:55:56.000Z</published>
-    <updated>2019-08-13T02:17:44.161Z</updated>
+    <updated>2020-02-15T03:07:23.084Z</updated>
     
     <summary type="html">
     
@@ -438,11 +509,7 @@
     
     </summary>
     
-      <category term="蓝桥杯" scheme="http://yoursite.com/categories/%E8%93%9D%E6%A1%A5%E6%9D%AF/"/>
-    
-      <category term="天梯赛" scheme="http://yoursite.com/categories/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%A4%A9%E6%A2%AF%E8%B5%9B/"/>
-    
-      <category term="总结" scheme="http://yoursite.com/categories/%E8%93%9D%E6%A1%A5%E6%9D%AF/%E5%A4%A9%E6%A2%AF%E8%B5%9B/%E6%80%BB%E7%BB%93/"/>
+      <category term="总结" scheme="http://yoursite.com/categories/%E6%80%BB%E7%BB%93/"/>
     
     
       <category term="蓝桥杯" scheme="http://yoursite.com/tags/%E8%93%9D%E6%A1%A5%E6%9D%AF/"/>
@@ -509,7 +576,7 @@
     <link href="http://yoursite.com/2019/02/21/%E3%80%90%E6%9C%AC%E7%AB%99%E6%90%AD%E5%BB%BA%E3%80%91%E5%88%A9%E7%94%A8Hexo-Github%E6%90%AD%E5%BB%BA%E5%B1%9E%E4%BA%8E%E4%BD%A0%E7%9A%84Blog/"/>
     <id>http://yoursite.com/2019/02/21/【本站搭建】利用Hexo-Github搭建属于你的Blog/</id>
     <published>2019-02-21T07:40:01.000Z</published>
-    <updated>2019-08-13T02:17:44.165Z</updated>
+    <updated>2020-02-15T03:02:43.247Z</updated>
     
     <summary type="html">
     
@@ -536,30 +603,6 @@
       <category term="关于本站" scheme="http://yoursite.com/tags/%E5%85%B3%E4%BA%8E%E6%9C%AC%E7%AB%99/"/>
     
       <category term="Github" scheme="http://yoursite.com/tags/Github/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="http://yoursite.com/2019/02/20/hello-world/"/>
-    <id>http://yoursite.com/2019/02/20/hello-world/</id>
-    <published>2019-02-20T01:51:53.000Z</published>
-    <updated>2019-08-13T02:28:01.212Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;Hello
-        
-      
-    
-    </summary>
-    
-      <category term="Hello World" scheme="http://yoursite.com/categories/Hello-World/"/>
-    
     
   </entry>
   
