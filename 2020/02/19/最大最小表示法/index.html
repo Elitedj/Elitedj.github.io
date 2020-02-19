@@ -126,13 +126,18 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Elitedj">
-<meta property="og:url" content="http://yoursite.com/tags/Hexo/index.html">
+  <meta name="description" content="给定一个字符串s，求与s循环同构的字符串中字典序最大/小的字符串。 比如s=”abc”，则与s循环同构的字符串有”abc”, “bca”, “cab” 暴力的做法时间复杂度较高，而最大最小表示法的时间复杂度是O(n) 最大最小表示法有两个指针i和j，初始时i=0, j=1，用k记录由i开头的字符串和由j开头的字符串的相同长度。 即s[i...i+k-1]==s[j...j+k-1]。 若由i开头的">
+<meta name="keywords" content="Algorithm,String">
+<meta property="og:type" content="article">
+<meta property="og:title" content="最大最小表示法">
+<meta property="og:url" content="http://yoursite.com/2020/02/19/最大最小表示法/index.html">
 <meta property="og:site_name" content="Elitedj">
+<meta property="og:description" content="给定一个字符串s，求与s循环同构的字符串中字典序最大/小的字符串。 比如s=”abc”，则与s循环同构的字符串有”abc”, “bca”, “cab” 暴力的做法时间复杂度较高，而最大最小表示法的时间复杂度是O(n) 最大最小表示法有两个指针i和j，初始时i=0, j=1，用k记录由i开头的字符串和由j开头的字符串的相同长度。 即s[i...i+k-1]==s[j...j+k-1]。 若由i开头的">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-02-19T13:12:34.162Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Elitedj">
+<meta name="twitter:title" content="最大最小表示法">
+<meta name="twitter:description" content="给定一个字符串s，求与s循环同构的字符串中字典序最大/小的字符串。 比如s=”abc”，则与s循环同构的字符串有”abc”, “bca”, “cab” 暴力的做法时间复杂度较高，而最大最小表示法的时间复杂度是O(n) 最大最小表示法有两个指针i和j，初始时i=0, j=1，用k记录由i开头的字符串和由j开头的字符串的相同长度。 即s[i...i+k-1]==s[j...j+k-1]。 若由i开头的">
 
 
 
@@ -141,7 +146,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/Hexo/">
+  <link rel="canonical" href="http://yoursite.com/2020/02/19/最大最小表示法/">
 
 
 
@@ -151,7 +156,7 @@
   };
 </script>
 
-  <title>Tag: Hexo | Elitedj</title>
+  <title>最大最小表示法 | Elitedj</title>
   
 
 
@@ -199,7 +204,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -269,7 +274,7 @@
         
         
           
-          <li class="menu-item menu-item-tags menu-item-active">
+          <li class="menu-item menu-item-tags">
 
     
     
@@ -350,31 +355,6 @@
   
     
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
   
 
   
@@ -420,108 +400,241 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block tag">
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>Hexo<small>Tag</small>
-        </h1>
-      </div>
-
-      
-        
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/19/最大最小表示法/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Elitedj">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/tou.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elitedj">
+    </span>
+
+    
+      <header class="post-header">
+
         
-          <a class="post-title-link" href="/2019/02/25/【Hexo】3-0！为Blog增加相册页面/" itemprop="url">
-            
-              <span itemprop="name">【Hexo】3.0！为Blog增加相册页面</span>
-            
-          </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">最大最小表示法
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-02-25T17:44:08+08:00" content="2019-02-25">
-          02-25
-        </time>
-      </div>
+              
+            
+          </h1>
+        
 
-    </header>
-  </article>
+        <div class="post-meta">
+          <span class="post-time">
 
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2020-02-19 17:35:42 / Modified: 21:12:34" itemprop="dateCreated datePublished" datetime="2020-02-19T17:35:42+08:00">2020-02-19</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Algorithm/String/" itemprop="url" rel="index"><span itemprop="name">String</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/2020/02/19/最大最小表示法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/02/19/最大最小表示法/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/02/24/【Hexo】个性化2-0震撼来袭/" itemprop="url">
-            
-              <span itemprop="name">【Hexo】个性化2.0震撼来袭</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-02-24T15:29:02+08:00" content="2019-02-24">
-          02-24
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/02/21/【本站搭建】利用Hexo-Github搭建属于你的Blog/" itemprop="url">
-            
-              <span itemprop="name">【本站搭建】利用Hexo+Github搭建属于你的Blog</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-02-21T15:40:01+08:00" content="2019-02-21">
-          02-21
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+        <p>给定一个字符串s，求与s循环同构的字符串中字典序最大/小的字符串。</p>
+<p>比如s=”abc”，则与s循环同构的字符串有”abc”, “bca”, “cab”</p>
+<p>暴力的做法时间复杂度较高，而最大最小表示法的时间复杂度是O(n)</p>
+<h2 id="最大最小表示法"><a href="#最大最小表示法" class="headerlink" title="最大最小表示法"></a>最大最小表示法</h2><p>有两个指针i和j，初始时i=0, j=1，用k记录由i开头的字符串和由j开头的字符串的相同长度。</p>
+<p>即<code>s[i...i+k-1]==s[j...j+k-1]</code>。</p>
+<p>若由i开头的字符串和由j开头的字符串的第k+1个字符不相同，则面临两种情况，我们以最小表示法为例。</p>
+<p>令<code>t= s[(i+k)%n] - s[(j+k)%n]</code></p>
+<p>若<code>t&gt;0</code>，则表面i开头的第k+1个字符比由j开头的第k+1个字符大，则令<code>i += k+1</code>，即将i往后移，否则<code>j += k+1</code>。</p>
+<p>为什么可以令i移动那么多呢？因为i与j相匹配的那些字符，都不可能是字典序最小的字符串的开头，下面证明一下为什么。</p>
+<p>若s[i…i+k-1]与s[j…j+k-1]相匹配，且s[i+k] != s[j+k]。</p>
+<p>若由i…i+k-1中的一个字符ii开头，则一定能在j…j+k-1中找到对应位置的jj，由jj开头的字典序一定比ii开头的要小，因为跑到s[i+k]和s[j+k]这个位置的时候，s[i+k]&gt;s[j+k]。</p>
+<p>比如当前由i开头的字符串是”abce”，由j开头的字符串是”abcd”，”abc”都能匹配上，但是”e”&gt;”d”。</p>
+<p>若由b开头，”bce”的字典序会大于”bcd”的字典序，所以某个位置失配的时候可以直接跳一大段。</p>
+<p>最大表示法同理。</p>
+<h2 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h2><p>返回的是以s[index]开头的字符串字典序最大/小的<code>index</code></p>
+<p>最小表示法<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getmin</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i=<span class="number">0</span>, j=<span class="number">1</span>, k=<span class="number">0</span>, n=<span class="built_in">strlen</span>(s);</span><br><span class="line">	<span class="keyword">while</span>(i&lt;n &amp;&amp; j&lt;n &amp;&amp; k&lt;n)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> t = s[(i+k)%n]-s[(j+k)%n];</span><br><span class="line">		<span class="keyword">if</span>(!t)</span><br><span class="line">			k++;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(t&gt;<span class="number">0</span>)</span><br><span class="line">				i += k+<span class="number">1</span>;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				j += k+<span class="number">1</span>;</span><br><span class="line">			<span class="keyword">if</span>(i==j)</span><br><span class="line">				j++;</span><br><span class="line">			k=<span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> min(i, j);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>最大表示法<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getmax</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i=<span class="number">0</span>, j=<span class="number">1</span>, k=<span class="number">0</span>, n=<span class="built_in">strlen</span>(s);</span><br><span class="line">	<span class="keyword">while</span>(i&lt;n &amp;&amp; j&lt;n &amp;&amp; k&lt;n)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> t = s[(i+k)%n]-s[(j+k)%n];</span><br><span class="line">		<span class="keyword">if</span>(!t)</span><br><span class="line">			k++;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(t&lt;<span class="number">0</span>)</span><br><span class="line">				i += k+<span class="number">1</span>;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				j += k+<span class="number">1</span>;</span><br><span class="line">			<span class="keyword">if</span>(i==j)</span><br><span class="line">				j++;</span><br><span class="line">			k=<span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> min(i, j);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
 
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
+          
+            <a href="/tags/String/" rel="tag"># String</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/02/15/Manacher/" rel="next" title="Manacher">
+                <i class="fa fa-chevron-left"></i> Manacher
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+  </div>
 
 
           </div>
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
 
         </div>
         
@@ -542,8 +655,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -708,6 +830,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#最大最小表示法"><span class="nav-number">1.</span> <span class="nav-text">最大最小表示法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模板"><span class="nav-number">2.</span> <span class="nav-text">模板</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
@@ -883,6 +1022,11 @@ setInterval("createtime()",250);
 
 
   
+  <script src="/js/src/scrollspy.js?v=7.0.0"></script>
+<script src="/js/src/post-details.js?v=7.0.0"></script>
+<script type="text/javascript" src="/js/src/photoswipe-ui-default.min.js?v="></script>
+
+
 
   
 
@@ -922,6 +1066,8 @@ setInterval("createtime()",250);
 
 
 
+
+  
 
 
   
