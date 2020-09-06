@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-02-19T13:12:34.162Z</updated>
+  <updated>2020-09-06T11:52:13.676Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>可持久化数组</title>
+    <link href="http://yoursite.com/2020/09/06/%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96%E6%95%B0%E7%BB%84/"/>
+    <id>http://yoursite.com/2020/09/06/可持久化数组/</id>
+    <published>2020-09-06T11:39:56.000Z</published>
+    <updated>2020-09-06T11:52:13.676Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;可持久化的数据结构就是可以访问历史版本的数据结构，那么可持久化数组就是可以访问历史版本的数组&lt;/p&gt;
+&lt;h1 id=&quot;朴素做法&quot;&gt;&lt;a href=&quot;#朴素做法&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="Algorithm" scheme="http://yoursite.com/categories/Algorithm/"/>
+    
+      <category term="Data Structure" scheme="http://yoursite.com/categories/Algorithm/Data-Structure/"/>
+    
+    
+      <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
+    
+      <category term="Data Structure" scheme="http://yoursite.com/tags/Data-Structure/"/>
+    
+  </entry>
   
   <entry>
     <title>最大最小表示法</title>
@@ -565,33 +596,6 @@
         
         
           &lt;p&gt;本次的个性化设置是添加相册页面，具体效果可以查看&lt;a href=&quot;http://elitedj.me/photos/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;我的相册&lt;/a&gt;&lt;br&gt;本篇教程是参考的&lt;a
-        
-      
-    
-    </summary>
-    
-      <category term="Hexo" scheme="http://yoursite.com/categories/Hexo/"/>
-    
-    
-      <category term="Hexo" scheme="http://yoursite.com/tags/Hexo/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>【Hexo】个性化2.0震撼来袭</title>
-    <link href="http://yoursite.com/2019/02/24/%E3%80%90Hexo%E3%80%91%E4%B8%AA%E6%80%A7%E5%8C%962-0%E9%9C%87%E6%92%BC%E6%9D%A5%E8%A2%AD/"/>
-    <id>http://yoursite.com/2019/02/24/【Hexo】个性化2-0震撼来袭/</id>
-    <published>2019-02-24T07:29:02.000Z</published>
-    <updated>2019-08-13T02:17:44.141Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;个性化2.0增加了首页文章阴影、右下角萌物、网页标题欺骗、页脚底部显示运行天数&lt;/p&gt;
-&lt;h2 id=&quot;首页文章阴影&quot;&gt;&lt;a href=&quot;#首页文章阴影&quot; class=&quot;headerlink&quot; title=&quot;首页文章阴影&quot;&gt;&lt;/a&gt;首页文章阴影&lt;/h2&gt;&lt;p&gt;在
         
       
     
