@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-09-06T11:52:13.676Z</updated>
+  <updated>2020-09-07T01:23:16.708Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>可持久化并查集</title>
+    <link href="http://yoursite.com/2020/09/07/%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96%E5%B9%B6%E6%9F%A5%E9%9B%86/"/>
+    <id>http://yoursite.com/2020/09/07/可持久化并查集/</id>
+    <published>2020-09-07T01:16:05.000Z</published>
+    <updated>2020-09-07T01:23:16.708Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;并查集是很常见的数据结构，通常我们合并两颗子树之后就没法拆开了，但是如果我们能够访问历史版本的并查集，那么就可以达到拆开的效果了。&lt;/p&gt;
+&lt;p&gt;学习可持久化并查集需要先学习并查集和&lt;a
+        
+      
+    
+    </summary>
+    
+      <category term="Algorithm" scheme="http://yoursite.com/categories/Algorithm/"/>
+    
+      <category term="Data Structure" scheme="http://yoursite.com/categories/Algorithm/Data-Structure/"/>
+    
+    
+      <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
+    
+      <category term="Data Structure" scheme="http://yoursite.com/tags/Data-Structure/"/>
+    
+  </entry>
   
   <entry>
     <title>可持久化数组</title>
@@ -579,32 +610,6 @@
       <category term="蓝桥杯" scheme="http://yoursite.com/tags/%E8%93%9D%E6%A1%A5%E6%9D%AF/"/>
     
       <category term="天梯赛" scheme="http://yoursite.com/tags/%E5%A4%A9%E6%A2%AF%E8%B5%9B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>【Hexo】3.0！为Blog增加相册页面</title>
-    <link href="http://yoursite.com/2019/02/25/%E3%80%90Hexo%E3%80%913-0%EF%BC%81%E4%B8%BABlog%E5%A2%9E%E5%8A%A0%E7%9B%B8%E5%86%8C%E9%A1%B5%E9%9D%A2/"/>
-    <id>http://yoursite.com/2019/02/25/【Hexo】3-0！为Blog增加相册页面/</id>
-    <published>2019-02-25T09:44:08.000Z</published>
-    <updated>2019-09-04T05:12:17.320Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;本次的个性化设置是添加相册页面，具体效果可以查看&lt;a href=&quot;http://elitedj.me/photos/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;我的相册&lt;/a&gt;&lt;br&gt;本篇教程是参考的&lt;a
-        
-      
-    
-    </summary>
-    
-      <category term="Hexo" scheme="http://yoursite.com/categories/Hexo/"/>
-    
-    
-      <category term="Hexo" scheme="http://yoursite.com/tags/Hexo/"/>
     
   </entry>
   
