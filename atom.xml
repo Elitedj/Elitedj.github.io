@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-09-07T01:23:16.708Z</updated>
+  <updated>2020-09-08T01:06:20.005Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>替罪羊树</title>
+    <link href="http://yoursite.com/2020/09/08/%E6%9B%BF%E7%BD%AA%E7%BE%8A%E6%A0%91/"/>
+    <id>http://yoursite.com/2020/09/08/替罪羊树/</id>
+    <published>2020-09-08T01:01:24.000Z</published>
+    <updated>2020-09-08T01:06:20.005Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;&lt;img src=&quot;fengmian.jpg&quot; alt=&quot;fengmian&quot;&gt;&lt;/p&gt;
+&lt;h1 id=&quot;替罪羊树？&quot;&gt;&lt;a href=&quot;#替罪羊树？&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="Algorithm" scheme="http://yoursite.com/categories/Algorithm/"/>
+    
+      <category term="Data Structure" scheme="http://yoursite.com/categories/Algorithm/Data-Structure/"/>
+    
+    
+      <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
+    
+      <category term="Data Structure" scheme="http://yoursite.com/tags/Data-Structure/"/>
+    
+  </entry>
   
   <entry>
     <title>可持久化并查集</title>
@@ -581,35 +612,6 @@
     
     
       <category term="C/C++" scheme="http://yoursite.com/tags/C-C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>【总结】关于第十届蓝桥杯和第四届CCCC字符串大赛的体验</title>
-    <link href="http://yoursite.com/2019/03/31/%E3%80%90%E6%80%BB%E7%BB%93%E3%80%91%E5%85%B3%E4%BA%8E%E7%AC%AC%E5%8D%81%E5%B1%8A%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%92%8C%E7%AC%AC%E5%9B%9B%E5%B1%8ACCCC%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%A7%E8%B5%9B%E7%9A%84%E4%BD%93%E9%AA%8C/"/>
-    <id>http://yoursite.com/2019/03/31/【总结】关于第十届蓝桥杯和第四届CCCC字符串大赛的体验/</id>
-    <published>2019-03-31T01:55:56.000Z</published>
-    <updated>2020-02-15T03:07:23.084Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;自从大一参加了ACM校赛拿了二等奖之后就很久很久没刷OJ的题了，大二上上了数据结构课，学了些算法，自己平时真把算法荒废了，感觉自己越来越菜了，但回想起自己参加算法竞赛A题的那种热血沸腾的感觉，还是毅然决然的报了蓝桥杯和第四届天梯赛。 &lt;/p&gt;
-&lt;h2
-        
-      
-    
-    </summary>
-    
-      <category term="总结" scheme="http://yoursite.com/categories/%E6%80%BB%E7%BB%93/"/>
-    
-    
-      <category term="蓝桥杯" scheme="http://yoursite.com/tags/%E8%93%9D%E6%A1%A5%E6%9D%AF/"/>
-    
-      <category term="天梯赛" scheme="http://yoursite.com/tags/%E5%A4%A9%E6%A2%AF%E8%B5%9B/"/>
     
   </entry>
   
