@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-09-08T01:06:20.005Z</updated>
+  <updated>2020-09-10T01:42:29.784Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>莫队算法</title>
+    <link href="http://yoursite.com/2020/09/10/%E8%8E%AB%E9%98%9F%E7%AE%97%E6%B3%95/"/>
+    <id>http://yoursite.com/2020/09/10/莫队算法/</id>
+    <published>2020-09-10T01:34:58.000Z</published>
+    <updated>2020-09-10T01:42:29.784Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;莫队算法是由莫涛发明的，用于处理区间询问的&lt;del&gt;暴力&lt;/del&gt;优雅的离线算法，主要基于分块和排序的思想。&lt;/p&gt;
+&lt;h1
+        
+      
+    
+    </summary>
+    
+      <category term="Algorithm" scheme="http://yoursite.com/categories/Algorithm/"/>
+    
+      <category term="Other" scheme="http://yoursite.com/categories/Algorithm/Other/"/>
+    
+    
+      <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
+    
+      <category term="Other" scheme="http://yoursite.com/tags/Other/"/>
+    
+  </entry>
   
   <entry>
     <title>替罪羊树</title>
@@ -584,34 +615,6 @@
     
     
       <category term="GDCPC" scheme="http://yoursite.com/tags/GDCPC/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[c/c++]关于输入输出</title>
-    <link href="http://yoursite.com/2019/05/08/c-c-%E5%85%B3%E4%BA%8E%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/"/>
-    <id>http://yoursite.com/2019/05/08/c-c-关于输入输出/</id>
-    <published>2019-05-08T08:16:53.000Z</published>
-    <updated>2020-02-15T03:13:32.058Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;这篇文章很久之前就想写了，可是一直都很忙，现在终于可以开始慢慢的写啦～&lt;/p&gt;
-&lt;p&gt;因为拿到了GDCPC的名额，所以在4.19晚上打了一场双鸭山大学的ACM校赛重现赛，先来看一道水题吧&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;timu.jpg&quot;
-        
-      
-    
-    </summary>
-    
-      <category term="C/C++" scheme="http://yoursite.com/categories/C-C/"/>
-    
-    
-      <category term="C/C++" scheme="http://yoursite.com/tags/C-C/"/>
     
   </entry>
   
