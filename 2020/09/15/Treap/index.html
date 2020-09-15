@@ -1,0 +1,1492 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<script src="/js/src/photoswipe.min.js?v="></script>
+<script src="/js/src/photoswipe-ui-default.min.js?v="></script>
+
+<html class="theme-next muse use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Italianno:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext">
+  
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.0.0',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="TreapTreap是由Tree和Heap一起组合而成的数据结构，是一种平衡二叉搜索树。每一个数由一个二元组&amp;lt;val, key&amp;gt;表示，其中val表示数的值，而key存储的是一个随机值，Treap对于val来说满足二叉搜索树的性质，对于key来说满足堆的性质(但不满足完全二叉树这一性质)。 为什么二叉搜索树要结合堆的性质呢？在按照1、2、3、4、5这个顺序插入构成一颗二叉搜索树的时候，会">
+<meta name="keywords" content="Algorithm,Data Structure">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Treap">
+<meta property="og:url" content="http://yoursite.com/2020/09/15/Treap/index.html">
+<meta property="og:site_name" content="Elitedj">
+<meta property="og:description" content="TreapTreap是由Tree和Heap一起组合而成的数据结构，是一种平衡二叉搜索树。每一个数由一个二元组&amp;lt;val, key&amp;gt;表示，其中val表示数的值，而key存储的是一个随机值，Treap对于val来说满足二叉搜索树的性质，对于key来说满足堆的性质(但不满足完全二叉树这一性质)。 为什么二叉搜索树要结合堆的性质呢？在按照1、2、3、4、5这个顺序插入构成一颗二叉搜索树的时候，会">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://yoursite.com/2020/09/15/Treap/zuo.png">
+<meta property="og:image" content="http://yoursite.com/2020/09/15/Treap/you.png">
+<meta property="og:image" content="http://yoursite.com/2020/09/15/Treap/p3369.png">
+<meta property="og:image" content="http://yoursite.com/2020/09/15/Treap/split1.png">
+<meta property="og:image" content="http://yoursite.com/2020/09/15/Treap/split2.png">
+<meta property="og:image" content="http://yoursite.com/2020/09/15/Treap/p3391.png">
+<meta property="og:updated_time" content="2020-09-15T02:58:13.220Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Treap">
+<meta name="twitter:description" content="TreapTreap是由Tree和Heap一起组合而成的数据结构，是一种平衡二叉搜索树。每一个数由一个二元组&amp;lt;val, key&amp;gt;表示，其中val表示数的值，而key存储的是一个随机值，Treap对于val来说满足二叉搜索树的性质，对于key来说满足堆的性质(但不满足完全二叉树这一性质)。 为什么二叉搜索树要结合堆的性质呢？在按照1、2、3、4、5这个顺序插入构成一颗二叉搜索树的时候，会">
+<meta name="twitter:image" content="http://yoursite.com/2020/09/15/Treap/zuo.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Elitedj" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/09/15/Treap/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Treap | Elitedj</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="site-title">Elitedj</span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-photos">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/photos" rel="section"><i class="menu-item-icon fa fa-fw fa-camera"></i> <br>photos</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/15/Treap/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Elitedj">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/tou.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elitedj">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Treap
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2020-09-15 10:55:37 / Modified: 10:58:13" itemprop="dateCreated datePublished" datetime="2020-09-15T10:55:37+08:00">2020-09-15</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Algorithm/Data-Structure/" itemprop="url" rel="index"><span itemprop="name">Data Structure</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/2020/09/15/Treap/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/09/15/Treap/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Treap"><a href="#Treap" class="headerlink" title="Treap"></a>Treap</h1><p>Treap是由Tree和Heap一起组合而成的数据结构，是一种平衡二叉搜索树。每一个数由一个二元组<code>&lt;val, key&gt;</code>表示，其中<code>val</code>表示数的值，而<code>key</code>存储的是一个随机值，Treap对于<code>val</code>来说满足二叉搜索树的性质，对于<code>key</code>来说满足堆的性质(但不满足完全二叉树这一性质)。</p>
+<p>为什么二叉搜索树要结合堆的性质呢？在按照<code>1、2、3、4、5</code>这个顺序插入构成一颗二叉搜索树的时候，会退化成一个链表，所以我们给每一个结点加一个随机值，然后随机值满足堆的性质，这样就可以避免最坏情况，使得树基本平衡。</p>
+<h2 id="数据结构定义"><a href="#数据结构定义" class="headerlink" title="数据结构定义"></a>数据结构定义</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// val重复的在一个结点记录，由cnt表示， size表示以该结点为根的子树的大小，son[0]表示左儿子，son[1]表示右儿子</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span> &#123;</span></span><br><span class="line">	<span class="keyword">int</span> son[<span class="number">2</span>];</span><br><span class="line">	<span class="keyword">int</span> val, key;</span><br><span class="line">	<span class="keyword">int</span> cnt, size;</span><br><span class="line">&#125; tree[maxn];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> tot, root;</span><br><span class="line"></span><br><span class="line"><span class="function">mt19937 <span class="title">rnd</span><span class="params">(<span class="number">233</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+<h2 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h2><p>因为Treap是通过旋转操作来维护树的平衡的，所以需要更新一下结点的size值</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pushup</span><span class="params">(<span class="keyword">int</span> p)</span> </span>&#123;</span><br><span class="line">	tree[p].size = tree[tree[p].son[<span class="number">0</span>]].size + tree[tree[p].son[<span class="number">1</span>]].size + tree[p].cnt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="旋转"><a href="#旋转" class="headerlink" title="旋转"></a>旋转</h2><p>普通的Treap是通过旋转操作来维护树的平衡的，先来了解一下旋转操作吧。</p>
+<h3 id="左旋"><a href="#左旋" class="headerlink" title="左旋"></a>左旋</h3><p>对A结点进行左旋，以A结点的右儿子为轴，A结点左旋。</p>
+<p><img src="zuo.png" alt="left rotate"></p>
+<h3 id="右旋"><a href="#右旋" class="headerlink" title="右旋"></a>右旋</h3><p>对A结点进行右旋，以A结点的左儿子为轴，A结点右旋。</p>
+<p><img src="you.png" alt="right rotate"></p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// d = 0表示左旋，d = 1表示右旋</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">rotate</span><span class="params">(<span class="keyword">int</span> &amp;p, <span class="keyword">int</span> d)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> k = tree[p].son[d^<span class="number">1</span>];</span><br><span class="line">	tree[p].son[d^<span class="number">1</span>] = tree[k].son[d];</span><br><span class="line">	tree[k].son[d] = p;</span><br><span class="line">	pushup(p);</span><br><span class="line">	pushup(k);</span><br><span class="line">	p = k;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span> &amp;p, <span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 到一个空结点，直接新建一个</span></span><br><span class="line">	<span class="keyword">if</span> (!p) &#123;</span><br><span class="line">		p = ++tot;</span><br><span class="line">		tree[p].size = tree[p].cnt = <span class="number">1</span>;</span><br><span class="line">		tree[p].val = x;</span><br><span class="line">		tree[p].key = rnd();</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="comment">// 找到值相同的结点，直接++cnt和++size就好了</span></span><br><span class="line">	<span class="keyword">if</span> (tree[p].val == x) &#123;</span><br><span class="line">		tree[p].size++;</span><br><span class="line">		tree[p].cnt++;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="comment">// 确定插入到左子树还是右子树</span></span><br><span class="line">	<span class="keyword">int</span> d = (x &gt; tree[p].val);</span><br><span class="line">	insert(tree[p].son[d], x);</span><br><span class="line">    <span class="comment">// 维护堆的性质，判断是否需要旋转</span></span><br><span class="line">	<span class="keyword">if</span> (tree[p].key &lt; tree[tree[p].son[d]].key) rotate(p, d^<span class="number">1</span>);</span><br><span class="line">	pushup(p);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">del</span><span class="params">(<span class="keyword">int</span> &amp;p, <span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 找到空结点返回就好</span></span><br><span class="line">	<span class="keyword">if</span> (!p) <span class="keyword">return</span>;</span><br><span class="line">    <span class="comment">// 根据二叉搜索树的性质往下找</span></span><br><span class="line">	<span class="keyword">if</span> (x &lt; tree[p].val) del(tree[p].son[<span class="number">0</span>], x);</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (x &gt; tree[p].val) del(tree[p].son[<span class="number">1</span>], x);</span><br><span class="line">    <span class="comment">// 当前节点就是要删除的结点</span></span><br><span class="line">	<span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 如果左右儿子都为空，直接删就好了</span></span><br><span class="line">		<span class="keyword">if</span> (!tree[p].son[<span class="number">0</span>] &amp;&amp; !tree[p].son[<span class="number">1</span>]) &#123;</span><br><span class="line">			tree[p].cnt--;</span><br><span class="line">			tree[p].size--;</span><br><span class="line">            <span class="comment">// 空了就置为0即可</span></span><br><span class="line">			<span class="keyword">if</span> (tree[p].cnt == <span class="number">0</span>) p = <span class="number">0</span>;</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> (tree[p].son[<span class="number">0</span>] &amp;&amp; !tree[p].son[<span class="number">1</span>]) &#123;	<span class="comment">// 右儿子空</span></span><br><span class="line">            <span class="comment">// 进行右旋，把该节点往下弄</span></span><br><span class="line">			rotate(p, <span class="number">1</span>);</span><br><span class="line">			del(tree[p].son[<span class="number">1</span>], x);</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> (!tree[p].son[<span class="number">0</span>] &amp;&amp; tree[p].son[<span class="number">1</span>]) &#123;	<span class="comment">// 左儿子空</span></span><br><span class="line">            <span class="comment">// 进行左旋，把该节点往下弄</span></span><br><span class="line">			rotate(p, <span class="number">0</span>);</span><br><span class="line">			del(tree[p].son[<span class="number">0</span>], x);</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 左右都不为空，则把key大的网上弄</span></span><br><span class="line">			<span class="keyword">int</span> d = (tree[tree[p].son[<span class="number">0</span>]].key &gt; tree[tree[p].son[<span class="number">1</span>]].key);</span><br><span class="line">			rotate(p, d);</span><br><span class="line">			del(tree[p].son[d], x);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	pushup(p);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="获取排名"><a href="#获取排名" class="headerlink" title="获取排名"></a>获取排名</h2><p>排名定义为比<code>val</code>小的数的个数+1</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getrank</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (!p) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span> (tree[p].val == x) <span class="keyword">return</span> tree[tree[p].son[<span class="number">0</span>]].size + <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (tree[p].val &lt; x)</span><br><span class="line">		<span class="keyword">return</span> tree[tree[p].son[<span class="number">0</span>]].size + tree[p].cnt + getrank(tree[p].son[<span class="number">1</span>], x);</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> getrank(tree[p].son[<span class="number">0</span>], x);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="根据排名获取值"><a href="#根据排名获取值" class="headerlink" title="根据排名获取值"></a>根据排名获取值</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getnum</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (!p) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span> (tree[tree[p].son[<span class="number">0</span>]].size &gt;= x) <span class="keyword">return</span> getnum(tree[p].son[<span class="number">0</span>], x);</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (tree[tree[p].son[<span class="number">0</span>]].size + tree[p].cnt &lt; x)</span><br><span class="line">		<span class="keyword">return</span> getnum(tree[p].son[<span class="number">1</span>], x - tree[tree[p].son[<span class="number">0</span>]].size - tree[p].cnt);</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> tree[p].val;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="获取前驱"><a href="#获取前驱" class="headerlink" title="获取前驱"></a>获取前驱</h2><p>前驱是比<code>val</code>小的最大值</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getpre</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (!p) <span class="keyword">return</span> -inf;</span><br><span class="line">	<span class="keyword">if</span> (tree[p].val &gt;= x) <span class="keyword">return</span> getpre(tree[p].son[<span class="number">0</span>], x);</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> max(tree[p].val, getpre(tree[p].son[<span class="number">1</span>], x));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="获取后继"><a href="#获取后继" class="headerlink" title="获取后继"></a>获取后继</h2><p>后继是比<code>val</code>大的最小值</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getnxt</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (!p) <span class="keyword">return</span> inf;</span><br><span class="line">	<span class="keyword">if</span> (tree[p].val &lt;= x) <span class="keyword">return</span> getnxt(tree[p].son[<span class="number">1</span>], x);</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> min(tree[p].val, getnxt(tree[p].son[<span class="number">0</span>], x));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="洛谷P3369"><a href="#洛谷P3369" class="headerlink" title="洛谷P3369"></a>洛谷P3369</h2><p>模板题<a href="https://www.luogu.com.cn/problem/P3369" target="_blank" rel="noopener">洛谷P3369</a></p>
+<p><img src="p3369.png" alt="p3369"></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 输入样例</span></span><br><span class="line"><span class="number">10</span></span><br><span class="line"><span class="number">1</span> <span class="number">106465</span></span><br><span class="line"><span class="number">4</span> <span class="number">1</span></span><br><span class="line"><span class="number">1</span> <span class="number">317721</span></span><br><span class="line"><span class="number">1</span> <span class="number">460929</span></span><br><span class="line"><span class="number">1</span> <span class="number">644985</span></span><br><span class="line"><span class="number">1</span> <span class="number">84185</span></span><br><span class="line"><span class="number">1</span> <span class="number">89851</span></span><br><span class="line"><span class="number">6</span> <span class="number">81968</span></span><br><span class="line"><span class="number">1</span> <span class="number">492737</span></span><br><span class="line"><span class="number">5</span> <span class="number">493598</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出样例</span></span><br><span class="line"><span class="number">106465</span></span><br><span class="line"><span class="number">84185</span></span><br><span class="line"><span class="number">492737</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span> ull;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> inf 0x3f3f3f3f</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 0x3f3f3f3f3f3f3f3f</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> IO ios::sync_with_stdio(0)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> DEBUG(x) cout<span class="meta-string">&lt;&lt;"---&gt;"&lt;&lt;(x)&lt;&lt;endl;</span></span></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; P;</span><br><span class="line"><span class="keyword">const</span> ll mod = <span class="number">1e9</span>+<span class="number">7</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> eps = <span class="number">1e-9</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> PI = <span class="built_in">acos</span>(<span class="number">-1</span>);</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">2e5</span>+<span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span> &#123;</span></span><br><span class="line">	<span class="keyword">int</span> son[<span class="number">2</span>];</span><br><span class="line">	<span class="keyword">int</span> val, key;</span><br><span class="line">	<span class="keyword">int</span> cnt, size;</span><br><span class="line">&#125; tree[maxn];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> tot, root;</span><br><span class="line"></span><br><span class="line"><span class="function">mt19937 <span class="title">rnd</span><span class="params">(<span class="number">233</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pushup</span><span class="params">(<span class="keyword">int</span> p)</span> </span>&#123;</span><br><span class="line">	tree[p].size = tree[tree[p].son[<span class="number">0</span>]].size + tree[tree[p].son[<span class="number">1</span>]].size + tree[p].cnt;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">rotate</span><span class="params">(<span class="keyword">int</span> &amp;p, <span class="keyword">int</span> d)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> k = tree[p].son[d^<span class="number">1</span>];</span><br><span class="line">	tree[p].son[d^<span class="number">1</span>] = tree[k].son[d];</span><br><span class="line">	tree[k].son[d] = p;</span><br><span class="line">	pushup(p);</span><br><span class="line">	pushup(k);</span><br><span class="line">	p = k;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span> &amp;p, <span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (!p) &#123;</span><br><span class="line">		p = ++tot;</span><br><span class="line">		tree[p].size = tree[p].cnt = <span class="number">1</span>;</span><br><span class="line">		tree[p].val = x;</span><br><span class="line">		tree[p].key = rnd();</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (tree[p].val == x) &#123;</span><br><span class="line">		tree[p].size++;</span><br><span class="line">		tree[p].cnt++;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> d = (x &gt; tree[p].val);</span><br><span class="line">	insert(tree[p].son[d], x);</span><br><span class="line">	<span class="keyword">if</span> (tree[p].key &lt; tree[tree[p].son[d]].key) rotate(p, d^<span class="number">1</span>);</span><br><span class="line">	pushup(p);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">del</span><span class="params">(<span class="keyword">int</span> &amp;p, <span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (!p) <span class="keyword">return</span>;</span><br><span class="line">	<span class="keyword">if</span> (x &lt; tree[p].val) del(tree[p].son[<span class="number">0</span>], x);</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (x &gt; tree[p].val) del(tree[p].son[<span class="number">1</span>], x);</span><br><span class="line">	<span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">if</span> (!tree[p].son[<span class="number">0</span>] &amp;&amp; !tree[p].son[<span class="number">1</span>]) &#123;</span><br><span class="line">			tree[p].cnt--;</span><br><span class="line">			tree[p].size--;</span><br><span class="line">			<span class="keyword">if</span> (tree[p].cnt == <span class="number">0</span>) p = <span class="number">0</span>;</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> (tree[p].son[<span class="number">0</span>] &amp;&amp; !tree[p].son[<span class="number">1</span>]) &#123;</span><br><span class="line">			rotate(p, <span class="number">1</span>);</span><br><span class="line">			del(tree[p].son[<span class="number">1</span>], x);</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> (!tree[p].son[<span class="number">0</span>] &amp;&amp; tree[p].son[<span class="number">1</span>]) &#123;</span><br><span class="line">			rotate(p, <span class="number">0</span>);</span><br><span class="line">			del(tree[p].son[<span class="number">0</span>], x);</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">int</span> d = (tree[tree[p].son[<span class="number">0</span>]].key &gt; tree[tree[p].son[<span class="number">1</span>]].key);</span><br><span class="line">			rotate(p, d);</span><br><span class="line">			del(tree[p].son[d], x);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	pushup(p);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getrank</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (!p) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span> (tree[p].val == x) <span class="keyword">return</span> tree[tree[p].son[<span class="number">0</span>]].size + <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (tree[p].val &lt; x)</span><br><span class="line">		<span class="keyword">return</span> tree[tree[p].son[<span class="number">0</span>]].size + tree[p].cnt + getrank(tree[p].son[<span class="number">1</span>], x);</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> getrank(tree[p].son[<span class="number">0</span>], x);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getnum</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (!p) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span> (tree[tree[p].son[<span class="number">0</span>]].size &gt;= x) <span class="keyword">return</span> getnum(tree[p].son[<span class="number">0</span>], x);</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (tree[tree[p].son[<span class="number">0</span>]].size + tree[p].cnt &lt; x)</span><br><span class="line">		<span class="keyword">return</span> getnum(tree[p].son[<span class="number">1</span>], x - tree[tree[p].son[<span class="number">0</span>]].size - tree[p].cnt);</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> tree[p].val;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getpre</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (!p) <span class="keyword">return</span> -inf;</span><br><span class="line">	<span class="keyword">if</span> (tree[p].val &gt;= x) <span class="keyword">return</span> getpre(tree[p].son[<span class="number">0</span>], x);</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> max(tree[p].val, getpre(tree[p].son[<span class="number">1</span>], x));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getnxt</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (!p) <span class="keyword">return</span> inf;</span><br><span class="line">	<span class="keyword">if</span> (tree[p].val &lt;= x) <span class="keyword">return</span> getnxt(tree[p].son[<span class="number">1</span>], x);</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> min(tree[p].val, getnxt(tree[p].son[<span class="number">0</span>], x));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> n;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=n; i++) &#123;</span><br><span class="line">		<span class="keyword">int</span> opt, x;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;opt, &amp;x);</span><br><span class="line">		<span class="keyword">if</span> (opt == <span class="number">1</span>) insert(root, x);</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (opt == <span class="number">2</span>) del(root, x);</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (opt == <span class="number">3</span>) <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, getrank(root, x));</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (opt == <span class="number">4</span>) <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, getnum(root, x));</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (opt == <span class="number">5</span>) <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, getpre(root, x));</span><br><span class="line">		<span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, getnxt(root, x));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="无旋-Treap"><a href="#无旋-Treap" class="headerlink" title="无旋 Treap"></a>无旋 Treap</h1><p>无旋Treap也叫fhq Treap，是由范浩强发明的数据结构，顾名思义，无旋Treap不需要旋转操作便能维护树的平衡，主要是通过分裂和合并两个操作。</p>
+<h2 id="数据结构定义-1"><a href="#数据结构定义-1" class="headerlink" title="数据结构定义"></a>数据结构定义</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span> &#123;</span></span><br><span class="line">	<span class="keyword">int</span> l, r;</span><br><span class="line">	<span class="keyword">int</span> val, key;</span><br><span class="line">	<span class="keyword">int</span> size;</span><br><span class="line">&#125;tree[maxn];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> root, cnt;</span><br><span class="line"><span class="function">mt19937 <span class="title">rnd</span><span class="params">(<span class="number">233</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> x, y, z;	<span class="comment">// 用于分裂时存储树的结点</span></span><br></pre></td></tr></table></figure>
+<h2 id="创建新结点"><a href="#创建新结点" class="headerlink" title="创建新结点"></a>创建新结点</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">newnode</span><span class="params">(<span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">	++cnt;</span><br><span class="line">	tree[cnt].val = val;</span><br><span class="line">	tree[cnt].size = <span class="number">1</span>;</span><br><span class="line">	tree[cnt].key = rnd();</span><br><span class="line">	<span class="keyword">return</span> cnt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="更新-1"><a href="#更新-1" class="headerlink" title="更新"></a>更新</h2><p>更新操作与普通的Treap相同</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> now)</span> </span>&#123;</span><br><span class="line">	tree[now].size = tree[tree[now].l].size + tree[tree[now].r].size + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="分裂"><a href="#分裂" class="headerlink" title="分裂"></a>分裂</h2><p>分裂主要有两种方式</p>
+<ul>
+<li>按值<code>value</code>分裂，将树分为两颗，一颗树上的<code>val</code>小于等于<code>value</code>，另一棵树大于<code>value</code></li>
+<li>按大小<code>sz</code>分裂，将一颗子树分为<code>sz</code>大小，另一颗子树为<code>n-sz</code>大小</li>
+</ul>
+<p>这里先讲按值分裂，按大小分裂之后会结合例题看。</p>
+<p>假设有下面这样一颗树</p>
+<p><img src="split1.png" alt="split1"></p>
+<p>我们对它按值<code>17</code>进行分裂，得到的结果如下</p>
+<p><img src="split2.png" alt="split2"></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 当前结点序号为now，按照val分裂，分裂成两颗子树，根节点为x和y，因为x和y的值会改变，所以传引用</span></span><br><span class="line"><span class="comment">// 其中以x为根的子树是小于等于val，y为大于val</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">split</span><span class="params">(<span class="keyword">int</span> now, <span class="keyword">int</span> val, <span class="keyword">int</span> &amp;x, <span class="keyword">int</span> &amp;y)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// now为空，则让x和y都为空就好</span></span><br><span class="line">	<span class="keyword">if</span> (!now) x = y = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 如果当前结点的值小于等于val，直接让x等于now就好，然后对now的右子树继续分裂</span></span><br><span class="line">		<span class="keyword">if</span> (tree[now].val &lt;= val) &#123;</span><br><span class="line">			x = now;</span><br><span class="line">            <span class="comment">// 当前结点改为右子树，val不变，x改为x的右子树，y没变化</span></span><br><span class="line">			split(tree[now].r, val, tree[now].r, y);</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 反之同理，改变左子树</span></span><br><span class="line">			y = now;</span><br><span class="line">			split(tree[now].l, val, x, tree[now].l);</span><br><span class="line">		&#125;</span><br><span class="line">        <span class="comment">// 记得更新结点信息</span></span><br><span class="line">		update(now);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="合并"><a href="#合并" class="headerlink" title="合并"></a>合并</h2><p>合并操作就是分裂的逆操作，将两颗子树合并为一颗。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 两颗子树的根为x和y</span></span><br><span class="line"><span class="comment">// 需要注意的是，x子树的值一定一定一定要小于y的值</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 当有一个为空时，直接返回另一个的值，两个都为空则返回0</span></span><br><span class="line">	<span class="keyword">if</span> (!x || !y) <span class="keyword">return</span> x + y;</span><br><span class="line">    <span class="comment">// 通过key来合并，随机化，因为随机，所以这个&gt;号改为&gt;=  &lt; &lt;=都是ok的</span></span><br><span class="line">	<span class="keyword">if</span> (tree[x].key &gt; tree[y].key) &#123;</span><br><span class="line">        <span class="comment">// y子树一定在x的右边，让x的右子树和y合并，并且更新x右子树的值</span></span><br><span class="line">		tree[x].r = merge(tree[x].r, y);</span><br><span class="line">		update(x);</span><br><span class="line">		<span class="keyword">return</span> x;</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 让x和y的左子树合并，并且更新y左子树的值</span></span><br><span class="line">		tree[y].l = merge(x, tree[y].l);</span><br><span class="line">		update(y);</span><br><span class="line">		<span class="keyword">return</span> y;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="插入-1"><a href="#插入-1" class="headerlink" title="插入"></a>插入</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 先按照val进行分裂，其中x子树小于等于val</span></span><br><span class="line"><span class="comment">// 让x和新结点进行合并，再和y子树合并即可</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">	split(root, val, x, y);</span><br><span class="line">	root = merge(merge(x, newnode(val)), y);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="删除-1"><a href="#删除-1" class="headerlink" title="删除"></a>删除</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 先按照val进行分裂，分为x和z子树，其中x子树的值小于等于val</span></span><br><span class="line"><span class="comment">// 再将x子树按照val-1进行分裂，分裂成x和y子树，其中x子树的值小于等于val-1，而y子树的值都为val</span></span><br><span class="line"><span class="comment">// 我们删除y子树的根节点，相当于直接让y子树的左子树和右子树合并成y，之后再将x、y、z合并回去即可</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">del</span><span class="params">(<span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">	split(root, val, x, z);</span><br><span class="line">	split(x, val<span class="number">-1</span>, x, y);</span><br><span class="line">	y = merge(tree[y].l, tree[y].r);</span><br><span class="line">	root = merge(merge(x, y), z);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="获取排名-1"><a href="#获取排名-1" class="headerlink" title="获取排名"></a>获取排名</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 按照val-1分裂成x和y子树，返回x子树的size+1即可</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getrank</span><span class="params">(<span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> res;</span><br><span class="line">	split(root, val<span class="number">-1</span>, x, y);</span><br><span class="line">	res = tree[x].size + <span class="number">1</span>;</span><br><span class="line">	root = merge(x, y);</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="根据排名获取值-1"><a href="#根据排名获取值-1" class="headerlink" title="根据排名获取值"></a>根据排名获取值</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 与普通Treap没什么两样</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getnum</span><span class="params">(<span class="keyword">int</span> rank)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> now = root;</span><br><span class="line">	<span class="keyword">while</span> (now) &#123;</span><br><span class="line">		<span class="keyword">if</span> (tree[tree[now].l].size + <span class="number">1</span> == rank)</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (tree[tree[now].l].size &gt;= rank)</span><br><span class="line">			now = tree[now].l;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			rank -= tree[tree[now].l].size + <span class="number">1</span>;</span><br><span class="line">			now = tree[now].r;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> tree[now].val;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="获取前驱-1"><a href="#获取前驱-1" class="headerlink" title="获取前驱"></a>获取前驱</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 将树按照val-1进行分裂，然后返回x子树最右边的值即可</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getpre</span><span class="params">(<span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">	split(root, val<span class="number">-1</span>, x, y);</span><br><span class="line">	<span class="keyword">int</span> now = x;</span><br><span class="line">	<span class="keyword">while</span> (tree[now].r)</span><br><span class="line">		now = tree[now].r;</span><br><span class="line">	<span class="keyword">int</span> res = tree[now].val;</span><br><span class="line">	root = merge(x, y);</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="获取后继-1"><a href="#获取后继-1" class="headerlink" title="获取后继"></a>获取后继</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 按照val进行分裂，再返回y子树最左边的值</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getnxt</span><span class="params">(<span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">	split(root, val, x, y);</span><br><span class="line">	<span class="keyword">int</span> now = y;</span><br><span class="line">	<span class="keyword">while</span> (tree[now].l)</span><br><span class="line">		now = tree[now].l;</span><br><span class="line">	<span class="keyword">int</span> res = tree[now].val;</span><br><span class="line">	root = merge(x, y);</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="洛谷P3369-1"><a href="#洛谷P3369-1" class="headerlink" title="洛谷P3369"></a>洛谷P3369</h2><p>对于上面的模板题，通过无旋Treap的解法如下</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span> ull;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> inf 0x3f3f3f3f</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 0x3f3f3f3f3f3f3f3f</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> IO ios::sync_with_stdio(0)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> DEBUG(x) cout<span class="meta-string">&lt;&lt;"---&gt;"&lt;&lt;(x)&lt;&lt;endl;</span></span></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; P;</span><br><span class="line"><span class="keyword">const</span> ll mod = <span class="number">1e9</span>+<span class="number">7</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> eps = <span class="number">1e-9</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> PI = <span class="built_in">acos</span>(<span class="number">-1</span>);</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">2e5</span>+<span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span> &#123;</span></span><br><span class="line">	<span class="keyword">int</span> l, r;</span><br><span class="line">	<span class="keyword">int</span> val, key;</span><br><span class="line">	<span class="keyword">int</span> size;</span><br><span class="line">&#125;tree[maxn];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> root, cnt;</span><br><span class="line"><span class="function">mt19937 <span class="title">rnd</span><span class="params">(<span class="number">233</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> x, y, z;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">newnode</span><span class="params">(<span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">	++cnt;</span><br><span class="line">	tree[cnt].val = val;</span><br><span class="line">	tree[cnt].size = <span class="number">1</span>;</span><br><span class="line">	tree[cnt].key = rnd();</span><br><span class="line">	<span class="keyword">return</span> cnt;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> now)</span> </span>&#123;</span><br><span class="line">	tree[now].size = tree[tree[now].l].size + tree[tree[now].r].size + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">split</span><span class="params">(<span class="keyword">int</span> now, <span class="keyword">int</span> val, <span class="keyword">int</span> &amp;x, <span class="keyword">int</span> &amp;y)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (!now) x = y = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">if</span> (tree[now].val &lt;= val) &#123;</span><br><span class="line">			x = now;</span><br><span class="line">			split(tree[now].r, val, tree[now].r, y);</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			y = now;</span><br><span class="line">			split(tree[now].l, val, x, tree[now].l);</span><br><span class="line">		&#125;</span><br><span class="line">		update(now);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (!x || !y) <span class="keyword">return</span> x + y;</span><br><span class="line">	<span class="keyword">if</span> (tree[x].key &gt; tree[y].key) &#123;</span><br><span class="line">		tree[x].r = merge(tree[x].r, y);</span><br><span class="line">		update(x);</span><br><span class="line">		<span class="keyword">return</span> x;</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		tree[y].l = merge(x, tree[y].l);</span><br><span class="line">		update(y);</span><br><span class="line">		<span class="keyword">return</span> y;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">	split(root, val, x, y);</span><br><span class="line">	root = merge(merge(x, newnode(val)), y);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">del</span><span class="params">(<span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">	split(root, val, x, z);</span><br><span class="line">	split(x, val<span class="number">-1</span>, x, y);</span><br><span class="line">	y = merge(tree[y].l, tree[y].r);</span><br><span class="line">	root = merge(merge(x, y), z);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getrank</span><span class="params">(<span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> res;</span><br><span class="line">	split(root, val<span class="number">-1</span>, x, y);</span><br><span class="line">	res = tree[x].size + <span class="number">1</span>;</span><br><span class="line">	root = merge(x, y);</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getnum</span><span class="params">(<span class="keyword">int</span> rank)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> now = root;</span><br><span class="line">	<span class="keyword">while</span> (now) &#123;</span><br><span class="line">		<span class="keyword">if</span> (tree[tree[now].l].size + <span class="number">1</span> == rank)</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (tree[tree[now].l].size &gt;= rank)</span><br><span class="line">			now = tree[now].l;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			rank -= tree[tree[now].l].size + <span class="number">1</span>;</span><br><span class="line">			now = tree[now].r;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> tree[now].val;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getpre</span><span class="params">(<span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">	split(root, val<span class="number">-1</span>, x, y);</span><br><span class="line">	<span class="keyword">int</span> now = x;</span><br><span class="line">	<span class="keyword">while</span> (tree[now].r)</span><br><span class="line">		now = tree[now].r;</span><br><span class="line">	<span class="keyword">int</span> res = tree[now].val;</span><br><span class="line">	root = merge(x, y);</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getnxt</span><span class="params">(<span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">	split(root, val, x, y);</span><br><span class="line">	<span class="keyword">int</span> now = y;</span><br><span class="line">	<span class="keyword">while</span> (tree[now].l)</span><br><span class="line">		now = tree[now].l;</span><br><span class="line">	<span class="keyword">int</span> res = tree[now].val;</span><br><span class="line">	root = merge(x, y);</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> t;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;t);</span><br><span class="line">	<span class="keyword">while</span> (t--) &#123;</span><br><span class="line">		<span class="keyword">int</span> opt, x;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;opt, &amp;x);</span><br><span class="line">		<span class="keyword">if</span> (opt == <span class="number">1</span>) insert(x);</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (opt == <span class="number">2</span>) del(x);</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (opt == <span class="number">3</span>) <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, getrank(x));</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (opt == <span class="number">4</span>) <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, getnum(x));</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (opt == <span class="number">5</span>) <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, getpre(x));</span><br><span class="line">		<span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, getnxt(x));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="无旋Treap维护区间信息"><a href="#无旋Treap维护区间信息" class="headerlink" title="无旋Treap维护区间信息"></a>无旋Treap维护区间信息</h1><p>无旋Treap还能和线段树那样维护区间信息，结合例题来看</p>
+<p><a href="https://www.luogu.com.cn/problem/P3391" target="_blank" rel="noopener">洛谷P3391</a></p>
+<p><img src="p3391.png" alt="P3391"></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 样例输入</span></span><br><span class="line"><span class="number">5</span> <span class="number">3</span></span><br><span class="line"><span class="number">1</span> <span class="number">3</span></span><br><span class="line"><span class="number">1</span> <span class="number">3</span></span><br><span class="line"><span class="number">1</span> <span class="number">4</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 样例输出</span></span><br><span class="line"><span class="number">4</span> <span class="number">3</span> <span class="number">2</span> <span class="number">1</span> <span class="number">5</span></span><br></pre></td></tr></table></figure>
+<p>对于这种反转问题，暴力去翻肯定是会超时的，结合线段树<code>lazy tag</code>的思想，通过标记区间翻转标记，来降低时间复杂度。为了解决这个问题，无旋Treap将按大小进行分裂</p>
+<h2 id="数据结构定义-2"><a href="#数据结构定义-2" class="headerlink" title="数据结构定义"></a>数据结构定义</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span> &#123;</span></span><br><span class="line">	<span class="keyword">int</span> l, r;</span><br><span class="line">	<span class="keyword">int</span> val, key;</span><br><span class="line">	<span class="keyword">int</span> size;</span><br><span class="line">	<span class="keyword">int</span> reverse;	<span class="comment">// 翻转标记</span></span><br><span class="line">&#125;tree[maxn];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> cnt, root;</span><br><span class="line"><span class="function">mt19937 <span class="title">rnd</span><span class="params">(<span class="number">233</span>)</span></span>;</span><br><span class="line"><span class="keyword">int</span> x, y, z;</span><br></pre></td></tr></table></figure>
+<h2 id="标记下传"><a href="#标记下传" class="headerlink" title="标记下传"></a>标记下传</h2><p>因为Treap在分裂和合并的时候，有可能改变结点的位置，所以我们需要将<code>reverse</code>标记下传，以防丢失信息</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pushdown</span><span class="params">(<span class="keyword">int</span> now)</span> </span>&#123;</span><br><span class="line">	swap(tree[now].l, tree[now].r);</span><br><span class="line">	tree[tree[now].l].reverse ^= <span class="number">1</span>;</span><br><span class="line">	tree[tree[now].r].reverse ^= <span class="number">1</span>;</span><br><span class="line">	tree[now].reverse = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="分裂-1"><a href="#分裂-1" class="headerlink" title="分裂"></a>分裂</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">split</span><span class="params">(<span class="keyword">int</span> now, <span class="keyword">int</span> sz, <span class="keyword">int</span> &amp;x, <span class="keyword">int</span> &amp;y)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (!now) x = y = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 标记下传</span></span><br><span class="line">		<span class="keyword">if</span> (tree[now].reverse) pushdown(now);</span><br><span class="line">        <span class="comment">// 左子树不足sz那么多，要往右子树继续分裂</span></span><br><span class="line">		<span class="keyword">if</span> (tree[tree[now].l].size &lt; sz) &#123;</span><br><span class="line">			x = now;</span><br><span class="line">			split(tree[now].r, sz - tree[tree[now].l].size - <span class="number">1</span>, tree[now].r, y);</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			y = now;</span><br><span class="line">			split(tree[now].l, sz, x, tree[now].l);</span><br><span class="line">		&#125;</span><br><span class="line">		update(now);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="合并-1"><a href="#合并-1" class="headerlink" title="合并"></a>合并</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 分裂只需要加一步标记下传即可</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (!x || !y) <span class="keyword">return</span> x + y;</span><br><span class="line">	<span class="keyword">if</span> (tree[x].key &lt; tree[y].key) &#123;</span><br><span class="line">		<span class="keyword">if</span> (tree[x].reverse) pushdown(x);</span><br><span class="line">		tree[x].r = merge(tree[x].r, y);</span><br><span class="line">		update(x);</span><br><span class="line">		<span class="keyword">return</span> x;</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">if</span> (tree[y].reverse) pushdown(y);</span><br><span class="line">		tree[y].l = merge(x, tree[y].l);</span><br><span class="line">		update(y);</span><br><span class="line">		<span class="keyword">return</span> y;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="反转"><a href="#反转" class="headerlink" title="反转"></a>反转</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 将树按照l-1大小进行分裂，其中y子树的大小为n-l+1</span></span><br><span class="line"><span class="comment">// 再将y子树按照r-l+1大小进行分裂，分裂出来的y子树就是我们需要反转的区间，改变标记即可</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">reverse</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> x, y, z;</span><br><span class="line">	split(root, l<span class="number">-1</span>, x, y);</span><br><span class="line">	split(y, r-l+<span class="number">1</span>, y, z);</span><br><span class="line">	tree[y].reverse ^= <span class="number">1</span>;</span><br><span class="line">	root = merge(merge(x, y), z);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="AC代码"><a href="#AC代码" class="headerlink" title="AC代码"></a>AC代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span> ull;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> inf 0x3f3f3f3f</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 0x3f3f3f3f3f3f3f3f</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> IO ios::sync_with_stdio(0)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> DEBUG(x) cout<span class="meta-string">&lt;&lt;"---&gt;"&lt;&lt;(x)&lt;&lt;endl;</span></span></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; P;</span><br><span class="line"><span class="keyword">const</span> ll mod = <span class="number">1e9</span>+<span class="number">7</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> eps = <span class="number">1e-9</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> PI = <span class="built_in">acos</span>(<span class="number">-1</span>);</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">1e5</span>+<span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span> &#123;</span></span><br><span class="line">	<span class="keyword">int</span> l, r;</span><br><span class="line">	<span class="keyword">int</span> val, key;</span><br><span class="line">	<span class="keyword">int</span> size;</span><br><span class="line">	<span class="keyword">int</span> reverse;</span><br><span class="line">&#125;tree[maxn];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> cnt, root;</span><br><span class="line"><span class="function">mt19937 <span class="title">rnd</span><span class="params">(<span class="number">233</span>)</span></span>;</span><br><span class="line"><span class="keyword">int</span> x, y, z;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">newnode</span><span class="params">(<span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">	++cnt;</span><br><span class="line">	tree[cnt].val = val;</span><br><span class="line">	tree[cnt].size = <span class="number">1</span>;</span><br><span class="line">	tree[cnt].key = rnd();</span><br><span class="line">	<span class="keyword">return</span> cnt;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> now)</span> </span>&#123;</span><br><span class="line">	tree[now].size = tree[tree[now].l].size + tree[tree[now].r].size + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pushdown</span><span class="params">(<span class="keyword">int</span> now)</span> </span>&#123;</span><br><span class="line">	swap(tree[now].l, tree[now].r);</span><br><span class="line">	tree[tree[now].l].reverse ^= <span class="number">1</span>;</span><br><span class="line">	tree[tree[now].r].reverse ^= <span class="number">1</span>;</span><br><span class="line">	tree[now].reverse = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">split</span><span class="params">(<span class="keyword">int</span> now, <span class="keyword">int</span> sz, <span class="keyword">int</span> &amp;x, <span class="keyword">int</span> &amp;y)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (!now) x = y = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">if</span> (tree[now].reverse) pushdown(now);</span><br><span class="line">		<span class="keyword">if</span> (tree[tree[now].l].size &lt; sz) &#123;</span><br><span class="line">			x = now;</span><br><span class="line">			split(tree[now].r, sz - tree[tree[now].l].size - <span class="number">1</span>, tree[now].r, y);</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			y = now;</span><br><span class="line">			split(tree[now].l, sz, x, tree[now].l);</span><br><span class="line">		&#125;</span><br><span class="line">		update(now);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (!x || !y) <span class="keyword">return</span> x + y;</span><br><span class="line">	<span class="keyword">if</span> (tree[x].key &lt; tree[y].key) &#123;</span><br><span class="line">		<span class="keyword">if</span> (tree[x].reverse) pushdown(x);</span><br><span class="line">		tree[x].r = merge(tree[x].r, y);</span><br><span class="line">		update(x);</span><br><span class="line">		<span class="keyword">return</span> x;</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">if</span> (tree[y].reverse) pushdown(y);</span><br><span class="line">		tree[y].l = merge(x, tree[y].l);</span><br><span class="line">		update(y);</span><br><span class="line">		<span class="keyword">return</span> y;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">reverse</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> x, y, z;</span><br><span class="line">	split(root, l<span class="number">-1</span>, x, y);</span><br><span class="line">	split(y, r-l+<span class="number">1</span>, y, z);</span><br><span class="line">	tree[y].reverse ^= <span class="number">1</span>;</span><br><span class="line">	root = merge(merge(x, y), z);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">int</span> now)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (!now) <span class="keyword">return</span>;</span><br><span class="line">	<span class="keyword">if</span> (tree[now].reverse) pushdown(now);</span><br><span class="line">	print(tree[now].l);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d "</span>, tree[now].val);</span><br><span class="line">	print(tree[now].r);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> n, m;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;n, &amp;m);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">		root = merge(root, newnode(i));</span><br><span class="line">	<span class="keyword">while</span> (m--) &#123;</span><br><span class="line">		<span class="keyword">int</span> l, r;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;l, &amp;r);</span><br><span class="line">		reverse(l, r);</span><br><span class="line">	&#125;</span><br><span class="line">	print(root);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
+          
+            <a href="/tags/Data-Structure/" rel="tag"># Data Structure</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/09/10/莫队算法/" rel="next" title="莫队算法">
+                <i class="fa fa-chevron-left"></i> 莫队算法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/tou.jpg" alt="Elitedj">
+            
+              <p class="site-author-name" itemprop="name">Elitedj</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">27</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Elitedj" title="GitHub &rarr; https://github.com/Elitedj" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="/elite@m.scnu.edu.cn" title="E-Mail &rarr; elite@m.scnu.edu.cn"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blog.tover.xyz" title="http://blog.tover.xyz" rel="noopener" target="_blank">Tover</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://ariacx.me" title="https://ariacx.me" rel="noopener" target="_blank">Aria</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://0xffff.one/" title="https://0xffff.one/" rel="noopener" target="_blank">0xFFFF</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.yuque.com/0xffff.one/cs-learning" title="https://www.yuque.com/0xffff.one/cs-learning" rel="noopener" target="_blank">SCNU CS Wiki</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Treap"><span class="nav-number">1.</span> <span class="nav-text">Treap</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据结构定义"><span class="nav-number">1.1.</span> <span class="nav-text">数据结构定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更新"><span class="nav-number">1.2.</span> <span class="nav-text">更新</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#旋转"><span class="nav-number">1.3.</span> <span class="nav-text">旋转</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#左旋"><span class="nav-number">1.3.1.</span> <span class="nav-text">左旋</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#右旋"><span class="nav-number">1.3.2.</span> <span class="nav-text">右旋</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">1.3.3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插入"><span class="nav-number">1.4.</span> <span class="nav-text">插入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除"><span class="nav-number">1.5.</span> <span class="nav-text">删除</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取排名"><span class="nav-number">1.6.</span> <span class="nav-text">获取排名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#根据排名获取值"><span class="nav-number">1.7.</span> <span class="nav-text">根据排名获取值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取前驱"><span class="nav-number">1.8.</span> <span class="nav-text">获取前驱</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取后继"><span class="nav-number">1.9.</span> <span class="nav-text">获取后继</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#洛谷P3369"><span class="nav-number">1.10.</span> <span class="nav-text">洛谷P3369</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#无旋-Treap"><span class="nav-number">2.</span> <span class="nav-text">无旋 Treap</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据结构定义-1"><span class="nav-number">2.1.</span> <span class="nav-text">数据结构定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建新结点"><span class="nav-number">2.2.</span> <span class="nav-text">创建新结点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更新-1"><span class="nav-number">2.3.</span> <span class="nav-text">更新</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分裂"><span class="nav-number">2.4.</span> <span class="nav-text">分裂</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#合并"><span class="nav-number">2.5.</span> <span class="nav-text">合并</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插入-1"><span class="nav-number">2.6.</span> <span class="nav-text">插入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除-1"><span class="nav-number">2.7.</span> <span class="nav-text">删除</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取排名-1"><span class="nav-number">2.8.</span> <span class="nav-text">获取排名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#根据排名获取值-1"><span class="nav-number">2.9.</span> <span class="nav-text">根据排名获取值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取前驱-1"><span class="nav-number">2.10.</span> <span class="nav-text">获取前驱</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取后继-1"><span class="nav-number">2.11.</span> <span class="nav-text">获取后继</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#洛谷P3369-1"><span class="nav-number">2.12.</span> <span class="nav-text">洛谷P3369</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#无旋Treap维护区间信息"><span class="nav-number">3.</span> <span class="nav-text">无旋Treap维护区间信息</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据结构定义-2"><span class="nav-number">3.1.</span> <span class="nav-text">数据结构定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标记下传"><span class="nav-number">3.2.</span> <span class="nav-text">标记下传</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分裂-1"><span class="nav-number">3.3.</span> <span class="nav-text">分裂</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#合并-1"><span class="nav-number">3.4.</span> <span class="nav-text">合并</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反转"><span class="nav-number">3.5.</span> <span class="nav-text">反转</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AC代码"><span class="nav-number">3.6.</span> <span class="nav-text">AC代码</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Elitedj</span>
+
+  
+
+  
+</div>
+
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span><br>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("02/21/2019 13:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.0.0</div>
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="Total Visitors">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="Total Views">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.0"></script>
+
+  <script src="/js/src/motion.js?v=7.0.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.0"></script>
+<script src="/js/src/post-details.js?v=7.0.0"></script>
+<script type="text/javascript" src="/js/src/photoswipe-ui-default.min.js?v="></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.0"></script>
+
+
+
+  
+  
+
+<script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+
+
+
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'zOEvCRaHczqQkvn7g5bk2d9c-gzGzoHsz',
+    appKey: 'JJQvXVH4XIDyjJaIK2HWeTY3',
+    placeholder: 'comment something',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+</script>
+
+
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+
+<!--崩溃欺骗-->
+<script type="text/javascript" src="/js/src/crash_cheat.js"></script>
