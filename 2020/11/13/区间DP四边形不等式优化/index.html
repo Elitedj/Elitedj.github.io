@@ -126,14 +126,18 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="categories">
-<meta property="og:url" content="http://yoursite.com/categories/index.html">
+  <meta name="description" content="石子合并先看一道最经典的区间DP题洛谷P1880 石子合并 题意有一个圆形的操场，放着N堆石子，我们只能将相邻的两堆石子合并成一堆，花费是两堆石子数的和，问将N堆合并成一堆的最大最小花费是多少。 思路以最大值为例，我们定义$dp_{i, j}$表示将第$i$和第$j$堆石子合并的最大花费，我们从小区间开始枚举，通过状态转移方程求的大区间的最优解。对于求$dp_{i, j}$时，我们枚举$k \qu">
+<meta name="keywords" content="Algorithm,DP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="区间DP四边形不等式优化">
+<meta property="og:url" content="http://yoursite.com/2020/11/13/区间DP四边形不等式优化/index.html">
 <meta property="og:site_name" content="Elitedj">
+<meta property="og:description" content="石子合并先看一道最经典的区间DP题洛谷P1880 石子合并 题意有一个圆形的操场，放着N堆石子，我们只能将相邻的两堆石子合并成一堆，花费是两堆石子数的和，问将N堆合并成一堆的最大最小花费是多少。 思路以最大值为例，我们定义$dp_{i, j}$表示将第$i$和第$j$堆石子合并的最大花费，我们从小区间开始枚举，通过状态转移方程求的大区间的最优解。对于求$dp_{i, j}$时，我们枚举$k \qu">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-02-21T02:16:08.135Z">
+<meta property="og:updated_time" content="2020-11-13T09:18:18.978Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="categories">
+<meta name="twitter:title" content="区间DP四边形不等式优化">
+<meta name="twitter:description" content="石子合并先看一道最经典的区间DP题洛谷P1880 石子合并 题意有一个圆形的操场，放着N堆石子，我们只能将相邻的两堆石子合并成一堆，花费是两堆石子数的和，问将N堆合并成一堆的最大最小花费是多少。 思路以最大值为例，我们定义$dp_{i, j}$表示将第$i$和第$j$堆石子合并的最大花费，我们从小区间开始枚举，通过状态转移方程求的大区间的最优解。对于求$dp_{i, j}$时，我们枚举$k \qu">
 
 
 
@@ -142,7 +146,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/categories/">
+  <link rel="canonical" href="http://yoursite.com/2020/11/13/区间DP四边形不等式优化/">
 
 
 
@@ -152,7 +156,7 @@
   };
 </script>
 
-  <title>categories | Elitedj</title>
+  <title>区间DP四边形不等式优化 | Elitedj</title>
   
 
 
@@ -287,7 +291,7 @@
         
         
           
-          <li class="menu-item menu-item-categories menu-item-active">
+          <li class="menu-item menu-item-categories">
 
     
     
@@ -351,31 +355,6 @@
   
     
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
   
 
   
@@ -423,107 +402,254 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/13/区间DP四边形不等式优化/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Elitedj">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/tou.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elitedj">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-<h1 class="post-title" itemprop="name headline">categories
-
-</h1>
-
-<div class="post-meta">
-  
-  
-
-
-
-</div>
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <div class="category-all-page">
-            <div class="category-all-title">
+          <h1 class="post-title" itemprop="name headline">区间DP四边形不等式优化
+
               
-              
-                
-                  
-                
-              
-                
-                  
-                
-              
-                
-                  
-                
-              
-                
-                  
-                
-              
-                
-                  
-                
-              
-                
-                  
-                
-              
-                
-                  
-                
-              
-                
-                  
-                
-              
-                
-                  
-                
-              
-                
-                  
-                
-              
-                
-                  
-                
-              
-                
-                  
-                
-              
-              12 categories in total
-            </div>
-            <div class="category-all">
-              <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><span class="category-list-count">19</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/DP/">DP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Data-Structure/">Data Structure</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Graph/">Graph</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Math/">Math</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Other/">Other</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/String/">String</a><span class="category-list-count">5</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/C-C/">C/C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hello-World/">Hello World</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ICPC/">ICPC</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/总结/">总结</a><span class="category-list-count">2</span></li></ul>
-            </div>
-          </div>
+            
+          </h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2020-11-13 16:30:53 / Modified: 17:18:18" itemprop="dateCreated datePublished" datetime="2020-11-13T16:30:53+08:00">2020-11-13</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Algorithm/DP/" itemprop="url" rel="index"><span itemprop="name">DP</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/2020/11/13/区间DP四边形不等式优化/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/11/13/区间DP四边形不等式优化/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <h1 id="石子合并"><a href="#石子合并" class="headerlink" title="石子合并"></a>石子合并</h1><p>先看一道最经典的区间DP题<a href="https://www.luogu.com.cn/problem/P1880" target="_blank" rel="noopener">洛谷P1880 石子合并</a></p>
+<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>有一个圆形的操场，放着N堆石子，我们只能将相邻的两堆石子合并成一堆，花费是两堆石子数的和，问将N堆合并成一堆的最大最小花费是多少。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>以最大值为例，我们定义$dp_{i, j}$表示将第$i$和第$j$堆石子合并的最大花费，我们从小区间开始枚举，通过状态转移方程求的大区间的最优解。对于求$dp_{i, j}$时，我们枚举$k \quad (i \le k &lt; j)$，找到最大的$dp_{i, k} + dp_{k + 1, j} + cost(i, j)$即可。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span> ull;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; P;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> inf 0x3f3f3f3f</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 0x3f3f3f3f3f3f3f3f</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> IO ios::sync_with_stdio(0)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> DEBUG(x) cout<span class="meta-string">&lt;&lt;"---&gt;"&lt;&lt;(x)&lt;&lt;endl;</span></span></span><br><span class="line"><span class="keyword">const</span> ll mod = <span class="number">998244353</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> eps = <span class="number">1e-9</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> PI = <span class="built_in">acos</span>(<span class="number">-1</span>);</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">1e4</span> + <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> a[<span class="number">205</span>], pre[<span class="number">205</span>];</span><br><span class="line"><span class="keyword">int</span> dp1[<span class="number">205</span>][<span class="number">205</span>], dp2[<span class="number">205</span>][<span class="number">205</span>];	<span class="comment">// 最大，最小</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="comment">// freopen("in.txt", "r", stdin);</span></span><br><span class="line">	<span class="keyword">int</span> n;</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; a[i];</span><br><span class="line">		a[i + n] = a[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= (n&lt;&lt;<span class="number">1</span>); i++) &#123;</span><br><span class="line">		pre[i] = pre[i - <span class="number">1</span>] + a[i];</span><br><span class="line">	&#125;</span><br><span class="line">        <span class="comment">// 从小到大枚举长度</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> len = <span class="number">2</span>; len &lt;= n; len++) &#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>, j = len; j &lt;= (n&lt;&lt;<span class="number">1</span>); i++, j++) &#123;</span><br><span class="line">			dp2[i][j] = inf;</span><br><span class="line">                        <span class="comment">// 枚举中间最优点k</span></span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> k = i; k &lt; j; k++) &#123;</span><br><span class="line">				dp1[i][j] = max(dp1[i][j], dp1[i][k] + dp1[k + <span class="number">1</span>][j] + pre[j] - pre[i - <span class="number">1</span>]);</span><br><span class="line">				dp2[i][j] = min(dp2[i][j], dp2[i][k] + dp2[k + <span class="number">1</span>][j] + pre[j] - pre[i - <span class="number">1</span>]);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> mx = <span class="number">0</span>, mi = inf;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>, j = n; j &lt;= (n&lt;&lt;<span class="number">1</span>); i++, j++) &#123;</span><br><span class="line">		mx = max(mx, dp1[i][j]);</span><br><span class="line">		mi = min(mi, dp2[i][j]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; mi &lt;&lt; <span class="string">'\n'</span> &lt;&lt; mx &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="四边形不等式优化"><a href="#四边形不等式优化" class="headerlink" title="四边形不等式优化"></a>四边形不等式优化</h1><p>很显然上面的做法的时间复杂度为$O(n^3)$的，对于大数据肯定是会很慢的，如果满足某些条件，可以将类似的DP优化成$O(n^2)$，大大降低复杂度。</p>
+<p>对于上面的状态转移方程可以写成这样的形式<br>$$<br>dp(l, r) = min_{l \le k \le r - 1} \lbrace dp(l, k) + dp(k + 1, r) \rbrace + w(l, r) \quad (1 \le l \le r \le n)<br>$$</p>
+<h2 id="区间包含单调性"><a href="#区间包含单调性" class="headerlink" title="区间包含单调性"></a>区间包含单调性</h2><p>对于任意的$l \le l’ \le r’ \le r$，均有$w(l’, r’) \le w(l, r)$成立，则称函数$w$对于区间包含关系具有单调性。</p>
+<h2 id="四边形不等式"><a href="#四边形不等式" class="headerlink" title="四边形不等式"></a>四边形不等式</h2><p>如果对于任意的$l_1 \le l_2 \le r_1 \le r_2$，均有$w(l_1, r_1) + w(l_2, r_2) \le w(l_1, r_2) + w(l_2, r_1)$成立，则称函数$w$满足四边形不等式，也叫做交叉小于包含。</p>
+<h2 id="引理1"><a href="#引理1" class="headerlink" title="引理1"></a>引理1</h2><p>若关于区间包含的单调性函数$w(l, r)$满足四边形不等式，则状态$dp(l, r)$也满足四边形不等式。</p>
+<p>定义$s_{k, l, r} = dp_{l, k} + dp_{k + 1, r} + w(l, r)$表示当决策为$k$时的状态值，任取$l_1 \le l_2 \le r_1 \le r_2$，记$u = \mathop{Best}\limits_{l_1 \le k &lt; r_2}s_{k, l_1, r_2}$，$v = \mathop{Best}\limits_{l_2 \le k &lt; r_1}s_{k, l_2, r_1}$分别表示状态$dp_{l_1, r_2}$和$dp_{l_2, r_1}$的最优抉择点。</p>
+<ul>
+<li>若$u \le v$，则$l_1 \le u &lt; r_1, l_2 \le v &lt; r_2$，因此<br>$$<br>dp_{l_1, r_1} \le s_{u, l_1, r_1} = dp_{l_1. u} + dp_{u + 1, r_1} + w(l_1, r_1) \quad (1) \\<br>dp_{l_2, r_2} \le s_{v, l_2, r_2} = dp_{l_2, v} + dp_{v + 1, r_2} + w(l_2, r_2) \quad (2)<br>$$<br>再由$u + 1 \le v + 1 \le r_1 \le r_2$和归纳假设知<br>$$<br>dp_{u + 1, r_1} + dp_{v + 1, r_2} \le dp_{u + 1, r_2} + dp_{v + 1, r_1} \quad (3)<br>$$</li>
+</ul>
+<p>将$(1)$和$(2)$相加，得<br>$$<br>dp_{l_1, r_1} + dp_{l_2, r_2} \le dp_{l_1, u} + dp_{l_2, v} + dp_{u + 1, r_1} + dp_{v + 1, r_2} + w(l_1, r_1) + w(l_2, r_2) \quad (4)<br>$$<br>将$(3)$代入$(4)$中，并且根据$w$函数满足四边形不等式，得<br>$$<br>\begin{aligned}<br>dp_{l_1, r_1} + dp_{l_2, r_2} \le&amp; dp_{l_1, u} + dp_{l_2, v} + dp_{u + 1, r_2} + dp_{v + 1, r_1} + w(l_1, r_2) + w(l_2, r_1) \\<br>\le&amp; s_{u, l_1, r_2} + s_{v, l_2, r_1} = dp_{l_1, r_2} + dp_{l_2, r_1}<br>\end{aligned}<br>$$</p>
+<ul>
+<li>若$u &gt; v$，则$l_1 \le v \le r_1$，$l_2 \le u \le r_2$，因此<br>$$<br>dp_{l_1, r_1} \le s_{v, l_1, r_1} = dp_{l_1, v} + dp_{v + 1, r_1} + w(l_1, r_1) \quad (5) \\<br>dp_{l_2, r_2} \le s_{u, l_2, r_2} = dp_{l_2, u} + dp_{u + 1, r_2} + w(l_2, r_2) \quad (6)<br>$$<br>再由$l_1 \le l_2 \le v \le u$和归纳假设知<br>$$<br>dp_{l_1, v} + dp_{l_2, u} \le dp_{l_1, u} + dp_{l_2, v} \quad (7)<br>$$<br>将$(5)$和$(6)$相加，得<br>$$<br>dp_{l_1, r_1} + dp_{l_2, r_2} \le dp_{l_1, v} + dp_{l_2, u} + dp_{v + 1, r_1} + dp_{u + 1, r_2} + w(l_1, r_1) + w(l_2, r_2) \quad (8)<br>$$<br>将$(7)$代入$(8)$中，并且根据$w$函数满足四边形不等式，得<br>$$<br>\begin{aligned}<br>dp_{l_1, r_1} + dp_{l_2, r_2} \le&amp; dp_{l_1, u} + dp_{l_2, v} + dp_{v + 1, r_1} + dp_{u + 1, r_2} + w(l_1, r_2) + w(l_2, r_1) \\<br>\le&amp; s_{u, l_1, r_2} + s_{v, l_2, r_1} = dp_{l_1, r_2} + dp_{l_2, r_1}<br>\end{aligned}<br>$$</li>
+</ul>
+<p>综上所述，两种情况都有$dp_{l_1, r_1} + dp_{l_2, r_2} \le dp_{l_1, r_2} + dp_{l_2, r_1}$，则四边形不等式成立</p>
+<h2 id="决策单调性"><a href="#决策单调性" class="headerlink" title="决策单调性"></a>决策单调性</h2><p><strong>定理1</strong> ：若状态$dp$满足四边形不等式，定义$m_{l, r} = \min\lbrace k : dp_{l, r} = s_{k, l, r} \rbrace$表示最优决策点，则有<br>$$<br>m_{l, r - 1} \le m_{l, r} \le m_{l + 1, r}<br>$$<br>记$u = m_{l, r}$，$k_1 = m{l, r - 1}$ ，$k_2 = m_{l + 1, r}$ </p>
+<ul>
+<li>若$k_1 &gt; u$，则$u + 1 \le k_1 + 1 \le r - 1 \le r$，因此根据四边形不等式有<br>$$<br>dp_{u + 1, r - 1} + dp_{k_1 + 1, r} \le dp_{u + 1, r} + dp_{k_1 + 1, r - 1} \quad (9)<br>$$<br>​根据$u$是状态$dp_{l, r}$的最优决策点可知<br>$$<br>dp_{l, u} + dp_{u + 1, r} \le dp_{l, k_1} + dp_{k_1 + 1, r} \quad (10)<br>$$<br>​将$(9)$和$(10)$两个不等式相加，得<br>$$<br>\begin{aligned}<br>dp_{l, u} + dp_{u + 1, r - 1} \le&amp; dp_{l, k_1} + dp_{k_1 + 1, r - 1} \\<br>s_{u, l, r - 1} \le&amp; s_{k_1, l, r - 1}<br>\end{aligned}<br>$$<br>这与$k_1$是最小的最优决策点矛盾，所以$k_1 \le u$</li>
+</ul>
+<ul>
+<li>若$u &gt; k_2$，则$l \le l + 1 \le + k_2 \le u$，根据四边形不等式得<br>$$<br>dp_{l, k_2} + dp_{l + 1, u} \le dp_{l, u} + dp_{l + 1, k_2} \quad (11)<br>$$<br>根据$k_2$是状态$dp_{l + 1, r}$的最优决策点可知<br>$$<br>dp_{l + 1, k_2} + dp_{k_2 + 1, r} \le dp_{l + 1, u} + dp_{u + 1, r} \quad (12)<br>$$<br>将$(11)$和$(12)$相加，得<br>$$<br>\begin{aligned}<br>dp_{l, k_2} + dp_{k_2 + 1, r} \le&amp; dp_{l, u} + dp_{u + 1, r} \\<br>s_{k_2, l, r} \le&amp; s_{u, l, r}<br>\end{aligned}<br>$$<br>这与$u$是最小的最优决策点矛盾，因此$u \le k_2$</li>
+</ul>
+<p>所以，如果我们在计算状态$dp_{l, r}$的同时将最小的最优决策点$m_{l, r}$记录下来，那么我们队决策点$k$的总枚举次数将为<br>$$<br>\sum\limits_{1 \le l &lt; r \le n} m_{l + 1, r} - m_{l, r - 1} = \sum\limits_{i = 1}^{n} m_{i, n} - m_{1, i} \le n^{2}<br>$$</p>
+<h1 id="四边形不等式优化后的石子合并"><a href="#四边形不等式优化后的石子合并" class="headerlink" title="四边形不等式优化后的石子合并"></a>四边形不等式优化后的石子合并</h1><p>因为求最大值时，不满足四边形不等式，只能优化求最小值，并且我们在求解$dp_{l, r}$时，是需要知道$m_{l, r - 1}$和$m_{l + 1, r}$的，所以$l$需要从大到小枚举，$r$需要从小到大枚举</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span> ull;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; P;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> inf 0x3f3f3f3f</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 0x3f3f3f3f3f3f3f3f</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> IO ios::sync_with_stdio(0)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> DEBUG(x) cout<span class="meta-string">&lt;&lt;"---&gt;"&lt;&lt;(x)&lt;&lt;endl;</span></span></span><br><span class="line"><span class="keyword">const</span> ll mod = <span class="number">998244353</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> eps = <span class="number">1e-9</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> PI = <span class="built_in">acos</span>(<span class="number">-1</span>);</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">1e4</span> + <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> a[<span class="number">205</span>], pre[<span class="number">205</span>];</span><br><span class="line"><span class="keyword">int</span> dp1[<span class="number">205</span>][<span class="number">205</span>], dp2[<span class="number">205</span>][<span class="number">205</span>], m[<span class="number">205</span>][<span class="number">205</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="comment">// freopen("in.txt", "r", stdin);</span></span><br><span class="line">	<span class="keyword">int</span> n;</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; a[i];</span><br><span class="line">		a[i + n] = a[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= (n&lt;&lt;<span class="number">1</span>); i++) &#123;</span><br><span class="line">		pre[i] = pre[i - <span class="number">1</span>] + a[i];</span><br><span class="line">		m[i][i] = i;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = (n&lt;&lt;<span class="number">1</span>); i &gt;= <span class="number">1</span>; i--) &#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt;= (n&lt;&lt;<span class="number">1</span>); j++) &#123;</span><br><span class="line">			dp2[i][j] = inf;</span><br><span class="line">			dp1[i][j] = max(dp1[i + <span class="number">1</span>][j], dp1[i][j - <span class="number">1</span>]) + pre[j] - pre[i - <span class="number">1</span>];</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> k = m[i][j - <span class="number">1</span>]; k &lt;= m[i + <span class="number">1</span>][j]; k++) &#123;</span><br><span class="line">				<span class="keyword">if</span> (dp2[i][j] &gt; dp2[i][k] + dp2[k + <span class="number">1</span>][j] + pre[j] - pre[i - <span class="number">1</span>]) &#123;</span><br><span class="line">					dp2[i][j] = dp2[i][k] + dp2[k + <span class="number">1</span>][j] + pre[j] - pre[i - <span class="number">1</span>];</span><br><span class="line">					m[i][j] = k;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> mi = inf, mx = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>, j = n; j &lt;= (n&lt;&lt;<span class="number">1</span>); i++, j++) &#123;</span><br><span class="line">		mi = min(mi, dp2[i][j]);</span><br><span class="line">		mx = max(mx, dp1[i][j]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; mi &lt;&lt; <span class="string">'\n'</span> &lt;&lt; mx &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://oi-wiki.org/dp/opt/quadrangle/" target="_blank" rel="noopener">OI-Wiki 四边形不等式优化</a></p>
+<p><a href="https://www.bilibili.com/video/BV1W7411T7dq" target="_blank" rel="noopener">B站 bewildRan - 0225【四边形不等式优化DP】</a></p>
+
       
     </div>
-    
-
-
 
     
+
     
     
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
+          
+            <a href="/tags/DP/" rel="tag"># DP</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/09/15/Treap/" rel="next" title="Treap">
+                <i class="fa fa-chevron-left"></i> Treap
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
   </div>
 
 
           </div>
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
 
         </div>
         
@@ -544,8 +670,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -726,6 +861,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#石子合并"><span class="nav-number">1.</span> <span class="nav-text">石子合并</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题意"><span class="nav-number">1.1.</span> <span class="nav-text">题意</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">1.2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">1.3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四边形不等式优化"><span class="nav-number">2.</span> <span class="nav-text">四边形不等式优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#区间包含单调性"><span class="nav-number">2.1.</span> <span class="nav-text">区间包含单调性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四边形不等式"><span class="nav-number">2.2.</span> <span class="nav-text">四边形不等式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引理1"><span class="nav-number">2.3.</span> <span class="nav-text">引理1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#决策单调性"><span class="nav-number">2.4.</span> <span class="nav-text">决策单调性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四边形不等式优化后的石子合并"><span class="nav-number">3.</span> <span class="nav-text">四边形不等式优化后的石子合并</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
@@ -950,6 +1102,8 @@ setInterval("createtime()",250);
 
 
 
+
+  
 
 
   
@@ -1288,6 +1442,43 @@ setInterval("createtime()",250);
   
 
   
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow: auto hidden;
+}
+</style>
+
+    
+  
 
 
   
@@ -1312,7 +1503,7 @@ setInterval("createtime()",250);
   <script src="/lib/bookmark/bookmark.min.js?v=1.0"></script>
   <script>
   
-    bookmark.loadBookmark();
+    bookmark.scrollToMark('auto', "#more");
   
   </script>
 

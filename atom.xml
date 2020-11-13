@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-09-15T02:58:13.220Z</updated>
+  <updated>2020-11-13T09:18:18.978Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>区间DP四边形不等式优化</title>
+    <link href="http://yoursite.com/2020/11/13/%E5%8C%BA%E9%97%B4DP%E5%9B%9B%E8%BE%B9%E5%BD%A2%E4%B8%8D%E7%AD%89%E5%BC%8F%E4%BC%98%E5%8C%96/"/>
+    <id>http://yoursite.com/2020/11/13/区间DP四边形不等式优化/</id>
+    <published>2020-11-13T08:30:53.000Z</published>
+    <updated>2020-11-13T09:18:18.978Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;石子合并&quot;&gt;&lt;a href=&quot;#石子合并&quot; class=&quot;headerlink&quot; title=&quot;石子合并&quot;&gt;&lt;/a&gt;石子合并&lt;/h1&gt;&lt;p&gt;先看一道最经典的区间DP题&lt;a href=&quot;https://www.luogu.com.cn/problem/P1880&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="Algorithm" scheme="http://yoursite.com/categories/Algorithm/"/>
+    
+      <category term="DP" scheme="http://yoursite.com/categories/Algorithm/DP/"/>
+    
+    
+      <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
+    
+      <category term="DP" scheme="http://yoursite.com/tags/DP/"/>
+    
+  </entry>
   
   <entry>
     <title>Treap</title>
@@ -586,37 +616,6 @@
       <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
     
       <category term="Graph" scheme="http://yoursite.com/tags/Graph/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>线段树基础</title>
-    <link href="http://yoursite.com/2019/07/25/%E7%BA%BF%E6%AE%B5%E6%A0%91%E5%9F%BA%E7%A1%80/"/>
-    <id>http://yoursite.com/2019/07/25/线段树基础/</id>
-    <published>2019-07-25T12:30:10.000Z</published>
-    <updated>2020-02-15T03:11:09.593Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;最近几天都在瞎搞线段树，学会了如何轻松愉快的写线段树模板题，于是想写一个线段树入门的总结。如果你是像上海全能王csl一样会&lt;strong&gt;ac自动机fail树上dfs序建可持久化线段树&lt;/strong&gt;的神犇，那么你可以无视这一篇没什么用的blog了。&lt;/p&gt;
-&lt;h1
-        
-      
-    
-    </summary>
-    
-      <category term="Algorithm" scheme="http://yoursite.com/categories/Algorithm/"/>
-    
-      <category term="Data Structure" scheme="http://yoursite.com/categories/Algorithm/Data-Structure/"/>
-    
-    
-      <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
-    
-      <category term="Data Structure" scheme="http://yoursite.com/tags/Data-Structure/"/>
     
   </entry>
   
