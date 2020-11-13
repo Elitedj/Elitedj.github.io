@@ -134,7 +134,7 @@
 <meta property="og:site_name" content="Elitedj">
 <meta property="og:description" content="石子合并先看一道最经典的区间DP题洛谷P1880 石子合并 题意有一个圆形的操场，放着N堆石子，我们只能将相邻的两堆石子合并成一堆，花费是两堆石子数的和，问将N堆合并成一堆的最大最小花费是多少。 思路以最大值为例，我们定义$dp_{i, j}$表示将第$i$和第$j$堆石子合并的最大花费，我们从小区间开始枚举，通过状态转移方程求的大区间的最优解。对于求$dp_{i, j}$时，我们枚举$k \qu">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-11-13T09:18:18.978Z">
+<meta property="og:updated_time" content="2020-11-13T09:20:41.338Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="区间DP四边形不等式优化">
 <meta name="twitter:description" content="石子合并先看一道最经典的区间DP题洛谷P1880 石子合并 题意有一个圆形的操场，放着N堆石子，我们只能将相邻的两堆石子合并成一堆，花费是两堆石子数的和，问将N堆合并成一堆的最大最小花费是多少。 思路以最大值为例，我们定义$dp_{i, j}$表示将第$i$和第$j$堆石子合并的最大花费，我们从小区间开始枚举，通过状态转移方程求的大区间的最优解。对于求$dp_{i, j}$时，我们枚举$k \qu">
@@ -461,7 +461,7 @@
                 
               
 
-              <time title="Created: 2020-11-13 16:30:53 / Modified: 17:18:18" itemprop="dateCreated datePublished" datetime="2020-11-13T16:30:53+08:00">2020-11-13</time>
+              <time title="Created: 2020-11-13 16:30:53 / Modified: 17:20:41" itemprop="dateCreated datePublished" datetime="2020-11-13T16:30:53+08:00">2020-11-13</time>
             
 
             
@@ -556,9 +556,8 @@
 <h2 id="引理1"><a href="#引理1" class="headerlink" title="引理1"></a>引理1</h2><p>若关于区间包含的单调性函数$w(l, r)$满足四边形不等式，则状态$dp(l, r)$也满足四边形不等式。</p>
 <p>定义$s_{k, l, r} = dp_{l, k} + dp_{k + 1, r} + w(l, r)$表示当决策为$k$时的状态值，任取$l_1 \le l_2 \le r_1 \le r_2$，记$u = \mathop{Best}\limits_{l_1 \le k &lt; r_2}s_{k, l_1, r_2}$，$v = \mathop{Best}\limits_{l_2 \le k &lt; r_1}s_{k, l_2, r_1}$分别表示状态$dp_{l_1, r_2}$和$dp_{l_2, r_1}$的最优抉择点。</p>
 <ul>
-<li>若$u \le v$，则$l_1 \le u &lt; r_1, l_2 \le v &lt; r_2$，因此<br>$$<br>dp_{l_1, r_1} \le s_{u, l_1, r_1} = dp_{l_1. u} + dp_{u + 1, r_1} + w(l_1, r_1) \quad (1) \\<br>dp_{l_2, r_2} \le s_{v, l_2, r_2} = dp_{l_2, v} + dp_{v + 1, r_2} + w(l_2, r_2) \quad (2)<br>$$<br>再由$u + 1 \le v + 1 \le r_1 \le r_2$和归纳假设知<br>$$<br>dp_{u + 1, r_1} + dp_{v + 1, r_2} \le dp_{u + 1, r_2} + dp_{v + 1, r_1} \quad (3)<br>$$</li>
+<li>若$u \le v$，则$l_1 \le u &lt; r_1, l_2 \le v &lt; r_2$，因此<br>$$<br>dp_{l_1, r_1} \le s_{u, l_1, r_1} = dp_{l_1. u} + dp_{u + 1, r_1} + w(l_1, r_1) \quad (1) \\<br>dp_{l_2, r_2} \le s_{v, l_2, r_2} = dp_{l_2, v} + dp_{v + 1, r_2} + w(l_2, r_2) \quad (2)<br>$$<br>再由$u + 1 \le v + 1 \le r_1 \le r_2$和归纳假设知<br>$$<br>dp_{u + 1, r_1} + dp_{v + 1, r_2} \le dp_{u + 1, r_2} + dp_{v + 1, r_1} \quad (3)<br>$$<br>将$(1)$和$(2)$相加，得<br>$$<br>dp_{l_1, r_1} + dp_{l_2, r_2} \le dp_{l_1, u} + dp_{l_2, v} + dp_{u + 1, r_1} + dp_{v + 1, r_2} + w(l_1, r_1) + w(l_2, r_2) \quad (4)<br>$$<br>将$(3)$代入$(4)$中，并且根据$w$函数满足四边形不等式，得<br>$$<br>\begin{aligned}<br>dp_{l_1, r_1} + dp_{l_2, r_2} \le&amp; dp_{l_1, u} + dp_{l_2, v} + dp_{u + 1, r_2} + dp_{v + 1, r_1} + w(l_1, r_2) + w(l_2, r_1) \\<br>\le&amp; s_{u, l_1, r_2} + s_{v, l_2, r_1} = dp_{l_1, r_2} + dp_{l_2, r_1}<br>\end{aligned}<br>$$</li>
 </ul>
-<p>将$(1)$和$(2)$相加，得<br>$$<br>dp_{l_1, r_1} + dp_{l_2, r_2} \le dp_{l_1, u} + dp_{l_2, v} + dp_{u + 1, r_1} + dp_{v + 1, r_2} + w(l_1, r_1) + w(l_2, r_2) \quad (4)<br>$$<br>将$(3)$代入$(4)$中，并且根据$w$函数满足四边形不等式，得<br>$$<br>\begin{aligned}<br>dp_{l_1, r_1} + dp_{l_2, r_2} \le&amp; dp_{l_1, u} + dp_{l_2, v} + dp_{u + 1, r_2} + dp_{v + 1, r_1} + w(l_1, r_2) + w(l_2, r_1) \\<br>\le&amp; s_{u, l_1, r_2} + s_{v, l_2, r_1} = dp_{l_1, r_2} + dp_{l_2, r_1}<br>\end{aligned}<br>$$</p>
 <ul>
 <li>若$u &gt; v$，则$l_1 \le v \le r_1$，$l_2 \le u \le r_2$，因此<br>$$<br>dp_{l_1, r_1} \le s_{v, l_1, r_1} = dp_{l_1, v} + dp_{v + 1, r_1} + w(l_1, r_1) \quad (5) \\<br>dp_{l_2, r_2} \le s_{u, l_2, r_2} = dp_{l_2, u} + dp_{u + 1, r_2} + w(l_2, r_2) \quad (6)<br>$$<br>再由$l_1 \le l_2 \le v \le u$和归纳假设知<br>$$<br>dp_{l_1, v} + dp_{l_2, u} \le dp_{l_1, u} + dp_{l_2, v} \quad (7)<br>$$<br>将$(5)$和$(6)$相加，得<br>$$<br>dp_{l_1, r_1} + dp_{l_2, r_2} \le dp_{l_1, v} + dp_{l_2, u} + dp_{v + 1, r_1} + dp_{u + 1, r_2} + w(l_1, r_1) + w(l_2, r_2) \quad (8)<br>$$<br>将$(7)$代入$(8)$中，并且根据$w$函数满足四边形不等式，得<br>$$<br>\begin{aligned}<br>dp_{l_1, r_1} + dp_{l_2, r_2} \le&amp; dp_{l_1, u} + dp_{l_2, v} + dp_{v + 1, r_1} + dp_{u + 1, r_2} + w(l_1, r_2) + w(l_2, r_1) \\<br>\le&amp; s_{u, l_1, r_2} + s_{v, l_2, r_1} = dp_{l_1, r_2} + dp_{l_2, r_1}<br>\end{aligned}<br>$$</li>
 </ul>
