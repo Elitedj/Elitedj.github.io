@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-11-13T09:20:41.338Z</updated>
+  <updated>2020-11-23T06:57:45.974Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,42 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>重链剖分</title>
+    <link href="http://yoursite.com/2020/11/23/%E9%87%8D%E9%93%BE%E5%89%96%E5%88%86/"/>
+    <id>http://yoursite.com/2020/11/23/重链剖分/</id>
+    <published>2020-11-23T06:52:14.000Z</published>
+    <updated>2020-11-23T06:57:45.974Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;重链剖分是树链剖分的一种，将一棵树分为多条链，组合成一个线性结构，然后用数据结构维护树上的信息，如&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;查询树上两点的路径的权值和&lt;/li&gt;
+&lt;li&gt;修改树上两点的路径的权值&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;可以用线段树等数据结构来维护。&lt;/p&gt;
+&lt;h2
+        
+      
+    
+    </summary>
+    
+      <category term="Algorithm" scheme="http://yoursite.com/categories/Algorithm/"/>
+    
+      <category term="Graph" scheme="http://yoursite.com/categories/Algorithm/Graph/"/>
+    
+    
+      <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
+    
+      <category term="Graph" scheme="http://yoursite.com/tags/Graph/"/>
+    
+  </entry>
   
   <entry>
     <title>区间DP四边形不等式优化</title>
@@ -586,36 +622,6 @@
       <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
     
       <category term="Data Structure" scheme="http://yoursite.com/tags/Data-Structure/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>图论——最短路径</title>
-    <link href="http://yoursite.com/2019/08/12/%E5%9B%BE%E8%AE%BA%E2%80%94%E2%80%94%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/"/>
-    <id>http://yoursite.com/2019/08/12/图论——最短路径/</id>
-    <published>2019-08-12T01:51:53.000Z</published>
-    <updated>2020-02-15T03:09:54.718Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
-      <category term="Algorithm" scheme="http://yoursite.com/categories/Algorithm/"/>
-    
-      <category term="Graph" scheme="http://yoursite.com/categories/Algorithm/Graph/"/>
-    
-    
-      <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
-    
-      <category term="Graph" scheme="http://yoursite.com/tags/Graph/"/>
     
   </entry>
   
