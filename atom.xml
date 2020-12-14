@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-11-23T06:57:45.974Z</updated>
+  <updated>2020-12-14T12:09:12.278Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Windows10 VSCode SSH Remote &#39;过程试图写入的管道不存在&#39;解决方案</title>
+    <link href="http://yoursite.com/2020/12/14/Windows10-VSCode-SSH-Remote-%E8%BF%87%E7%A8%8B%E8%AF%95%E5%9B%BE%E5%86%99%E5%85%A5%E7%9A%84%E7%AE%A1%E9%81%93%E4%B8%8D%E5%AD%98%E5%9C%A8-%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
+    <id>http://yoursite.com/2020/12/14/Windows10-VSCode-SSH-Remote-过程试图写入的管道不存在-解决方案/</id>
+    <published>2020-12-14T12:05:48.000Z</published>
+    <updated>2020-12-14T12:09:12.278Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;最近开始要做毕设了，搞了个腾讯云的服务器来做开发，想着用VS Code的SSH Remote连接服务器远程开发，但是死活连不上。尝试用各种终端SSH都是可以连接到服务器，但是VS
+        
+      
+    
+    </summary>
+    
+      <category term="Windows" scheme="http://yoursite.com/categories/Windows/"/>
+    
+      <category term="Bug" scheme="http://yoursite.com/categories/Windows/Bug/"/>
+    
+    
+      <category term="Windows" scheme="http://yoursite.com/tags/Windows/"/>
+    
+      <category term="Bug" scheme="http://yoursite.com/tags/Bug/"/>
+    
+  </entry>
   
   <entry>
     <title>重链剖分</title>
@@ -592,36 +622,6 @@
     
     
       <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>可持久化线段树(主席树)</title>
-    <link href="http://yoursite.com/2019/08/29/%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96%E7%BA%BF%E6%AE%B5%E6%A0%91-%E4%B8%BB%E5%B8%AD%E6%A0%91/"/>
-    <id>http://yoursite.com/2019/08/29/可持久化线段树-主席树/</id>
-    <published>2019-08-29T01:39:11.000Z</published>
-    <updated>2020-02-15T03:09:34.018Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;可持久化线段树是线段树的高级应用，如果不会线段树的话是看不懂这一篇blog的，可以先去看&lt;a
-        
-      
-    
-    </summary>
-    
-      <category term="Algorithm" scheme="http://yoursite.com/categories/Algorithm/"/>
-    
-      <category term="Data Structure" scheme="http://yoursite.com/categories/Algorithm/Data-Structure/"/>
-    
-    
-      <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
-    
-      <category term="Data Structure" scheme="http://yoursite.com/tags/Data-Structure/"/>
     
   </entry>
   
