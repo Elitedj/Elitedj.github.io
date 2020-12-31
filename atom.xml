@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-12-14T12:09:12.278Z</updated>
+  <updated>2020-12-31T11:41:04.304Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>2020 Summary</title>
+    <link href="http://yoursite.com/2020/12/31/2020-Summary/"/>
+    <id>http://yoursite.com/2020/12/31/2020-Summary/</id>
+    <published>2020-12-31T11:31:10.000Z</published>
+    <updated>2020-12-31T11:41:04.304Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;2020是很操蛋的一年，但对于我来说又是很重要的一年。大三的结束意味着我到了一个分岔路口，工作/读研/考公/其他……，这一年在这个分岔路口犹豫徘徊，最后也是做出了对我人生而言很重要的一个决定吧。&lt;/p&gt;
+&lt;p&gt;今年的挺多事情都是交叉发生的，用线性的方式实在是太难表述清楚了，
+        
+      
+    
+    </summary>
+    
+      <category term="总结" scheme="http://yoursite.com/categories/%E6%80%BB%E7%BB%93/"/>
+    
+    
+      <category term="总结" scheme="http://yoursite.com/tags/%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
   
   <entry>
     <title>Windows10 VSCode SSH Remote &#39;过程试图写入的管道不存在&#39;解决方案</title>
@@ -596,32 +623,6 @@
       <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
     
       <category term="Graph" scheme="http://yoursite.com/tags/Graph/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[LCA]最近公共祖先</title>
-    <link href="http://yoursite.com/2019/09/03/LCA-%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88/"/>
-    <id>http://yoursite.com/2019/09/03/LCA-最近公共祖先/</id>
-    <published>2019-09-03T12:30:14.000Z</published>
-    <updated>2019-09-04T05:06:52.704Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;LCA(Least Common
-        
-      
-    
-    </summary>
-    
-      <category term="Algorithm" scheme="http://yoursite.com/categories/Algorithm/"/>
-    
-    
-      <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
     
   </entry>
   
