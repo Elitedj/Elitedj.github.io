@@ -1,1571 +1,227 @@
-<!DOCTYPE html>
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-<script src="/js/src/photoswipe.min.js?v="></script>
-<script src="/js/src/photoswipe-ui-default.min.js?v="></script>
-
-<html class="theme-next muse use-motion" lang="en">
-<head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-    
-
-    
-  
-
-  
-
-  
-    
-    
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Italianno:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext">
-  
-
-
-
-
-
-
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
-
-<link rel="stylesheet" href="/css/main.css?v=7.0.0">
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.0">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.0">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.0">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=7.0.0" color="#222">
-
-
-
-
-
-
-
-<script id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Muse',
-    version: '7.0.0',
-    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: false,
-    fastclick: false,
-    lazyload: false,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-  
-
-
-
-
-  <meta name="description" content="本次的个性化设置是添加相册页面，具体效果可以查看我的相册本篇教程是参考的这，不过本人在操作过程中遇到一些问题，在本篇文章会更改   建立Github相册仓库在本地建立一个git仓库先在本地建立一个git仓库，用来存放照片123mkdir MyBlog_Imagescd ~/MyBlog_Imagesgit init 并且在里面新建photos和min_photos两个文件夹在photos文件夹下放">
-<meta name="keywords" content="Hexo">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>【Hexo】3.0！为Blog增加相册页面 | Elitedj</title><meta name="keywords" content="Hexo"><meta name="author" content="Elitedj"><meta name="copyright" content="Elitedj"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="为Next主题增加相册模块">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【Hexo】3.0！为Blog增加相册页面">
-<meta property="og:url" content="http://yoursite.com/2019/02/25/【Hexo】3-0！为Blog增加相册页面/index.html">
+<meta property="og:url" content="http://elitedj.me/2019/02/25/%E3%80%90Hexo%E3%80%913-0%EF%BC%81%E4%B8%BABlog%E5%A2%9E%E5%8A%A0%E7%9B%B8%E5%86%8C%E9%A1%B5%E9%9D%A2/index.html">
 <meta property="og:site_name" content="Elitedj">
-<meta property="og:description" content="本次的个性化设置是添加相册页面，具体效果可以查看我的相册本篇教程是参考的这，不过本人在操作过程中遇到一些问题，在本篇文章会更改   建立Github相册仓库在本地建立一个git仓库先在本地建立一个git仓库，用来存放照片123mkdir MyBlog_Imagescd ~/MyBlog_Imagesgit init 并且在里面新建photos和min_photos两个文件夹在photos文件夹下放">
-<meta property="og:locale" content="en">
-<meta property="og:image" content="http://yoursite.com/2019/02/25/【Hexo】3-0！为Blog增加相册页面/repo.png">
-<meta property="og:updated_time" content="2019-09-04T05:12:17.320Z">
+<meta property="og:description" content="为Next主题增加相册模块">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://z3.ax1x.com/2021/04/07/c8QqWn.jpg">
+<meta property="article:published_time" content="2019-02-25T09:44:08.000Z">
+<meta property="article:modified_time" content="2021-04-07T06:45:15.724Z">
+<meta property="article:author" content="Elitedj">
+<meta property="article:tag" content="Hexo">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="【Hexo】3.0！为Blog增加相册页面">
-<meta name="twitter:description" content="本次的个性化设置是添加相册页面，具体效果可以查看我的相册本篇教程是参考的这，不过本人在操作过程中遇到一些问题，在本篇文章会更改   建立Github相册仓库在本地建立一个git仓库先在本地建立一个git仓库，用来存放照片123mkdir MyBlog_Imagescd ~/MyBlog_Imagesgit init 并且在里面新建photos和min_photos两个文件夹在photos文件夹下放">
-<meta name="twitter:image" content="http://yoursite.com/2019/02/25/【Hexo】3-0！为Blog增加相册页面/repo.png">
-
-
-
-  <link rel="alternate" href="/atom.xml" title="Elitedj" type="application/atom+xml">
-
-
-
-
-  <link rel="canonical" href="http://yoursite.com/2019/02/25/【Hexo】3-0！为Blog增加相册页面/">
-
-
-
-<script id="page.configurations">
-  CONFIG.page = {
-    sidebar: "",
-  };
-</script>
-
-  <title>【Hexo】3.0！为Blog增加相册页面 | Elitedj</title>
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .motion-element,
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-title { opacity: initial; }
-
-  .use-motion .logo,
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
+<meta name="twitter:image" content="https://z3.ax1x.com/2021/04/07/c8QqWn.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://elitedj.me/2019/02/25/%E3%80%90Hexo%E3%80%913-0%EF%BC%81%E4%B8%BABlog%E5%A2%9E%E5%8A%A0%E7%9B%B8%E5%86%8C%E9%A1%B5%E9%9D%A2/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fonts.font.im/css?family=Merienda:700" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-04-07 14:45:15'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
   }
 
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
 
-</head>
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
 
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
   
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
   
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
     
-  
-
-  <div class="container sidebar-position-left page-post-detail">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/" class="brand" rel="start">
-        <span class="site-title">Elitedj</span>
-      </a>
-    </div>
-    
-    
-  </div>
-
-  <div class="site-nav-toggle">
-    <button aria-label="Toggle navigation bar">
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
-</div>
-
-
-
-<nav class="site-nav">
-  
-    <ul id="menu" class="menu">
-      
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
         
-        
-        
-          
-          <li class="menu-item menu-item-home">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
-
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-about">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
-
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-tags">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
-
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-categories">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
-
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-archives">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
-
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-photos">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/photos" rel="section"><i class="menu-item-icon fa fa-fw fa-camera"></i> <br>photos</a>
-
-  </li>
-
-      
-      
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-          
-            
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
-        </li>
-      
-    </ul>
-  
-
-  
-    
-
-  
-
-  
-    <div class="site-search">
-      
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
-    <span class="popup-btn-close">
-      <i class="fa fa-times-circle"></i>
-    </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
-    </div>
-  </div>
-  <div id="local-search-result"></div>
-</div>
-
-
-
-    </div>
-  
-</nav>
-
-
-
-  
-
-
-
-</div>
-    </header>
-
-    
-
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
-    
-
-  
-
-  
-  
-  
-
-  
-    <div class="reading-progress-bar"></div>
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/25/【Hexo】3-0！为Blog增加相册页面/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Elitedj">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/tou.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Elitedj">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">【Hexo】3.0！为Blog增加相册页面
-
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-02-25 17:44:08" itemprop="dateCreated datePublished" datetime="2019-02-25T17:44:08+08:00">2019-02-25</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-09-04 13:12:17" itemprop="dateModified" datetime="2019-09-04T13:12:17+08:00">2019-09-04</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Hexo/" itemprop="url" rel="index"><span itemprop="name">Hexo</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-              
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-            
-                <span class="post-meta-item-text">Comments: </span>
-                <a href="/2019/02/25/【Hexo】3-0！为Blog增加相册页面/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/02/25/【Hexo】3-0！为Blog增加相册页面/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-            <span class="post-meta-divider">|</span>
-            <span class="post-meta-item-icon">
-            <i class="fa fa-eye"></i>
-             Views:  
-            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
-            </span>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <p>本次的个性化设置是添加相册页面，具体效果可以查看<a href="http://elitedj.me/photos/" target="_blank" rel="noopener">我的相册</a><br>本篇教程是参考的<a href="https://malizhi.cn/HexoAlbum/" target="_blank" rel="noopener">这</a>，不过本人在操作过程中遇到一些问题，在本篇文章会更改  </p>
-<h2 id="建立Github相册仓库"><a href="#建立Github相册仓库" class="headerlink" title="建立Github相册仓库"></a>建立Github相册仓库</h2><h3 id="在本地建立一个git仓库"><a href="#在本地建立一个git仓库" class="headerlink" title="在本地建立一个git仓库"></a>在本地建立一个git仓库</h3><p>先在本地建立一个git仓库，用来存放照片<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir MyBlog_Images</span><br><span class="line"><span class="built_in">cd</span> ~/MyBlog_Images</span><br><span class="line">git init</span><br></pre></td></tr></table></figure></p>
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Elitedj" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="https://z3.ax1x.com/2021/04/07/c8eSC6.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">32</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">18</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">14</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/gallery/"><i class="fa-fw fas fa-image"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://z3.ax1x.com/2021/04/07/c8eVUI.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Elitedj</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/gallery/"><i class="fa-fw fas fa-image"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">【Hexo】3.0！为Blog增加相册页面</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2019-02-25T09:44:08.000Z" title="发表于 2019-02-25 17:44:08">2019-02-25</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-04-07T06:45:15.724Z" title="更新于 2021-04-07 14:45:15">2021-04-07</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Hexo/">Hexo</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>9分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="【Hexo】3.0！为Blog增加相册页面"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>本次的个性化设置是添加相册页面，具体效果可以查看<a href="http://elitedj.me/photos/">我的相册</a><br>本篇教程是参考的<a target="_blank" rel="noopener" href="https://malizhi.cn/HexoAlbum/">这</a>，不过本人在操作过程中遇到一些问题，在本篇文章会更改  </p>
+<h2 id="建立Github相册仓库"><a href="#建立Github相册仓库" class="headerlink" title="建立Github相册仓库"></a>建立Github相册仓库</h2><h3 id="在本地建立一个git仓库"><a href="#在本地建立一个git仓库" class="headerlink" title="在本地建立一个git仓库"></a>在本地建立一个git仓库</h3><p>先在本地建立一个git仓库，用来存放照片  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir MyBlog_Images</span><br><span class="line"><span class="built_in">cd</span> ~/MyBlog_Images</span><br><span class="line">git init</span><br></pre></td></tr></table></figure>
 <p>并且在里面新建<strong>photos</strong>和<strong>min_photos</strong>两个文件夹<br>在<strong>photos</strong>文件夹下放一张测试图片，所有的图片需以特定方式命名，格式为：<strong>yyyy-mm-dd_PicName.jpg/png/jpeg/gif</strong>，例如2000-01-01_test.jpg  </p>
 <h3 id="在Github创建新仓库"><a href="#在Github创建新仓库" class="headerlink" title="在Github创建新仓库"></a>在Github创建新仓库</h3><p>在Github申请一个新的仓库<br><img src="repo.png" alt="repo"></p>
-<h3 id="将本地仓库与Github仓库连接"><a href="#将本地仓库与Github仓库连接" class="headerlink" title="将本地仓库与Github仓库连接"></a>将本地仓库与Github仓库连接</h3><p>在终端输入以下命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin your_repo_address</span><br><span class="line">git push origin master</span><br></pre></td></tr></table></figure></p>
-<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h3 id="下载配置文件"><a href="#下载配置文件" class="headerlink" title="下载配置文件"></a>下载配置文件</h3><p><a href="https://github.com/malizhigithub/HexoAlbumData" target="_blank" rel="noopener">这个仓库</a>有需要的所有配置文件，将这个仓库克隆到本地<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> git@github.com:malizhigithub/HexoAlbumData.git</span><br></pre></td></tr></table></figure></p>
-<h3 id="开始配置"><a href="#开始配置" class="headerlink" title="开始配置"></a>开始配置</h3><p>将<strong>tool.py</strong>和<strong>Imageprocessing.py</strong>文件放到<strong>~/MyBlog_Images</strong>路径下<br>打开 <strong>tool.py</strong>文件，将下面的代码替换掉<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- <span class="keyword">with</span> open(<span class="string">"E://YourBlog/themes/next/source/lib/album/data.json"</span>,<span class="string">"w"</span>) <span class="keyword">as</span> fp:</span><br><span class="line">+ <span class="keyword">with</span> open(<span class="string">"YourBolgPath/themes/next/source/lib/album/data.json"</span>,<span class="string">"w"</span>) <span class="keyword">as</span> fp:</span><br></pre></td></tr></table></figure></p>
+<h3 id="将本地仓库与Github仓库连接"><a href="#将本地仓库与Github仓库连接" class="headerlink" title="将本地仓库与Github仓库连接"></a>将本地仓库与Github仓库连接</h3><p>在终端输入以下命令  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin your_repo_address</span><br><span class="line">git push origin master</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h3 id="下载配置文件"><a href="#下载配置文件" class="headerlink" title="下载配置文件"></a>下载配置文件</h3><p><a target="_blank" rel="noopener" href="https://github.com/malizhigithub/HexoAlbumData">这个仓库</a>有需要的所有配置文件，将这个仓库克隆到本地  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> git@github.com:malizhigithub/HexoAlbumData.git</span><br></pre></td></tr></table></figure>
+
+<h3 id="开始配置"><a href="#开始配置" class="headerlink" title="开始配置"></a>开始配置</h3><p>将<strong>tool.py</strong>和<strong>Imageprocessing.py</strong>文件放到**~/MyBlog_Images**路径下<br>打开 <strong>tool.py</strong>文件，将下面的代码替换掉  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;E://YourBlog/themes/next/source/lib/album/data.json&quot;</span>,<span class="string">&quot;w&quot;</span>) <span class="keyword">as</span> fp:</span><br><span class="line">+ <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;YourBolgPath/themes/next/source/lib/album/data.json&quot;</span>,<span class="string">&quot;w&quot;</span>) <span class="keyword">as</span> fp:</span><br></pre></td></tr></table></figure>
 <p>并且在<strong>YourBolgPath/themes/next/source/lib</strong>路径新建<strong>album</strong>文件夹，在 <strong>album</strong>文件夹下新建 <strong>data.json</strong>文件  </p>
-<p>若你想在相册放置较多格式的图片，可以修改<strong>tool.py</strong>的代码<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- <span class="keyword">if</span> fileformat.lower() == <span class="string">"jpg"</span> <span class="keyword">or</span> fileformat.lower() == <span class="string">"png"</span> <span class="keyword">or</span> fileformat.lower() == <span class="string">"gif"</span>:</span><br><span class="line">+ <span class="keyword">if</span> fileformat.lower() == <span class="string">"jpg"</span> <span class="keyword">or</span> fileformat.lower() == <span class="string">"png"</span> <span class="keyword">or</span> fileformat.lower() == <span class="string">"gif"</span> <span class="keyword">or</span> fileformat.lower() == <span class="string">"你的照片格式"</span>:</span><br></pre></td></tr></table></figure></p>
-<p><strong>tool.py</strong>这个脚本默认是将照片进行较大程度的压缩的，可以自行修改 <strong>compress_photo()</strong>函数的以下代码<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义压缩比，数值越大，压缩越小</span></span><br><span class="line"><span class="comment"># SIZE_normal = 1.0 1级</span></span><br><span class="line"><span class="comment"># SIZE_small = 1.5  2级</span></span><br><span class="line"><span class="comment"># SIZE_more_small = 2.0 3级</span></span><br><span class="line"><span class="comment"># SIZE_more_small_small = 3.0   4级</span></span><br><span class="line">compress(<span class="string">'压缩等级(1/2/3/4)'</span>, des_dir, src_dir, file_list_src)</span><br></pre></td></tr></table></figure></p>
+<p>若你想在相册放置较多格式的图片，可以修改<strong>tool.py</strong>的代码  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- <span class="keyword">if</span> fileformat.lower() == <span class="string">&quot;jpg&quot;</span> <span class="keyword">or</span> fileformat.lower() == <span class="string">&quot;png&quot;</span> <span class="keyword">or</span> fileformat.lower() == <span class="string">&quot;gif&quot;</span>:</span><br><span class="line">+ <span class="keyword">if</span> fileformat.lower() == <span class="string">&quot;jpg&quot;</span> <span class="keyword">or</span> fileformat.lower() == <span class="string">&quot;png&quot;</span> <span class="keyword">or</span> fileformat.lower() == <span class="string">&quot;gif&quot;</span> <span class="keyword">or</span> fileformat.lower() == <span class="string">&quot;你的照片格式&quot;</span>:</span><br></pre></td></tr></table></figure>
+
+<p><strong>tool.py</strong>这个脚本默认是将照片进行较大程度的压缩的，可以自行修改 **compress_photo()**函数的以下代码  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义压缩比，数值越大，压缩越小</span></span><br><span class="line"><span class="comment"># SIZE_normal = 1.0 1级</span></span><br><span class="line"><span class="comment"># SIZE_small = 1.5  2级</span></span><br><span class="line"><span class="comment"># SIZE_more_small = 2.0 3级</span></span><br><span class="line"><span class="comment"># SIZE_more_small_small = 3.0   4级</span></span><br><span class="line">compress(<span class="string">&#x27;压缩等级(1/2/3/4)&#x27;</span>, des_dir, src_dir, file_list_src)</span><br></pre></td></tr></table></figure>
 <p>本人选择不进行压缩，即压缩等级为1  </p>
 <p>将<strong>JS&amp;CSS</strong>文件夹下的所有文件复制到<strong>YourBolgPath/themes/next/source/lib/album</strong><br>然后再将<strong>photoswipe-ui-default.min.js</strong>，<strong>photoswipe.min.js</strong>两个文件添加到<strong>themes/next/source/js/src</strong>中。  </p>
-<p>打开<strong>YourBolgPath/themes/next/source/lib/album/ins.js</strong>文件，修改以下代码<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> minSrc = <span class="string">'https://raw.githubusercontent.com/lizhi/Blog_Album/master/min_photos/'</span> + data.link[i];</span><br><span class="line"><span class="keyword">var</span> src = <span class="string">'https://raw.githubusercontent.com/lizhi/Blog_Album/master/photos/'</span> + data.link[i];</span><br><span class="line"><span class="comment">// 替换成下面的代码</span></span><br><span class="line"><span class="keyword">var</span> minSrc = <span class="string">'https://raw.githubusercontent.com/yougithubname/pathtoyourphotos/min_photos/'</span> + data.link[i];</span><br><span class="line"><span class="keyword">var</span> src = <span class="string">'https://raw.githubusercontent.com/yougithubname/pathtoyourphotos/photos/'</span> + data.link[i];</span><br></pre></td></tr></table></figure></p>
-<p><strong>确保你的图片地址是正确的</strong>，否则不能正常加载图片<br>测试方法：在Github仓库中打开你的测试图片，并右键选择<strong>在新标签页打开图片</strong>就可以看到图片的地址<br>图片的地址一定是以<strong><a href="https://raw.githubusercontent.com" target="_blank" rel="noopener">https://raw.githubusercontent.com</a></strong>开头的，如果你看到的是以<strong><a href="https://github.com" target="_blank" rel="noopener">https://github.com</a></strong>开头的说明是不正确的  </p>
-<p>在<strong>YourBolgPath/themes/next/layout/_layout.swig</strong>的<strong>head</strong>部分前添加以下代码<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">"&#123;&#123; url_for(theme.js) &#125;&#125;/src/photoswipe.min.js?v=&#123;&#123; theme.version &#125;&#125;"</span>&gt;&lt;/script&gt;</span><br><span class="line">&lt;script src=<span class="string">"&#123;&#123; url_for(theme.js) &#125;&#125;/src/photoswipe-ui-default.min.js?v=&#123;&#123; theme.version &#125;&#125;"</span>&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
-<p>在<strong>body</strong>部分增加下面代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">&#123;% if page.type === &quot;photos&quot; %&#125;</span><br><span class="line">  &lt;!-- Root element of PhotoSwipe. Must have class pswp. --&gt;</span><br><span class="line">  &lt;div class=&quot;pswp&quot; tabindex=&quot;-1&quot; role=&quot;dialog&quot; aria-hidden=&quot;true&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;pswp__bg&quot;&gt;&lt;/div&gt;</span><br><span class="line">    &lt;div class=&quot;pswp__scroll-wrap&quot;&gt;</span><br><span class="line">        &lt;div class=&quot;pswp__container&quot;&gt;</span><br><span class="line">            &lt;div class=&quot;pswp__item&quot;&gt;&lt;/div&gt;</span><br><span class="line">            &lt;div class=&quot;pswp__item&quot;&gt;&lt;/div&gt;</span><br><span class="line">            &lt;div class=&quot;pswp__item&quot;&gt;&lt;/div&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">        &lt;div class=&quot;pswp__ui pswp__ui--hidden&quot;&gt;</span><br><span class="line">            &lt;div class=&quot;pswp__top-bar&quot;&gt;</span><br><span class="line">                &lt;div class=&quot;pswp__counter&quot;&gt;&lt;/div&gt;</span><br><span class="line">                &lt;button class=&quot;pswp__button pswp__button--close&quot; title=&quot;Close (Esc)&quot;&gt;&lt;/button&gt;</span><br><span class="line">                &lt;button class=&quot;pswp__button pswp__button--share&quot; title=&quot;Share&quot;&gt;&lt;/button&gt;</span><br><span class="line">                &lt;button class=&quot;pswp__button pswp__button--fs&quot; title=&quot;Toggle fullscreen&quot;&gt;&lt;/button&gt;</span><br><span class="line">                &lt;button class=&quot;pswp__button pswp__button--zoom&quot; title=&quot;Zoom in/out&quot;&gt;&lt;/button&gt;</span><br><span class="line">                &lt;!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR --&gt;</span><br><span class="line">                &lt;!-- element will get class pswp__preloader--active when preloader is running --&gt;</span><br><span class="line">                &lt;div class=&quot;pswp__preloader&quot;&gt;</span><br><span class="line">                    &lt;div class=&quot;pswp__preloader__icn&quot;&gt;</span><br><span class="line">                      &lt;div class=&quot;pswp__preloader__cut&quot;&gt;</span><br><span class="line">                        &lt;div class=&quot;pswp__preloader__donut&quot;&gt;&lt;/div&gt;</span><br><span class="line">                      &lt;/div&gt;</span><br><span class="line">                    &lt;/div&gt;</span><br><span class="line">                &lt;/div&gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">            &lt;div class=&quot;pswp__share-modal pswp__share-modal--hidden pswp__single-tap&quot;&gt;</span><br><span class="line">                &lt;div class=&quot;pswp__share-tooltip&quot;&gt;&lt;/div&gt; </span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">            &lt;button class=&quot;pswp__button pswp__button--arrow--left&quot; title=&quot;Previous (arrow left)&quot;&gt;</span><br><span class="line">            &lt;/button&gt;</span><br><span class="line">            &lt;button class=&quot;pswp__button pswp__button--arrow--right&quot; title=&quot;Next (arrow right)&quot;&gt;</span><br><span class="line">            &lt;/button&gt;</span><br><span class="line">            &lt;div class=&quot;pswp__caption&quot;&gt;</span><br><span class="line">                &lt;div class=&quot;pswp__caption__center&quot;&gt;&lt;/div&gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br></pre></td></tr></table></figure></p>
-<p>在<strong>YourBolgPath/themes/next/layout/_scripts/pages/post-details.swig</strong>添加下面代码<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span> src=<span class="string">"&#123;&#123; url_for(theme.js) &#125;&#125;/src/photoswipe.min.js?v=&#123;&#123; theme.version &#125;&#125;"</span>&gt;&lt;/script&gt;</span><br><span class="line">&lt;script type=<span class="string">"text/javascript"</span> src=<span class="string">"&#123;&#123; url_for(theme.js) &#125;&#125;/src/photoswipe-ui-default.min.js?v=&#123;&#123; theme.version &#125;&#125;"</span>&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
-<p>若你的主题开启了<strong>fancybox</strong>功能，则在<strong>YourBolgPath/themes/next/layout/_partials/head.swig</strong>中添加以下代码，否则不用管<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">+&#123;% if page.type === &quot;photos&quot;  %&#125;</span><br><span class="line">+  &#123;% set theme.fancybox = false %&#125;</span><br><span class="line">+&#123;% endif %&#125;</span><br><span class="line">+&#123;% if page.type !== &quot;photos&quot;  %&#125;</span><br><span class="line">+  &#123;% set theme.fancybox = true %&#125;</span><br><span class="line">+&#123;% endif %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% if theme.fancybox  %&#125;</span><br><span class="line">  &#123;% set fancybox_css_uri = url_for(theme.vendors._internal + &apos;/fancybox/source/jquery.fancybox.css?v=2.1.5&apos;) %&#125;</span><br><span class="line">  &#123;% if theme.vendors.fancybox_css %&#125;</span><br><span class="line">    &#123;% set fancybox_css_uri = theme.vendors.fancybox_css %&#125;</span><br><span class="line">  &#123;% endif %&#125;</span><br><span class="line">  &lt;link href=&quot;&#123;&#123; fancybox_css_uri &#125;&#125;&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="设置photos界面"><a href="#设置photos界面" class="headerlink" title="设置photos界面"></a>设置photos界面</h2><p>在终端输入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> YourBlogPath</span><br><span class="line">hexo n page photos</span><br></pre></td></tr></table></figure></p>
-<p>打开<strong>YourBlogPath/themes/next/_config.yml</strong>，在<strong>menu</strong>中修改以下代码<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">menu:</span></span><br><span class="line"><span class="attr">  home:</span> <span class="string">/</span> <span class="string">||</span> <span class="string">home</span></span><br><span class="line"><span class="attr">  about:</span> <span class="string">/about/</span> <span class="string">||</span> <span class="string">user</span></span><br><span class="line"><span class="attr">  categories:</span> <span class="string">/categories/</span> <span class="string">||</span> <span class="string">th-list</span></span><br><span class="line"><span class="attr">  tags:</span> <span class="string">/tags/</span> <span class="string">||</span> <span class="string">tags</span></span><br><span class="line"><span class="attr">  archives:</span> <span class="string">/archives/</span> <span class="string">||</span> <span class="string">archive</span></span><br><span class="line">  <span class="comment">#schedule: /schedule/ || calendar</span></span><br><span class="line"><span class="string">+</span> <span class="string">相册:</span> <span class="string">/photos</span>  <span class="string">||</span> <span class="string">camera</span></span><br></pre></td></tr></table></figure></p>
-<p>在<strong>photos</strong>的<strong>index.md</strong>文件添加以下代码<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">---</span><br><span class="line">title: 照片</span><br><span class="line">date: 2018-09-02 21:00:00</span><br><span class="line">type: photos</span><br><span class="line">fancybox: false</span><br><span class="line">comments: true</span><br><span class="line">---</span><br><span class="line">&lt;link rel="stylesheet" href="../lib/album/ins.css"&gt;</span><br><span class="line">&lt;link rel="stylesheet" href="../lib/album/photoswipe.css"&gt; </span><br><span class="line">&lt;link rel="stylesheet" href="../lib/album/default-skin/default-skin.css"&gt; </span><br><span class="line">&lt;div class="photos-btn-wrap"&gt;</span><br><span class="line">  &lt;a class="photos-btn active" href="javascript:void(0)" target="_blank" rel="external"&gt;Photos&lt;/a&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;div class="instagram itemscope"&gt;</span><br><span class="line">  &lt;a href="http://yourbolg.com" target="_blank" class="open-ins"&gt;图片正在加载中…&lt;/a&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"> </span><br><span class="line">&lt;script&gt;</span><br><span class="line">  (function() &#123;</span><br><span class="line"><span class="code">    var loadScript = function(path) &#123;</span></span><br><span class="line"><span class="code">      var $script = document.createElement('script')</span></span><br><span class="line"><span class="code">      document.getElementsByTagName('body')[0].appendChild($script)</span></span><br><span class="line"><span class="code">      $script.setAttribute('src', path)</span></span><br><span class="line"><span class="code">    &#125;</span></span><br><span class="line"><span class="code">    setTimeout(function() &#123;</span></span><br><span class="line"><span class="code">        loadScript('../lib/album/ins.js')</span></span><br><span class="line"><span class="code">    &#125;, 0)</span></span><br><span class="line">  &#125;)()</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
-<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>在终端输入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/MyBlog_Images</span><br><span class="line">python3 tool.py</span><br><span class="line"><span class="built_in">cd</span> YourBlogPath</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure></p>
-<p>刷新自己的主页，就可以看到相册页面啦～<br>以后只需要在 <strong>~/MyBlog_Images/photos</strong>里面放入图片，并正确命名，执行 <code>python3 tool.py</code><br>在自己的本地Blog地址执行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure></p>
+<p>打开<strong>YourBolgPath/themes/next/source/lib/album/ins.js</strong>文件，修改以下代码  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> minSrc = <span class="string">&#x27;https://raw.githubusercontent.com/lizhi/Blog_Album/master/min_photos/&#x27;</span> + data.link[i];</span><br><span class="line"><span class="keyword">var</span> src = <span class="string">&#x27;https://raw.githubusercontent.com/lizhi/Blog_Album/master/photos/&#x27;</span> + data.link[i];</span><br><span class="line"><span class="comment">// 替换成下面的代码</span></span><br><span class="line"><span class="keyword">var</span> minSrc = <span class="string">&#x27;https://raw.githubusercontent.com/yougithubname/pathtoyourphotos/min_photos/&#x27;</span> + data.link[i];</span><br><span class="line"><span class="keyword">var</span> src = <span class="string">&#x27;https://raw.githubusercontent.com/yougithubname/pathtoyourphotos/photos/&#x27;</span> + data.link[i];</span><br></pre></td></tr></table></figure>
+<p><strong>确保你的图片地址是正确的</strong>，否则不能正常加载图片<br>测试方法：在Github仓库中打开你的测试图片，并右键选择<strong>在新标签页打开图片</strong>就可以看到图片的地址<br>图片的地址一定是以<strong><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/">https://raw.githubusercontent.com</a></strong>开头的，如果你看到的是以<strong><a target="_blank" rel="noopener" href="https://github.com/">https://github.com</a></strong>开头的说明是不正确的  </p>
+<p>在<strong>YourBolgPath/themes/next/layout/_layout.swig</strong>的<strong>head</strong>部分前添加以下代码  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">&quot;&#123;&#123; url_for(theme.js) &#125;&#125;/src/photoswipe.min.js?v=&#123;&#123; theme.version &#125;&#125;&quot;</span>&gt;&lt;/script&gt;</span><br><span class="line">&lt;script src=<span class="string">&quot;&#123;&#123; url_for(theme.js) &#125;&#125;/src/photoswipe-ui-default.min.js?v=&#123;&#123; theme.version &#125;&#125;&quot;</span>&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>在<strong>body</strong>部分增加下面代码  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">&#123;% if page.type &#x3D;&#x3D;&#x3D; &quot;photos&quot; %&#125;</span><br><span class="line">  &lt;!-- Root element of PhotoSwipe. Must have class pswp. --&gt;</span><br><span class="line">  &lt;div class&#x3D;&quot;pswp&quot; tabindex&#x3D;&quot;-1&quot; role&#x3D;&quot;dialog&quot; aria-hidden&#x3D;&quot;true&quot;&gt;</span><br><span class="line">    &lt;div class&#x3D;&quot;pswp__bg&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">    &lt;div class&#x3D;&quot;pswp__scroll-wrap&quot;&gt;</span><br><span class="line">        &lt;div class&#x3D;&quot;pswp__container&quot;&gt;</span><br><span class="line">            &lt;div class&#x3D;&quot;pswp__item&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">            &lt;div class&#x3D;&quot;pswp__item&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">            &lt;div class&#x3D;&quot;pswp__item&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">        &lt;&#x2F;div&gt;</span><br><span class="line">        &lt;div class&#x3D;&quot;pswp__ui pswp__ui--hidden&quot;&gt;</span><br><span class="line">            &lt;div class&#x3D;&quot;pswp__top-bar&quot;&gt;</span><br><span class="line">                &lt;div class&#x3D;&quot;pswp__counter&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">                &lt;button class&#x3D;&quot;pswp__button pswp__button--close&quot; title&#x3D;&quot;Close (Esc)&quot;&gt;&lt;&#x2F;button&gt;</span><br><span class="line">                &lt;button class&#x3D;&quot;pswp__button pswp__button--share&quot; title&#x3D;&quot;Share&quot;&gt;&lt;&#x2F;button&gt;</span><br><span class="line">                &lt;button class&#x3D;&quot;pswp__button pswp__button--fs&quot; title&#x3D;&quot;Toggle fullscreen&quot;&gt;&lt;&#x2F;button&gt;</span><br><span class="line">                &lt;button class&#x3D;&quot;pswp__button pswp__button--zoom&quot; title&#x3D;&quot;Zoom in&#x2F;out&quot;&gt;&lt;&#x2F;button&gt;</span><br><span class="line">                &lt;!-- Preloader demo http:&#x2F;&#x2F;codepen.io&#x2F;dimsemenov&#x2F;pen&#x2F;yyBWoR --&gt;</span><br><span class="line">                &lt;!-- element will get class pswp__preloader--active when preloader is running --&gt;</span><br><span class="line">                &lt;div class&#x3D;&quot;pswp__preloader&quot;&gt;</span><br><span class="line">                    &lt;div class&#x3D;&quot;pswp__preloader__icn&quot;&gt;</span><br><span class="line">                      &lt;div class&#x3D;&quot;pswp__preloader__cut&quot;&gt;</span><br><span class="line">                        &lt;div class&#x3D;&quot;pswp__preloader__donut&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">                      &lt;&#x2F;div&gt;</span><br><span class="line">                    &lt;&#x2F;div&gt;</span><br><span class="line">                &lt;&#x2F;div&gt;</span><br><span class="line">            &lt;&#x2F;div&gt;</span><br><span class="line">            &lt;div class&#x3D;&quot;pswp__share-modal pswp__share-modal--hidden pswp__single-tap&quot;&gt;</span><br><span class="line">                &lt;div class&#x3D;&quot;pswp__share-tooltip&quot;&gt;&lt;&#x2F;div&gt; </span><br><span class="line">            &lt;&#x2F;div&gt;</span><br><span class="line">            &lt;button class&#x3D;&quot;pswp__button pswp__button--arrow--left&quot; title&#x3D;&quot;Previous (arrow left)&quot;&gt;</span><br><span class="line">            &lt;&#x2F;button&gt;</span><br><span class="line">            &lt;button class&#x3D;&quot;pswp__button pswp__button--arrow--right&quot; title&#x3D;&quot;Next (arrow right)&quot;&gt;</span><br><span class="line">            &lt;&#x2F;button&gt;</span><br><span class="line">            &lt;div class&#x3D;&quot;pswp__caption&quot;&gt;</span><br><span class="line">                &lt;div class&#x3D;&quot;pswp__caption__center&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">            &lt;&#x2F;div&gt;</span><br><span class="line">        &lt;&#x2F;div&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在<strong>YourBolgPath/themes/next/layout/_scripts/pages/post-details.swig</strong>添加下面代码  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">&quot;text/javascript&quot;</span> src=<span class="string">&quot;&#123;&#123; url_for(theme.js) &#125;&#125;/src/photoswipe.min.js?v=&#123;&#123; theme.version &#125;&#125;&quot;</span>&gt;&lt;/script&gt;</span><br><span class="line">&lt;script type=<span class="string">&quot;text/javascript&quot;</span> src=<span class="string">&quot;&#123;&#123; url_for(theme.js) &#125;&#125;/src/photoswipe-ui-default.min.js?v=&#123;&#123; theme.version &#125;&#125;&quot;</span>&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>若你的主题开启了<strong>fancybox</strong>功能，则在<strong>YourBolgPath/themes/next/layout/_partials/head.swig</strong>中添加以下代码，否则不用管  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">+&#123;% if page.type &#x3D;&#x3D;&#x3D; &quot;photos&quot;  %&#125;</span><br><span class="line">+  &#123;% set theme.fancybox &#x3D; false %&#125;</span><br><span class="line">+&#123;% endif %&#125;</span><br><span class="line">+&#123;% if page.type !&#x3D;&#x3D; &quot;photos&quot;  %&#125;</span><br><span class="line">+  &#123;% set theme.fancybox &#x3D; true %&#125;</span><br><span class="line">+&#123;% endif %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% if theme.fancybox  %&#125;</span><br><span class="line">  &#123;% set fancybox_css_uri &#x3D; url_for(theme.vendors._internal + &#39;&#x2F;fancybox&#x2F;source&#x2F;jquery.fancybox.css?v&#x3D;2.1.5&#39;) %&#125;</span><br><span class="line">  &#123;% if theme.vendors.fancybox_css %&#125;</span><br><span class="line">    &#123;% set fancybox_css_uri &#x3D; theme.vendors.fancybox_css %&#125;</span><br><span class="line">  &#123;% endif %&#125;</span><br><span class="line">  &lt;link href&#x3D;&quot;&#123;&#123; fancybox_css_uri &#125;&#125;&quot; rel&#x3D;&quot;stylesheet&quot; type&#x3D;&quot;text&#x2F;css&quot; &#x2F;&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="设置photos界面"><a href="#设置photos界面" class="headerlink" title="设置photos界面"></a>设置photos界面</h2><p>在终端输入  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> YourBlogPath</span><br><span class="line">hexo n page photos</span><br></pre></td></tr></table></figure>
+
+<p>打开<strong>YourBlogPath/themes/next/_config.yml</strong>，在<strong>menu</strong>中修改以下代码</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">menu:</span></span><br><span class="line">  <span class="attr">home:</span> <span class="string">/</span> <span class="string">||</span> <span class="string">home</span></span><br><span class="line">  <span class="attr">about:</span> <span class="string">/about/</span> <span class="string">||</span> <span class="string">user</span></span><br><span class="line">  <span class="attr">categories:</span> <span class="string">/categories/</span> <span class="string">||</span> <span class="string">th-list</span></span><br><span class="line">  <span class="attr">tags:</span> <span class="string">/tags/</span> <span class="string">||</span> <span class="string">tags</span></span><br><span class="line">  <span class="attr">archives:</span> <span class="string">/archives/</span> <span class="string">||</span> <span class="string">archive</span></span><br><span class="line">  <span class="comment">#schedule: /schedule/ || calendar</span></span><br><span class="line"><span class="string">+</span> <span class="string">相册:</span> <span class="string">/photos</span>  <span class="string">||</span> <span class="string">camera</span></span><br></pre></td></tr></table></figure>
+
+<p>在<strong>photos</strong>的<strong>index.md</strong>文件添加以下代码</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">---</span><br><span class="line">title: 照片</span><br><span class="line">date: 2018-09-02 21:00:00</span><br><span class="line">type: photos</span><br><span class="line">fancybox: false</span><br><span class="line">comments: true</span><br><span class="line">---</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;../lib/album/ins.css&quot;</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;../lib/album/photoswipe.css&quot;</span>&gt;</span></span> </span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;../lib/album/default-skin/default-skin.css&quot;</span>&gt;</span></span> </span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;photos-btn-wrap&quot;</span>&gt;</span></span></span><br><span class="line">  <span class="xml"><span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">&quot;photos-btn active&quot;</span> <span class="attr">href</span>=<span class="string">&quot;javascript:void(0)&quot;</span> <span class="attr">target</span>=<span class="string">&quot;_blank&quot;</span> <span class="attr">rel</span>=<span class="string">&quot;external&quot;</span>&gt;</span></span>Photos<span class="xml"><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;instagram itemscope&quot;</span>&gt;</span></span></span><br><span class="line">  <span class="xml"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;http://yourbolg.com&quot;</span> <span class="attr">target</span>=<span class="string">&quot;_blank&quot;</span> <span class="attr">class</span>=<span class="string">&quot;open-ins&quot;</span>&gt;</span></span>图片正在加载中…<span class="xml"><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span></span><br><span class="line">  (function() &#123;</span><br><span class="line"><span class="code">    var loadScript = function(path) &#123;</span></span><br><span class="line"><span class="code">      var $script = document.createElement(&#x27;script&#x27;)</span></span><br><span class="line"><span class="code">      document.getElementsByTagName(&#x27;body&#x27;)[0].appendChild($script)</span></span><br><span class="line"><span class="code">      $script.setAttribute(&#x27;src&#x27;, path)</span></span><br><span class="line"><span class="code">    &#125;</span></span><br><span class="line"><span class="code">    setTimeout(function() &#123;</span></span><br><span class="line"><span class="code">        loadScript(&#x27;../lib/album/ins.js&#x27;)</span></span><br><span class="line"><span class="code">    &#125;, 0)</span></span><br><span class="line"><span class="code">  &#125;)()</span></span><br><span class="line"><span class="code">&lt;/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>在终端输入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/MyBlog_Images</span><br><span class="line">python3 tool.py</span><br><span class="line"><span class="built_in">cd</span> YourBlogPath</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+<p>刷新自己的主页，就可以看到相册页面啦～<br>以后只需要在 <strong>~/MyBlog_Images/photos</strong>里面放入图片，并正确命名，执行 <code>python3 tool.py</code><br>在自己的本地Blog地址执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
 <p>就可以更新相册了<br>有任何疑问可以在下面评论～</p>
 <p>完</p>
-
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/Hexo/" rel="tag"># Hexo</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2019/02/24/【Hexo】个性化2-0震撼来袭/" rel="next" title="【Hexo】个性化2.0震撼来袭">
-                <i class="fa fa-chevron-left"></i> 【Hexo】个性化2.0震撼来袭
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/03/31/【总结】关于第十届蓝桥杯和第四届CCCC字符串大赛的体验/" rel="prev" title="【总结】关于第十届蓝桥杯和第四届CCCC字符串大赛的体验">
-                【总结】关于第十届蓝桥杯和第四届CCCC字符串大赛的体验 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-  </div>
-
-
-          </div>
-          
-
-  
-    <div class="comments" id="comments">
-    </div>
-
-  
-
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <img class="site-author-image" itemprop="image" src="/images/tou.jpg" alt="Elitedj">
-            
-              <p class="site-author-name" itemprop="name">Elitedj</p>
-              <p class="site-description motion-element" itemprop="description"></p>
-          </div>
-
-          
-            <nav class="site-state motion-element">
-              
-                <div class="site-state-item site-state-posts">
-                
-                  <a href="/archives/">
-                
-                    <span class="site-state-item-count">32</span>
-                    <span class="site-state-item-name">posts</span>
-                  </a>
-                </div>
-              
-
-              
-                
-                
-                <div class="site-state-item site-state-categories">
-                  <a href="/categories/index.html">
-                    
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">14</span>
-                    <span class="site-state-item-name">categories</span>
-                  </a>
-                </div>
-              
-
-              
-                
-                
-                <div class="site-state-item site-state-tags">
-                  <a href="/tags/index.html">
-                    
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">18</span>
-                    <span class="site-state-item-name">tags</span>
-                  </a>
-                </div>
-              
-            </nav>
-          
-
-          
-            <div class="feed-link motion-element">
-              <a href="/atom.xml" rel="alternate">
-                <i class="fa fa-rss"></i>
-                RSS
-              </a>
-            </div>
-          
-
-          
-            <div class="links-of-author motion-element">
-              
-                <span class="links-of-author-item">
-                  
-                  
-                    
-                  
-                  
-                    
-                  
-                  <a href="https://github.com/Elitedj" title="GitHub &rarr; https://github.com/Elitedj" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
-                </span>
-              
-                <span class="links-of-author-item">
-                  
-                  
-                    
-                  
-                  
-                    
-                  
-                  <a href="/elite@m.scnu.edu.cn" title="E-Mail &rarr; elite@m.scnu.edu.cn"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
-                </span>
-              
-            </div>
-          
-
-          
-
-          
-          
-            <div class="links-of-blogroll motion-element links-of-blogroll-block">
-              <div class="links-of-blogroll-title">
-                <i class="fa  fa-fw fa-link"></i>
-                Links
-              </div>
-              <ul class="links-of-blogroll-list">
-                
-                  <li class="links-of-blogroll-item">
-                    <a href="http://blog.tover.xyz" title="http://blog.tover.xyz" rel="noopener" target="_blank">Tover</a>
-                  </li>
-                
-                  <li class="links-of-blogroll-item">
-                    <a href="https://ariacx.me" title="https://ariacx.me" rel="noopener" target="_blank">Aria</a>
-                  </li>
-                
-                  <li class="links-of-blogroll-item">
-                    <a href="https://0xffff.one/" title="https://0xffff.one/" rel="noopener" target="_blank">0xFFFF</a>
-                  </li>
-                
-                  <li class="links-of-blogroll-item">
-                    <a href="https://www.yuque.com/0xffff.one/cs-learning" title="https://www.yuque.com/0xffff.one/cs-learning" rel="noopener" target="_blank">SCNU CS Wiki</a>
-                  </li>
-                
-              </ul>
-            </div>
-          
-
-          
-            
-          
-          
-
-        </div>
-      </div>
-
-      
-      <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#建立Github相册仓库"><span class="nav-number">1.</span> <span class="nav-text">建立Github相册仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#在本地建立一个git仓库"><span class="nav-number">1.1.</span> <span class="nav-text">在本地建立一个git仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在Github创建新仓库"><span class="nav-number">1.2.</span> <span class="nav-text">在Github创建新仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将本地仓库与Github仓库连接"><span class="nav-number">1.3.</span> <span class="nav-text">将本地仓库与Github仓库连接</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-number">2.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载配置文件"><span class="nav-number">2.1.</span> <span class="nav-text">下载配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开始配置"><span class="nav-number">2.2.</span> <span class="nav-text">开始配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置photos界面"><span class="nav-number">3.</span> <span class="nav-text">设置photos界面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试"><span class="nav-number">4.</span> <span class="nav-text">测试</span></a></li></ol></div>
-            
-
-          </div>
-        </div>
-      <!--/noindex-->
-      
-
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; 2019 – <span itemprop="copyrightYear">2021</span>
-  <span class="with-love" id="animate">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Elitedj</span>
-
-  
-
-  
-</div>
-
-<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span><br>
-<script>
-    var now = new Date();
-    function createtime() {
-        var grt= new Date("02/21/2019 13:00:00");//此处修改你的建站时间或者网站上线时间
-        now.setTime(now.getTime()+250);
-        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
-        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
-        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
-        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
-        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
-        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
-        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
-        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
-    }
-setInterval("createtime()",250);
-</script>
-
-
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
-
-
-
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.0.0</div>
-
-
-
-
-
-
-        
-<div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-  
-    <span class="post-meta-item-icon">
-      <i class="fa fa-user"></i>
-    </span>
-    <span class="site-uv" title="Total Visitors">
-      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
-    </span>
-  
-
-  
-    <span class="post-meta-divider">|</span>
-  
-
-  
-    <span class="post-meta-item-icon">
-      <i class="fa fa-eye"></i>
-    </span>
-    <span class="site-pv" title="Total Views">
-      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
-    </span>
-  
-</div>
-
-
-
-
-
-
-
-
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-    
-
-    
-
-    
-  </div>
-
-  
-
-  
-
-<script>
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Elitedj</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://elitedj.me/2019/02/25/%E3%80%90Hexo%E3%80%913-0%EF%BC%81%E4%B8%BABlog%E5%A2%9E%E5%8A%A0%E7%9B%B8%E5%86%8C%E9%A1%B5%E9%9D%A2/">http://elitedj.me/2019/02/25/【Hexo】3-0！为Blog增加相册页面/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://elitedj.me" target="_blank">Elitedj</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Hexo/">Hexo</a></div><div class="post_share"><div class="social-share" data-image="https://z3.ax1x.com/2021/04/07/c8QqWn.jpg" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2019/03/31/%E3%80%90%E6%80%BB%E7%BB%93%E3%80%91%E5%85%B3%E4%BA%8E%E7%AC%AC%E5%8D%81%E5%B1%8A%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%92%8C%E7%AC%AC%E5%9B%9B%E5%B1%8ACCCC%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%A7%E8%B5%9B%E7%9A%84%E4%BD%93%E9%AA%8C/"><img class="prev-cover" src="https://z3.ax1x.com/2021/04/07/c8lt0S.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">【总结】关于第十届蓝桥杯和第四届CCCC字符串大赛的体验</div></div></a></div><div class="next-post pull-right"><a href="/2019/02/24/%E3%80%90Hexo%E3%80%91%E4%B8%AA%E6%80%A7%E5%8C%962-0%E9%9C%87%E6%92%BC%E6%9D%A5%E8%A2%AD/"><img class="next-cover" src="https://z3.ax1x.com/2021/04/07/c81ecq.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">【Hexo】个性化2.0震撼来袭</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="https://z3.ax1x.com/2021/04/07/c8eSC6.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">Elitedj</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">32</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">18</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">14</div></a></div></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Elitedj" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:elitedj@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BB%BA%E7%AB%8BGithub%E7%9B%B8%E5%86%8C%E4%BB%93%E5%BA%93"><span class="toc-number">1.</span> <span class="toc-text">建立Github相册仓库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E6%9C%AC%E5%9C%B0%E5%BB%BA%E7%AB%8B%E4%B8%80%E4%B8%AAgit%E4%BB%93%E5%BA%93"><span class="toc-number">1.1.</span> <span class="toc-text">在本地建立一个git仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8Github%E5%88%9B%E5%BB%BA%E6%96%B0%E4%BB%93%E5%BA%93"><span class="toc-number">1.2.</span> <span class="toc-text">在Github创建新仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%86%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E4%B8%8EGithub%E4%BB%93%E5%BA%93%E8%BF%9E%E6%8E%A5"><span class="toc-number">1.3.</span> <span class="toc-text">将本地仓库与Github仓库连接</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE"><span class="toc-number">2.</span> <span class="toc-text">配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-number">2.1.</span> <span class="toc-text">下载配置文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%A7%8B%E9%85%8D%E7%BD%AE"><span class="toc-number">2.2.</span> <span class="toc-text">开始配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AEphotos%E7%95%8C%E9%9D%A2"><span class="toc-number">3.</span> <span class="toc-text">设置photos界面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95"><span class="toc-number">4.</span> <span class="toc-text">测试</span></a></li></ol></div></div></div></div></main><footer id="footer" style="background-image: url('https://z3.ax1x.com/2021/04/07/c8eVUI.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2021 By Elitedj</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'zOEvCRaHczqQkvn7g5bk2d9c-gzGzoHsz',
+      appKey: 'JJQvXVH4XIDyjJaIK2HWeTY3',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: 'nick,mail'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
   }
-</script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-  
-  <script src="/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script src="/lib/reading_progress/reading_progress.js"></script>
-
-
-  
-
-
-  <script src="/js/src/utils.js?v=7.0.0"></script>
-
-  <script src="/js/src/motion.js?v=7.0.0"></script>
-
-
-
-  
-  
-
-
-  <script src="/js/src/schemes/muse.js?v=7.0.0"></script>
-
-
-
-  
-  <script src="/js/src/scrollspy.js?v=7.0.0"></script>
-<script src="/js/src/post-details.js?v=7.0.0"></script>
-<script type="text/javascript" src="/js/src/photoswipe-ui-default.min.js?v="></script>
-
-
-
-  
-
-
-  <script src="/js/src/bootstrap.js?v=7.0.0"></script>
-
-
-
-  
-  
-
-<script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
-
-
-
-<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
-
-<script>
-  var GUEST = ['nick', 'mail', 'link'];
-  var guest = 'nick,mail';
-  guest = guest.split(',').filter(function(item) {
-    return GUEST.indexOf(item) > -1;
-  });
-  new Valine({
-    el: '#comments',
-    verify: false,
-    notify: false,
-    appId: 'zOEvCRaHczqQkvn7g5bk2d9c-gzGzoHsz',
-    appKey: 'JJQvXVH4XIDyjJaIK2HWeTY3',
-    placeholder: 'comment something',
-    avatar: 'mm',
-    meta: guest,
-    pageSize: '10' || 10,
-    visitor: false
-  });
-</script>
-
-
-
-
-  
-
-
-  
-  <script>
-    // Popup Window;
-    var isfetched = false;
-    var isXml = true;
-    // Search DB path;
-    var search_path = "";
-    if (search_path.length === 0) {
-      search_path = "search.xml";
-    } else if (/json$/i.test(search_path)) {
-      isXml = false;
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
-
-    var onPopupClose = function (e) {
-      $('.popup').hide();
-      $('#local-search-input').val('');
-      $('.search-result-list').remove();
-      $('#no-result').remove();
-      $(".local-search-pop-overlay").remove();
-      $('body').css('overflow', '');
-    }
-
-    function proceedsearch() {
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
-        .css('overflow', 'hidden');
-      $('.search-popup-overlay').click(onPopupClose);
-      $('.popup').toggle();
-      var $localSearchInput = $('#local-search-input');
-      $localSearchInput.attr("autocapitalize", "none");
-      $localSearchInput.attr("autocorrect", "off");
-      $localSearchInput.focus();
-    }
-
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-      'use strict';
-
-      // start loading animation
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
-          '<div id="search-loading-icon">' +
-          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
-          '</div>' +
-          '</div>')
-        .css('overflow', 'hidden');
-      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
-
-      
-
-      $.ajax({
-        url: path,
-        dataType: isXml ? "xml" : "json",
-        async: true,
-        success: function(res) {
-          // get the contents from search data
-          isfetched = true;
-          $('.popup').detach().appendTo('.header-inner');
-          var datas = isXml ? $("entry", res).map(function() {
-            return {
-              title: $("title", this).text(),
-              content: $("content",this).text(),
-              url: $("url" , this).text()
-            };
-          }).get() : res;
-          var input = document.getElementById(search_id);
-          var resultContent = document.getElementById(content_id);
-          var inputEventFunction = function() {
-            var searchText = input.value.trim().toLowerCase();
-            var keywords = searchText.split(/[\s\-]+/);
-            if (keywords.length > 1) {
-              keywords.push(searchText);
-            }
-            var resultItems = [];
-            if (searchText.length > 0) {
-              // perform local searching
-              datas.forEach(function(data) {
-                var isMatch = false;
-                var hitCount = 0;
-                var searchTextCount = 0;
-                var title = data.title.trim();
-                var titleInLowerCase = title.toLowerCase();
-                var content = data.content.trim().replace(/<[^>]+>/g,"");
-                
-                var contentInLowerCase = content.toLowerCase();
-                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
-                var indexOfTitle = [];
-                var indexOfContent = [];
-                // only match articles with not empty titles
-                if(title != '') {
-                  keywords.forEach(function(keyword) {
-                    function getIndexByWord(word, text, caseSensitive) {
-                      var wordLen = word.length;
-                      if (wordLen === 0) {
-                        return [];
-                      }
-                      var startPosition = 0, position = [], index = [];
-                      if (!caseSensitive) {
-                        text = text.toLowerCase();
-                        word = word.toLowerCase();
-                      }
-                      while ((position = text.indexOf(word, startPosition)) > -1) {
-                        index.push({position: position, word: word});
-                        startPosition = position + wordLen;
-                      }
-                      return index;
-                    }
-
-                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
-                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
-                  });
-                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
-                    isMatch = true;
-                    hitCount = indexOfTitle.length + indexOfContent.length;
-                  }
-                }
-
-                // show search results
-
-                if (isMatch) {
-                  // sort index by position of keyword
-
-                  [indexOfTitle, indexOfContent].forEach(function (index) {
-                    index.sort(function (itemLeft, itemRight) {
-                      if (itemRight.position !== itemLeft.position) {
-                        return itemRight.position - itemLeft.position;
-                      } else {
-                        return itemLeft.word.length - itemRight.word.length;
-                      }
-                    });
-                  });
-
-                  // merge hits into slices
-
-                  function mergeIntoSlice(text, start, end, index) {
-                    var item = index[index.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    var hits = [];
-                    var searchTextCountInSlice = 0;
-                    while (position + word.length <= end && index.length != 0) {
-                      if (word === searchText) {
-                        searchTextCountInSlice++;
-                      }
-                      hits.push({position: position, length: word.length});
-                      var wordEnd = position + word.length;
-
-                      // move to next position of hit
-
-                      index.pop();
-                      while (index.length != 0) {
-                        item = index[index.length - 1];
-                        position = item.position;
-                        word = item.word;
-                        if (wordEnd > position) {
-                          index.pop();
-                        } else {
-                          break;
-                        }
-                      }
-                    }
-                    searchTextCount += searchTextCountInSlice;
-                    return {
-                      hits: hits,
-                      start: start,
-                      end: end,
-                      searchTextCount: searchTextCountInSlice
-                    };
-                  }
-
-                  var slicesOfTitle = [];
-                  if (indexOfTitle.length != 0) {
-                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
-                  }
-
-                  var slicesOfContent = [];
-                  while (indexOfContent.length != 0) {
-                    var item = indexOfContent[indexOfContent.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    // cut out 100 characters
-                    var start = position - 20;
-                    var end = position + 80;
-                    if(start < 0){
-                      start = 0;
-                    }
-                    if (end < position + word.length) {
-                      end = position + word.length;
-                    }
-                    if(end > content.length){
-                      end = content.length;
-                    }
-                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
-                  }
-
-                  // sort slices in content by search text's count and hits' count
-
-                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
-                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
-                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
-                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
-                      return sliceRight.hits.length - sliceLeft.hits.length;
-                    } else {
-                      return sliceLeft.start - sliceRight.start;
-                    }
-                  });
-
-                  // select top N slices in content
-
-                  var upperBound = parseInt('1');
-                  if (upperBound >= 0) {
-                    slicesOfContent = slicesOfContent.slice(0, upperBound);
-                  }
-
-                  // highlight title and content
-
-                  function highlightKeyword(text, slice) {
-                    var result = '';
-                    var prevEnd = slice.start;
-                    slice.hits.forEach(function (hit) {
-                      result += text.substring(prevEnd, hit.position);
-                      var end = hit.position + hit.length;
-                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
-                      prevEnd = end;
-                    });
-                    result += text.substring(prevEnd, slice.end);
-                    return result;
-                  }
-
-                  var resultItem = '';
-
-                  if (slicesOfTitle.length != 0) {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
-                  } else {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
-                  }
-
-                  slicesOfContent.forEach(function (slice) {
-                    resultItem += "<a href='" + articleUrl + "'>" +
-                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
-                      "...</p>" + "</a>";
-                  });
-
-                  resultItem += "</li>";
-                  resultItems.push({
-                    item: resultItem,
-                    searchTextCount: searchTextCount,
-                    hitCount: hitCount,
-                    id: resultItems.length
-                  });
-                }
-              })
-            };
-            if (keywords.length === 1 && keywords[0] === "") {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
-            } else if (resultItems.length === 0) {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
-            } else {
-              resultItems.sort(function (resultLeft, resultRight) {
-                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
-                  return resultRight.searchTextCount - resultLeft.searchTextCount;
-                } else if (resultLeft.hitCount !== resultRight.hitCount) {
-                  return resultRight.hitCount - resultLeft.hitCount;
-                } else {
-                  return resultRight.id - resultLeft.id;
-                }
-              });
-              var searchResultList = '<ul class=\"search-result-list\">';
-              resultItems.forEach(function (result) {
-                searchResultList += result.item;
-              })
-              searchResultList += "</ul>";
-              resultContent.innerHTML = searchResultList;
-            }
-          }
-
-          if ('auto' === 'auto') {
-            input.addEventListener('input', inputEventFunction);
-          } else {
-            $('.search-icon').click(inputEventFunction);
-            input.addEventListener('keypress', function (event) {
-              if (event.keyCode === 13) {
-                inputEventFunction();
-              }
-            });
-          }
-
-          // remove loading animation
-          $(".local-search-pop-overlay").remove();
-          $('body').css('overflow', '');
-
-          proceedsearch();
-        }
-      });
-    }
-
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched === false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-    });
-
-    $('.popup-btn-close').click(onPopupClose);
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-    $(document).on('keyup', function (event) {
-      var shouldDismissSearchPopup = event.which === 27 &&
-        $('.search-popup').is(':visible');
-      if (shouldDismissSearchPopup) {
-        onPopupClose();
-      }
-    });
-  </script>
-
-
-
-
-
-  
-
-  
-
-  
-  
-
-  
-  
-
-  
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-  
-  <script src="/lib/bookmark/bookmark.min.js?v=1.0"></script>
-  <script>
-  
-    bookmark.scrollToMark('auto', "#more");
-  
-  </script>
-
-
-  
-  <style>
-    .copy-btn {
-      display: inline-block;
-      padding: 6px 12px;
-      font-size: 13px;
-      font-weight: 700;
-      line-height: 20px;
-      color: #333;
-      white-space: nowrap;
-      vertical-align: middle;
-      cursor: pointer;
-      background-color: #eee;
-      background-image: linear-gradient(#fcfcfc, #eee);
-      border: 1px solid #d5d5d5;
-      border-radius: 3px;
-      user-select: none;
-      outline: 0;
-    }
-
-    .highlight-wrap .copy-btn {
-      transition: opacity .3s ease-in-out;
-      opacity: 0;
-      padding: 2px 6px;
-      position: absolute;
-      right: 4px;
-      top: 8px;
-    }
-
-    .highlight-wrap:hover .copy-btn,
-    .highlight-wrap .copy-btn:focus {
-      opacity: 1
-    }
-
-    .highlight-wrap {
-      position: relative;
-    }
-  </style>
-  <script>
-    $('.highlight').each(function(i, e) {
-      var $wrap = $('<div>').addClass('highlight-wrap');
-      $(e).after($wrap);
-      $wrap.append($('<button>').addClass('copy-btn').append('Copy').on('click', function(e) {
-        var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
-          return $(e).text();
-        }).toArray().join('\n');
-        var ta = document.createElement('textarea');
-        var range = document.createRange(); //For Chrome
-        var sel = window.getSelection(); //For Chrome
-        var yPosition = window.pageYOffset || document.documentElement.scrollTop;
-        ta.style.top = yPosition + 'px'; //Prevent page scroll
-        ta.style.position = 'absolute';
-        ta.style.opacity = '0';
-        ta.value = code;
-        ta.textContent = code; //For FireFox
-        ta.contentEditable = true;
-        ta.readOnly = false;
-        document.body.appendChild(ta);
-        range.selectNode(ta);
-        sel.removeAllRanges();
-        sel.addRange(range);
-        ta.setSelectionRange(0, code.length);
-        var result = document.execCommand('copy');
-        
-          if (result) $(this).text('Copied');
-          else $(this).text('Copy failed');
-        
-        ta.blur(); //For iOS
-        $(this).blur();
-      })).on('mouseleave', function(e) {
-        var $b = $(this).find('.copy-btn');
-        setTimeout(function() {
-          $b.text('Copy');
-        }, 300);
-      }).append(e);
-    })
-  </script>
-
-
-</body>
-</html>
-
-<!--崩溃欺骗-->
-<script type="text/javascript" src="/js/src/crash_cheat.js"></script>
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

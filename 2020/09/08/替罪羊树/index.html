@@ -1,568 +1,172 @@
-<!DOCTYPE html>
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-<script src="/js/src/photoswipe.min.js?v="></script>
-<script src="/js/src/photoswipe-ui-default.min.js?v="></script>
-
-<html class="theme-next muse use-motion" lang="en">
-<head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-    
-
-    
-  
-
-  
-
-  
-    
-    
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Italianno:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext">
-  
-
-
-
-
-
-
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
-
-<link rel="stylesheet" href="/css/main.css?v=7.0.0">
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.0">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.0">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.0">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=7.0.0" color="#222">
-
-
-
-
-
-
-
-<script id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Muse',
-    version: '7.0.0',
-    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: false,
-    fastclick: false,
-    lazyload: false,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-  
-
-
-
-
-  <meta name="description" content="替罪羊树？替罪羊树是一种平衡二叉搜索树，在维护树的平衡时，不需要进行旋转操作，而是通过一种非常暴力的重构来保证树的平衡。 替罪羊树参数定义树结点的定义如下，需要记录左右子树的序号、当前结点的值、当前子树的大小、当前子树的真实大小以及当前结点是否存在。 当前子树的真实大小是指去掉被删除结点的大小，因为替罪羊树采用懒删除的思想，删除节点时不是真的马上删除，而是在下一次重构时才真的把结点删除，所以对于">
-<meta name="keywords" content="Algorithm,Data Structure">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>替罪羊树 | Elitedj</title><meta name="keywords" content="Algorithm,Data Structure"><meta name="author" content="Elitedj"><meta name="copyright" content="Elitedj"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="替罪羊树简介">
 <meta property="og:type" content="article">
 <meta property="og:title" content="替罪羊树">
-<meta property="og:url" content="http://yoursite.com/2020/09/08/替罪羊树/index.html">
+<meta property="og:url" content="http://elitedj.me/2020/09/08/%E6%9B%BF%E7%BD%AA%E7%BE%8A%E6%A0%91/index.html">
 <meta property="og:site_name" content="Elitedj">
-<meta property="og:description" content="替罪羊树？替罪羊树是一种平衡二叉搜索树，在维护树的平衡时，不需要进行旋转操作，而是通过一种非常暴力的重构来保证树的平衡。 替罪羊树参数定义树结点的定义如下，需要记录左右子树的序号、当前结点的值、当前子树的大小、当前子树的真实大小以及当前结点是否存在。 当前子树的真实大小是指去掉被删除结点的大小，因为替罪羊树采用懒删除的思想，删除节点时不是真的马上删除，而是在下一次重构时才真的把结点删除，所以对于">
-<meta property="og:locale" content="en">
-<meta property="og:image" content="http://yoursite.com/2020/09/08/替罪羊树/fengmian.jpg">
-<meta property="og:image" content="http://yoursite.com/2020/09/08/替罪羊树/lift.jpg">
-<meta property="og:image" content="http://yoursite.com/2020/09/08/替罪羊树/p3369.png">
-<meta property="og:updated_time" content="2020-09-08T01:06:20.005Z">
+<meta property="og:description" content="替罪羊树简介">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://z3.ax1x.com/2021/04/07/c8tjVx.jpg">
+<meta property="article:published_time" content="2020-09-08T01:01:24.000Z">
+<meta property="article:modified_time" content="2021-04-07T07:20:49.706Z">
+<meta property="article:author" content="Elitedj">
+<meta property="article:tag" content="Algorithm">
+<meta property="article:tag" content="Data Structure">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="替罪羊树">
-<meta name="twitter:description" content="替罪羊树？替罪羊树是一种平衡二叉搜索树，在维护树的平衡时，不需要进行旋转操作，而是通过一种非常暴力的重构来保证树的平衡。 替罪羊树参数定义树结点的定义如下，需要记录左右子树的序号、当前结点的值、当前子树的大小、当前子树的真实大小以及当前结点是否存在。 当前子树的真实大小是指去掉被删除结点的大小，因为替罪羊树采用懒删除的思想，删除节点时不是真的马上删除，而是在下一次重构时才真的把结点删除，所以对于">
-<meta name="twitter:image" content="http://yoursite.com/2020/09/08/替罪羊树/fengmian.jpg">
-
-
-
-  <link rel="alternate" href="/atom.xml" title="Elitedj" type="application/atom+xml">
-
-
-
-
-  <link rel="canonical" href="http://yoursite.com/2020/09/08/替罪羊树/">
-
-
-
-<script id="page.configurations">
-  CONFIG.page = {
-    sidebar: "",
-  };
-</script>
-
-  <title>替罪羊树 | Elitedj</title>
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .motion-element,
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-title { opacity: initial; }
-
-  .use-motion .logo,
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
+<meta name="twitter:image" content="https://z3.ax1x.com/2021/04/07/c8tjVx.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://elitedj.me/2020/09/08/%E6%9B%BF%E7%BD%AA%E7%BE%8A%E6%A0%91/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fonts.font.im/css?family=Merienda:700" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-04-07 15:20:49'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
   }
 
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
 
-</head>
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
 
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
   
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
   
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
     
-  
-
-  <div class="container sidebar-position-left page-post-detail">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/" class="brand" rel="start">
-        <span class="site-title">Elitedj</span>
-      </a>
-    </div>
-    
-    
-  </div>
-
-  <div class="site-nav-toggle">
-    <button aria-label="Toggle navigation bar">
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
-</div>
-
-
-
-<nav class="site-nav">
-  
-    <ul id="menu" class="menu">
-      
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
         
-        
-        
-          
-          <li class="menu-item menu-item-home">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
-
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-about">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
-
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-tags">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
-
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-categories">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
-
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-archives">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
-
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-photos">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/photos" rel="section"><i class="menu-item-icon fa fa-fw fa-camera"></i> <br>photos</a>
-
-  </li>
-
-      
-      
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-          
-            
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
-        </li>
-      
-    </ul>
-  
-
-  
-    
-
-  
-
-  
-    <div class="site-search">
-      
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
-    <span class="popup-btn-close">
-      <i class="fa fa-times-circle"></i>
-    </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
-    </div>
-  </div>
-  <div id="local-search-result"></div>
-</div>
-
-
-
-    </div>
-  
-</nav>
-
-
-
-  
-
-
-
-</div>
-    </header>
-
-    
-
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
-    
-
-  
-
-  
-  
-  
-
-  
-    <div class="reading-progress-bar"></div>
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/08/替罪羊树/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Elitedj">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/tou.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Elitedj">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">替罪羊树
-
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2020-09-08 09:01:24 / Modified: 09:06:20" itemprop="dateCreated datePublished" datetime="2020-09-08T09:01:24+08:00">2020-09-08</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a></span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Algorithm/Data-Structure/" itemprop="url" rel="index"><span itemprop="name">Data Structure</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-              
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-            
-                <span class="post-meta-item-text">Comments: </span>
-                <a href="/2020/09/08/替罪羊树/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2020/09/08/替罪羊树/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-            <span class="post-meta-divider">|</span>
-            <span class="post-meta-item-icon">
-            <i class="fa fa-eye"></i>
-             Views:  
-            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
-            </span>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <p><img src="fengmian.jpg" alt="fengmian"></p>
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Elitedj" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="https://z3.ax1x.com/2021/04/07/c8eSC6.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">32</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">18</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">14</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/gallery/"><i class="fa-fw fas fa-image"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://z3.ax1x.com/2021/04/07/c8eVUI.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Elitedj</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/gallery/"><i class="fa-fw fas fa-image"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">替罪羊树</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-09-08T01:01:24.000Z" title="发表于 2020-09-08 09:01:24">2020-09-08</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-04-07T07:20:49.706Z" title="更新于 2021-04-07 15:20:49">2021-04-07</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Algorithm/">Algorithm</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Algorithm/Data-Structure/">Data Structure</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>12分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="替罪羊树"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><img src="fengmian.jpg" alt="fengmian"></p>
 <h1 id="替罪羊树？"><a href="#替罪羊树？" class="headerlink" title="替罪羊树？"></a>替罪羊树？</h1><p>替罪羊树是一种平衡二叉搜索树，在维护树的平衡时，不需要进行旋转操作，而是通过一种非常暴力的重构来保证树的平衡。</p>
 <h1 id="替罪羊树"><a href="#替罪羊树" class="headerlink" title="替罪羊树"></a>替罪羊树</h1><h2 id="参数定义"><a href="#参数定义" class="headerlink" title="参数定义"></a>参数定义</h2><p>树结点的定义如下，需要记录左右子树的序号、当前结点的值、当前子树的大小、当前子树的真实大小以及当前结点是否存在。</p>
 <p>当前子树的真实大小是指去掉被删除结点的大小，因为替罪羊树采用懒删除的思想，删除节点时不是真的马上删除，而是在下一次重构时才真的把结点删除，所以对于每一个结点来说，用<code>exist</code>标记该结点是否被删除。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span> &#123;</span></span><br><span class="line">	<span class="keyword">int</span> l, r, val;</span><br><span class="line">	<span class="keyword">int</span> size, fact;</span><br><span class="line">	<span class="keyword">int</span> exist;</span><br><span class="line">&#125;tree[maxn];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> cnt, root;</span><br></pre></td></tr></table></figure>
+
+
+
 <h2 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h2><p>插入操作非常的简单，与二叉搜索树没什么差别。其中<code>insert()</code>中的<code>check()</code>是检查是否需要重构来保证树的平衡的，之后会讲到，这里可以先忽略。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 新建结点</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">newnode</span><span class="params">(<span class="keyword">int</span> &amp;now, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">	now = ++cnt;</span><br><span class="line">	tree[now].val = val;</span><br><span class="line">	tree[now].size = tree[now].fact = <span class="number">1</span>;</span><br><span class="line">	tree[now].exist = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 插入</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span> &amp;now, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (!now) &#123;</span><br><span class="line">		newnode(now, val);</span><br><span class="line">		check(root, now);</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	tree[now].size++;</span><br><span class="line">	tree[now].fact++;</span><br><span class="line">	<span class="keyword">if</span> (val &lt; tree[now].val) insert(tree[now].l, val);</span><br><span class="line">	<span class="keyword">else</span> insert(tree[now].r, val);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 新建结点</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">newnode</span><span class="params">(<span class="keyword">int</span> &amp;now, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">	now = ++cnt;</span><br><span class="line">	tree[now].val = val;</span><br><span class="line">	tree[now].size = tree[now].fact = <span class="number">1</span>;</span><br><span class="line">	tree[now].exist = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 插入</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span> &amp;now, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (!now) &#123;</span><br><span class="line">		<span class="built_in">newnode</span>(now, val);</span><br><span class="line">		<span class="built_in">check</span>(root, now);</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	tree[now].size++;</span><br><span class="line">	tree[now].fact++;</span><br><span class="line">	<span class="keyword">if</span> (val &lt; tree[now].val) <span class="built_in">insert</span>(tree[now].l, val);</span><br><span class="line">	<span class="keyword">else</span> <span class="built_in">insert</span>(tree[now].r, val);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
 <h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><p>删除操作也非常的简单，找到该结点并且将<code>exist</code>标记改为0即可，同时也需要<code>check()</code>一下是否需要重构。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 删除</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">del</span><span class="params">(<span class="keyword">int</span> now, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (tree[now].exist &amp;&amp; tree[now].val == val) &#123;</span><br><span class="line">		tree[now].exist = <span class="number">0</span>;</span><br><span class="line">		tree[now].fact--;</span><br><span class="line">		check(root, now);</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	tree[now].fact--;</span><br><span class="line">	<span class="keyword">if</span> (val &lt; tree[now].val) del(tree[now].l, val);</span><br><span class="line">	<span class="keyword">else</span> del(tree[now].r, val);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 删除</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">del</span><span class="params">(<span class="keyword">int</span> now, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (tree[now].exist &amp;&amp; tree[now].val == val) &#123;</span><br><span class="line">		tree[now].exist = <span class="number">0</span>;</span><br><span class="line">		tree[now].fact--;</span><br><span class="line">		<span class="built_in">check</span>(root, now);</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	tree[now].fact--;</span><br><span class="line">	<span class="keyword">if</span> (val &lt; tree[now].val) <span class="built_in">del</span>(tree[now].l, val);</span><br><span class="line">	<span class="keyword">else</span> <span class="built_in">del</span>(tree[now].r, val);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
 <h2 id="重构"><a href="#重构" class="headerlink" title="重构"></a>重构</h2><h3 id="判断是否需要重构"><a href="#判断是否需要重构" class="headerlink" title="判断是否需要重构"></a>判断是否需要重构</h3><p>因为只有插入和删除操作会影响树的高度，所以只需要在插入和删除的函数里面调用<code>check()</code>函数来判断是否需要重构。而插入和删除操作只对树的一条链路有影响，所以重构时，我们在该链路上寻找需要重构的子树。</p>
 <p>那么我们是从下往上找好呢还是从上往下找好呢？很显然是从上往下找好，因为从下往上找可能需要多次重构，而从上往下找到一颗子树需要重构那么剩下的都会在这一次重构中完成。</p>
 <p>所以也可以看到我们在调用<code>check()</code>函数时，传递的参数是从root到now结点，即从上往下找。</p>
 <p><code>check()</code>函数非常的简单，只是一层简单的封装。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 检查是否需要重构</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> &amp;now, <span class="keyword">int</span> end)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (now == end) <span class="keyword">return</span>;</span><br><span class="line">	<span class="keyword">if</span> (imbalence(now)) &#123;</span><br><span class="line">		rebuild(now);</span><br><span class="line">		update(root, now);</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (tree[end].val &lt; tree[now].val) check(tree[now].l, end);</span><br><span class="line">	<span class="keyword">else</span> check(tree[now].r, end);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 检查是否需要重构</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> &amp;now, <span class="keyword">int</span> end)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (now == end) <span class="keyword">return</span>;</span><br><span class="line">	<span class="keyword">if</span> (<span class="built_in">imbalence</span>(now)) &#123;</span><br><span class="line">		<span class="built_in">rebuild</span>(now);</span><br><span class="line">		<span class="built_in">update</span>(root, now);</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (tree[end].val &lt; tree[now].val) <span class="built_in">check</span>(tree[now].l, end);</span><br><span class="line">	<span class="keyword">else</span> <span class="built_in">check</span>(tree[now].r, end);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
 <h3 id="判断是否平衡"><a href="#判断是否平衡" class="headerlink" title="判断是否平衡"></a>判断是否平衡</h3><p>我们如何判断替罪羊树是否平衡呢？</p>
 <p>我们先定义一个平衡因子<code>alpha</code>，<code>alpha</code>的值必需取<code>0.5~1.0</code>之间，我这里取<code>0.75</code>，当满足下面两个条件的一个就需要重构了。</p>
 <ul>
@@ -570,1014 +174,80 @@
 <li>当子树被删除的结点数大于子树的<code>size * 0.3</code>的时，既<code>tree[now].size - tree[now].fact &gt; tree[now].size * 0.3</code></li>
 </ul>
 <p>那么判断树是否平衡的函数也非常的好写了</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> alpha = <span class="number">0.75</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 判断是否不平衡</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">imbalence</span><span class="params">(<span class="keyword">int</span> now)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (max(tree[tree[now].l].size, tree[tree[now].r].size) &gt; tree[now].size * alpha</span><br><span class="line">			|| tree[now].size - tree[now].fact &gt; tree[now].size * <span class="number">0.3</span>)</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> alpha = <span class="number">0.75</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 判断是否不平衡</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">imbalence</span><span class="params">(<span class="keyword">int</span> now)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (<span class="built_in">max</span>(tree[tree[now].l].size, tree[tree[now].r].size) &gt; tree[now].size * alpha</span><br><span class="line">			|| tree[now].size - tree[now].fact &gt; tree[now].size * <span class="number">0.3</span>)</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
 <h3 id="重构子树"><a href="#重构子树" class="headerlink" title="重构子树"></a>重构子树</h3><p>替罪羊树是通过一种非常暴力的方式来进行重构的。</p>
 <p>首先对需要重构的子树进行中序遍历，将未删除的结点加到vector里面，然后通过分治的方式，把中序遍历的结果“提”起来变成一颗树，就像下面这张图一样。</p>
 <p><img src="lift.jpg" alt="lift"></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v;	<span class="comment">// 记录中序遍历的结果</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对now为根的子树做中序遍历</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">inoder</span><span class="params">(<span class="keyword">int</span> now)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (!now) <span class="keyword">return</span>;</span><br><span class="line">	inoder(tree[now].l);</span><br><span class="line">	<span class="keyword">if</span> (tree[now].exist) v.push_back(now);</span><br><span class="line">	inoder(tree[now].r);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 对中序遍历的结果重构</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">lift</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> &amp;now)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (l == r) &#123;</span><br><span class="line">		now = v[l];</span><br><span class="line">		tree[now].l = tree[now].r = <span class="number">0</span>;</span><br><span class="line">		tree[now].size = tree[now].fact = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="comment">// 出现重复值时，要将重复值挂在右子树，所以需要while找最左边的重复值</span></span><br><span class="line">	<span class="keyword">while</span> (l &lt; mid &amp;&amp; tree[v[mid]].val == tree[v[mid<span class="number">-1</span>]].val) mid--;</span><br><span class="line">	now = v[mid];</span><br><span class="line">    <span class="comment">// 左子树可能为空，所以需要判断一下</span></span><br><span class="line">	<span class="keyword">if</span> (l &lt; mid) lift(l, mid<span class="number">-1</span>, tree[now].l);</span><br><span class="line">	<span class="keyword">else</span> tree[now].l = <span class="number">0</span>;</span><br><span class="line">	lift(mid+<span class="number">1</span>, r, tree[now].r);</span><br><span class="line">	tree[now].size = tree[tree[now].l].size + tree[tree[now].r].size + <span class="number">1</span>;</span><br><span class="line">	tree[now].fact = tree[tree[now].l].fact + tree[tree[now].r].fact + <span class="number">1</span>; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 对以now为根的子树重构</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">rebuild</span><span class="params">(<span class="keyword">int</span> &amp;now)</span> </span>&#123;</span><br><span class="line">	v.clear();</span><br><span class="line">	inoder(now);</span><br><span class="line">    <span class="comment">// 子树全被删除了，直接将该结点置空就好</span></span><br><span class="line">	<span class="keyword">if</span> (v.empty()) &#123;</span><br><span class="line">		now = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	lift(<span class="number">0</span>, v.size()<span class="number">-1</span>, now);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; v;	<span class="comment">// 记录中序遍历的结果</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对now为根的子树做中序遍历</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">inoder</span><span class="params">(<span class="keyword">int</span> now)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (!now) <span class="keyword">return</span>;</span><br><span class="line">	<span class="built_in">inoder</span>(tree[now].l);</span><br><span class="line">	<span class="keyword">if</span> (tree[now].exist) v.<span class="built_in">push_back</span>(now);</span><br><span class="line">	<span class="built_in">inoder</span>(tree[now].r);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 对中序遍历的结果重构</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">lift</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> &amp;now)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (l == r) &#123;</span><br><span class="line">		now = v[l];</span><br><span class="line">		tree[now].l = tree[now].r = <span class="number">0</span>;</span><br><span class="line">		tree[now].size = tree[now].fact = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="comment">// 出现重复值时，要将重复值挂在右子树，所以需要while找最左边的重复值</span></span><br><span class="line">	<span class="keyword">while</span> (l &lt; mid &amp;&amp; tree[v[mid]].val == tree[v[mid<span class="number">-1</span>]].val) mid--;</span><br><span class="line">	now = v[mid];</span><br><span class="line">    <span class="comment">// 左子树可能为空，所以需要判断一下</span></span><br><span class="line">	<span class="keyword">if</span> (l &lt; mid) <span class="built_in">lift</span>(l, mid<span class="number">-1</span>, tree[now].l);</span><br><span class="line">	<span class="keyword">else</span> tree[now].l = <span class="number">0</span>;</span><br><span class="line">	<span class="built_in">lift</span>(mid+<span class="number">1</span>, r, tree[now].r);</span><br><span class="line">	tree[now].size = tree[tree[now].l].size + tree[tree[now].r].size + <span class="number">1</span>;</span><br><span class="line">	tree[now].fact = tree[tree[now].l].fact + tree[tree[now].r].fact + <span class="number">1</span>; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 对以now为根的子树重构</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">rebuild</span><span class="params">(<span class="keyword">int</span> &amp;now)</span> </span>&#123;</span><br><span class="line">	v.<span class="built_in">clear</span>();</span><br><span class="line">	<span class="built_in">inoder</span>(now);</span><br><span class="line">    <span class="comment">// 子树全被删除了，直接将该结点置空就好</span></span><br><span class="line">	<span class="keyword">if</span> (v.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">		now = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">lift</span>(<span class="number">0</span>, v.<span class="built_in">size</span>()<span class="number">-1</span>, now);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
 <h3 id="更新信息"><a href="#更新信息" class="headerlink" title="更新信息"></a>更新信息</h3><p>重构子树后，需要对链路上未重构的结点的信息进行更新，操作也很简单，通过递归回溯的方式更新。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 重构完后更新根到now链路上结点的信息</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> now, <span class="keyword">int</span> end)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (!now) <span class="keyword">return</span>;</span><br><span class="line">	<span class="keyword">if</span> (tree[end].val &lt; tree[now].val) update(tree[now].l, end);</span><br><span class="line">	<span class="keyword">else</span> update(tree[now].r, end);</span><br><span class="line">	tree[now].size = tree[tree[now].l].size + tree[tree[now].r].size + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 重构完后更新根到now链路上结点的信息</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> now, <span class="keyword">int</span> end)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (!now) <span class="keyword">return</span>;</span><br><span class="line">	<span class="keyword">if</span> (tree[end].val &lt; tree[now].val) <span class="built_in">update</span>(tree[now].l, end);</span><br><span class="line">	<span class="keyword">else</span> <span class="built_in">update</span>(tree[now].r, end);</span><br><span class="line">	tree[now].size = tree[tree[now].l].size + tree[tree[now].r].size + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
 <h2 id="获取值x的排名"><a href="#获取值x的排名" class="headerlink" title="获取值x的排名"></a>获取值x的排名</h2><p>排名的定义是值小于x的数的个数+1，在统计<code>rank</code>的值时，往左子树走时，是无贡献的，只有往右子树走时，才有左子树和根节点的贡献。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 根据值获得排名，即比当前数小的个数+1</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getrank</span><span class="params">(<span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> now = root, rank = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">while</span>(now) &#123;</span><br><span class="line">		<span class="keyword">if</span> (val &lt;= tree[now].val)</span><br><span class="line">			now = tree[now].l;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 往右子树走，统计小于x的值的个数</span></span><br><span class="line">			rank += tree[now].exist + tree[tree[now].l].fact;</span><br><span class="line">			now = tree[now].r;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> rank;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
 <h2 id="根据排名rank获取值val"><a href="#根据排名rank获取值val" class="headerlink" title="根据排名rank获取值val"></a>根据排名rank获取值val</h2><p>与主席树求第k大时也很像。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 根据排名获得值</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getnum</span><span class="params">(<span class="keyword">int</span> rank)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> now = root;</span><br><span class="line">	<span class="keyword">while</span> (now) &#123;</span><br><span class="line">		<span class="keyword">if</span> (tree[now].exist &amp;&amp; tree[tree[now].l].fact + tree[now].exist == rank)</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(tree[tree[now].l].fact &gt;= rank)</span><br><span class="line">			now = tree[now].l;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			rank -= tree[tree[now].l].fact + tree[now].exist;</span><br><span class="line">			now = tree[now].r;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> tree[now].val;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="x的前驱"><a href="#x的前驱" class="headerlink" title="x的前驱"></a>x的前驱</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 找x的前驱，即小于x且最大的数</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getpre</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> getnum(getrank(x) - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="x的后继"><a href="#x的后继" class="headerlink" title="x的后继"></a>x的后继</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 找x的后继，即大于x且最小的数</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getnext</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> getnum(getrank(x + <span class="number">1</span>));</span><br><span class="line">    <span class="comment">// 注意这里为什么不是下面的写法</span></span><br><span class="line">    <span class="comment">// return getnum(getrank(x) + 1);</span></span><br><span class="line">    <span class="comment">// 这样写在出现重复数字时会出现错误，而getrank(x+1)是把所有x都包含进去了，不会出现错误。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="洛谷P3369"><a href="#洛谷P3369" class="headerlink" title="洛谷P3369"></a>洛谷P3369</h1><p><a href="https://www.luogu.com.cn/problem/P3369" target="_blank" rel="noopener">洛谷P3369</a>是平衡树的模板题</p>
+
+
+
+<h2 id="x的前驱"><a href="#x的前驱" class="headerlink" title="x的前驱"></a>x的前驱</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 找x的前驱，即小于x且最大的数</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getpre</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">getnum</span>(<span class="built_in">getrank</span>(x) - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="x的后继"><a href="#x的后继" class="headerlink" title="x的后继"></a>x的后继</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 找x的后继，即大于x且最小的数</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getnext</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">getnum</span>(<span class="built_in">getrank</span>(x + <span class="number">1</span>));</span><br><span class="line">    <span class="comment">// 注意这里为什么不是下面的写法</span></span><br><span class="line">    <span class="comment">// return getnum(getrank(x) + 1);</span></span><br><span class="line">    <span class="comment">// 这样写在出现重复数字时会出现错误，而getrank(x+1)是把所有x都包含进去了，不会出现错误。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="洛谷P3369"><a href="#洛谷P3369" class="headerlink" title="洛谷P3369"></a>洛谷P3369</h1><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3369">洛谷P3369</a>是平衡树的模板题</p>
 <p><img src="p3369.png" alt="p3369"></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 样例输入</span></span><br><span class="line"><span class="number">10</span></span><br><span class="line"><span class="number">1</span> <span class="number">106465</span></span><br><span class="line"><span class="number">4</span> <span class="number">1</span></span><br><span class="line"><span class="number">1</span> <span class="number">317721</span></span><br><span class="line"><span class="number">1</span> <span class="number">460929</span></span><br><span class="line"><span class="number">1</span> <span class="number">644985</span></span><br><span class="line"><span class="number">1</span> <span class="number">84185</span></span><br><span class="line"><span class="number">1</span> <span class="number">89851</span></span><br><span class="line"><span class="number">6</span> <span class="number">81968</span></span><br><span class="line"><span class="number">1</span> <span class="number">492737</span></span><br><span class="line"><span class="number">5</span> <span class="number">493598</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 样例输出</span></span><br><span class="line"><span class="number">106465</span></span><br><span class="line"><span class="number">84185</span></span><br><span class="line"><span class="number">492737</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span> ull;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> inf 0x3f3f3f3f</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 0x3f3f3f3f3f3f3f3f</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> IO ios::sync_with_stdio(0)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> DEBUG(x) cout<span class="meta-string">&lt;&lt;"---&gt;"&lt;&lt;(x)&lt;&lt;endl;</span></span></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; P;</span><br><span class="line"><span class="keyword">const</span> ll mod = <span class="number">1e9</span>+<span class="number">7</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> eps = <span class="number">1e-9</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> PI = <span class="built_in">acos</span>(<span class="number">-1</span>);</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">2e5</span>+<span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span> &#123;</span></span><br><span class="line">	<span class="keyword">int</span> l, r, val;</span><br><span class="line">	<span class="keyword">int</span> size, fact;</span><br><span class="line">	<span class="keyword">int</span> exist;</span><br><span class="line">&#125;tree[maxn];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> cnt, root;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> alpha = <span class="number">0.75</span>;	<span class="comment">// 平衡因子</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v;	<span class="comment">// 记录中序遍历的结果</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 新建结点</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">newnode</span><span class="params">(<span class="keyword">int</span> &amp;now, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">	now = ++cnt;</span><br><span class="line">	tree[now].val = val;</span><br><span class="line">	tree[now].size = tree[now].fact = <span class="number">1</span>;</span><br><span class="line">	tree[now].exist = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 判断是否不平衡</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">imbalence</span><span class="params">(<span class="keyword">int</span> now)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (max(tree[tree[now].l].size, tree[tree[now].r].size) &gt; tree[now].size * alpha</span><br><span class="line">			|| tree[now].size - tree[now].fact &gt; tree[now].size * <span class="number">0.3</span>)</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 对now为根的子树做中序遍历</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">inorder</span><span class="params">(<span class="keyword">int</span> now)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (!now) <span class="keyword">return</span>;</span><br><span class="line">	inorder(tree[now].l);</span><br><span class="line">	<span class="keyword">if</span> (tree[now].exist) v.push_back(now);</span><br><span class="line">	inorder(tree[now].r);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 对中序遍历的结果重构</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">lift</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> &amp;now)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (l == r) &#123;</span><br><span class="line">		now = v[l];</span><br><span class="line">		tree[now].l = tree[now].r = <span class="number">0</span>;</span><br><span class="line">		tree[now].size = tree[now].fact = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">while</span> (l &lt; mid &amp;&amp; tree[v[mid]].val == tree[v[mid<span class="number">-1</span>]].val) mid--;</span><br><span class="line">	now = v[mid];</span><br><span class="line">	<span class="keyword">if</span> (l &lt; mid) lift(l, mid<span class="number">-1</span>, tree[now].l);</span><br><span class="line">	<span class="keyword">else</span> tree[now].l = <span class="number">0</span>;</span><br><span class="line">	lift(mid+<span class="number">1</span>, r, tree[now].r);</span><br><span class="line">	tree[now].size = tree[tree[now].l].size + tree[tree[now].r].size + <span class="number">1</span>;</span><br><span class="line">	tree[now].fact = tree[tree[now].l].fact + tree[tree[now].r].fact + <span class="number">1</span>; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 对以now为根的子树重构</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">rebuild</span><span class="params">(<span class="keyword">int</span> &amp;now)</span> </span>&#123;</span><br><span class="line">	v.clear();</span><br><span class="line">	inorder(now);</span><br><span class="line">	<span class="keyword">if</span> (v.empty()) &#123;</span><br><span class="line">		now = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	lift(<span class="number">0</span>, v.size()<span class="number">-1</span>, now);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 重构完后更新根到now链路上结点的信息</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> now, <span class="keyword">int</span> end)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (!now) <span class="keyword">return</span>;</span><br><span class="line">	<span class="keyword">if</span> (tree[end].val &lt; tree[now].val) update(tree[now].l, end);</span><br><span class="line">	<span class="keyword">else</span> update(tree[now].r, end);</span><br><span class="line">	tree[now].size = tree[tree[now].l].size + tree[tree[now].r].size + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 检查是否需要重构</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> &amp;now, <span class="keyword">int</span> end)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (now == end) <span class="keyword">return</span>;</span><br><span class="line">	<span class="keyword">if</span> (imbalence(now)) &#123;</span><br><span class="line">		rebuild(now);</span><br><span class="line">		update(root, now);</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (tree[end].val &lt; tree[now].val) check(tree[now].l, end);</span><br><span class="line">	<span class="keyword">else</span> check(tree[now].r, end);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 插入</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span> &amp;now, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (!now) &#123;</span><br><span class="line">		newnode(now, val);</span><br><span class="line">		check(root, now);</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	tree[now].size++;</span><br><span class="line">	tree[now].fact++;</span><br><span class="line">	<span class="keyword">if</span> (val &lt; tree[now].val) insert(tree[now].l, val);</span><br><span class="line">	<span class="keyword">else</span> insert(tree[now].r, val);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 删除</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">del</span><span class="params">(<span class="keyword">int</span> now, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (tree[now].exist &amp;&amp; tree[now].val == val) &#123;</span><br><span class="line">		tree[now].exist = <span class="number">0</span>;</span><br><span class="line">		tree[now].fact--;</span><br><span class="line">		check(root, now);</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	tree[now].fact--;</span><br><span class="line">	<span class="keyword">if</span> (val &lt; tree[now].val) del(tree[now].l, val);</span><br><span class="line">	<span class="keyword">else</span> del(tree[now].r, val);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 根据值获得排名，即比当前数小的个数+1</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getrank</span><span class="params">(<span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> now = root, rank = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">while</span>(now) &#123;</span><br><span class="line">		<span class="keyword">if</span> (val &lt;= tree[now].val)</span><br><span class="line">			now = tree[now].l;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			rank += tree[now].exist + tree[tree[now].l].fact;</span><br><span class="line">			now = tree[now].r;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> rank;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 根据排名获得值</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getnum</span><span class="params">(<span class="keyword">int</span> rank)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> now = root;</span><br><span class="line">	<span class="keyword">while</span> (now) &#123;</span><br><span class="line">		<span class="keyword">if</span> (tree[now].exist &amp;&amp; tree[tree[now].l].fact + tree[now].exist == rank)</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(tree[tree[now].l].fact &gt;= rank)</span><br><span class="line">			now = tree[now].l;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			rank -= tree[tree[now].l].fact + tree[now].exist;</span><br><span class="line">			now = tree[now].r;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> tree[now].val;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 找x的前驱，即小于x且最大的数</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getpre</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> getnum(getrank(x) - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 找x的后继，即大于x且最小的数</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getnext</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> getnum(getrank(x + <span class="number">1</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> t;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;t);</span><br><span class="line">	<span class="keyword">while</span> (t--) &#123;</span><br><span class="line">		<span class="keyword">int</span> opt, x;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;opt, &amp;x);</span><br><span class="line">		<span class="keyword">if</span> (opt == <span class="number">1</span>) insert(root, x);</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(opt == <span class="number">2</span>) del(root, x);</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(opt == <span class="number">3</span>) <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, getrank(x));</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(opt == <span class="number">4</span>) <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, getnum(x));</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(opt == <span class="number">5</span>) <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, getpre(x));</span><br><span class="line">		<span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, getnext(x));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-      
-    </div>
 
-    
 
-    
-    
-    
 
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
-          
-            <a href="/tags/Data-Structure/" rel="tag"># Data Structure</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2020/09/07/可持久化并查集/" rel="next" title="可持久化并查集">
-                <i class="fa fa-chevron-left"></i> 可持久化并查集
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/09/10/莫队算法/" rel="prev" title="莫队算法">
-                莫队算法 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-  </div>
-
-
-          </div>
-          
-
-  
-    <div class="comments" id="comments">
-    </div>
-
-  
-
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <img class="site-author-image" itemprop="image" src="/images/tou.jpg" alt="Elitedj">
-            
-              <p class="site-author-name" itemprop="name">Elitedj</p>
-              <p class="site-description motion-element" itemprop="description"></p>
-          </div>
-
-          
-            <nav class="site-state motion-element">
-              
-                <div class="site-state-item site-state-posts">
-                
-                  <a href="/archives/">
-                
-                    <span class="site-state-item-count">32</span>
-                    <span class="site-state-item-name">posts</span>
-                  </a>
-                </div>
-              
-
-              
-                
-                
-                <div class="site-state-item site-state-categories">
-                  <a href="/categories/index.html">
-                    
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">14</span>
-                    <span class="site-state-item-name">categories</span>
-                  </a>
-                </div>
-              
-
-              
-                
-                
-                <div class="site-state-item site-state-tags">
-                  <a href="/tags/index.html">
-                    
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">18</span>
-                    <span class="site-state-item-name">tags</span>
-                  </a>
-                </div>
-              
-            </nav>
-          
-
-          
-            <div class="feed-link motion-element">
-              <a href="/atom.xml" rel="alternate">
-                <i class="fa fa-rss"></i>
-                RSS
-              </a>
-            </div>
-          
-
-          
-            <div class="links-of-author motion-element">
-              
-                <span class="links-of-author-item">
-                  
-                  
-                    
-                  
-                  
-                    
-                  
-                  <a href="https://github.com/Elitedj" title="GitHub &rarr; https://github.com/Elitedj" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
-                </span>
-              
-                <span class="links-of-author-item">
-                  
-                  
-                    
-                  
-                  
-                    
-                  
-                  <a href="/elite@m.scnu.edu.cn" title="E-Mail &rarr; elite@m.scnu.edu.cn"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
-                </span>
-              
-            </div>
-          
-
-          
-
-          
-          
-            <div class="links-of-blogroll motion-element links-of-blogroll-block">
-              <div class="links-of-blogroll-title">
-                <i class="fa  fa-fw fa-link"></i>
-                Links
-              </div>
-              <ul class="links-of-blogroll-list">
-                
-                  <li class="links-of-blogroll-item">
-                    <a href="http://blog.tover.xyz" title="http://blog.tover.xyz" rel="noopener" target="_blank">Tover</a>
-                  </li>
-                
-                  <li class="links-of-blogroll-item">
-                    <a href="https://ariacx.me" title="https://ariacx.me" rel="noopener" target="_blank">Aria</a>
-                  </li>
-                
-                  <li class="links-of-blogroll-item">
-                    <a href="https://0xffff.one/" title="https://0xffff.one/" rel="noopener" target="_blank">0xFFFF</a>
-                  </li>
-                
-                  <li class="links-of-blogroll-item">
-                    <a href="https://www.yuque.com/0xffff.one/cs-learning" title="https://www.yuque.com/0xffff.one/cs-learning" rel="noopener" target="_blank">SCNU CS Wiki</a>
-                  </li>
-                
-              </ul>
-            </div>
-          
-
-          
-            
-          
-          
-
-        </div>
-      </div>
-
-      
-      <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#替罪羊树？"><span class="nav-number">1.</span> <span class="nav-text">替罪羊树？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#替罪羊树"><span class="nav-number">2.</span> <span class="nav-text">替罪羊树</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#参数定义"><span class="nav-number">2.1.</span> <span class="nav-text">参数定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插入"><span class="nav-number">2.2.</span> <span class="nav-text">插入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除"><span class="nav-number">2.3.</span> <span class="nav-text">删除</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重构"><span class="nav-number">2.4.</span> <span class="nav-text">重构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#判断是否需要重构"><span class="nav-number">2.4.1.</span> <span class="nav-text">判断是否需要重构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#判断是否平衡"><span class="nav-number">2.4.2.</span> <span class="nav-text">判断是否平衡</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重构子树"><span class="nav-number">2.4.3.</span> <span class="nav-text">重构子树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新信息"><span class="nav-number">2.4.4.</span> <span class="nav-text">更新信息</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取值x的排名"><span class="nav-number">2.5.</span> <span class="nav-text">获取值x的排名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#根据排名rank获取值val"><span class="nav-number">2.6.</span> <span class="nav-text">根据排名rank获取值val</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#x的前驱"><span class="nav-number">2.7.</span> <span class="nav-text">x的前驱</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#x的后继"><span class="nav-number">2.8.</span> <span class="nav-text">x的后继</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#洛谷P3369"><span class="nav-number">3.</span> <span class="nav-text">洛谷P3369</span></a></li></ol></div>
-            
-
-          </div>
-        </div>
-      <!--/noindex-->
-      
-
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; 2019 – <span itemprop="copyrightYear">2021</span>
-  <span class="with-love" id="animate">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Elitedj</span>
-
-  
-
-  
-</div>
-
-<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span><br>
-<script>
-    var now = new Date();
-    function createtime() {
-        var grt= new Date("02/21/2019 13:00:00");//此处修改你的建站时间或者网站上线时间
-        now.setTime(now.getTime()+250);
-        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
-        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
-        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
-        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
-        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
-        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
-        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
-        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
-    }
-setInterval("createtime()",250);
-</script>
-
-
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
-
-
-
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.0.0</div>
-
-
-
-
-
-
-        
-<div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-  
-    <span class="post-meta-item-icon">
-      <i class="fa fa-user"></i>
-    </span>
-    <span class="site-uv" title="Total Visitors">
-      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
-    </span>
-  
-
-  
-    <span class="post-meta-divider">|</span>
-  
-
-  
-    <span class="post-meta-item-icon">
-      <i class="fa fa-eye"></i>
-    </span>
-    <span class="site-pv" title="Total Views">
-      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
-    </span>
-  
-</div>
-
-
-
-
-
-
-
-
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-    
-
-    
-
-    
-  </div>
-
-  
-
-  
-
-<script>
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span> ull;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> inf 0x3f3f3f3f</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 0x3f3f3f3f3f3f3f3f</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> IO ios::sync_with_stdio(0)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> DEBUG(x) cout<span class="meta-string">&lt;&lt;&quot;---&gt;</span><span class="meta-string">&quot;&lt;&lt;(x)&lt;&lt;endl;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">typedef pair&lt;int, int&gt; P;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">const ll mod = 1e9+7;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">const double eps = 1e-9;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">const double PI = acos(-1);</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">const int maxn = 2e5+5;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string"></span></span></span><br><span class="line"><span class="meta"><span class="meta-string"></span></span></span><br><span class="line"><span class="meta"><span class="meta-string">struct node &#123;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	int l, r, val;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	int size, fact;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	int exist;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">&#125;tree[maxn];</span></span></span><br><span class="line"><span class="meta"><span class="meta-string"></span></span></span><br><span class="line"><span class="meta"><span class="meta-string">int cnt, root;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">const double alpha = 0.75;	// 平衡因子</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">vector&lt;int&gt; v;	// 记录中序遍历的结果</span></span></span><br><span class="line"><span class="meta"><span class="meta-string"></span></span></span><br><span class="line"><span class="meta"><span class="meta-string">// 新建结点</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">void newnode(int &amp;now, int val) &#123;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	now = ++cnt;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	tree[now].val = val;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	tree[now].size = tree[now].fact = 1;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	tree[now].exist = 1;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">&#125;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string"></span></span></span><br><span class="line"><span class="meta"><span class="meta-string">// 判断是否不平衡</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">bool imbalence(int now) &#123;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	if (max(tree[tree[now].l].size, tree[tree[now].r].size) &gt; tree[now].size * alpha</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">			|| tree[now].size - tree[now].fact &gt; tree[now].size * 0.3)</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">		return true;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	return false;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">&#125;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string"></span></span></span><br><span class="line"><span class="meta"><span class="meta-string">// 对now为根的子树做中序遍历</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">void inorder(int now) &#123;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	if (!now) return;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	inorder(tree[now].l);</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	if (tree[now].exist) v.push_back(now);</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	inorder(tree[now].r);</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">&#125;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string"></span></span></span><br><span class="line"><span class="meta"><span class="meta-string">// 对中序遍历的结果重构</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">void lift(int l, int r, int &amp;now) &#123;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	if (l == r) &#123;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">		now = v[l];</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">		tree[now].l = tree[now].r = 0;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">		tree[now].size = tree[now].fact = 1;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">		return;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	&#125;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	int mid = (l + r) &gt;&gt; 1;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	while (l &lt; mid &amp;&amp; tree[v[mid]].val == tree[v[mid-1]].val) mid--;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	now = v[mid];</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	if (l &lt; mid) lift(l, mid-1, tree[now].l);</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	else tree[now].l = 0;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	lift(mid+1, r, tree[now].r);</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	tree[now].size = tree[tree[now].l].size + tree[tree[now].r].size + 1;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	tree[now].fact = tree[tree[now].l].fact + tree[tree[now].r].fact + 1; </span></span></span><br><span class="line"><span class="meta"><span class="meta-string">&#125;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string"></span></span></span><br><span class="line"><span class="meta"><span class="meta-string">// 对以now为根的子树重构</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">void rebuild(int &amp;now) &#123;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	v.clear();</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	inorder(now);</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	if (v.empty()) &#123;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">		now = 0;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">		return;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	&#125;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	lift(0, v.size()-1, now);</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">&#125;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string"></span></span></span><br><span class="line"><span class="meta"><span class="meta-string">// 重构完后更新根到now链路上结点的信息</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">void update(int now, int end) &#123;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	if (!now) return;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	if (tree[end].val &lt; tree[now].val) update(tree[now].l, end);</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	else update(tree[now].r, end);</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	tree[now].size = tree[tree[now].l].size + tree[tree[now].r].size + 1;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">&#125;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string"></span></span></span><br><span class="line"><span class="meta"><span class="meta-string">// 检查是否需要重构</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">void check(int &amp;now, int end) &#123;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	if (now == end) return;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	if (imbalence(now)) &#123;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">		rebuild(now);</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">		update(root, now);</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">		return;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	&#125;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	if (tree[end].val &lt; tree[now].val) check(tree[now].l, end);</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	else check(tree[now].r, end);</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">&#125;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string"></span></span></span><br><span class="line"><span class="meta"><span class="meta-string">// 插入</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">void insert(int &amp;now, int val) &#123;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	if (!now) &#123;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">		newnode(now, val);</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">		check(root, now);</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">		return;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	&#125;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	tree[now].size++;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	tree[now].fact++;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	if (val &lt; tree[now].val) insert(tree[now].l, val);</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	else insert(tree[now].r, val);</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">&#125;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string"></span></span></span><br><span class="line"><span class="meta"><span class="meta-string">// 删除</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">void del(int now, int val) &#123;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	if (tree[now].exist &amp;&amp; tree[now].val == val) &#123;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">		tree[now].exist = 0;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">		tree[now].fact--;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">		check(root, now);</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">		return;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	&#125;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	tree[now].fact--;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	if (val &lt; tree[now].val) del(tree[now].l, val);</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	else del(tree[now].r, val);</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">&#125;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string"></span></span></span><br><span class="line"><span class="meta"><span class="meta-string">// 根据值获得排名，即比当前数小的个数+1</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">int getrank(int val) &#123;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	int now = root, rank = 1;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	while(now) &#123;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">		if (val &lt;= tree[now].val)</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">			now = tree[now].l;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">		else &#123;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">			rank += tree[now].exist + tree[tree[now].l].fact;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">			now = tree[now].r;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">		&#125;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	&#125;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	return rank;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">&#125;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string"></span></span></span><br><span class="line"><span class="meta"><span class="meta-string">// 根据排名获得值</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">int getnum(int rank) &#123;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	int now = root;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	while (now) &#123;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">		if (tree[now].exist &amp;&amp; tree[tree[now].l].fact + tree[now].exist == rank)</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">			break;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">		else if(tree[tree[now].l].fact &gt;= rank)</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">			now = tree[now].l;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">		else &#123;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">			rank -= tree[tree[now].l].fact + tree[now].exist;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">			now = tree[now].r;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">		&#125;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	&#125;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	return tree[now].val;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">&#125;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string"></span></span></span><br><span class="line"><span class="meta"><span class="meta-string">// 找x的前驱，即小于x且最大的数</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">int getpre(int x) &#123;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	return getnum(getrank(x) - 1);</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">&#125;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string"></span></span></span><br><span class="line"><span class="meta"><span class="meta-string">// 找x的后继，即大于x且最小的数</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">int getnext(int x) &#123;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	return getnum(getrank(x + 1));</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">&#125;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string"></span></span></span><br><span class="line"><span class="meta"><span class="meta-string">int main() &#123;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	int t;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	scanf(&quot;</span>%d<span class="meta-string">&quot;, &amp;t);</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	while (t--) &#123;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">		int opt, x;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">		scanf(&quot;</span>%d%d<span class="meta-string">&quot;, &amp;opt, &amp;x);</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">		if (opt == 1) insert(root, x);</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">		else if(opt == 2) del(root, x);</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">		else if(opt == 3) printf(&quot;</span>%d\n<span class="meta-string">&quot;, getrank(x));</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">		else if(opt == 4) printf(&quot;</span>%d\n<span class="meta-string">&quot;, getnum(x));</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">		else if(opt == 5) printf(&quot;</span>%d\n<span class="meta-string">&quot;, getpre(x));</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">		else printf(&quot;</span>%d\n<span class="meta-string">&quot;, getnext(x));</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	&#125;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">	return 0;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">&#125;</span></span></span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Elitedj</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://elitedj.me/2020/09/08/%E6%9B%BF%E7%BD%AA%E7%BE%8A%E6%A0%91/">http://elitedj.me/2020/09/08/替罪羊树/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://elitedj.me" target="_blank">Elitedj</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Algorithm/">Algorithm</a><a class="post-meta__tags" href="/tags/Data-Structure/">Data Structure</a></div><div class="post_share"><div class="social-share" data-image="https://z3.ax1x.com/2021/04/07/c8tjVx.jpg" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/09/10/%E8%8E%AB%E9%98%9F%E7%AE%97%E6%B3%95/"><img class="prev-cover" src="https://z3.ax1x.com/2021/04/07/c8eZ5t.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">莫队算法</div></div></a></div><div class="next-post pull-right"><a href="/2020/09/07/%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96%E5%B9%B6%E6%9F%A5%E9%9B%86/"><img class="next-cover" src="https://z3.ax1x.com/2021/04/07/c8Gy8J.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">可持久化并查集</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="https://z3.ax1x.com/2021/04/07/c8eSC6.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">Elitedj</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">32</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">18</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">14</div></a></div></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Elitedj" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:elitedj@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9B%BF%E7%BD%AA%E7%BE%8A%E6%A0%91%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">替罪羊树？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9B%BF%E7%BD%AA%E7%BE%8A%E6%A0%91"><span class="toc-number">2.</span> <span class="toc-text">替罪羊树</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E5%AE%9A%E4%B9%89"><span class="toc-number">2.1.</span> <span class="toc-text">参数定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%92%E5%85%A5"><span class="toc-number">2.2.</span> <span class="toc-text">插入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A0%E9%99%A4"><span class="toc-number">2.3.</span> <span class="toc-text">删除</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%8D%E6%9E%84"><span class="toc-number">2.4.</span> <span class="toc-text">重构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E9%9C%80%E8%A6%81%E9%87%8D%E6%9E%84"><span class="toc-number">2.4.1.</span> <span class="toc-text">判断是否需要重构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E5%B9%B3%E8%A1%A1"><span class="toc-number">2.4.2.</span> <span class="toc-text">判断是否平衡</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E6%9E%84%E5%AD%90%E6%A0%91"><span class="toc-number">2.4.3.</span> <span class="toc-text">重构子树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%B4%E6%96%B0%E4%BF%A1%E6%81%AF"><span class="toc-number">2.4.4.</span> <span class="toc-text">更新信息</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E5%80%BCx%E7%9A%84%E6%8E%92%E5%90%8D"><span class="toc-number">2.5.</span> <span class="toc-text">获取值x的排名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B9%E6%8D%AE%E6%8E%92%E5%90%8Drank%E8%8E%B7%E5%8F%96%E5%80%BCval"><span class="toc-number">2.6.</span> <span class="toc-text">根据排名rank获取值val</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#x%E7%9A%84%E5%89%8D%E9%A9%B1"><span class="toc-number">2.7.</span> <span class="toc-text">x的前驱</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#x%E7%9A%84%E5%90%8E%E7%BB%A7"><span class="toc-number">2.8.</span> <span class="toc-text">x的后继</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B4%9B%E8%B0%B7P3369"><span class="toc-number">3.</span> <span class="toc-text">洛谷P3369</span></a></li></ol></div></div></div></div></main><footer id="footer" style="background-image: url('https://z3.ax1x.com/2021/04/07/c8eVUI.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2021 By Elitedj</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'zOEvCRaHczqQkvn7g5bk2d9c-gzGzoHsz',
+      appKey: 'JJQvXVH4XIDyjJaIK2HWeTY3',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: 'nick,mail'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
   }
-</script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-  
-  <script src="/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script src="/lib/reading_progress/reading_progress.js"></script>
-
-
-  
-
-
-  <script src="/js/src/utils.js?v=7.0.0"></script>
-
-  <script src="/js/src/motion.js?v=7.0.0"></script>
-
-
-
-  
-  
-
-
-  <script src="/js/src/schemes/muse.js?v=7.0.0"></script>
-
-
-
-  
-  <script src="/js/src/scrollspy.js?v=7.0.0"></script>
-<script src="/js/src/post-details.js?v=7.0.0"></script>
-<script type="text/javascript" src="/js/src/photoswipe-ui-default.min.js?v="></script>
-
-
-
-  
-
-
-  <script src="/js/src/bootstrap.js?v=7.0.0"></script>
-
-
-
-  
-  
-
-<script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
-
-
-
-<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
-
-<script>
-  var GUEST = ['nick', 'mail', 'link'];
-  var guest = 'nick,mail';
-  guest = guest.split(',').filter(function(item) {
-    return GUEST.indexOf(item) > -1;
-  });
-  new Valine({
-    el: '#comments',
-    verify: false,
-    notify: false,
-    appId: 'zOEvCRaHczqQkvn7g5bk2d9c-gzGzoHsz',
-    appKey: 'JJQvXVH4XIDyjJaIK2HWeTY3',
-    placeholder: 'comment something',
-    avatar: 'mm',
-    meta: guest,
-    pageSize: '10' || 10,
-    visitor: false
-  });
-</script>
-
-
-
-
-  
-
-
-  
-  <script>
-    // Popup Window;
-    var isfetched = false;
-    var isXml = true;
-    // Search DB path;
-    var search_path = "";
-    if (search_path.length === 0) {
-      search_path = "search.xml";
-    } else if (/json$/i.test(search_path)) {
-      isXml = false;
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
-
-    var onPopupClose = function (e) {
-      $('.popup').hide();
-      $('#local-search-input').val('');
-      $('.search-result-list').remove();
-      $('#no-result').remove();
-      $(".local-search-pop-overlay").remove();
-      $('body').css('overflow', '');
-    }
-
-    function proceedsearch() {
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
-        .css('overflow', 'hidden');
-      $('.search-popup-overlay').click(onPopupClose);
-      $('.popup').toggle();
-      var $localSearchInput = $('#local-search-input');
-      $localSearchInput.attr("autocapitalize", "none");
-      $localSearchInput.attr("autocorrect", "off");
-      $localSearchInput.focus();
-    }
-
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-      'use strict';
-
-      // start loading animation
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
-          '<div id="search-loading-icon">' +
-          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
-          '</div>' +
-          '</div>')
-        .css('overflow', 'hidden');
-      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
-
-      
-
-      $.ajax({
-        url: path,
-        dataType: isXml ? "xml" : "json",
-        async: true,
-        success: function(res) {
-          // get the contents from search data
-          isfetched = true;
-          $('.popup').detach().appendTo('.header-inner');
-          var datas = isXml ? $("entry", res).map(function() {
-            return {
-              title: $("title", this).text(),
-              content: $("content",this).text(),
-              url: $("url" , this).text()
-            };
-          }).get() : res;
-          var input = document.getElementById(search_id);
-          var resultContent = document.getElementById(content_id);
-          var inputEventFunction = function() {
-            var searchText = input.value.trim().toLowerCase();
-            var keywords = searchText.split(/[\s\-]+/);
-            if (keywords.length > 1) {
-              keywords.push(searchText);
-            }
-            var resultItems = [];
-            if (searchText.length > 0) {
-              // perform local searching
-              datas.forEach(function(data) {
-                var isMatch = false;
-                var hitCount = 0;
-                var searchTextCount = 0;
-                var title = data.title.trim();
-                var titleInLowerCase = title.toLowerCase();
-                var content = data.content.trim().replace(/<[^>]+>/g,"");
-                
-                var contentInLowerCase = content.toLowerCase();
-                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
-                var indexOfTitle = [];
-                var indexOfContent = [];
-                // only match articles with not empty titles
-                if(title != '') {
-                  keywords.forEach(function(keyword) {
-                    function getIndexByWord(word, text, caseSensitive) {
-                      var wordLen = word.length;
-                      if (wordLen === 0) {
-                        return [];
-                      }
-                      var startPosition = 0, position = [], index = [];
-                      if (!caseSensitive) {
-                        text = text.toLowerCase();
-                        word = word.toLowerCase();
-                      }
-                      while ((position = text.indexOf(word, startPosition)) > -1) {
-                        index.push({position: position, word: word});
-                        startPosition = position + wordLen;
-                      }
-                      return index;
-                    }
-
-                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
-                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
-                  });
-                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
-                    isMatch = true;
-                    hitCount = indexOfTitle.length + indexOfContent.length;
-                  }
-                }
-
-                // show search results
-
-                if (isMatch) {
-                  // sort index by position of keyword
-
-                  [indexOfTitle, indexOfContent].forEach(function (index) {
-                    index.sort(function (itemLeft, itemRight) {
-                      if (itemRight.position !== itemLeft.position) {
-                        return itemRight.position - itemLeft.position;
-                      } else {
-                        return itemLeft.word.length - itemRight.word.length;
-                      }
-                    });
-                  });
-
-                  // merge hits into slices
-
-                  function mergeIntoSlice(text, start, end, index) {
-                    var item = index[index.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    var hits = [];
-                    var searchTextCountInSlice = 0;
-                    while (position + word.length <= end && index.length != 0) {
-                      if (word === searchText) {
-                        searchTextCountInSlice++;
-                      }
-                      hits.push({position: position, length: word.length});
-                      var wordEnd = position + word.length;
-
-                      // move to next position of hit
-
-                      index.pop();
-                      while (index.length != 0) {
-                        item = index[index.length - 1];
-                        position = item.position;
-                        word = item.word;
-                        if (wordEnd > position) {
-                          index.pop();
-                        } else {
-                          break;
-                        }
-                      }
-                    }
-                    searchTextCount += searchTextCountInSlice;
-                    return {
-                      hits: hits,
-                      start: start,
-                      end: end,
-                      searchTextCount: searchTextCountInSlice
-                    };
-                  }
-
-                  var slicesOfTitle = [];
-                  if (indexOfTitle.length != 0) {
-                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
-                  }
-
-                  var slicesOfContent = [];
-                  while (indexOfContent.length != 0) {
-                    var item = indexOfContent[indexOfContent.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    // cut out 100 characters
-                    var start = position - 20;
-                    var end = position + 80;
-                    if(start < 0){
-                      start = 0;
-                    }
-                    if (end < position + word.length) {
-                      end = position + word.length;
-                    }
-                    if(end > content.length){
-                      end = content.length;
-                    }
-                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
-                  }
-
-                  // sort slices in content by search text's count and hits' count
-
-                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
-                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
-                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
-                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
-                      return sliceRight.hits.length - sliceLeft.hits.length;
-                    } else {
-                      return sliceLeft.start - sliceRight.start;
-                    }
-                  });
-
-                  // select top N slices in content
-
-                  var upperBound = parseInt('1');
-                  if (upperBound >= 0) {
-                    slicesOfContent = slicesOfContent.slice(0, upperBound);
-                  }
-
-                  // highlight title and content
-
-                  function highlightKeyword(text, slice) {
-                    var result = '';
-                    var prevEnd = slice.start;
-                    slice.hits.forEach(function (hit) {
-                      result += text.substring(prevEnd, hit.position);
-                      var end = hit.position + hit.length;
-                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
-                      prevEnd = end;
-                    });
-                    result += text.substring(prevEnd, slice.end);
-                    return result;
-                  }
-
-                  var resultItem = '';
-
-                  if (slicesOfTitle.length != 0) {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
-                  } else {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
-                  }
-
-                  slicesOfContent.forEach(function (slice) {
-                    resultItem += "<a href='" + articleUrl + "'>" +
-                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
-                      "...</p>" + "</a>";
-                  });
-
-                  resultItem += "</li>";
-                  resultItems.push({
-                    item: resultItem,
-                    searchTextCount: searchTextCount,
-                    hitCount: hitCount,
-                    id: resultItems.length
-                  });
-                }
-              })
-            };
-            if (keywords.length === 1 && keywords[0] === "") {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
-            } else if (resultItems.length === 0) {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
-            } else {
-              resultItems.sort(function (resultLeft, resultRight) {
-                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
-                  return resultRight.searchTextCount - resultLeft.searchTextCount;
-                } else if (resultLeft.hitCount !== resultRight.hitCount) {
-                  return resultRight.hitCount - resultLeft.hitCount;
-                } else {
-                  return resultRight.id - resultLeft.id;
-                }
-              });
-              var searchResultList = '<ul class=\"search-result-list\">';
-              resultItems.forEach(function (result) {
-                searchResultList += result.item;
-              })
-              searchResultList += "</ul>";
-              resultContent.innerHTML = searchResultList;
-            }
-          }
-
-          if ('auto' === 'auto') {
-            input.addEventListener('input', inputEventFunction);
-          } else {
-            $('.search-icon').click(inputEventFunction);
-            input.addEventListener('keypress', function (event) {
-              if (event.keyCode === 13) {
-                inputEventFunction();
-              }
-            });
-          }
-
-          // remove loading animation
-          $(".local-search-pop-overlay").remove();
-          $('body').css('overflow', '');
-
-          proceedsearch();
-        }
-      });
-    }
-
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched === false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-    });
-
-    $('.popup-btn-close').click(onPopupClose);
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-    $(document).on('keyup', function (event) {
-      var shouldDismissSearchPopup = event.which === 27 &&
-        $('.search-popup').is(':visible');
-      if (shouldDismissSearchPopup) {
-        onPopupClose();
-      }
-    });
-  </script>
-
-
-
-
-
-  
-
-  
-
-  
-  
-
-  
-  
-
-  
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-  
-  <script src="/lib/bookmark/bookmark.min.js?v=1.0"></script>
-  <script>
-  
-    bookmark.scrollToMark('auto', "#more");
-  
-  </script>
-
-
-  
-  <style>
-    .copy-btn {
-      display: inline-block;
-      padding: 6px 12px;
-      font-size: 13px;
-      font-weight: 700;
-      line-height: 20px;
-      color: #333;
-      white-space: nowrap;
-      vertical-align: middle;
-      cursor: pointer;
-      background-color: #eee;
-      background-image: linear-gradient(#fcfcfc, #eee);
-      border: 1px solid #d5d5d5;
-      border-radius: 3px;
-      user-select: none;
-      outline: 0;
-    }
-
-    .highlight-wrap .copy-btn {
-      transition: opacity .3s ease-in-out;
-      opacity: 0;
-      padding: 2px 6px;
-      position: absolute;
-      right: 4px;
-      top: 8px;
-    }
-
-    .highlight-wrap:hover .copy-btn,
-    .highlight-wrap .copy-btn:focus {
-      opacity: 1
-    }
-
-    .highlight-wrap {
-      position: relative;
-    }
-  </style>
-  <script>
-    $('.highlight').each(function(i, e) {
-      var $wrap = $('<div>').addClass('highlight-wrap');
-      $(e).after($wrap);
-      $wrap.append($('<button>').addClass('copy-btn').append('Copy').on('click', function(e) {
-        var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
-          return $(e).text();
-        }).toArray().join('\n');
-        var ta = document.createElement('textarea');
-        var range = document.createRange(); //For Chrome
-        var sel = window.getSelection(); //For Chrome
-        var yPosition = window.pageYOffset || document.documentElement.scrollTop;
-        ta.style.top = yPosition + 'px'; //Prevent page scroll
-        ta.style.position = 'absolute';
-        ta.style.opacity = '0';
-        ta.value = code;
-        ta.textContent = code; //For FireFox
-        ta.contentEditable = true;
-        ta.readOnly = false;
-        document.body.appendChild(ta);
-        range.selectNode(ta);
-        sel.removeAllRanges();
-        sel.addRange(range);
-        ta.setSelectionRange(0, code.length);
-        var result = document.execCommand('copy');
-        
-          if (result) $(this).text('Copied');
-          else $(this).text('Copy failed');
-        
-        ta.blur(); //For iOS
-        $(this).blur();
-      })).on('mouseleave', function(e) {
-        var $b = $(this).find('.copy-btn');
-        setTimeout(function() {
-          $b.text('Copy');
-        }, 300);
-      }).append(e);
-    })
-  </script>
-
-
-</body>
-</html>
-
-<!--崩溃欺骗-->
-<script type="text/javascript" src="/js/src/crash_cheat.js"></script>
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

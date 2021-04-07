@@ -1,590 +1,148 @@
-<!DOCTYPE html>
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-<script src="/js/src/photoswipe.min.js?v="></script>
-<script src="/js/src/photoswipe-ui-default.min.js?v="></script>
-
-<html class="theme-next muse use-motion" lang="en">
-<head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-    
-
-    
-  
-
-  
-
-  
-    
-    
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Italianno:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext">
-  
-
-
-
-
-
-
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
-
-<link rel="stylesheet" href="/css/main.css?v=7.0.0">
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.0">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.0">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.0">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=7.0.0" color="#222">
-
-
-
-
-
-
-
-<script id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Muse',
-    version: '7.0.0',
-    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: false,
-    fastclick: false,
-    lazyload: false,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-  
-
-
-
-
-  <meta name="description" content="利用Hexo+Github轻轻松松搭建酷炫的个人Blog！本人环境：  Ubantu 18.04 Hexo 3.8.0 Node.js 8.10.0 NexT 7.0.0    下面正式开始：   1.安装Hexo准备工作：     安装Node.js 安装Git   安装Node.js：在终端输入：curl https://raw.github.com/creationix/nvm/v0.33.">
-<meta name="keywords" content="Hexo,关于本站,Github">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>【本站搭建】利用Hexo+Github搭建属于你的Blog | Elitedj</title><meta name="keywords" content="Hexo,关于本站,Github"><meta name="author" content="Elitedj"><meta name="copyright" content="Elitedj"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="本站搭建教程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【本站搭建】利用Hexo+Github搭建属于你的Blog">
-<meta property="og:url" content="http://yoursite.com/2019/02/21/【本站搭建】利用Hexo-Github搭建属于你的Blog/index.html">
+<meta property="og:url" content="http://elitedj.me/2019/02/21/%E3%80%90%E6%9C%AC%E7%AB%99%E6%90%AD%E5%BB%BA%E3%80%91%E5%88%A9%E7%94%A8Hexo-Github%E6%90%AD%E5%BB%BA%E5%B1%9E%E4%BA%8E%E4%BD%A0%E7%9A%84Blog/index.html">
 <meta property="og:site_name" content="Elitedj">
-<meta property="og:description" content="利用Hexo+Github轻轻松松搭建酷炫的个人Blog！本人环境：  Ubantu 18.04 Hexo 3.8.0 Node.js 8.10.0 NexT 7.0.0    下面正式开始：   1.安装Hexo准备工作：     安装Node.js 安装Git   安装Node.js：在终端输入：curl https://raw.github.com/creationix/nvm/v0.33.">
-<meta property="og:locale" content="en">
-<meta property="og:image" content="http://yoursite.com/2019/02/21/【本站搭建】利用Hexo-Github搭建属于你的Blog/Node.png">
-<meta property="og:image" content="http://yoursite.com/2019/02/21/【本站搭建】利用Hexo-Github搭建属于你的Blog/hexo.png">
-<meta property="og:image" content="http://yoursite.com/2019/02/21/【本站搭建】利用Hexo-Github搭建属于你的Blog/init.png">
-<meta property="og:image" content="http://yoursite.com/2019/02/21/【本站搭建】利用Hexo-Github搭建属于你的Blog/theme.png">
-<meta property="og:image" content="http://yoursite.com/2019/02/21/【本站搭建】利用Hexo-Github搭建属于你的Blog/title.png">
-<meta property="og:image" content="http://yoursite.com/2019/02/21/【本站搭建】利用Hexo-Github搭建属于你的Blog/language.png">
-<meta property="og:image" content="http://yoursite.com/2019/02/21/【本站搭建】利用Hexo-Github搭建属于你的Blog/menu.png">
-<meta property="og:image" content="http://yoursite.com/2019/02/21/【本站搭建】利用Hexo-Github搭建属于你的Blog/tags.png">
-<meta property="og:image" content="http://yoursite.com/2019/02/21/【本站搭建】利用Hexo-Github搭建属于你的Blog/categories.png">
-<meta property="og:image" content="http://yoursite.com/2019/02/21/【本站搭建】利用Hexo-Github搭建属于你的Blog/about.png">
-<meta property="og:image" content="http://yoursite.com/2019/02/21/【本站搭建】利用Hexo-Github搭建属于你的Blog/scheme.png">
-<meta property="og:image" content="http://yoursite.com/2019/02/21/【本站搭建】利用Hexo-Github搭建属于你的Blog/social.png">
-<meta property="og:image" content="http://yoursite.com/2019/02/21/【本站搭建】利用Hexo-Github搭建属于你的Blog/links.png">
-<meta property="og:image" content="http://yoursite.com/2019/02/21/【本站搭建】利用Hexo-Github搭建属于你的Blog/avatar.png">
-<meta property="og:image" content="http://yoursite.com/2019/02/21/【本站搭建】利用Hexo-Github搭建属于你的Blog/auto_excerpt.png">
-<meta property="og:image" content="http://yoursite.com/2019/02/21/【本站搭建】利用Hexo-Github搭建属于你的Blog/valine.png">
-<meta property="og:image" content="http://yoursite.com/2019/02/21/【本站搭建】利用Hexo-Github搭建属于你的Blog/busuanzi.png">
-<meta property="og:image" content="http://yoursite.com/2019/02/21/【本站搭建】利用Hexo-Github搭建属于你的Blog/search.png">
-<meta property="og:image" content="http://yoursite.com/2019/02/21/【本站搭建】利用Hexo-Github搭建属于你的Blog/rss.png">
-<meta property="og:image" content="http://yoursite.com/2019/02/21/【本站搭建】利用Hexo-Github搭建属于你的Blog/header.png">
-<meta property="og:image" content="http://yoursite.com/2019/02/21/【本站搭建】利用Hexo-Github搭建属于你的Blog/sidebar.png">
-<meta property="og:image" content="http://yoursite.com/2019/02/21/【本站搭建】利用Hexo-Github搭建属于你的Blog/github.png">
-<meta property="og:image" content="http://yoursite.com/2019/02/21/【本站搭建】利用Hexo-Github搭建属于你的Blog/ssh.png">
-<meta property="og:image" content="http://yoursite.com/2019/02/21/【本站搭建】利用Hexo-Github搭建属于你的Blog/newssh.png">
-<meta property="og:image" content="http://yoursite.com/2019/02/21/【本站搭建】利用Hexo-Github搭建属于你的Blog/add.png">
-<meta property="og:image" content="http://yoursite.com/2019/02/21/【本站搭建】利用Hexo-Github搭建属于你的Blog/sshsuccess.png">
-<meta property="og:image" content="http://yoursite.com/2019/02/21/【本站搭建】利用Hexo-Github搭建属于你的Blog/godaddy.png">
-<meta property="og:image" content="http://yoursite.com/2019/02/21/【本站搭建】利用Hexo-Github搭建属于你的Blog/dns.png">
-<meta property="og:image" content="http://yoursite.com/2019/02/21/【本站搭建】利用Hexo-Github搭建属于你的Blog/ip.png">
-<meta property="og:image" content="http://yoursite.com/2019/02/21/【本站搭建】利用Hexo-Github搭建属于你的Blog/a.png">
-<meta property="og:image" content="http://yoursite.com/2019/02/21/【本站搭建】利用Hexo-Github搭建属于你的Blog/cname.png">
-<meta property="og:image" content="http://yoursite.com/2019/02/21/【本站搭建】利用Hexo-Github搭建属于你的Blog/githubcname.png">
-<meta property="og:image" content="http://yoursite.com/2019/02/21/【本站搭建】利用Hexo-Github搭建属于你的Blog/paper.png">
-<meta property="og:updated_time" content="2020-02-15T03:02:43.247Z">
+<meta property="og:description" content="本站搭建教程">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://z3.ax1x.com/2021/04/07/c8QqWn.jpg">
+<meta property="article:published_time" content="2019-02-21T07:40:01.000Z">
+<meta property="article:modified_time" content="2021-04-07T06:45:06.172Z">
+<meta property="article:author" content="Elitedj">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="关于本站">
+<meta property="article:tag" content="Github">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="【本站搭建】利用Hexo+Github搭建属于你的Blog">
-<meta name="twitter:description" content="利用Hexo+Github轻轻松松搭建酷炫的个人Blog！本人环境：  Ubantu 18.04 Hexo 3.8.0 Node.js 8.10.0 NexT 7.0.0    下面正式开始：   1.安装Hexo准备工作：     安装Node.js 安装Git   安装Node.js：在终端输入：curl https://raw.github.com/creationix/nvm/v0.33.">
-<meta name="twitter:image" content="http://yoursite.com/2019/02/21/【本站搭建】利用Hexo-Github搭建属于你的Blog/Node.png">
-
-
-
-  <link rel="alternate" href="/atom.xml" title="Elitedj" type="application/atom+xml">
-
-
-
-
-  <link rel="canonical" href="http://yoursite.com/2019/02/21/【本站搭建】利用Hexo-Github搭建属于你的Blog/">
-
-
-
-<script id="page.configurations">
-  CONFIG.page = {
-    sidebar: "",
-  };
-</script>
-
-  <title>【本站搭建】利用Hexo+Github搭建属于你的Blog | Elitedj</title>
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .motion-element,
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-title { opacity: initial; }
-
-  .use-motion .logo,
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
+<meta name="twitter:image" content="https://z3.ax1x.com/2021/04/07/c8QqWn.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://elitedj.me/2019/02/21/%E3%80%90%E6%9C%AC%E7%AB%99%E6%90%AD%E5%BB%BA%E3%80%91%E5%88%A9%E7%94%A8Hexo-Github%E6%90%AD%E5%BB%BA%E5%B1%9E%E4%BA%8E%E4%BD%A0%E7%9A%84Blog/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fonts.font.im/css?family=Merienda:700" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-04-07 14:45:06'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
   }
 
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
 
-</head>
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
 
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
   
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
   
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
     
-  
-
-  <div class="container sidebar-position-left page-post-detail">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/" class="brand" rel="start">
-        <span class="site-title">Elitedj</span>
-      </a>
-    </div>
-    
-    
-  </div>
-
-  <div class="site-nav-toggle">
-    <button aria-label="Toggle navigation bar">
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
-</div>
-
-
-
-<nav class="site-nav">
-  
-    <ul id="menu" class="menu">
-      
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
         
-        
-        
-          
-          <li class="menu-item menu-item-home">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
-
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-about">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
-
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-tags">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
-
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-categories">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
-
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-archives">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
-
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-photos">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/photos" rel="section"><i class="menu-item-icon fa fa-fw fa-camera"></i> <br>photos</a>
-
-  </li>
-
-      
-      
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-          
-            
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
-        </li>
-      
-    </ul>
-  
-
-  
-    
-
-  
-
-  
-    <div class="site-search">
-      
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
-    <span class="popup-btn-close">
-      <i class="fa fa-times-circle"></i>
-    </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
-    </div>
-  </div>
-  <div id="local-search-result"></div>
-</div>
-
-
-
-    </div>
-  
-</nav>
-
-
-
-  
-
-
-
-</div>
-    </header>
-
-    
-
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
-    
-
-  
-
-  
-  
-  
-
-  
-    <div class="reading-progress-bar"></div>
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/21/【本站搭建】利用Hexo-Github搭建属于你的Blog/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Elitedj">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/tou.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Elitedj">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">【本站搭建】利用Hexo+Github搭建属于你的Blog
-
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-02-21 15:40:01" itemprop="dateCreated datePublished" datetime="2019-02-21T15:40:01+08:00">2019-02-21</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2020-02-15 11:02:43" itemprop="dateModified" datetime="2020-02-15T11:02:43+08:00">2020-02-15</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Hexo/" itemprop="url" rel="index"><span itemprop="name">Hexo</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-              
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-            
-                <span class="post-meta-item-text">Comments: </span>
-                <a href="/2019/02/21/【本站搭建】利用Hexo-Github搭建属于你的Blog/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/02/21/【本站搭建】利用Hexo-Github搭建属于你的Blog/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-            <span class="post-meta-divider">|</span>
-            <span class="post-meta-item-icon">
-            <i class="fa fa-eye"></i>
-             Views:  
-            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
-            </span>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <p>利用Hexo+Github轻轻松松搭建酷炫的个人Blog！<br>本人环境：</p>
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Elitedj" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="https://z3.ax1x.com/2021/04/07/c8eSC6.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">32</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">18</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">14</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/gallery/"><i class="fa-fw fas fa-image"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://z3.ax1x.com/2021/04/07/c8eVUI.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Elitedj</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/gallery/"><i class="fa-fw fas fa-image"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">【本站搭建】利用Hexo+Github搭建属于你的Blog</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2019-02-21T07:40:01.000Z" title="发表于 2019-02-21 15:40:01">2019-02-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-04-07T06:45:06.172Z" title="更新于 2021-04-07 14:45:06">2021-04-07</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Hexo/">Hexo</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>6分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="【本站搭建】利用Hexo+Github搭建属于你的Blog"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>利用Hexo+Github轻轻松松搭建酷炫的个人Blog！<br>本人环境：</p>
 <ul>
 <li>Ubantu 18.04</li>
 <li>Hexo 3.8.0</li>
@@ -599,31 +157,35 @@
 <li>安装Git</li>
 </ul>
 </blockquote>
-<h3 id="安装Node-js："><a href="#安装Node-js：" class="headerlink" title="安装Node.js："></a>安装Node.js：</h3><p>在终端输入：<br><code>curl https://raw.github.com/creationix/nvm/v0.33.11/install.sh | sh</code></p>
-<p>or<br><code>wget -qO- https://raw.github.com/creationix/nvm/v0.33.11/install.sh | sh</code></p>
-<p>安装完成后输入:<br><code>nvm install stable</code></p>
-<p>查看是否安装成功<br><code>node -v</code></p>
+<h3 id="安装Node-js："><a href="#安装Node-js：" class="headerlink" title="安装Node.js："></a>安装Node.js：</h3><p>在终端输入：<br><code> curl https://raw.github.com/creationix/nvm/v0.33.11/install.sh | sh</code></p>
+<p>or<br><code> wget -qO- https://raw.github.com/creationix/nvm/v0.33.11/install.sh | sh</code></p>
+<p>安装完成后输入:<br><code> nvm install stable</code></p>
+<p>查看是否安装成功<br><code> node -v</code></p>
 <p>成功如下图：<br> <img src="Node.png" alt="成功安装Node.js"></p>
-<h3 id="安装Git"><a href="#安装Git" class="headerlink" title="安装Git"></a>安装Git</h3><p><code>sudo apt-get install git-core</code></p>
-<h3 id="开始安装Hexo"><a href="#开始安装Hexo" class="headerlink" title="开始安装Hexo"></a>开始安装Hexo</h3><p><code>npm install -g hexo-cli</code></p>
+<h3 id="安装Git"><a href="#安装Git" class="headerlink" title="安装Git"></a>安装Git</h3><p><code> sudo apt-get install git-core</code></p>
+<h3 id="开始安装Hexo"><a href="#开始安装Hexo" class="headerlink" title="开始安装Hexo"></a>开始安装Hexo</h3><p><code> npm install -g hexo-cli</code></p>
 <p>安装成功如下：<br><img src="hexo.png" alt="Hexo"></p>
-<h2 id="部署Blog到本地"><a href="#部署Blog到本地" class="headerlink" title="部署Blog到本地"></a>部署Blog到本地</h2><p>首先新建一个文件夹放置Blog文件，例如<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir MyBlogcd </span><br><span class="line">~/MyBlog</span><br></pre></td></tr></table></figure></p>
-<p>初始化<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo init</span><br><span class="line">hexo g</span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure></p>
-<p>看到下图，复制<strong><a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a></strong> 到浏览器即可预览<br><img src="init.png" alt="init"></p>
+<h2 id="部署Blog到本地"><a href="#部署Blog到本地" class="headerlink" title="部署Blog到本地"></a>部署Blog到本地</h2><p>首先新建一个文件夹放置Blog文件，例如 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir MyBlogcd </span><br><span class="line">~/MyBlog</span><br></pre></td></tr></table></figure>
+
+<p>初始化</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo init</span><br><span class="line">hexo g</span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+<p>看到下图，复制<strong><a target="_blank" rel="noopener" href="http://localhost:4000/">http://localhost:4000</a></strong> 到浏览器即可预览<br><img src="init.png" alt="init"></p>
 <p>在终端输入<strong>ctrl+c</strong>则停止预览</p>
-<h2 id="NexT主题"><a href="#NexT主题" class="headerlink" title="NexT主题"></a>NexT主题</h2><p>下面给我们的Blog换一个好看的主题吧～<br>本人选择的是<a href="https://github.com/theme-next/hexo-theme-next" target="_blank" rel="noopener">NexT</a><br>更多主题可以在<a href="https://hexo.io/themes/" target="_blank" rel="noopener">这</a>查看  </p>
+<h2 id="NexT主题"><a href="#NexT主题" class="headerlink" title="NexT主题"></a>NexT主题</h2><p>下面给我们的Blog换一个好看的主题吧～<br>本人选择的是<a target="_blank" rel="noopener" href="https://github.com/theme-next/hexo-theme-next">NexT</a><br>更多主题可以在<a target="_blank" rel="noopener" href="https://hexo.io/themes/">这</a>查看  </p>
 <h3 id="下载NexT主题到本地"><a href="#下载NexT主题到本地" class="headerlink" title="下载NexT主题到本地"></a>下载NexT主题到本地</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/MyBlog  </span><br><span class="line">git <span class="built_in">clone</span> https://github.com/theme-next/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure>
-<p>看到<strong>~/MyBlog/theme/next</strong>就说明下载成功了！</p>
-<h2 id="个性化"><a href="#个性化" class="headerlink" title="个性化"></a>个性化</h2><p>接下给Blog定制一些酷炫的效果和功能吧～<br>这里只介绍本人的一些设置<br>更多设置可以查看<a href="https://theme-next.org/docs/getting-started/" target="_blank" rel="noopener">官方文档</a><br>每更改一次配置都可以通过<strong>hexo s</strong>命令在<strong><a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a></strong>查看效果   </p>
+<p>看到**~/MyBlog/theme/next**就说明下载成功了！</p>
+<h2 id="个性化"><a href="#个性化" class="headerlink" title="个性化"></a>个性化</h2><p>接下给Blog定制一些酷炫的效果和功能吧～<br>这里只介绍本人的一些设置<br>更多设置可以查看<a target="_blank" rel="noopener" href="https://theme-next.org/docs/getting-started/">官方文档</a><br>每更改一次配置都可以通过<strong>hexo s</strong>命令在<strong><a target="_blank" rel="noopener" href="http://localhost:4000/">http://localhost:4000</a></strong>查看效果   </p>
 <p>首先用IDE打开MyBlog文档吧(用vim等直接编辑配置文件也是可以的，个人喜欢)，本人选用WebStorm  </p>
-<h3 id="修改主题为NexT"><a href="#修改主题为NexT" class="headerlink" title="修改主题为NexT"></a>修改主题为NexT</h3><p>打开<strong>~/MyBlog/_config.yml</strong><br>将 <strong>theme</strong>设置为<strong>next</strong>即可<br><img src="theme.png" alt="theme"></p>
-<h3 id="更改网站标题、作者名、语言"><a href="#更改网站标题、作者名、语言" class="headerlink" title="更改网站标题、作者名、语言"></a>更改网站标题、作者名、语言</h3><p>打开<strong>~/MyBlog/_config.yml</strong><br><img src="title.png" alt="title"><br>更多语言设置<br><img src="language.png" alt="language"></p>
-<h3 id="开启tags、categories、about页面"><a href="#开启tags、categories、about页面" class="headerlink" title="开启tags、categories、about页面"></a>开启tags、categories、about页面</h3><p>打开<strong>~/MyBlog/theme/next/_config.yml</strong>，找到<strong>menu </strong><br><img src="menu.png" alt="menu"></p>
-<p>再打开终端输入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo n page <span class="string">"tags"</span></span><br><span class="line">hexo n page <span class="string">"categories"</span></span><br><span class="line">hexo n page <span class="string">"about"</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="修改主题为NexT"><a href="#修改主题为NexT" class="headerlink" title="修改主题为NexT"></a>修改主题为NexT</h3><p>打开**~/MyBlog/_config.yml**<br>将 <strong>theme</strong>设置为<strong>next</strong>即可<br><img src="theme.png" alt="theme"></p>
+<h3 id="更改网站标题、作者名、语言"><a href="#更改网站标题、作者名、语言" class="headerlink" title="更改网站标题、作者名、语言"></a>更改网站标题、作者名、语言</h3><p>打开**~/MyBlog/_config.yml**<br><img src="title.png" alt="title"><br>更多语言设置<br><img src="language.png" alt="language"></p>
+<h3 id="开启tags、categories、about页面"><a href="#开启tags、categories、about页面" class="headerlink" title="开启tags、categories、about页面"></a>开启tags、categories、about页面</h3><p>打开**~/MyBlog/theme/next/_config.yml<strong>，找到</strong>menu **<br><img src="menu.png" alt="menu"></p>
+<p>再打开终端输入  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo n page <span class="string">&quot;tags&quot;</span></span><br><span class="line">hexo n page <span class="string">&quot;categories&quot;</span></span><br><span class="line">hexo n page <span class="string">&quot;about&quot;</span></span><br></pre></td></tr></table></figure>
 <p>这时候可以看到 <strong>~/MyBlog/source</strong> 中多了三个文件夹,每一个文件夹都有一个<strong>index.md</strong>文件,分别打开这三个文件，修改为<br><img src="tags.png" alt="tags">  </p>
 <p><img src="categories.png" alt="categories">  </p>
 <p><img src="about.png" alt="about"><br>在<strong>about/index.md</strong>文件中可以用MarkDown编写自己的个人介绍等  </p>
-<h3 id="更改NexT主题样式"><a href="#更改NexT主题样式" class="headerlink" title="更改NexT主题样式"></a>更改NexT主题样式</h3><p>打开<strong>~/MyBlog/theme/next/_config.yml</strong>文件，找到<strong>scheme  </strong><br>可以看到NexT主题提供四种样式，默认为<strong>Muse</strong>，可根据个人喜欢修改样式，本人选择的是默认<br><img src="scheme.png" alt="scheme">  </p>
+<h3 id="更改NexT主题样式"><a href="#更改NexT主题样式" class="headerlink" title="更改NexT主题样式"></a>更改NexT主题样式</h3><p>打开**~/MyBlog/theme/next/_config.yml<strong>文件，找到</strong>scheme  **<br>可以看到NexT主题提供四种样式，默认为<strong>Muse</strong>，可根据个人喜欢修改样式，本人选择的是默认<br><img src="scheme.png" alt="scheme">  </p>
 <h3 id="开启个人社交平台链接"><a href="#开启个人社交平台链接" class="headerlink" title="开启个人社交平台链接"></a>开启个人社交平台链接</h3><p>打开 <strong>~/MyBlog/theme/next/_config.yml</strong> 文件，找到 <strong>social</strong>,根据自己的需要设置即可<br><img src="social.png" alt="social">  </p>
 <h3 id="友情链接"><a href="#友情链接" class="headerlink" title="友情链接"></a>友情链接</h3><p>打开 <strong>~/MyBlog/theme/next/_config.yml</strong>文件，找到<strong>links</strong>,可以挂朋友的Blog～<br><img src="links.png" alt="links">  </p>
 <h3 id="更换个人头像、设置为圆形头像、头像旋转特效"><a href="#更换个人头像、设置为圆形头像、头像旋转特效" class="headerlink" title="更换个人头像、设置为圆形头像、头像旋转特效"></a>更换个人头像、设置为圆形头像、头像旋转特效</h3><p>将自己喜欢的头像放到 <strong>~/MyBlog/theme/next/source/images</strong>中，打开 <strong>~/MyBlog/theme/next/_config.yml</strong> 文件，找到<strong>avatar</strong><br><img src="avatar.png" alt="avatar">  </p>
@@ -631,1033 +193,85 @@
 <li>rounded: true 则头像为圆形</li>
 <li>rotated: true 则鼠标放置到头像，头像会有旋转特效  </li>
 </ul>
-<h3 id="阅读全文"><a href="#阅读全文" class="headerlink" title="阅读全文"></a>阅读全文</h3><p>如果不想首页的博文全部展开，开启阅读全文功能是一个不错的选择～<br>打开 <strong>~/MyBlog/theme/next/_config.yml</strong>文件，找到 <strong>auto_excerpt </strong><br><img src="auto_excerpt.png" alt="auto_excerpt"><br><strong>length</strong> 属性是博文的预览长度  </p>
-<h3 id="评论功能"><a href="#评论功能" class="headerlink" title="评论功能"></a>评论功能</h3><p>使用<strong>Valine</strong>插件实现评论功能<br>在<a href="https://leancloud.cn/" target="_blank" rel="noopener">leancloud</a>注册账号，新建一个应用(开发版即可)，设置-&gt;应用key，复制APP ID和APP Key，打开 <strong>~/MyBlog/theme/next/_config.yml</strong>文件，找到 <strong>Valine</strong>，将 <strong>enable</strong>设置为 <strong>true</strong>，并将 <strong>ID</strong>和 <strong>Key</strong>填到相应位置即可<br><img src="valine.png" alt="valine"></p>
+<h3 id="阅读全文"><a href="#阅读全文" class="headerlink" title="阅读全文"></a>阅读全文</h3><p>如果不想首页的博文全部展开，开启阅读全文功能是一个不错的选择～<br>打开 <strong>~/MyBlog/theme/next/_config.yml</strong>文件，找到 **auto_excerpt **<br><img src="auto_excerpt.png" alt="auto_excerpt"><br><strong>length</strong> 属性是博文的预览长度  </p>
+<h3 id="评论功能"><a href="#评论功能" class="headerlink" title="评论功能"></a>评论功能</h3><p>使用<strong>Valine</strong>插件实现评论功能<br>在<a target="_blank" rel="noopener" href="https://leancloud.cn/">leancloud</a>注册账号，新建一个应用(开发版即可)，设置-&gt;应用key，复制APP ID和APP Key，打开 <strong>~/MyBlog/theme/next/_config.yml</strong>文件，找到 <strong>Valine</strong>，将 <strong>enable</strong>设置为 <strong>true</strong>，并将 <strong>ID</strong>和 <strong>Key</strong>填到相应位置即可<br><img src="valine.png" alt="valine"></p>
 <h3 id="开启不蒜子计数功能，记录访问人数等"><a href="#开启不蒜子计数功能，记录访问人数等" class="headerlink" title="开启不蒜子计数功能，记录访问人数等"></a>开启不蒜子计数功能，记录访问人数等</h3><p>打开 <strong>~/MyBlog/theme/next/_config.yml</strong>文件，找到 <strong>busuanzi_count</strong><br><img src="busuanzi.png" alt="busuanzi"></p>
-<h3 id="开启搜索功能"><a href="#开启搜索功能" class="headerlink" title="开启搜索功能"></a>开启搜索功能</h3><p>打开终端，输入<br><code>npm install hexo-generator-searchdb --save</code></p>
-<p>将以下代码复制到 <strong>~/MyBlog/theme/next/_config.yml</strong>的末尾<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">search:</span>  </span><br><span class="line"><span class="attr">  path:</span> <span class="string">search.xml</span>  </span><br><span class="line"><span class="attr">  field:</span> <span class="string">post</span>  </span><br><span class="line"><span class="attr">  format:</span> <span class="string">html</span>  </span><br><span class="line"><span class="attr">  limit:</span> <span class="number">10000</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="开启搜索功能"><a href="#开启搜索功能" class="headerlink" title="开启搜索功能"></a>开启搜索功能</h3><p>打开终端，输入<br><code>npm install hexo-generator-searchdb --save  </code></p>
+<p>将以下代码复制到 <strong>~/MyBlog/theme/next/_config.yml</strong>的末尾  </p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">search:</span>  </span><br><span class="line">  <span class="attr">path:</span> <span class="string">search.xml</span>  </span><br><span class="line">  <span class="attr">field:</span> <span class="string">post</span>  </span><br><span class="line">  <span class="attr">format:</span> <span class="string">html</span>  </span><br><span class="line">  <span class="attr">limit:</span> <span class="number">10000</span>  </span><br></pre></td></tr></table></figure>
 <p>在 <strong>~/MyBlog/theme/next/_config.yml</strong>文件，找到<strong>local_search</strong>,设置为<strong>true</strong>即可<br><img src="search.png" alt="search"></p>
 <h3 id="RSS订阅功能"><a href="#RSS订阅功能" class="headerlink" title="RSS订阅功能"></a>RSS订阅功能</h3><p>在终端输入<br><code>npm install hexo-generator-feed --save</code></p>
-<p>在 <strong>~/MyBlog/theme/next/_config.yml</strong>文件，找到 <strong>rss</strong><br><img src="rss.png" alt="rss"><br>并在 <strong>~/MyBlog/_config.yml</strong>的底部添加以下代码<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># RSS订阅</span></span><br><span class="line"><span class="attr">feed:</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">atom</span></span><br><span class="line"><span class="attr">  path:</span> <span class="string">atom.xml</span></span><br><span class="line"><span class="attr">  limit:</span> <span class="number">20</span></span><br><span class="line"><span class="attr">  hub:</span></span><br><span class="line"><span class="attr">  content:</span></span><br><span class="line"><span class="attr">  content_limit:</span> <span class="number">140</span></span><br><span class="line"><span class="attr">  content_limit_delim:</span> <span class="string">' '</span></span><br></pre></td></tr></table></figure></p>
+<p>在 <strong>~/MyBlog/theme/next/_config.yml</strong>文件，找到 <strong>rss</strong><br><img src="rss.png" alt="rss"><br>并在 <strong>~/MyBlog/_config.yml</strong>的底部添加以下代码  </p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># RSS订阅</span></span><br><span class="line"><span class="attr">feed:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">atom</span></span><br><span class="line">  <span class="attr">path:</span> <span class="string">atom.xml</span></span><br><span class="line">  <span class="attr">limit:</span> <span class="number">20</span></span><br><span class="line">  <span class="attr">hub:</span></span><br><span class="line">  <span class="attr">content:</span></span><br><span class="line">  <span class="attr">content_limit:</span> <span class="number">140</span></span><br><span class="line">  <span class="attr">content_limit_delim:</span> <span class="string">&#x27; &#x27;</span></span><br></pre></td></tr></table></figure>
+
+
 <h3 id="给头部加个酷炫的壁纸"><a href="#给头部加个酷炫的壁纸" class="headerlink" title="给头部加个酷炫的壁纸"></a>给头部加个酷炫的壁纸</h3><p>将自己喜欢的壁纸放入 <strong>~/MyBlog/themes/next/source/images</strong>，打开 <strong>~/MyBlog/themes/next/source/css/_common/components/header/header.styl</strong><br>将配置修改为如下<br><img src="header.png" alt="header"></p>
 <h3 id="给侧边信息栏加个酷炫的壁纸"><a href="#给侧边信息栏加个酷炫的壁纸" class="headerlink" title="给侧边信息栏加个酷炫的壁纸"></a>给侧边信息栏加个酷炫的壁纸</h3><p>打开 <strong>~/MyBlog/themes/next/source/css/_common/components/sidebar/sidebar.styl</strong><br>将配置修改如下<br><img src="sidebar.png" alt="sidebar">  </p>
 <p>所有的个性化设置就结束啦～在本地预览效果还是蛮酷炫的吧！下面通过与Github仓库链接，可以让大家都访问到你酷炫的Blog，接着往下看吧～  </p>
 <h2 id="与Github仓库连接"><a href="#与Github仓库连接" class="headerlink" title="与Github仓库连接"></a>与Github仓库连接</h2><p>首先你得有一个Github的账号，没有的小伙伴自己去注册一个吧！  </p>
-<p>首先新建一个仓库，仓库名必须是<strong>yourname.github.io</strong>,例如<br><img src="github.png" alt="github"><br>进入~/MyBlog,在终端输入,将 <strong>yourname</strong>和 <strong>your-e-mail</strong>替换成自己的Github用户名和邮箱<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global uear.name <span class="string">"yourname"</span></span><br><span class="line">git config --global user.email <span class="string">"your-e-mail"</span></span><br></pre></td></tr></table></figure></p>
-<p>如果是第一次使用Github的话，还需要设置SSH Key，这样就可以在本地将你的Blog部署到Github上<br>不是第一次使用Github的老司机可以直接跳过，这里假设你是第一次使用Github<br>打开终端，输入(需替换成自己的邮箱)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">"youremail@example.com"</span></span><br></pre></td></tr></table></figure></p>
-<p>然后一路回车即可<br>在终端输入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/.ssh</span><br><span class="line">ls</span><br></pre></td></tr></table></figure></p>
+<p>首先新建一个仓库，仓库名必须是<strong>yourname.github.io</strong>,例如<br><img src="github.png" alt="github"><br>进入~/MyBlog,在终端输入,将 <strong>yourname</strong>和 <strong>your-e-mail</strong>替换成自己的Github用户名和邮箱  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global uear.name <span class="string">&quot;yourname&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;your-e-mail&quot;</span></span><br></pre></td></tr></table></figure>
+<p>如果是第一次使用Github的话，还需要设置SSH Key，这样就可以在本地将你的Blog部署到Github上<br>不是第一次使用Github的老司机可以直接跳过，这里假设你是第一次使用Github<br>打开终端，输入(需替换成自己的邮箱)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;youremail@example.com&quot;</span></span><br></pre></td></tr></table></figure>
+<p>然后一路回车即可<br>在终端输入  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/.ssh</span><br><span class="line">ls</span><br></pre></td></tr></table></figure>
 <p>可以看到有 <strong>id_rsa</strong>和 <strong>id_rsa.pub</strong>两个文件<br>打开Github的 <strong>setting</strong>找到 <strong>SSH and GPG keys</strong><br><img src="ssh.png" alt="ssh"><br>点击<br><img src="newssh.png" alt="newssh"></p>
-<p><img src="add.png" alt="add"><br>再点击 <strong>ADD SSH key</strong>即可<br>在终端输入下面命令，判断是否成功<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure></p>
+<p><img src="add.png" alt="add"><br>再点击 <strong>ADD SSH key</strong>即可<br>在终端输入下面命令，判断是否成功  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
+
 <p><img src="sshsuccess.png" alt="sshsuccess">  </p>
-<p>打开 <strong>~/MyBlog/_config.yml</strong>，配置 <strong>Deployment</strong>，修改为以下代码，并将Elitedj更换成自己的用户名即可<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">git</span></span><br><span class="line"><span class="attr">  repo:</span> <span class="string">git@github.com:Elitedj/Elitedj.github.io.git</span></span><br><span class="line"><span class="attr">  branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure></p>
-<p>打开终端输入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure></p>
+<p>打开 <strong>~/MyBlog/_config.yml</strong>，配置 <strong>Deployment</strong>，修改为以下代码，并将Elitedj更换成自己的用户名即可  </p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">git@github.com:Elitedj/Elitedj.github.io.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
+<p>打开终端输入  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
 <p>打开浏览器，输入 <strong>yourname.github.io</strong>就可以访问到你的Blog啦，并且 <strong>yourname.github.io</strong>就是你的Blog域名</p>
 <h2 id="设置域名"><a href="#设置域名" class="headerlink" title="设置域名"></a>设置域名</h2><p>有的小伙伴不喜欢 <strong>yourname.github.io</strong>，想设置一个别的域名，再指向自己的Github Page，就像本站可以通过elitedj.me访问  </p>
-<h3 id="购买域名"><a href="#购买域名" class="headerlink" title="购买域名"></a>购买域名</h3><p>在<a href="https://sg.godaddy.com/zh/" target="_blank" rel="noopener">Godaddy</a>上购买一个域名<br>购买过程不详细介绍~</p>
-<h3 id="设置DNS"><a href="#设置DNS" class="headerlink" title="设置DNS"></a>设置DNS</h3><p>在 <strong>我的产品</strong>里找到自己刚买的域名，点击 <strong>DNS</strong><br><img src="godaddy.png" alt="godaddy"><br>自定义域名服务器为<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">f1g1ns1.dnspod.net</span><br><span class="line">f1g1ns2.dnspod.net</span><br></pre></td></tr></table></figure></p>
+<h3 id="购买域名"><a href="#购买域名" class="headerlink" title="购买域名"></a>购买域名</h3><p>在<a target="_blank" rel="noopener" href="https://sg.godaddy.com/zh/">Godaddy</a>上购买一个域名<br>购买过程不详细介绍~</p>
+<h3 id="设置DNS"><a href="#设置DNS" class="headerlink" title="设置DNS"></a>设置DNS</h3><p>在 <strong>我的产品</strong>里找到自己刚买的域名，点击 <strong>DNS</strong><br><img src="godaddy.png" alt="godaddy"><br>自定义域名服务器为</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">f1g1ns1.dnspod.net</span><br><span class="line">f1g1ns2.dnspod.net</span><br></pre></td></tr></table></figure>
 <p><img src="dns.png" alt="dns">  </p>
-<p>在<a href="https://www.dnspod.cn/console/dashboard" target="_blank" rel="noopener">Dnspod</a>注册一个账号,在域名解析里增加自己的域名，添加两条记录<br>A记录：<br>首先查看 <strong>yourname.github.io</strong>的 <strong>IP地址</strong><br><img src="ip.png" alt="ip"><br>添加一条A记录<br><img src="a.png" alt="a"></p>
+<p>在<a target="_blank" rel="noopener" href="https://www.dnspod.cn/console/dashboard">Dnspod</a>注册一个账号,在域名解析里增加自己的域名，添加两条记录<br>A记录：<br>首先查看 <strong>yourname.github.io</strong>的 <strong>IP地址</strong><br><img src="ip.png" alt="ip"><br>添加一条A记录<br><img src="a.png" alt="a"></p>
 <p>CNAME记录:<br><img src="cname.png" alt="cname">  </p>
 <p>打开自己的Github仓库，新建一个 <strong>CNAME</strong>文件，并在里面输入自己购买的域名<br><img src="githubcname.png" alt="githubcname">  </p>
 <p>过一段时间就可以通过自己购买的域名访问自己的Blog了</p>
-<h2 id="开启自己的第一篇Blog"><a href="#开启自己的第一篇Blog" class="headerlink" title="开启自己的第一篇Blog"></a>开启自己的第一篇Blog</h2><p>这个时候整个Blog的搭建已经完成，来开启你的第一篇Blog吧<br>在~/MyBlog输入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo n <span class="string">"your-title"</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="开启自己的第一篇Blog"><a href="#开启自己的第一篇Blog" class="headerlink" title="开启自己的第一篇Blog"></a>开启自己的第一篇Blog</h2><p>这个时候整个Blog的搭建已经完成，来开启你的第一篇Blog吧<br>在~/MyBlog输入  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo n <span class="string">&quot;your-title&quot;</span></span><br></pre></td></tr></table></figure>
 <p>在 <strong>~/MyBlog/source/_posts</strong>就可以看到一个md文件，打开这个文件就可以用MarkDown语法编写自己的文章啦～<br>可以再文件的开头表明本文的标签和分类<br><img src="paper.png" alt="paper">  </p>
-<p>编写完成后，在终端输入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure></p>
+<p>编写完成后，在终端输入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
 <p>就可以部署到Github上，此时此刻大功告成啦～<br>更多的东西就自己探索啦～<br>有任何疑问可以在本文下面评论告诉我哦<br>感谢阅读！  </p>
 <p>完</p>
-
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/Hexo/" rel="tag"># Hexo</a>
-          
-            <a href="/tags/关于本站/" rel="tag"># 关于本站</a>
-          
-            <a href="/tags/Github/" rel="tag"># Github</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2019/02/20/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/02/24/【Hexo】个性化2-0震撼来袭/" rel="prev" title="【Hexo】个性化2.0震撼来袭">
-                【Hexo】个性化2.0震撼来袭 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-  </div>
-
-
-          </div>
-          
-
-  
-    <div class="comments" id="comments">
-    </div>
-
-  
-
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <img class="site-author-image" itemprop="image" src="/images/tou.jpg" alt="Elitedj">
-            
-              <p class="site-author-name" itemprop="name">Elitedj</p>
-              <p class="site-description motion-element" itemprop="description"></p>
-          </div>
-
-          
-            <nav class="site-state motion-element">
-              
-                <div class="site-state-item site-state-posts">
-                
-                  <a href="/archives/">
-                
-                    <span class="site-state-item-count">32</span>
-                    <span class="site-state-item-name">posts</span>
-                  </a>
-                </div>
-              
-
-              
-                
-                
-                <div class="site-state-item site-state-categories">
-                  <a href="/categories/index.html">
-                    
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">14</span>
-                    <span class="site-state-item-name">categories</span>
-                  </a>
-                </div>
-              
-
-              
-                
-                
-                <div class="site-state-item site-state-tags">
-                  <a href="/tags/index.html">
-                    
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">18</span>
-                    <span class="site-state-item-name">tags</span>
-                  </a>
-                </div>
-              
-            </nav>
-          
-
-          
-            <div class="feed-link motion-element">
-              <a href="/atom.xml" rel="alternate">
-                <i class="fa fa-rss"></i>
-                RSS
-              </a>
-            </div>
-          
-
-          
-            <div class="links-of-author motion-element">
-              
-                <span class="links-of-author-item">
-                  
-                  
-                    
-                  
-                  
-                    
-                  
-                  <a href="https://github.com/Elitedj" title="GitHub &rarr; https://github.com/Elitedj" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
-                </span>
-              
-                <span class="links-of-author-item">
-                  
-                  
-                    
-                  
-                  
-                    
-                  
-                  <a href="/elite@m.scnu.edu.cn" title="E-Mail &rarr; elite@m.scnu.edu.cn"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
-                </span>
-              
-            </div>
-          
-
-          
-
-          
-          
-            <div class="links-of-blogroll motion-element links-of-blogroll-block">
-              <div class="links-of-blogroll-title">
-                <i class="fa  fa-fw fa-link"></i>
-                Links
-              </div>
-              <ul class="links-of-blogroll-list">
-                
-                  <li class="links-of-blogroll-item">
-                    <a href="http://blog.tover.xyz" title="http://blog.tover.xyz" rel="noopener" target="_blank">Tover</a>
-                  </li>
-                
-                  <li class="links-of-blogroll-item">
-                    <a href="https://ariacx.me" title="https://ariacx.me" rel="noopener" target="_blank">Aria</a>
-                  </li>
-                
-                  <li class="links-of-blogroll-item">
-                    <a href="https://0xffff.one/" title="https://0xffff.one/" rel="noopener" target="_blank">0xFFFF</a>
-                  </li>
-                
-                  <li class="links-of-blogroll-item">
-                    <a href="https://www.yuque.com/0xffff.one/cs-learning" title="https://www.yuque.com/0xffff.one/cs-learning" rel="noopener" target="_blank">SCNU CS Wiki</a>
-                  </li>
-                
-              </ul>
-            </div>
-          
-
-          
-            
-          
-          
-
-        </div>
-      </div>
-
-      
-      <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-安装Hexo"><span class="nav-number">1.</span> <span class="nav-text">1.安装Hexo</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Node-js："><span class="nav-number">1.1.</span> <span class="nav-text">安装Node.js：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Git"><span class="nav-number">1.2.</span> <span class="nav-text">安装Git</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开始安装Hexo"><span class="nav-number">1.3.</span> <span class="nav-text">开始安装Hexo</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署Blog到本地"><span class="nav-number">2.</span> <span class="nav-text">部署Blog到本地</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NexT主题"><span class="nav-number">3.</span> <span class="nav-text">NexT主题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载NexT主题到本地"><span class="nav-number">3.1.</span> <span class="nav-text">下载NexT主题到本地</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#个性化"><span class="nav-number">4.</span> <span class="nav-text">个性化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#修改主题为NexT"><span class="nav-number">4.1.</span> <span class="nav-text">修改主题为NexT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更改网站标题、作者名、语言"><span class="nav-number">4.2.</span> <span class="nav-text">更改网站标题、作者名、语言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开启tags、categories、about页面"><span class="nav-number">4.3.</span> <span class="nav-text">开启tags、categories、about页面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更改NexT主题样式"><span class="nav-number">4.4.</span> <span class="nav-text">更改NexT主题样式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开启个人社交平台链接"><span class="nav-number">4.5.</span> <span class="nav-text">开启个人社交平台链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#友情链接"><span class="nav-number">4.6.</span> <span class="nav-text">友情链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更换个人头像、设置为圆形头像、头像旋转特效"><span class="nav-number">4.7.</span> <span class="nav-text">更换个人头像、设置为圆形头像、头像旋转特效</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#阅读全文"><span class="nav-number">4.8.</span> <span class="nav-text">阅读全文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#评论功能"><span class="nav-number">4.9.</span> <span class="nav-text">评论功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开启不蒜子计数功能，记录访问人数等"><span class="nav-number">4.10.</span> <span class="nav-text">开启不蒜子计数功能，记录访问人数等</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开启搜索功能"><span class="nav-number">4.11.</span> <span class="nav-text">开启搜索功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RSS订阅功能"><span class="nav-number">4.12.</span> <span class="nav-text">RSS订阅功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#给头部加个酷炫的壁纸"><span class="nav-number">4.13.</span> <span class="nav-text">给头部加个酷炫的壁纸</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#给侧边信息栏加个酷炫的壁纸"><span class="nav-number">4.14.</span> <span class="nav-text">给侧边信息栏加个酷炫的壁纸</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#与Github仓库连接"><span class="nav-number">5.</span> <span class="nav-text">与Github仓库连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置域名"><span class="nav-number">6.</span> <span class="nav-text">设置域名</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#购买域名"><span class="nav-number">6.1.</span> <span class="nav-text">购买域名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置DNS"><span class="nav-number">6.2.</span> <span class="nav-text">设置DNS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开启自己的第一篇Blog"><span class="nav-number">7.</span> <span class="nav-text">开启自己的第一篇Blog</span></a></li></ol></div>
-            
-
-          </div>
-        </div>
-      <!--/noindex-->
-      
-
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; 2019 – <span itemprop="copyrightYear">2021</span>
-  <span class="with-love" id="animate">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Elitedj</span>
-
-  
-
-  
-</div>
-
-<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span><br>
-<script>
-    var now = new Date();
-    function createtime() {
-        var grt= new Date("02/21/2019 13:00:00");//此处修改你的建站时间或者网站上线时间
-        now.setTime(now.getTime()+250);
-        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
-        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
-        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
-        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
-        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
-        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
-        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
-        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
-    }
-setInterval("createtime()",250);
-</script>
-
-
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
-
-
-
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.0.0</div>
-
-
-
-
-
-
-        
-<div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-  
-    <span class="post-meta-item-icon">
-      <i class="fa fa-user"></i>
-    </span>
-    <span class="site-uv" title="Total Visitors">
-      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
-    </span>
-  
-
-  
-    <span class="post-meta-divider">|</span>
-  
-
-  
-    <span class="post-meta-item-icon">
-      <i class="fa fa-eye"></i>
-    </span>
-    <span class="site-pv" title="Total Views">
-      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
-    </span>
-  
-</div>
-
-
-
-
-
-
-
-
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-    
-
-    
-
-    
-  </div>
-
-  
-
-  
-
-<script>
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Elitedj</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://elitedj.me/2019/02/21/%E3%80%90%E6%9C%AC%E7%AB%99%E6%90%AD%E5%BB%BA%E3%80%91%E5%88%A9%E7%94%A8Hexo-Github%E6%90%AD%E5%BB%BA%E5%B1%9E%E4%BA%8E%E4%BD%A0%E7%9A%84Blog/">http://elitedj.me/2019/02/21/【本站搭建】利用Hexo-Github搭建属于你的Blog/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://elitedj.me" target="_blank">Elitedj</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Hexo/">Hexo</a><a class="post-meta__tags" href="/tags/%E5%85%B3%E4%BA%8E%E6%9C%AC%E7%AB%99/">关于本站</a><a class="post-meta__tags" href="/tags/Github/">Github</a></div><div class="post_share"><div class="social-share" data-image="https://z3.ax1x.com/2021/04/07/c8QqWn.jpg" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2019/02/24/%E3%80%90Hexo%E3%80%91%E4%B8%AA%E6%80%A7%E5%8C%962-0%E9%9C%87%E6%92%BC%E6%9D%A5%E8%A2%AD/"><img class="prev-cover" src="https://z3.ax1x.com/2021/04/07/c81ecq.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">【Hexo】个性化2.0震撼来袭</div></div></a></div><div class="next-post pull-right"><a href="/2019/02/20/hello-world/"><img class="next-cover" src="https://z3.ax1x.com/2021/04/07/c8ddSS.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Hello World</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="https://z3.ax1x.com/2021/04/07/c8eSC6.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">Elitedj</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">32</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">18</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">14</div></a></div></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Elitedj" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:elitedj@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85Hexo"><span class="toc-number">1.</span> <span class="toc-text">1.安装Hexo</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Node-js%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">安装Node.js：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Git"><span class="toc-number">1.2.</span> <span class="toc-text">安装Git</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%A7%8B%E5%AE%89%E8%A3%85Hexo"><span class="toc-number">1.3.</span> <span class="toc-text">开始安装Hexo</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2Blog%E5%88%B0%E6%9C%AC%E5%9C%B0"><span class="toc-number">2.</span> <span class="toc-text">部署Blog到本地</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NexT%E4%B8%BB%E9%A2%98"><span class="toc-number">3.</span> <span class="toc-text">NexT主题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BDNexT%E4%B8%BB%E9%A2%98%E5%88%B0%E6%9C%AC%E5%9C%B0"><span class="toc-number">3.1.</span> <span class="toc-text">下载NexT主题到本地</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%AA%E6%80%A7%E5%8C%96"><span class="toc-number">4.</span> <span class="toc-text">个性化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E4%B8%BB%E9%A2%98%E4%B8%BANexT"><span class="toc-number">4.1.</span> <span class="toc-text">修改主题为NexT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%B4%E6%94%B9%E7%BD%91%E7%AB%99%E6%A0%87%E9%A2%98%E3%80%81%E4%BD%9C%E8%80%85%E5%90%8D%E3%80%81%E8%AF%AD%E8%A8%80"><span class="toc-number">4.2.</span> <span class="toc-text">更改网站标题、作者名、语言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%90%AFtags%E3%80%81categories%E3%80%81about%E9%A1%B5%E9%9D%A2"><span class="toc-number">4.3.</span> <span class="toc-text">开启tags、categories、about页面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%B4%E6%94%B9NexT%E4%B8%BB%E9%A2%98%E6%A0%B7%E5%BC%8F"><span class="toc-number">4.4.</span> <span class="toc-text">更改NexT主题样式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%90%AF%E4%B8%AA%E4%BA%BA%E7%A4%BE%E4%BA%A4%E5%B9%B3%E5%8F%B0%E9%93%BE%E6%8E%A5"><span class="toc-number">4.5.</span> <span class="toc-text">开启个人社交平台链接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5"><span class="toc-number">4.6.</span> <span class="toc-text">友情链接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%B4%E6%8D%A2%E4%B8%AA%E4%BA%BA%E5%A4%B4%E5%83%8F%E3%80%81%E8%AE%BE%E7%BD%AE%E4%B8%BA%E5%9C%86%E5%BD%A2%E5%A4%B4%E5%83%8F%E3%80%81%E5%A4%B4%E5%83%8F%E6%97%8B%E8%BD%AC%E7%89%B9%E6%95%88"><span class="toc-number">4.7.</span> <span class="toc-text">更换个人头像、设置为圆形头像、头像旋转特效</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%85%E8%AF%BB%E5%85%A8%E6%96%87"><span class="toc-number">4.8.</span> <span class="toc-text">阅读全文</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%84%E8%AE%BA%E5%8A%9F%E8%83%BD"><span class="toc-number">4.9.</span> <span class="toc-text">评论功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%90%AF%E4%B8%8D%E8%92%9C%E5%AD%90%E8%AE%A1%E6%95%B0%E5%8A%9F%E8%83%BD%EF%BC%8C%E8%AE%B0%E5%BD%95%E8%AE%BF%E9%97%AE%E4%BA%BA%E6%95%B0%E7%AD%89"><span class="toc-number">4.10.</span> <span class="toc-text">开启不蒜子计数功能，记录访问人数等</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%90%AF%E6%90%9C%E7%B4%A2%E5%8A%9F%E8%83%BD"><span class="toc-number">4.11.</span> <span class="toc-text">开启搜索功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RSS%E8%AE%A2%E9%98%85%E5%8A%9F%E8%83%BD"><span class="toc-number">4.12.</span> <span class="toc-text">RSS订阅功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%99%E5%A4%B4%E9%83%A8%E5%8A%A0%E4%B8%AA%E9%85%B7%E7%82%AB%E7%9A%84%E5%A3%81%E7%BA%B8"><span class="toc-number">4.13.</span> <span class="toc-text">给头部加个酷炫的壁纸</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%99%E4%BE%A7%E8%BE%B9%E4%BF%A1%E6%81%AF%E6%A0%8F%E5%8A%A0%E4%B8%AA%E9%85%B7%E7%82%AB%E7%9A%84%E5%A3%81%E7%BA%B8"><span class="toc-number">4.14.</span> <span class="toc-text">给侧边信息栏加个酷炫的壁纸</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8EGithub%E4%BB%93%E5%BA%93%E8%BF%9E%E6%8E%A5"><span class="toc-number">5.</span> <span class="toc-text">与Github仓库连接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E5%9F%9F%E5%90%8D"><span class="toc-number">6.</span> <span class="toc-text">设置域名</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B4%AD%E4%B9%B0%E5%9F%9F%E5%90%8D"><span class="toc-number">6.1.</span> <span class="toc-text">购买域名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AEDNS"><span class="toc-number">6.2.</span> <span class="toc-text">设置DNS</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E5%90%AF%E8%87%AA%E5%B7%B1%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87Blog"><span class="toc-number">7.</span> <span class="toc-text">开启自己的第一篇Blog</span></a></li></ol></div></div></div></div></main><footer id="footer" style="background-image: url('https://z3.ax1x.com/2021/04/07/c8eVUI.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2021 By Elitedj</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'zOEvCRaHczqQkvn7g5bk2d9c-gzGzoHsz',
+      appKey: 'JJQvXVH4XIDyjJaIK2HWeTY3',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: 'nick,mail'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
   }
-</script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-  
-  <script src="/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script src="/lib/reading_progress/reading_progress.js"></script>
-
-
-  
-
-
-  <script src="/js/src/utils.js?v=7.0.0"></script>
-
-  <script src="/js/src/motion.js?v=7.0.0"></script>
-
-
-
-  
-  
-
-
-  <script src="/js/src/schemes/muse.js?v=7.0.0"></script>
-
-
-
-  
-  <script src="/js/src/scrollspy.js?v=7.0.0"></script>
-<script src="/js/src/post-details.js?v=7.0.0"></script>
-<script type="text/javascript" src="/js/src/photoswipe-ui-default.min.js?v="></script>
-
-
-
-  
-
-
-  <script src="/js/src/bootstrap.js?v=7.0.0"></script>
-
-
-
-  
-  
-
-<script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
-
-
-
-<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
-
-<script>
-  var GUEST = ['nick', 'mail', 'link'];
-  var guest = 'nick,mail';
-  guest = guest.split(',').filter(function(item) {
-    return GUEST.indexOf(item) > -1;
-  });
-  new Valine({
-    el: '#comments',
-    verify: false,
-    notify: false,
-    appId: 'zOEvCRaHczqQkvn7g5bk2d9c-gzGzoHsz',
-    appKey: 'JJQvXVH4XIDyjJaIK2HWeTY3',
-    placeholder: 'comment something',
-    avatar: 'mm',
-    meta: guest,
-    pageSize: '10' || 10,
-    visitor: false
-  });
-</script>
-
-
-
-
-  
-
-
-  
-  <script>
-    // Popup Window;
-    var isfetched = false;
-    var isXml = true;
-    // Search DB path;
-    var search_path = "";
-    if (search_path.length === 0) {
-      search_path = "search.xml";
-    } else if (/json$/i.test(search_path)) {
-      isXml = false;
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
-
-    var onPopupClose = function (e) {
-      $('.popup').hide();
-      $('#local-search-input').val('');
-      $('.search-result-list').remove();
-      $('#no-result').remove();
-      $(".local-search-pop-overlay").remove();
-      $('body').css('overflow', '');
-    }
-
-    function proceedsearch() {
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
-        .css('overflow', 'hidden');
-      $('.search-popup-overlay').click(onPopupClose);
-      $('.popup').toggle();
-      var $localSearchInput = $('#local-search-input');
-      $localSearchInput.attr("autocapitalize", "none");
-      $localSearchInput.attr("autocorrect", "off");
-      $localSearchInput.focus();
-    }
-
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-      'use strict';
-
-      // start loading animation
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
-          '<div id="search-loading-icon">' +
-          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
-          '</div>' +
-          '</div>')
-        .css('overflow', 'hidden');
-      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
-
-      
-
-      $.ajax({
-        url: path,
-        dataType: isXml ? "xml" : "json",
-        async: true,
-        success: function(res) {
-          // get the contents from search data
-          isfetched = true;
-          $('.popup').detach().appendTo('.header-inner');
-          var datas = isXml ? $("entry", res).map(function() {
-            return {
-              title: $("title", this).text(),
-              content: $("content",this).text(),
-              url: $("url" , this).text()
-            };
-          }).get() : res;
-          var input = document.getElementById(search_id);
-          var resultContent = document.getElementById(content_id);
-          var inputEventFunction = function() {
-            var searchText = input.value.trim().toLowerCase();
-            var keywords = searchText.split(/[\s\-]+/);
-            if (keywords.length > 1) {
-              keywords.push(searchText);
-            }
-            var resultItems = [];
-            if (searchText.length > 0) {
-              // perform local searching
-              datas.forEach(function(data) {
-                var isMatch = false;
-                var hitCount = 0;
-                var searchTextCount = 0;
-                var title = data.title.trim();
-                var titleInLowerCase = title.toLowerCase();
-                var content = data.content.trim().replace(/<[^>]+>/g,"");
-                
-                var contentInLowerCase = content.toLowerCase();
-                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
-                var indexOfTitle = [];
-                var indexOfContent = [];
-                // only match articles with not empty titles
-                if(title != '') {
-                  keywords.forEach(function(keyword) {
-                    function getIndexByWord(word, text, caseSensitive) {
-                      var wordLen = word.length;
-                      if (wordLen === 0) {
-                        return [];
-                      }
-                      var startPosition = 0, position = [], index = [];
-                      if (!caseSensitive) {
-                        text = text.toLowerCase();
-                        word = word.toLowerCase();
-                      }
-                      while ((position = text.indexOf(word, startPosition)) > -1) {
-                        index.push({position: position, word: word});
-                        startPosition = position + wordLen;
-                      }
-                      return index;
-                    }
-
-                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
-                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
-                  });
-                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
-                    isMatch = true;
-                    hitCount = indexOfTitle.length + indexOfContent.length;
-                  }
-                }
-
-                // show search results
-
-                if (isMatch) {
-                  // sort index by position of keyword
-
-                  [indexOfTitle, indexOfContent].forEach(function (index) {
-                    index.sort(function (itemLeft, itemRight) {
-                      if (itemRight.position !== itemLeft.position) {
-                        return itemRight.position - itemLeft.position;
-                      } else {
-                        return itemLeft.word.length - itemRight.word.length;
-                      }
-                    });
-                  });
-
-                  // merge hits into slices
-
-                  function mergeIntoSlice(text, start, end, index) {
-                    var item = index[index.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    var hits = [];
-                    var searchTextCountInSlice = 0;
-                    while (position + word.length <= end && index.length != 0) {
-                      if (word === searchText) {
-                        searchTextCountInSlice++;
-                      }
-                      hits.push({position: position, length: word.length});
-                      var wordEnd = position + word.length;
-
-                      // move to next position of hit
-
-                      index.pop();
-                      while (index.length != 0) {
-                        item = index[index.length - 1];
-                        position = item.position;
-                        word = item.word;
-                        if (wordEnd > position) {
-                          index.pop();
-                        } else {
-                          break;
-                        }
-                      }
-                    }
-                    searchTextCount += searchTextCountInSlice;
-                    return {
-                      hits: hits,
-                      start: start,
-                      end: end,
-                      searchTextCount: searchTextCountInSlice
-                    };
-                  }
-
-                  var slicesOfTitle = [];
-                  if (indexOfTitle.length != 0) {
-                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
-                  }
-
-                  var slicesOfContent = [];
-                  while (indexOfContent.length != 0) {
-                    var item = indexOfContent[indexOfContent.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    // cut out 100 characters
-                    var start = position - 20;
-                    var end = position + 80;
-                    if(start < 0){
-                      start = 0;
-                    }
-                    if (end < position + word.length) {
-                      end = position + word.length;
-                    }
-                    if(end > content.length){
-                      end = content.length;
-                    }
-                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
-                  }
-
-                  // sort slices in content by search text's count and hits' count
-
-                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
-                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
-                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
-                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
-                      return sliceRight.hits.length - sliceLeft.hits.length;
-                    } else {
-                      return sliceLeft.start - sliceRight.start;
-                    }
-                  });
-
-                  // select top N slices in content
-
-                  var upperBound = parseInt('1');
-                  if (upperBound >= 0) {
-                    slicesOfContent = slicesOfContent.slice(0, upperBound);
-                  }
-
-                  // highlight title and content
-
-                  function highlightKeyword(text, slice) {
-                    var result = '';
-                    var prevEnd = slice.start;
-                    slice.hits.forEach(function (hit) {
-                      result += text.substring(prevEnd, hit.position);
-                      var end = hit.position + hit.length;
-                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
-                      prevEnd = end;
-                    });
-                    result += text.substring(prevEnd, slice.end);
-                    return result;
-                  }
-
-                  var resultItem = '';
-
-                  if (slicesOfTitle.length != 0) {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
-                  } else {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
-                  }
-
-                  slicesOfContent.forEach(function (slice) {
-                    resultItem += "<a href='" + articleUrl + "'>" +
-                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
-                      "...</p>" + "</a>";
-                  });
-
-                  resultItem += "</li>";
-                  resultItems.push({
-                    item: resultItem,
-                    searchTextCount: searchTextCount,
-                    hitCount: hitCount,
-                    id: resultItems.length
-                  });
-                }
-              })
-            };
-            if (keywords.length === 1 && keywords[0] === "") {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
-            } else if (resultItems.length === 0) {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
-            } else {
-              resultItems.sort(function (resultLeft, resultRight) {
-                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
-                  return resultRight.searchTextCount - resultLeft.searchTextCount;
-                } else if (resultLeft.hitCount !== resultRight.hitCount) {
-                  return resultRight.hitCount - resultLeft.hitCount;
-                } else {
-                  return resultRight.id - resultLeft.id;
-                }
-              });
-              var searchResultList = '<ul class=\"search-result-list\">';
-              resultItems.forEach(function (result) {
-                searchResultList += result.item;
-              })
-              searchResultList += "</ul>";
-              resultContent.innerHTML = searchResultList;
-            }
-          }
-
-          if ('auto' === 'auto') {
-            input.addEventListener('input', inputEventFunction);
-          } else {
-            $('.search-icon').click(inputEventFunction);
-            input.addEventListener('keypress', function (event) {
-              if (event.keyCode === 13) {
-                inputEventFunction();
-              }
-            });
-          }
-
-          // remove loading animation
-          $(".local-search-pop-overlay").remove();
-          $('body').css('overflow', '');
-
-          proceedsearch();
-        }
-      });
-    }
-
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched === false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-    });
-
-    $('.popup-btn-close').click(onPopupClose);
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-    $(document).on('keyup', function (event) {
-      var shouldDismissSearchPopup = event.which === 27 &&
-        $('.search-popup').is(':visible');
-      if (shouldDismissSearchPopup) {
-        onPopupClose();
-      }
-    });
-  </script>
-
-
-
-
-
-  
-
-  
-
-  
-  
-
-  
-  
-
-  
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-  
-  <script src="/lib/bookmark/bookmark.min.js?v=1.0"></script>
-  <script>
-  
-    bookmark.scrollToMark('auto', "#more");
-  
-  </script>
-
-
-  
-  <style>
-    .copy-btn {
-      display: inline-block;
-      padding: 6px 12px;
-      font-size: 13px;
-      font-weight: 700;
-      line-height: 20px;
-      color: #333;
-      white-space: nowrap;
-      vertical-align: middle;
-      cursor: pointer;
-      background-color: #eee;
-      background-image: linear-gradient(#fcfcfc, #eee);
-      border: 1px solid #d5d5d5;
-      border-radius: 3px;
-      user-select: none;
-      outline: 0;
-    }
-
-    .highlight-wrap .copy-btn {
-      transition: opacity .3s ease-in-out;
-      opacity: 0;
-      padding: 2px 6px;
-      position: absolute;
-      right: 4px;
-      top: 8px;
-    }
-
-    .highlight-wrap:hover .copy-btn,
-    .highlight-wrap .copy-btn:focus {
-      opacity: 1
-    }
-
-    .highlight-wrap {
-      position: relative;
-    }
-  </style>
-  <script>
-    $('.highlight').each(function(i, e) {
-      var $wrap = $('<div>').addClass('highlight-wrap');
-      $(e).after($wrap);
-      $wrap.append($('<button>').addClass('copy-btn').append('Copy').on('click', function(e) {
-        var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
-          return $(e).text();
-        }).toArray().join('\n');
-        var ta = document.createElement('textarea');
-        var range = document.createRange(); //For Chrome
-        var sel = window.getSelection(); //For Chrome
-        var yPosition = window.pageYOffset || document.documentElement.scrollTop;
-        ta.style.top = yPosition + 'px'; //Prevent page scroll
-        ta.style.position = 'absolute';
-        ta.style.opacity = '0';
-        ta.value = code;
-        ta.textContent = code; //For FireFox
-        ta.contentEditable = true;
-        ta.readOnly = false;
-        document.body.appendChild(ta);
-        range.selectNode(ta);
-        sel.removeAllRanges();
-        sel.addRange(range);
-        ta.setSelectionRange(0, code.length);
-        var result = document.execCommand('copy');
-        
-          if (result) $(this).text('Copied');
-          else $(this).text('Copy failed');
-        
-        ta.blur(); //For iOS
-        $(this).blur();
-      })).on('mouseleave', function(e) {
-        var $b = $(this).find('.copy-btn');
-        setTimeout(function() {
-          $b.text('Copy');
-        }, 300);
-      }).append(e);
-    })
-  </script>
-
-
-</body>
-</html>
-
-<!--崩溃欺骗-->
-<script type="text/javascript" src="/js/src/crash_cheat.js"></script>
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
