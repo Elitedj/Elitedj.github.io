@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html
+  lang="zh"
+  dir="ltr"
+  
+><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<title>莫队算法 | Elitedj&#39;s Blog</title>
+
+<meta name="generator" content="Hugo Eureka 0.9.3" />
+<link rel="stylesheet" href="/css/eureka.min.9cec6350e37e534b0338fa9a085bf06855de3b0f2dcf857e792e5e97b07ea905d4d5513db554cbc26a9c3da622bae92d.css">
+<script defer src="/js/eureka.min.fa9a6bf6d7a50bb635b4cca7d2ba5cf3dfb095ae3798773f1328f7950028b48c17d06276594e1b5f244a25a6c969a705.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload"
+  href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&amp;family=Noto&#43;Serif&#43;SC:wght@400;600;700&amp;display=swap"
+  as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/styles/base16/solarized-light.min.css"
+   media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/highlight.min.js"
+   crossorigin></script>
+  <script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/languages/dart.min.js"
+     crossorigin></script>
+<link rel="stylesheet" href="/css/highlightjs.min.2958991528e43eb6fc9b8c4f2b8e052f79c4010718e1d1e888a777620e9ee63021c2c57ec7417a3108019bb8c41943e6.css" media="print" onload="this.media='all';this.onload=null">
+
+
+<script defer type="text/javascript" src="/js/fontawesome.min.d9ba21a4e7c7dbe0ba1f8b62ea1dda063fb92d88bd994ccb206ced4f4c9081fe517f9b61b57efd649e9edbdff33a2114.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"
+   integrity="sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ"  media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js" 
+  integrity="sha384-VQ8d8WVFw0yHhCk5E8I86oOhv48xLpnDZx5T9GogA/Y84DcCKWXDmSDfn13bzFZY"  crossorigin></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js"
+   integrity="sha384-&#43;XBljXPPiv&#43;OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR"  crossorigin></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: "$$", right: "$$", display: true },
+        { left: "$", right: "$", display: false },
+        { left: "\\(", right: "\\)", display: false },
+        { left: "\\[", right: "\\]", display: true }
+      ],
+    });
+  });
+</script>
+
+
+<script defer src="https://cdn.jsdelivr.net/npm/mermaid@8.14.0/dist/mermaid.min.js" 
+  integrity="sha384-atOyb0FxAgN9LyAc6PEf9BjgwLISyansgdH8/VXQH8p2o5vfrRgmGIJ2Sg22L0A0"  crossorigin></script>
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="/images/avatar_hubecf9d80b8b876872272a68886c75e90_327995_32x32_fill_box_center_3.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/avatar_hubecf9d80b8b876872272a68886c75e90_327995_180x180_fill_box_center_3.png">
+
+<meta name="description"
+  content="Elitedj&#39;s Blog">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1 ,
+      "name":"Posts",
+      "item":"/posts/"},{
+      "@type": "ListItem",
+      "position": 2 ,
+      "name":"莫队算法",
+      "item":"/posts/modui/"}]
+}
+</script>
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "/posts/modui/"
+    },
+    "headline": "莫队算法 | Elitedj\u0027s Blog","datePublished": "2020-09-10T09:34:58+00:00",
+    "dateModified": "2020-09-10T09:34:58+00:00",
+    "wordCount":  2106 ,
+    "publisher": {
+        "@type": "Person",
+        "name": "Elitedj",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "/images/avatar.png"
+        }
+        },
+    "description": "Elitedj\u0027s Blog"
+}
+</script><meta property="og:title" content="莫队算法 | Elitedj&#39;s Blog" />
+<meta property="og:type" content="article" />
+
+
+<meta property="og:image" content="/images/avatar.png">
+
+
+<meta property="og:url" content="/posts/modui/" />
+
+
+
+
+<meta property="og:description" content="" />
+
+
+
+
+<meta property="og:locale" content="zh" />
+
+
+
+
+<meta property="og:site_name" content="Elitedj&#39;s Blog" />
+
+
+
+
+
+
+<meta property="article:published_time" content="2020-09-10T09:34:58&#43;00:00" />
+
+
+<meta property="article:modified_time" content="2020-09-10T09:34:58&#43;00:00" />
+
+
+
+<meta property="article:section" content="posts" />
+
+
+<meta property="article:tag" content="Algorithm" />
+
+<meta property="article:tag" content="Other" />
+
+
+
+
+
+<meta property="og:see_also" content="/posts/scapegoat-tree/" />
+
+<meta property="og:see_also" content="/posts/persistent-set-union/" />
+
+<meta property="og:see_also" content="/posts/persistent-array/" />
+
+<meta property="og:see_also" content="/posts/max-min-representation/" />
+
+<meta property="og:see_also" content="/posts/manacher/" />
+
+<meta property="og:see_also" content="/posts/exkmp/" />
+
+
+
+
+  <body class="flex min-h-screen flex-col">
+    <header
+      class="min-h-16 pl-scrollbar bg-secondary-bg fixed z-50 flex w-full items-center shadow-sm"
+    >
+      <div class="mx-auto w-full max-w-screen-xl"><script>
+    let storageColorScheme = localStorage.getItem("lightDarkMode")
+    if (((storageColorScheme == 'Auto' || storageColorScheme == null) && window.matchMedia("(prefers-color-scheme: dark)").matches) || storageColorScheme == "Dark") {
+        document.getElementsByTagName('html')[0].classList.add('dark')
+    }
+</script>
+<nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0">
+    <a href="/" class="me-6 text-primary-text text-xl font-bold">Elitedj&#39;s Blog</a>
+    <button id="navbar-btn" class="md:hidden flex items-center px-3 py-2" aria-label="Open Navbar">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div id="target"
+        class="hidden block md:flex md:grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20">
+        <div class="md:flex md:h-16 text-sm md:grow pb-4 md:pb-0 border-b md:border-b-0">
+            <a href="/about" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  me-4">About</a>
+        </div>
+
+        <div class="flex">
+            <div class="relative pt-4 md:pt-0">
+                <div class="cursor-pointer hover:text-eureka" id="lightDarkMode">
+                    <i class="fas fa-adjust"></i>
+                </div>
+                <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id="is-open">
+                </div>
+                <div class="absolute flex flex-col start-0 md:start-auto end-auto md:end-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40"
+                    id='lightDarkOptions'>
+                    <span class="px-4 py-1 hover:text-eureka" name="Light">浅色</span>
+                    <span class="px-4 py-1 hover:text-eureka" name="Dark">深色</span>
+                    <span class="px-4 py-1 hover:text-eureka" name="Auto">自动</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id="is-open-mobile">
+    </div>
+
+</nav>
+<script>
+    
+    let element = document.getElementById('lightDarkMode')
+    if (storageColorScheme == null || storageColorScheme == 'Auto') {
+        document.addEventListener('DOMContentLoaded', () => {
+            window.matchMedia("(prefers-color-scheme: dark)").addEventListener('change', switchDarkMode)
+        })
+    } else if (storageColorScheme == "Light") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'sun')
+        element.firstElementChild.classList.add('fa-sun')
+    } else if (storageColorScheme == "Dark") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'moon')
+        element.firstElementChild.classList.add('fa-moon')
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        getcolorscheme();
+        switchBurger();
+    });
+</script>
+</div>
+    </header>
+    <main class="grow pt-16">
+        <div class="pl-scrollbar">
+          <div class="mx-auto w-full max-w-screen-xl lg:px-4 xl:px-8">
+  
+  
+  <div class="grid grid-cols-2 gap-4 lg:grid-cols-8 lg:pt-12">
+    <div
+      class="lg:col-start-2 bg-secondary-bg col-span-2 rounded px-6 py-8 lg:col-span-6"
+    >
+      <article class="prose">
+  <h1 class="mb-4">莫队算法</h1>
+
+  <div
+  class="text-tertiary-text not-prose mt-2 flex flex-row flex-wrap items-center"
+>
+  <div class="me-6 my-2">
+    <i class="fas fa-calendar me-1"></i>
+    <span
+      >2020-09-10</span
+    >
+  </div>
+  <div class="me-6 my-2">
+    <i class="fas fa-clock me-1"></i>
+    <span>5分钟阅读时长</span>
+  </div>
+
+  
+    <div class="me-6 my-2">
+      <i class="fas fa-folder me-1"></i>
+      
+        <a href="/categories/algorithm/" class="hover:text-eureka"
+          >Algorithm</a
+        >
+      
+        
+          <span>, </span>
+        <a href="/categories/other/" class="hover:text-eureka"
+          >Other</a
+        >
+      
+    </div>
+  
+
+  
+</div>
+
+
+  
+  
+
+  <h1 id="简介">简介</h1>
+<p>莫队算法是由莫涛发明的，用于处理区间询问的<del>暴力</del>优雅的离线算法，主要基于分块和排序的思想。</p>
+<h1 id="问题引入">问题引入</h1>
+<p>假设我们要求一个区间<code>[l, r]</code>中含有不同元素的个数，现在已知区间<code>[2, 3]</code>的答案，要求区间<code>[2, 4]</code>的答案，要怎么做呢？我们先开一个<code>cnt[]</code>数组来记录已知答案的区间包含的元素个数，那么求区间<code>[2, 4]</code>时，先将<code>r</code>指针往右移，判断<code>cnt[a[r]]</code>是否为0，为0的话则说明出现了一个新的数字，答案的贡献+1，并且<code>cnt[a[i]]++</code>。所以，对于求任何的区间，我们都可以通过移动左右指针，并且暴力维护区间信息的方式来得到答案。</p>
+<p>这个算法非常容易写，这里就不写了~~，(主要是懒)~~</p>
+<p>很明显这个算法会存在问题，比如题目要求<code>[1, 2]</code>、<code>[n-1, n]</code>、<code>[1, 2]</code>、<code>[n-1, n]</code>……，那么我们的左右指针就会在两个极端反复横跳，那么必定会TLE。这一个暴力还不够的优雅，所以肯定不是莫队算法，但是离莫队算法很近很近了。</p>
+<h1 id="优化">优化</h1>
+<p>对于上面这种情况，加入我们将询问区间变为<code>[1, 2]</code>、<code>[1, 2]</code>、<code>[1, 2]</code>……<code>[n-1, n]</code>、<code>[n-1, n]</code>、<code>[n-1, n]</code>这样，那么将跑的飞快。所以莫队算法就是将所有询问记录下来，然后根据规则对询问区间进行排序，再通过移动左右指针的方式暴力维护答案。所以莫队算法是处理离线问题的，对于在线问题是束手无措。</p>
+<p>在线问题就是必须询问一次回答一次，离线问题就是可以先将全部询问记录下来，最后再一起回答。</p>
+<p>那么如何对区间进行排序呢？我们先将区间分为<code>sqrt(n)</code>块，有两个区间<code>a</code>和<code>b</code>，如果<code>a.l</code>和<code>b.l</code>在同一个块里，我们就将根据它们的<code>r</code>排序，否则将<code>l</code>所在块号小的排在前面。</p>
+<h1 id="莫队">莫队</h1>
+<p>来看看对于上面的问题，代码究竟怎么写吧</p>
+<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+typedef long long ll;
+typedef unsigned long long ull;
+#define inf 0x3f3f3f3f
+#define INF 0x3f3f3f3f3f3f3f3f
+#define IO ios::sync_with_stdio(0)
+#define DEBUG(x) cout&lt;&lt;&quot;---&gt;&quot;&lt;&lt;(x)&lt;&lt;endl;
+typedef pair&lt;int, int&gt; P;
+const ll mod = 1e9+7;
+const double eps = 1e-9;
+const double PI = acos(-1);
+const int maxn = 1e6+5;
+
+// 记录询问，k代表第几个询问
+struct Q {
+	int l, r, k;
+}q[maxn];
+
+// pos[i]表示i所在的块号
+int pos[maxn], cnt[maxn], ans[maxn], a[maxn];
+
+// 记录区间答案的全局变量
+int res;
+
+// 排序规则
+bool cmp(Q a, Q b) {
+	return pos[a.l] == pos[b.l] ? a.r &lt; b.r : pos[a.l] &lt; pos[b.l];
+}
+
+// 加贡献
+void add(int x) {
+	cnt[a[x]]++;
+	res += cnt[a[x]] == 1;
+}
+
+// 减贡献
+void sub(int x) {
+	cnt[a[x]]--;
+	res -= cnt[a[x]] == 0;
+}
+
+int main() {
+	int n;
+	scanf(&quot;%d&quot;, &amp;n);
+    // 块大小
+	int size = sqrt(n);
+	for (int i=1; i&lt;=n; i++) {
+		scanf(&quot;%d&quot;, &amp;a[i]);
+        // i所在的块号
+		pos[i] = i / size;
+	}
+	int m;
+	scanf(&quot;%d&quot;, &amp;m);
+	for (int i=0; i&lt;m; i++) {
+		scanf(&quot;%d%d&quot;, &amp;q[i].l, &amp;q[i].r);
+		q[i].k = i;
+	}
+	sort(q, q+m, cmp);
+    // 注意l和r的初始化不是0 0
+	int l=1, r=0;
+	for (int i=0; i&lt;m; i++) {
+        // 暴力移动区间，注意自增自减运算符的效果
+		while (q[i].l &lt; l) add(--l);
+		while (q[i].r &gt; r) add(++r);
+		while (q[i].l &gt; l) sub(l++);
+		while (q[i].r &lt; r) sub(r--);
+		ans[q[i].k] = res;
+	}
+	for (int i=0; i&lt;m; i++) printf(&quot;%d\n&quot;, ans[i]);
+	return 0;
+}
+</code></pre>
+<p>莫队算法的整体架构就如上面一样，只是<code>add()</code>和<code>sub()</code>函数的写法需要根据题目要求定制一下，这么一看莫队算法确实是优雅的暴力~</p>
+<h1 id="洛谷p2709">洛谷P2709</h1>
+<p>来看一道模板题吧</p>
+<p><a href="https://www.luogu.com.cn/problem/P2709">luogu P2709</a></p>
+<p><img src="p2709.png" alt="image-20200909094120601"></p>
+<pre><code class="language-c++">// 样例输入
+6 4 3
+1 3 2 1 1 3
+1 4
+2 6
+3 5
+5 6
+
+// 样例输出
+6
+9
+5
+2
+</code></pre>
+<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+typedef long long ll;
+typedef unsigned long long ull;
+#define inf 0x3f3f3f3f
+#define INF 0x3f3f3f3f3f3f3f3f
+#define IO ios::sync_with_stdio(0)
+#define DEBUG(x) cout&lt;&lt;&quot;---&gt;&quot;&lt;&lt;(x)&lt;&lt;endl;
+typedef pair&lt;int, int&gt; P;
+const ll mod = 1e9+7;
+const double eps = 1e-9;
+const double PI = acos(-1);
+const int maxn = 2e5+5;
+
+
+struct Q {
+	int l, r, k;
+}q[maxn];
+
+int a[maxn], pos[maxn], cnt[maxn];
+ll ans[maxn];
+ll res;
+
+bool cmp(Q x, Q y) {
+	return pos[x.l] == pos[y.l] ? x.r &lt; y.r : pos[x.l] &lt; pos[y.l];
+}
+
+void add(int x) {
+	cnt[a[x]]++;
+	res += 1ll * cnt[a[x]] * cnt[a[x]] - 1ll * (cnt[a[x]] - 1) * (cnt[a[x]] - 1);
+}
+
+void sub(int x) {
+	cnt[a[x]]--;
+	res -= 1ll * (cnt[a[x]] + 1) * (cnt[a[x]] + 1) - 1ll * cnt[a[x]] * cnt[a[x]];
+}
+
+int main() {
+	int n, m, k;
+	cin &gt;&gt; n &gt;&gt; m &gt;&gt; k;
+	int size = sqrt(n);
+	for (int i=1; i&lt;=n; i++) {
+		cin &gt;&gt; a[i];
+		pos[i] = i / size;
+	}
+	for (int i=0; i&lt;m; i++) {
+		cin &gt;&gt; q[i].l &gt;&gt; q[i].r;
+		q[i].k = i;
+	}
+	sort(q, q+m, cmp);
+	int l = 1, r = 0;
+	for (int i=0 ;i&lt;m; i++) {
+		while (q[i].l &lt; l) add(--l);
+		while (q[i].r &gt; r) add(++r);
+		while (q[i].l &gt; l) sub(l++);
+		while (q[i].r &lt; r) sub(r--);
+		ans[q[i].k] = res;
+	}
+	for (int i=0; i&lt;m; i++) cout &lt;&lt; ans[i] &lt;&lt; '\n';
+	return 0;
+}
+</code></pre>
+<h1 id="带修改的莫队">带修改的莫队</h1>
+<p>有一些带修改的问题也能用莫队来做，只要不是强制在线就行。</p>
+<p>带修莫队和普通莫队没有太大的区别，只是需要维护多一个变量<code>time</code>，普通莫队的移动为<code>[l+1, r]</code>、<code>[l-1, r]</code>、<code>[l, r+1]</code>、<code>[l, r-1]</code>，而带修莫队还需要判断当前时间和查询操作的时间的差异，所以带修莫队的移动为<code>[l+1, r, t]</code>、<code>[l-1, r, t]</code>、<code>[l, r+1, t]</code>、<code>[l, r-1, t]</code>、<code>[l, r, t-1]</code>、<code>[l, r, t+1]</code>。</p>
+<p>并且将排序规则改为下面的样子</p>
+<pre><code class="language-c++">bool cmp(Q a, Q b) {
+	return (pos[a.l] ^ pos[b.l]) ? pos[a.l] &lt; pos[b.l] : ((pos[a.r] ^ pos[b.r]) ? pos[a.r] &lt; pos[b.r] : a.t &lt; b.t);
+}
+</code></pre>
+<p>块的大小也由<code>sqrt(n)</code>变为<code>pow(n, 2.0 / 3.0)</code></p>
+<p>干说有点不知道在干嘛，还是看个具体的问题吧。</p>
+<h1 id="洛谷p1903">洛谷P1903</h1>
+<p><a href="https://www.luogu.com.cn/problem/P1903">luogu P1903</a></p>
+<p><img src="p1903.png" alt="image-20200909094740495"></p>
+<pre><code class="language-c++">// 样例输入
+6 5
+1 2 3 4 5 5
+Q 1 4
+Q 2 6
+R 1 2
+Q 1 4
+Q 2 6
+
+// 样例输出
+4
+4
+3
+4
+</code></pre>
+<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+typedef long long ll;
+typedef unsigned long long ull;
+#define inf 0x3f3f3f3f
+#define INF 0x3f3f3f3f3f3f3f3f
+#define IO ios::sync_with_stdio(0)
+#define DEBUG(x) cout&lt;&lt;&quot;---&gt;&quot;&lt;&lt;(x)&lt;&lt;endl;
+typedef pair&lt;int, int&gt; P;
+const ll mod = 1e9+7;
+const double eps = 1e-9;
+const double PI = acos(-1);
+const int maxn = 1e6+5;
+
+// 查询
+struct Q {
+	int l, r, k, t;
+}q[maxn];
+// 修改
+struct M {
+	int p, col;
+}c[maxn];
+int a[maxn], cnt[maxn], ans[maxn], pos[maxn];
+int cntq, cntc, n, m, size;
+
+bool cmp(Q a, Q b) {
+	return (pos[a.l] ^ pos[b.l]) ? pos[a.l] &lt; pos[b.l] : ((pos[a.r] ^ pos[b.r]) ? pos[a.r] &lt; pos[b.r] : a.t &lt; b.t);
+}
+
+int main() {
+	scanf(&quot;%d&quot;, &amp;n);
+	scanf(&quot;%d&quot;, &amp;m);
+    // 块大小与普通莫队不同
+	size = pow(n, 2.0 / 3.0);
+	for (int i=1; i&lt;=n; i++) {
+		pos[i] = i / size;
+		scanf(&quot;%d&quot;, &amp;a[i]);
+	}
+	for (int i=1; i&lt;=m; i++) {
+		char opt[100];
+		scanf(&quot;%s&quot;, opt);
+		if (opt[0] == 'Q') {
+			++cntq;
+			scanf(&quot;%d%d&quot;, &amp;q[cntq].l, &amp;q[cntq].r);
+			q[cntq].k = cntq;
+			q[cntq].t = cntc;	// 查询询问的时间戳
+		} else {
+			++cntc;
+			scanf(&quot;%d%d&quot;, &amp;c[cntc].p, &amp;c[cntc].col);
+		}
+	}
+	sort(q + 1, q + cntq + 1, cmp);
+	int l = 1, r = 0, time = 0, res = 0;
+    // 为了方便理解，就没有专门写add和sub函数了
+	for (int i=1; i&lt;=cntq; i++) {
+		int ql = q[i].l, qr = q[i].r, qt = q[i].t;
+		while (ql &lt; l) {
+			l--;
+			cnt[a[l]]++;
+			res += cnt[a[l]] == 1;
+		}
+		while (ql &gt; l) {
+			cnt[a[l]]--;
+			res -= cnt[a[l]] == 0;
+			l++;
+		}
+		while (qr &lt; r) {
+			cnt[a[r]]--;
+			res -= cnt[a[r]] == 0;
+			r--;
+		}
+		while (qr &gt; r) {
+			r++;
+			cnt[a[r]]++;
+			res += cnt[a[r]] == 1;
+		}
+        // 下面两个是针对修改的移动
+		while (time &lt; qt) {
+			++time;
+			if (ql &lt;= c[time].p &amp;&amp; c[time].p &lt;= qr) {
+				cnt[a[c[time].p]]--;
+				cnt[c[time].col]++;
+				res -= cnt[a[c[time].p]] == 0;
+				res += cnt[c[time].col] == 1;
+			}
+			swap(a[c[time].p], c[time].col);
+		}
+		while (time &gt; qt) {
+			if (ql &lt;= c[time].p &amp;&amp; c[time].p &lt;= qr) {
+				cnt[a[c[time].p]]--;
+				cnt[c[time].col]++;
+				res -= cnt[a[c[time].p]] == 0;
+				res += cnt[c[time].col] == 1;
+			}
+			swap(a[c[time].p], c[time].col);
+			--time;
+		}
+		ans[q[i].k] = res;
+	}
+	for (int i=1; i&lt;=cntq; i++)
+		printf(&quot;%d\n&quot;, ans[i]);
+	return 0;
+}
+</code></pre>
+<p>带修莫队只是比普通莫队多维护一维而已，写起来也不难。</p>
+<h1 id="推荐视频">推荐视频</h1>
+<p><a href="https://www.bilibili.com/video/BV1zE411673h">AgOH&ndash;莫队算法</a></p>
+</article>
+
+
+      
+        <div class="my-4">
+    
+    <a href="/tags/algorithm/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 me-2 hover:text-eureka">#Algorithm</a>
+    
+    <a href="/tags/other/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 me-2 hover:text-eureka">#Other</a>
+    
+</div>
+      
+
+      
+
+
+
+      
+
+      
+  <div
+    class="-mx-2 mt-4 flex flex-col border-t px-2 pt-4 md:flex-row md:justify-between"
+  >
+    <div>
+      
+        <span class="text-primary-text block font-bold"
+          >上一页</span
+        >
+        <a href="/posts/treap/" class="block">Treap</a>
+      
+    </div>
+    <div class="mt-4 md:mt-0 md:text-right">
+      
+        <span class="text-primary-text block font-bold">下一页</span>
+        <a href="/posts/scapegoat-tree/" class="block">替罪羊树</a>
+      
+    </div>
+  </div>
+
+
+      
+
+
+
+  <div id="valine-comments" class="mt-4"></div>
+<script defer src="https://cdn.jsdelivr.net/npm/valine@1.4.16/dist/Valine.min.js" 
+  integrity="sha384-e0&#43;DNUCJo75aOAzHQbFWYBCM9/S4f0BhRJXvEgbE3mMS85RM20MSSGStHuNdY2QK"  crossorigin></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    new Valine({
+      el: "#valine-comments",
+    })
+  });
+</script>
+
+    </div>
+    
+
+    
+    
+      <div
+        class="lg:col-start-2 bg-secondary-bg prose col-span-2 rounded p-6 lg:col-span-6"
+      >
+        <h3>相关</h3>
+        
+          <a href="/posts/scapegoat-tree/" class="no-underline">替罪羊树</a>
+          <br />
+        
+          <a href="/posts/persistent-set-union/" class="no-underline">可持久化并查集</a>
+          <br />
+        
+          <a href="/posts/persistent-array/" class="no-underline">可持久化数组</a>
+          <br />
+        
+          <a href="/posts/max-min-representation/" class="no-underline">最大最小表示法</a>
+          <br />
+        
+          <a href="/posts/manacher/" class="no-underline">Manacher</a>
+          <br />
+        
+          <a href="/posts/exkmp/" class="no-underline">扩展KMP</a>
+          <br />
+        
+      </div>
+    
+  </div>
+
+  
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        hljs.highlightAll();
+      });
+    </script>
+
+          </div>
+        </div>
+      
+    </main>
+    <footer class="pl-scrollbar">
+      <div class="mx-auto w-full max-w-screen-xl"><div class="text-center p-6 pin-b">
+    <p class="text-sm text-tertiary-text">&copy; 2019 <a href="https://github.com/Elitedj">Elitedj</a>
+ &middot;  Powered by the <a href="https://github.com/wangchucheng/hugo-eureka" class="hover:text-eureka">Eureka</a> theme for <a href="https://gohugo.io" class="hover:text-eureka">Hugo</a></p>
+</div></div>
+    </footer>
+  </body>
+</html>

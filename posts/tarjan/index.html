@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html
+  lang="zh"
+  dir="ltr"
+  
+><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<title>Tarjan求解强连通分量、割点、桥 | Elitedj&#39;s Blog</title>
+
+<meta name="generator" content="Hugo Eureka 0.9.3" />
+<link rel="stylesheet" href="/css/eureka.min.9cec6350e37e534b0338fa9a085bf06855de3b0f2dcf857e792e5e97b07ea905d4d5513db554cbc26a9c3da622bae92d.css">
+<script defer src="/js/eureka.min.fa9a6bf6d7a50bb635b4cca7d2ba5cf3dfb095ae3798773f1328f7950028b48c17d06276594e1b5f244a25a6c969a705.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload"
+  href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&amp;family=Noto&#43;Serif&#43;SC:wght@400;600;700&amp;display=swap"
+  as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/styles/base16/solarized-light.min.css"
+   media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/highlight.min.js"
+   crossorigin></script>
+  <script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/languages/dart.min.js"
+     crossorigin></script>
+<link rel="stylesheet" href="/css/highlightjs.min.2958991528e43eb6fc9b8c4f2b8e052f79c4010718e1d1e888a777620e9ee63021c2c57ec7417a3108019bb8c41943e6.css" media="print" onload="this.media='all';this.onload=null">
+
+
+<script defer type="text/javascript" src="/js/fontawesome.min.d9ba21a4e7c7dbe0ba1f8b62ea1dda063fb92d88bd994ccb206ced4f4c9081fe517f9b61b57efd649e9edbdff33a2114.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"
+   integrity="sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ"  media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js" 
+  integrity="sha384-VQ8d8WVFw0yHhCk5E8I86oOhv48xLpnDZx5T9GogA/Y84DcCKWXDmSDfn13bzFZY"  crossorigin></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js"
+   integrity="sha384-&#43;XBljXPPiv&#43;OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR"  crossorigin></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: "$$", right: "$$", display: true },
+        { left: "$", right: "$", display: false },
+        { left: "\\(", right: "\\)", display: false },
+        { left: "\\[", right: "\\]", display: true }
+      ],
+    });
+  });
+</script>
+
+
+<script defer src="https://cdn.jsdelivr.net/npm/mermaid@8.14.0/dist/mermaid.min.js" 
+  integrity="sha384-atOyb0FxAgN9LyAc6PEf9BjgwLISyansgdH8/VXQH8p2o5vfrRgmGIJ2Sg22L0A0"  crossorigin></script>
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="/images/avatar_hubecf9d80b8b876872272a68886c75e90_327995_32x32_fill_box_center_3.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/avatar_hubecf9d80b8b876872272a68886c75e90_327995_180x180_fill_box_center_3.png">
+
+<meta name="description"
+  content="Elitedj&#39;s Blog">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1 ,
+      "name":"Posts",
+      "item":"/posts/"},{
+      "@type": "ListItem",
+      "position": 2 ,
+      "name":"Tarjan求解强连通分量、割点、桥",
+      "item":"/posts/tarjan/"}]
+}
+</script>
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "/posts/tarjan/"
+    },
+    "headline": "Tarjan求解强连通分量、割点、桥 | Elitedj\u0027s Blog","datePublished": "2019-10-01T21:55:29+00:00",
+    "dateModified": "2019-10-01T21:55:29+00:00",
+    "wordCount":  1793 ,
+    "publisher": {
+        "@type": "Person",
+        "name": "Elitedj",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "/images/avatar.png"
+        }
+        },
+    "description": "Elitedj\u0027s Blog"
+}
+</script><meta property="og:title" content="Tarjan求解强连通分量、割点、桥 | Elitedj&#39;s Blog" />
+<meta property="og:type" content="article" />
+
+
+<meta property="og:image" content="/images/avatar.png">
+
+
+<meta property="og:url" content="/posts/tarjan/" />
+
+
+
+
+<meta property="og:description" content="" />
+
+
+
+
+<meta property="og:locale" content="zh" />
+
+
+
+
+<meta property="og:site_name" content="Elitedj&#39;s Blog" />
+
+
+
+
+
+
+<meta property="article:published_time" content="2019-10-01T21:55:29&#43;00:00" />
+
+
+<meta property="article:modified_time" content="2019-10-01T21:55:29&#43;00:00" />
+
+
+
+<meta property="article:section" content="posts" />
+
+
+<meta property="article:tag" content="Algorithm" />
+
+<meta property="article:tag" content="Graph" />
+
+
+
+
+
+<meta property="og:see_also" content="/posts/shortest-path/" />
+
+<meta property="og:see_also" content="/posts/lca/" />
+
+<meta property="og:see_also" content="/posts/persistent-seg-tree/" />
+
+<meta property="og:see_also" content="/posts/seg-tree/" />
+
+
+
+
+  <body class="flex min-h-screen flex-col">
+    <header
+      class="min-h-16 pl-scrollbar bg-secondary-bg fixed z-50 flex w-full items-center shadow-sm"
+    >
+      <div class="mx-auto w-full max-w-screen-xl"><script>
+    let storageColorScheme = localStorage.getItem("lightDarkMode")
+    if (((storageColorScheme == 'Auto' || storageColorScheme == null) && window.matchMedia("(prefers-color-scheme: dark)").matches) || storageColorScheme == "Dark") {
+        document.getElementsByTagName('html')[0].classList.add('dark')
+    }
+</script>
+<nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0">
+    <a href="/" class="me-6 text-primary-text text-xl font-bold">Elitedj&#39;s Blog</a>
+    <button id="navbar-btn" class="md:hidden flex items-center px-3 py-2" aria-label="Open Navbar">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div id="target"
+        class="hidden block md:flex md:grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20">
+        <div class="md:flex md:h-16 text-sm md:grow pb-4 md:pb-0 border-b md:border-b-0">
+            <a href="/about" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  me-4">About</a>
+        </div>
+
+        <div class="flex">
+            <div class="relative pt-4 md:pt-0">
+                <div class="cursor-pointer hover:text-eureka" id="lightDarkMode">
+                    <i class="fas fa-adjust"></i>
+                </div>
+                <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id="is-open">
+                </div>
+                <div class="absolute flex flex-col start-0 md:start-auto end-auto md:end-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40"
+                    id='lightDarkOptions'>
+                    <span class="px-4 py-1 hover:text-eureka" name="Light">浅色</span>
+                    <span class="px-4 py-1 hover:text-eureka" name="Dark">深色</span>
+                    <span class="px-4 py-1 hover:text-eureka" name="Auto">自动</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id="is-open-mobile">
+    </div>
+
+</nav>
+<script>
+    
+    let element = document.getElementById('lightDarkMode')
+    if (storageColorScheme == null || storageColorScheme == 'Auto') {
+        document.addEventListener('DOMContentLoaded', () => {
+            window.matchMedia("(prefers-color-scheme: dark)").addEventListener('change', switchDarkMode)
+        })
+    } else if (storageColorScheme == "Light") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'sun')
+        element.firstElementChild.classList.add('fa-sun')
+    } else if (storageColorScheme == "Dark") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'moon')
+        element.firstElementChild.classList.add('fa-moon')
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        getcolorscheme();
+        switchBurger();
+    });
+</script>
+</div>
+    </header>
+    <main class="grow pt-16">
+        <div class="pl-scrollbar">
+          <div class="mx-auto w-full max-w-screen-xl lg:px-4 xl:px-8">
+  
+  
+  <div class="grid grid-cols-2 gap-4 lg:grid-cols-8 lg:pt-12">
+    <div
+      class=" bg-secondary-bg col-span-2 rounded px-6 py-8 lg:col-span-6"
+    >
+      <article class="prose">
+  <h1 class="mb-4">Tarjan求解强连通分量、割点、桥</h1>
+
+  <div
+  class="text-tertiary-text not-prose mt-2 flex flex-row flex-wrap items-center"
+>
+  <div class="me-6 my-2">
+    <i class="fas fa-calendar me-1"></i>
+    <span
+      >2019-10-01</span
+    >
+  </div>
+  <div class="me-6 my-2">
+    <i class="fas fa-clock me-1"></i>
+    <span>4分钟阅读时长</span>
+  </div>
+
+  
+    <div class="me-6 my-2">
+      <i class="fas fa-folder me-1"></i>
+      
+        <a href="/categories/algorithm/" class="hover:text-eureka"
+          >Algorithm</a
+        >
+      
+        
+          <span>, </span>
+        <a href="/categories/graph/" class="hover:text-eureka"
+          >Graph</a
+        >
+      
+    </div>
+  
+
+  
+</div>
+
+
+  
+  
+
+  <h2 id="tarjan">Tarjan</h2>
+<p>Robert Tarjan，是美国的计算机科学家，在1986年获得图灵奖。在LCA的blog中也有提到求解LCA的Tarjan算法。这一篇的Tarjan算法是求解强连通分量、割点和桥的。</p>
+<h2 id="强连通分量">强连通分量</h2>
+<blockquote>
+<p>有向图强连通分量：在有向图G中，如果两个顶点vi,vj间（vi&gt;vj）有一条从vi到vj的有向路径，同时还有一条从vj到vi的有向路径，则称两个顶点强连通(strongly connected)。如果有向图G的每两个顶点都强连通，称G是一个强连通图。有向图的极大强连通子图，称为强连通分量(strongly connected components)。</p>
+</blockquote>
+<p>求解强连通分量、割点、桥的Tarjan算法都差不多，都是通过DFS来找的。</p>
+<p>在Tarjan算法中，有两个非常重要的变量。</p>
+<p><strong>dfn[i] : 表示第i个顶点在dfs中第几个访问（时间戳）</strong></p>
+<p><strong>low[i] : 表示第i个顶点可以回溯到的最早访问的顶点</strong></p>
+<p>可能这样说难以理解，一会看图解和代码就理解了。</p>
+<p>在求解强连通分量时，为了知道一个强连通分量有哪些顶点，还需要用到stack。</p>
+<p>Tarjan求解强连通分量的伪代码如下</p>
+<pre><code class="language-c++">low[u] = dfn[u] = ++ind;
+ins[u] = 1;
+stack.push(i);
+for v in &lt;u, v&gt;:
+    if(v is not visited):
+        Tarjan(v)
+        low[u] = min(low[u], low[v]);
+    else if(v in stack):
+        low[u] = min(low[u], dfn[v]);
+
+if(low[u] == dfn[u]):
+    int p;
+    cnt++;
+    do:
+        p = stack.top;
+        stack.pop;
+        ins[p] = 0;
+        belong[p] = cnt;
+    while(p != u)
+</code></pre>
+<p>图解来辽，就用下面这个图来做例子吧</p>
+<p><img src="0.png" alt="0"></p>
+<p>然后根据DFS，到下图</p>
+<p><img src="1.png" alt="1"></p>
+<p>这时候访问到顶点5，已经没法继续DFS了，并且low[5] = dfn[5]，说明存在强连通分量。把栈中的元素依次出栈，直到遇到了顶点5。这里只出栈了顶点5，说明顶点5单独成为一个强连通分量。</p>
+<p>回退到顶点3</p>
+<p><img src="2.png" alt="2"></p>
+<p>这时候和刚刚的情况一样，顶点3单独成为一个强连通分量。</p>
+<p><img src="3.png" alt="3"></p>
+<p>回退到顶点2，DFS遍历顶点4.</p>
+<p><img src="4.png" alt="4"></p>
+<p>这时候顶点4发现顶点1已经遍历过了，所以更新顶点4的low为1.</p>
+<p><img src="5.png" alt="5"></p>
+<p>回退到顶点2，更新顶点2的low</p>
+<p><img src="6.png" alt="6"></p>
+<p>回退到顶点1，发现low[1] = dfn[1]，将栈中的元素出栈，知道遇到1。这时候顶点1、 2、 4成为一个强连通分量。</p>
+<p><img src="7.png" alt="7"></p>
+<p>到这里整个算法就结束了～</p>
+<p>模板如下：</p>
+<pre><code class="language-c++">vector&lt;int&gt; g[maxn];
+int low[maxn], dfn[maxn], sta[maxn], ins[maxn], belong[maxn];
+int cnt, ind, tot; //cnt：强连通分量的数量， ind：时间戳， tot：sta的top
+
+void init()
+{
+    memset(ins, 0, sizeof(ins));
+    memset(belong, 0, sizeof(belong));
+    memset(dfn, 0, sizeof(dfn));
+    cnt = ind = tot = 0;
+}
+
+void Tarjan(int u)
+{
+    low[u] = dfn[u] = ++ind;
+    ins[u] = 1;
+    sta[++tot] = u;
+    for(int i=0;i&lt;g[u].size();i++)
+    {
+        int v = g[u][i];
+        if(!dfn[v])
+        {
+            Tarjan(v);
+            low[u] = min(low[u], low[v]);
+        }
+        else if(ins[v])
+            low[u] = min(low[u], dfn[v]);
+    }
+    int p;
+    if(low[u] == dfn[u])
+    {
+        ++cnt;
+        do
+        {
+            p = sta[tot--];
+            belong[p] = cnt;
+            ins[p] = 0;
+        }while(p != u);
+    }
+}
+</code></pre>
+<h2 id="割点">割点</h2>
+<p>在一个无向图中，如果删除一个顶点及与它相关联的边之后，图的连通分量增多了，则称这一个点为割点。</p>
+<p>对于根节点来说，只要它至少有两颗子树，那么根节点一定是割点。对于其它顶点来说则麻烦一些。</p>
+<p>回想一下Tarjan算法中low的意义，表示该顶点能够回溯到最早访问的顶点的序号。对于一个顶点来说，在它之前访问的一个顶点是该顶点的父亲，在它父亲之前的是它的祖先，若该顶点能够不通过父亲就回溯到祖先的话，那么说明该顶点的父亲不是割点。所以，若一个顶点的所有儿子都能够不通过它自己就能回溯到祖先顶点，则该顶点不是割点，否则就是割点。</p>
+<p>所以对于边&lt;u, v&gt;来说，若low[v] &gt;= dfn[u]，则u是割点。</p>
+<p><img src="8.png" alt="8"></p>
+<p>对于上图来说，顶点2和3都是割点。</p>
+<p>模板如下</p>
+<pre><code class="language-c++">vector&lt;int&gt; g[maxn];
+// iscut[i]: 若顶点i是割点，则为1，反之为0
+int low[maxn], dfn[maxn], iscut[maxn];
+int ind;
+
+void init()
+{
+    memset(dfn, 0, sizeof(dfn));
+    memset(iscut, 0, sizeof(iscut));
+    ind = 0;
+}
+
+// pa为u的父节点，初始时Tarjan(i, i)
+void Tarjan(int u, int pa)
+{
+    int cnt = 0; //用来记录子树的数量
+    low[u] = dfn[u] = ++ind;
+    for(int i=0;i&lt;g[u].size();i++)
+    {
+        int v = g[u][i];
+        if(!dfn[v])
+        {
+            Tarjan(v, u);
+            low[u] = min(low[u], low[v]);
+            // 若low[v]&gt;=dfn[u]，并且u不是根节点，则u是割点
+            if(low[v] &gt;= dfn[u] &amp;&amp; pa!=u)
+                iscut[u] = 1;
+            // 若u是根节点，则cnt++
+            if(u == pa)
+                cnt++;
+        }
+        else if(v != pa) //若v不等于父节点
+            low[u] = min(low[u], dfn[v]);
+    }
+    if(cnt&gt;=2 &amp;&amp; u==pa) //根节点子树数量大于等于2，则为割点
+        iscut[u] = 1;
+}
+</code></pre>
+<h2 id="桥">桥</h2>
+<p>桥也叫割边，对于边e来说，若去掉了e，图的连通分量增多了，则说明e为桥。</p>
+<p>找割边和找割点很像。对于边&lt;u, v&gt;来说，若low[v] &gt; dfn[u]， 则&lt;u, v&gt;是桥。</p>
+<p><img src="8.png" alt="8"></p>
+<p>所以对于上图来说，边&lt;2, 3&gt;和&lt;3, 5&gt;都是桥。</p>
+<p>模板：</p>
+<pre><code class="language-c++">// 用链式前向星来存储边
+struct Edge
+{
+    // iscut表示是否为桥
+    int to, next, iscut;
+}e[maxn*maxn*2];
+
+int head[maxn], low[maxn], dfn[maxn];
+int ind, tot; // tot是边的数量
+
+void init()
+{
+    memset(head, -1, sizeof(head));
+    memset(dfn, 0, sizeof(dfn));
+    ind = tot = 0;
+}
+
+void addedge(int u, int v)
+{
+    e[tot].to = v;
+    e[tot].next = head[u];
+    e[tot].iscut = 0;
+    head[u] = tot++;
+}
+
+void Tarjan(int u, int pa)
+{
+    low[u] = dfn[u] = ++ind;
+    for(int i=head[u]; ~i; i = e[i].next)
+    {
+        int v = e[i].to;
+        if(v == pa) continue;
+        if(!dfn[v])
+        {
+            Tarjan(v, u);
+            low[u] = min(low[u], low[v]);
+            // 是桥
+            if(low[v] &gt; dfn[u])
+            {
+                // 因为加边时，是加双向边的，所以编号0和1, 2和3...等是一对边，i^1就能取到另一条边，可自行测试
+                e[i].iscut = e[i^1].iscut = 1;
+            }
+        }
+        else
+        {
+            low[u] = min(low[u], dfn[v]);
+        }
+    }
+}
+</code></pre>
+<h2 id="end">END</h2>
+<p>Tarjan还可以用来缩点，emmm咕咕咕。
+溜～</p>
+</article>
+
+
+      
+        <div class="my-4">
+    
+    <a href="/tags/algorithm/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 me-2 hover:text-eureka">#Algorithm</a>
+    
+    <a href="/tags/graph/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 me-2 hover:text-eureka">#Graph</a>
+    
+</div>
+      
+
+      
+
+
+
+      
+
+      
+  <div
+    class="-mx-2 mt-4 flex flex-col border-t px-2 pt-4 md:flex-row md:justify-between"
+  >
+    <div>
+      
+        <span class="text-primary-text block font-bold"
+          >上一页</span
+        >
+        <a href="/posts/dinic/" class="block">网络流之dinic</a>
+      
+    </div>
+    <div class="mt-4 md:mt-0 md:text-right">
+      
+        <span class="text-primary-text block font-bold">下一页</span>
+        <a href="/posts/lca/" class="block">[LCA]最近公共祖先</a>
+      
+    </div>
+  </div>
+
+
+      
+
+
+
+  <div id="valine-comments" class="mt-4"></div>
+<script defer src="https://cdn.jsdelivr.net/npm/valine@1.4.16/dist/Valine.min.js" 
+  integrity="sha384-e0&#43;DNUCJo75aOAzHQbFWYBCM9/S4f0BhRJXvEgbE3mMS85RM20MSSGStHuNdY2QK"  crossorigin></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    new Valine({
+      el: "#valine-comments",
+    })
+  });
+</script>
+
+    </div>
+    
+      <div class="col-span-2">
+        
+        
+          <div
+  class="
+    bg-primary-bg
+   prose sticky top-16 z-10 hidden px-6 py-4 lg:block"
+>
+  <h3>本页内容</h3>
+</div>
+<div
+  class="sticky-toc  hidden px-6 pb-6 lg:block"
+>
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#tarjan">Tarjan</a></li>
+    <li><a href="#强连通分量">强连通分量</a></li>
+    <li><a href="#割点">割点</a></li>
+    <li><a href="#桥">桥</a></li>
+    <li><a href="#end">END</a></li>
+  </ul>
+</nav>
+</div>
+<script>
+  window.addEventListener("DOMContentLoaded", () => {
+    enableStickyToc();
+  });
+</script>
+
+        
+      </div>
+    
+
+    
+    
+      <div
+        class=" bg-secondary-bg prose col-span-2 rounded p-6 lg:col-span-6"
+      >
+        <h3>相关</h3>
+        
+          <a href="/posts/shortest-path/" class="no-underline">图论——最短路径</a>
+          <br />
+        
+          <a href="/posts/lca/" class="no-underline">[LCA]最近公共祖先</a>
+          <br />
+        
+          <a href="/posts/persistent-seg-tree/" class="no-underline">可持久化线段树(主席树)</a>
+          <br />
+        
+          <a href="/posts/seg-tree/" class="no-underline">线段树基础</a>
+          <br />
+        
+      </div>
+    
+  </div>
+
+  
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        hljs.highlightAll();
+      });
+    </script>
+
+          </div>
+        </div>
+      
+    </main>
+    <footer class="pl-scrollbar">
+      <div class="mx-auto w-full max-w-screen-xl"><div class="text-center p-6 pin-b">
+    <p class="text-sm text-tertiary-text">&copy; 2019 <a href="https://github.com/Elitedj">Elitedj</a>
+ &middot;  Powered by the <a href="https://github.com/wangchucheng/hugo-eureka" class="hover:text-eureka">Eureka</a> theme for <a href="https://gohugo.io" class="hover:text-eureka">Hugo</a></p>
+</div></div>
+    </footer>
+  </body>
+</html>

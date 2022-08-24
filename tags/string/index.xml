@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>String on Elitedj&#39;s Blog</title>
+    <link>/tags/string/</link>
+    <description>Recent content in String on Elitedj&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <copyright>&amp;copy; 2019 &lt;a href=&#34;https://github.com/Elitedj&#34;&gt;Elitedj&lt;/a&gt;
+</copyright>
+    <lastBuildDate>Wed, 19 Feb 2020 17:35:42 +0000</lastBuildDate><atom:link href="/tags/string/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>最大最小表示法</title>
+      <link>/posts/max-min-representation/</link>
+      <pubDate>Wed, 19 Feb 2020 17:35:42 +0000</pubDate>
+      
+      <guid>/posts/max-min-representation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Manacher</title>
+      <link>/posts/manacher/</link>
+      <pubDate>Sat, 15 Feb 2020 10:48:32 +0000</pubDate>
+      
+      <guid>/posts/manacher/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>扩展KMP</title>
+      <link>/posts/exkmp/</link>
+      <pubDate>Tue, 11 Feb 2020 21:14:49 +0000</pubDate>
+      
+      <guid>/posts/exkmp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>KMP</title>
+      <link>/posts/kmp/</link>
+      <pubDate>Thu, 06 Feb 2020 20:41:26 +0000</pubDate>
+      
+      <guid>/posts/kmp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>字符串哈希</title>
+      <link>/posts/string-hash/</link>
+      <pubDate>Mon, 03 Feb 2020 22:28:10 +0000</pubDate>
+      
+      <guid>/posts/string-hash/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

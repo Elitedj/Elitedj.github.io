@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html
+  lang="zh"
+  dir="ltr"
+  
+><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<title>Manacher | Elitedj&#39;s Blog</title>
+
+<meta name="generator" content="Hugo Eureka 0.9.3" />
+<link rel="stylesheet" href="/css/eureka.min.9cec6350e37e534b0338fa9a085bf06855de3b0f2dcf857e792e5e97b07ea905d4d5513db554cbc26a9c3da622bae92d.css">
+<script defer src="/js/eureka.min.fa9a6bf6d7a50bb635b4cca7d2ba5cf3dfb095ae3798773f1328f7950028b48c17d06276594e1b5f244a25a6c969a705.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload"
+  href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&amp;family=Noto&#43;Serif&#43;SC:wght@400;600;700&amp;display=swap"
+  as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/styles/base16/solarized-light.min.css"
+   media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/highlight.min.js"
+   crossorigin></script>
+  <script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/languages/dart.min.js"
+     crossorigin></script>
+<link rel="stylesheet" href="/css/highlightjs.min.2958991528e43eb6fc9b8c4f2b8e052f79c4010718e1d1e888a777620e9ee63021c2c57ec7417a3108019bb8c41943e6.css" media="print" onload="this.media='all';this.onload=null">
+
+
+<script defer type="text/javascript" src="/js/fontawesome.min.d9ba21a4e7c7dbe0ba1f8b62ea1dda063fb92d88bd994ccb206ced4f4c9081fe517f9b61b57efd649e9edbdff33a2114.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"
+   integrity="sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ"  media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js" 
+  integrity="sha384-VQ8d8WVFw0yHhCk5E8I86oOhv48xLpnDZx5T9GogA/Y84DcCKWXDmSDfn13bzFZY"  crossorigin></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js"
+   integrity="sha384-&#43;XBljXPPiv&#43;OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR"  crossorigin></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: "$$", right: "$$", display: true },
+        { left: "$", right: "$", display: false },
+        { left: "\\(", right: "\\)", display: false },
+        { left: "\\[", right: "\\]", display: true }
+      ],
+    });
+  });
+</script>
+
+
+<script defer src="https://cdn.jsdelivr.net/npm/mermaid@8.14.0/dist/mermaid.min.js" 
+  integrity="sha384-atOyb0FxAgN9LyAc6PEf9BjgwLISyansgdH8/VXQH8p2o5vfrRgmGIJ2Sg22L0A0"  crossorigin></script>
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="/images/avatar_hubecf9d80b8b876872272a68886c75e90_327995_32x32_fill_box_center_3.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/avatar_hubecf9d80b8b876872272a68886c75e90_327995_180x180_fill_box_center_3.png">
+
+<meta name="description"
+  content="Elitedj&#39;s Blog">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1 ,
+      "name":"Posts",
+      "item":"/posts/"},{
+      "@type": "ListItem",
+      "position": 2 ,
+      "name":"Manacher",
+      "item":"/posts/manacher/"}]
+}
+</script>
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "/posts/manacher/"
+    },
+    "headline": "Manacher | Elitedj\u0027s Blog","datePublished": "2020-02-15T10:48:32+00:00",
+    "dateModified": "2020-02-15T10:48:32+00:00",
+    "wordCount":  1695 ,
+    "publisher": {
+        "@type": "Person",
+        "name": "Elitedj",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "/images/avatar.png"
+        }
+        },
+    "description": "Elitedj\u0027s Blog"
+}
+</script><meta property="og:title" content="Manacher | Elitedj&#39;s Blog" />
+<meta property="og:type" content="article" />
+
+
+<meta property="og:image" content="/images/avatar.png">
+
+
+<meta property="og:url" content="/posts/manacher/" />
+
+
+
+
+<meta property="og:description" content="" />
+
+
+
+
+<meta property="og:locale" content="zh" />
+
+
+
+
+<meta property="og:site_name" content="Elitedj&#39;s Blog" />
+
+
+
+
+
+
+<meta property="article:published_time" content="2020-02-15T10:48:32&#43;00:00" />
+
+
+<meta property="article:modified_time" content="2020-02-15T10:48:32&#43;00:00" />
+
+
+
+<meta property="article:section" content="posts" />
+
+
+<meta property="article:tag" content="Algorithm" />
+
+<meta property="article:tag" content="String" />
+
+
+
+
+
+<meta property="og:see_also" content="/posts/exkmp/" />
+
+<meta property="og:see_also" content="/posts/kmp/" />
+
+<meta property="og:see_also" content="/posts/string-hash/" />
+
+<meta property="og:see_also" content="/posts/division-block/" />
+
+<meta property="og:see_also" content="/posts/trie/" />
+
+<meta property="og:see_also" content="/posts/dinic/" />
+
+
+
+
+  <body class="flex min-h-screen flex-col">
+    <header
+      class="min-h-16 pl-scrollbar bg-secondary-bg fixed z-50 flex w-full items-center shadow-sm"
+    >
+      <div class="mx-auto w-full max-w-screen-xl"><script>
+    let storageColorScheme = localStorage.getItem("lightDarkMode")
+    if (((storageColorScheme == 'Auto' || storageColorScheme == null) && window.matchMedia("(prefers-color-scheme: dark)").matches) || storageColorScheme == "Dark") {
+        document.getElementsByTagName('html')[0].classList.add('dark')
+    }
+</script>
+<nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0">
+    <a href="/" class="me-6 text-primary-text text-xl font-bold">Elitedj&#39;s Blog</a>
+    <button id="navbar-btn" class="md:hidden flex items-center px-3 py-2" aria-label="Open Navbar">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div id="target"
+        class="hidden block md:flex md:grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20">
+        <div class="md:flex md:h-16 text-sm md:grow pb-4 md:pb-0 border-b md:border-b-0">
+            <a href="/about" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  me-4">About</a>
+        </div>
+
+        <div class="flex">
+            <div class="relative pt-4 md:pt-0">
+                <div class="cursor-pointer hover:text-eureka" id="lightDarkMode">
+                    <i class="fas fa-adjust"></i>
+                </div>
+                <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id="is-open">
+                </div>
+                <div class="absolute flex flex-col start-0 md:start-auto end-auto md:end-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40"
+                    id='lightDarkOptions'>
+                    <span class="px-4 py-1 hover:text-eureka" name="Light">浅色</span>
+                    <span class="px-4 py-1 hover:text-eureka" name="Dark">深色</span>
+                    <span class="px-4 py-1 hover:text-eureka" name="Auto">自动</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id="is-open-mobile">
+    </div>
+
+</nav>
+<script>
+    
+    let element = document.getElementById('lightDarkMode')
+    if (storageColorScheme == null || storageColorScheme == 'Auto') {
+        document.addEventListener('DOMContentLoaded', () => {
+            window.matchMedia("(prefers-color-scheme: dark)").addEventListener('change', switchDarkMode)
+        })
+    } else if (storageColorScheme == "Light") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'sun')
+        element.firstElementChild.classList.add('fa-sun')
+    } else if (storageColorScheme == "Dark") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'moon')
+        element.firstElementChild.classList.add('fa-moon')
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        getcolorscheme();
+        switchBurger();
+    });
+</script>
+</div>
+    </header>
+    <main class="grow pt-16">
+        <div class="pl-scrollbar">
+          <div class="mx-auto w-full max-w-screen-xl lg:px-4 xl:px-8">
+  
+  
+  <div class="grid grid-cols-2 gap-4 lg:grid-cols-8 lg:pt-12">
+    <div
+      class=" bg-secondary-bg col-span-2 rounded px-6 py-8 lg:col-span-6"
+    >
+      <article class="prose">
+  <h1 class="mb-4">Manacher</h1>
+
+  <div
+  class="text-tertiary-text not-prose mt-2 flex flex-row flex-wrap items-center"
+>
+  <div class="me-6 my-2">
+    <i class="fas fa-calendar me-1"></i>
+    <span
+      >2020-02-15</span
+    >
+  </div>
+  <div class="me-6 my-2">
+    <i class="fas fa-clock me-1"></i>
+    <span>4分钟阅读时长</span>
+  </div>
+
+  
+    <div class="me-6 my-2">
+      <i class="fas fa-folder me-1"></i>
+      
+        <a href="/categories/algorithm/" class="hover:text-eureka"
+          >Algorithm</a
+        >
+      
+        
+          <span>, </span>
+        <a href="/categories/string/" class="hover:text-eureka"
+          >String</a
+        >
+      
+    </div>
+  
+
+  
+</div>
+
+
+  
+  
+
+  <p>在处理字符串问题时，常常会遇到回文串。回文串是正着和反着都一样的字符串，比如&quot;aba&quot;, &ldquo;baab&quot;等。</p>
+<h2 id="朴素做法">朴素做法</h2>
+<p>我们要如何找出最长的回文子串呢？</p>
+<p>我们找回文串的时候，一般先确定回文串的中心，然后往两边尽可能的延伸。</p>
+<p>回文串根据长度可以分为奇回文和偶回文，所以我们定义两个数组d1和d2，它们分别表示以i为中心，最长的奇回文和偶回文的半径。</p>
+<pre><code class="language-c++">string s;
+int n = s.length();
+int d1[maxn], d2[maxn];
+for(int i=0; i&lt;n; i++)
+{
+    d1[i] = 1;
+    while(0&lt;=i-d1[i] &amp;&amp; i+d1[i]&lt;n &amp;&amp; s[i-d1[i]]==s[i+d1[i]])
+        d1[i]++;
+    
+    d2[i] = 0;
+    while(0&lt;=i-d2[i]-1 &amp;&amp; i+d2[i]&lt;n &amp;&amp; s[i-d2[i]-1]==s[i+d2[i]])
+        d2[i]++;
+}
+</code></pre>
+<p>朴素算法的时间复杂度很显然是O(n^2)的，这个算法效率太慢了，且还分为奇回文偶回文来计算，太麻烦了。</p>
+<h2 id="预处理字符串">预处理字符串</h2>
+<p>我们可不可以将奇回文和偶回文一起处理，不分两个数组？</p>
+<p>我们将原始的字符串进行一些处理，得到一个新的字符串，就可以很方便的计算了。</p>
+<p>我们在每一个字符间，包括头和尾，都插入一个特殊的字符，比如#，当然这个字符得是原字符串一定不出现的字符才行。</p>
+<pre><code class="language-c++">原字符串: abba
+预处理后: #a#b#b#a#
+
+原字符串: aba
+预处理后: #a#b#a#
+</code></pre>
+<p>经过这样的预处理后，我们得到的字符串长度为奇数，并且可以将d1和d2合并成一个数组。</p>
+<h2 id="计算最长回文子串">计算最长回文子串</h2>
+<p>我们用p数组来记录以i为中心的最长回文串的半径。</p>
+<pre><code class="language-c++">i       0 1 2 3 4 5 6 7 8 9 10 11 12
+s[i]    # c # a # b # b # a #  f  #
+p[i]    1 2 1 2 1 2 5 2 1 2 1  2  1
+</code></pre>
+<p>观察到以i为中心的最长回文串的长度为p[i]-1</p>
+<p>所以最长的回文子串的长度为max(p[i]-1)</p>
+<h2 id="计算最长回文子串的开始索引">计算最长回文子串的开始索引</h2>
+<p>知道了最长回文串的开始索引，我们就能找出最长的回文串是哪一个了。</p>
+<p>还是以&quot;cabbaf&quot;为例</p>
+<pre><code class="language-c++">i       0 1 2 3 4 5 6 7 8 9 10 11 12
+s[i]    # c # a # b # b # a #  f  #
+p[i]    1 2 1 2 1 2 5 2 1 2 1  2  1
+</code></pre>
+<p>观察到p[6]=5是最长的半径，用6(i)-5(p[i])得到1，发现1正好是原始字符串&quot;cabbaf&quot;中a的索引号</p>
+<p>再看一个奇回文的例子，p[1]=2，计算以c为中心的最长回文子串的开始索引，用1(i)-2(p[i])=-1，出现了负数，这可不行。</p>
+<p>我们再在字符串前面加一个特殊符号&rsquo;$&rsquo;，在末尾加&rsquo;@&rsquo;，这两个字符也要保证原始字符串中绝对不出现。</p>
+<pre><code class="language-c++">i       0 1 2 3 4 5 6 7 8 9 10 11 12 13 14
+arr[i]  $ # c # a # b # b # a  #  f  #  @
+p[i]    1 1 2 1 2 1 2 5 2 1 2  1  2  1  1
+</code></pre>
+<p>然后我们观察到最长回文串的开始索引等于<code>int index = (i-p[i])/2</code></p>
+<h2 id="计算p数组">计算p数组</h2>
+<p>解决了以上的问题，我们该解决如何高效的计算p数组了。</p>
+<p>我们设置两个变量，id和mx，id是当前所找到的边界最靠右的回文串的中心，mx是最右的回文串边界。即<code>mx=p[id]+id</code></p>
+<p>我们尽可能的利用回文串的性质来降低时间复杂度度。</p>
+<p>假设当前遍历到i，要求p[i]，2*mx-id是mx关于id对称的点，2*id-i是i关于id对称的点。</p>
+<p>当前找到边界最靠右的回文串是s[2*id-mx&hellip;mx]</p>
+<p><img src="1.png" alt="1"></p>
+<p>我们将会面临三种情况：</p>
+<p>第一种：</p>
+<p><img src="2.png" alt="2"></p>
+<p>蓝色线的区间是以<code>2*id-i</code>为中心最长的回文串的范围，根据回文串的对称性，我们知道此时<code>p[i]=p[2*id-i]</code></p>
+<p>第二种：</p>
+<p><img src="3.png" alt="3"></p>
+<p>若<code>i+p[2*id-i] &gt; mx</code>，我们并不能确定mx之后的情况是怎么样的，所以只能先让<code>p[i]=mx-i</code>，然后根据朴素算法再慢慢向左右尽可能的拓展。</p>
+<p>第三种：</p>
+<p>若<code>i &gt; mx</code>的时候，我们让<code>p[i]=1</code>，然后根据朴素算法尽可能的向两边拓展。</p>
+<p>模板：</p>
+<pre><code class="language-c++">char s[maxn];
+char t[2*maxn];
+int p[2*maxn];
+int manacher()
+{
+	int len = strlen(s);
+	// 预处理字符串
+	int l=0;
+	t[l++] = '$';
+	t[l++] = '#';
+	for(int i=0;i&lt;len;i++)
+	{
+		t[l++] = s[i];
+		t[l++] = '#';
+	}
+	t[l] = '@';
+	int id = 0, mx = 0;
+	int maxlen = 1;
+	for(int i=0;i&lt;l;i++)
+	{
+	        // 预设p[i]的值
+		p[i] = mx&gt;i ? min(p[2*id-i], mx-i) : 1;
+		// 朴素算法向左右拓展，因为处理后的字符串头和尾都是特殊字符，所以不会越界
+		while(t[i+p[i]] == t[i-p[i]])p[i]++;
+		// 能否更新mx
+		if(mx &lt; p[i]+i)
+		{
+			mx = p[i]+i;
+			id = i;
+		}
+		// 更新最长回文子串的长度
+		if(maxlen &lt; p[i]-1)
+			maxlen = p[i]-1;
+	}
+	return maxlen;
+}
+</code></pre>
+<p>Manecher算法的时间复杂度是O(n)</p>
+<h2 id="例题">例题</h2>
+<p><a href="https://www.luogu.com.cn/problem/P3805">洛谷P3805</a></p>
+<p><img src="4.png" alt="4"></p>
+<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+typedef long long ll;
+typedef unsigned long long ull;
+#define inf 0x3f3f3f3f
+#define INF 0x3f3f3f3f3f3f3f3f
+#define IO ios::sync_with_stdio(0)
+#define DEBUG(x) cout&lt;&lt;&quot;---&gt;&quot;&lt;&lt;(x)&lt;&lt;endl;
+typedef pair&lt;int, int&gt; P;
+const int maxn = 4e5+5;
+const ll mod = 1e9+7;
+const double eps = 1e-9;
+using namespace std;
+
+
+const int N = 11000000+5;
+char s[N];
+char t[2*N];
+int p[2*N];
+int manacher()
+{
+	int len = strlen(s);
+	int l=0;
+	t[l++] = '$';
+	t[l++] = '#';
+	for(int i=0;i&lt;len;i++)
+	{
+		t[l++] = s[i];
+		t[l++] = '#';
+	}
+	t[l] = '@';
+	int id = 0, mx = 0;
+	int maxlen = 1;
+	for(int i=0;i&lt;l;i++)
+	{
+		p[i] = mx&gt;i ? min(p[2*id-i], mx-i) : 1;
+		while(t[i+p[i]] == t[i-p[i]])p[i]++;
+		if(mx &lt; p[i]+i)
+		{
+			mx = p[i]+i;
+			id = i;
+		}
+		if(maxlen &lt; p[i]-1)
+			maxlen = p[i]-1;
+	}
+	return maxlen;
+}
+int main()
+{
+	scanf(&quot;%s&quot;, &amp;s);
+	int ans = manacher();
+	printf(&quot;%d\n&quot;, ans);
+	return 0;
+}
+</code></pre>
+</article>
+
+
+      
+        <div class="my-4">
+    
+    <a href="/tags/algorithm/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 me-2 hover:text-eureka">#Algorithm</a>
+    
+    <a href="/tags/string/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 me-2 hover:text-eureka">#String</a>
+    
+</div>
+      
+
+      
+
+
+
+      
+
+      
+  <div
+    class="-mx-2 mt-4 flex flex-col border-t px-2 pt-4 md:flex-row md:justify-between"
+  >
+    <div>
+      
+        <span class="text-primary-text block font-bold"
+          >上一页</span
+        >
+        <a href="/posts/max-min-representation/" class="block">最大最小表示法</a>
+      
+    </div>
+    <div class="mt-4 md:mt-0 md:text-right">
+      
+        <span class="text-primary-text block font-bold">下一页</span>
+        <a href="/posts/exkmp/" class="block">扩展KMP</a>
+      
+    </div>
+  </div>
+
+
+      
+
+
+
+  <div id="valine-comments" class="mt-4"></div>
+<script defer src="https://cdn.jsdelivr.net/npm/valine@1.4.16/dist/Valine.min.js" 
+  integrity="sha384-e0&#43;DNUCJo75aOAzHQbFWYBCM9/S4f0BhRJXvEgbE3mMS85RM20MSSGStHuNdY2QK"  crossorigin></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    new Valine({
+      el: "#valine-comments",
+    })
+  });
+</script>
+
+    </div>
+    
+      <div class="col-span-2">
+        
+        
+          <div
+  class="
+    bg-primary-bg
+   prose sticky top-16 z-10 hidden px-6 py-4 lg:block"
+>
+  <h3>本页内容</h3>
+</div>
+<div
+  class="sticky-toc  hidden px-6 pb-6 lg:block"
+>
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#朴素做法">朴素做法</a></li>
+    <li><a href="#预处理字符串">预处理字符串</a></li>
+    <li><a href="#计算最长回文子串">计算最长回文子串</a></li>
+    <li><a href="#计算最长回文子串的开始索引">计算最长回文子串的开始索引</a></li>
+    <li><a href="#计算p数组">计算p数组</a></li>
+    <li><a href="#例题">例题</a></li>
+  </ul>
+</nav>
+</div>
+<script>
+  window.addEventListener("DOMContentLoaded", () => {
+    enableStickyToc();
+  });
+</script>
+
+        
+      </div>
+    
+
+    
+    
+      <div
+        class=" bg-secondary-bg prose col-span-2 rounded p-6 lg:col-span-6"
+      >
+        <h3>相关</h3>
+        
+          <a href="/posts/exkmp/" class="no-underline">扩展KMP</a>
+          <br />
+        
+          <a href="/posts/kmp/" class="no-underline">KMP</a>
+          <br />
+        
+          <a href="/posts/string-hash/" class="no-underline">字符串哈希</a>
+          <br />
+        
+          <a href="/posts/division-block/" class="no-underline">除法分块</a>
+          <br />
+        
+          <a href="/posts/trie/" class="no-underline">字典树(Trie)</a>
+          <br />
+        
+          <a href="/posts/dinic/" class="no-underline">网络流之dinic</a>
+          <br />
+        
+      </div>
+    
+  </div>
+
+  
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        hljs.highlightAll();
+      });
+    </script>
+
+          </div>
+        </div>
+      
+    </main>
+    <footer class="pl-scrollbar">
+      <div class="mx-auto w-full max-w-screen-xl"><div class="text-center p-6 pin-b">
+    <p class="text-sm text-tertiary-text">&copy; 2019 <a href="https://github.com/Elitedj">Elitedj</a>
+ &middot;  Powered by the <a href="https://github.com/wangchucheng/hugo-eureka" class="hover:text-eureka">Eureka</a> theme for <a href="https://gohugo.io" class="hover:text-eureka">Hugo</a></p>
+</div></div>
+    </footer>
+  </body>
+</html>
