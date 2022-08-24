@@ -1,305 +1,20 @@
-<!DOCTYPE html>
-<html
-  lang="zh"
-  dir="ltr"
-  
-><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-<title>除法分块 | Elitedj&#39;s Blog</title>
-
-<meta name="generator" content="Hugo Eureka 0.9.3" />
-<link rel="stylesheet" href="/css/eureka.min.9cec6350e37e534b0338fa9a085bf06855de3b0f2dcf857e792e5e97b07ea905d4d5513db554cbc26a9c3da622bae92d.css">
-<script defer src="/js/eureka.min.fa9a6bf6d7a50bb635b4cca7d2ba5cf3dfb095ae3798773f1328f7950028b48c17d06276594e1b5f244a25a6c969a705.js"></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload"
-  href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&amp;family=Noto&#43;Serif&#43;SC:wght@400;600;700&amp;display=swap"
-  as="style" onload="this.onload=null;this.rel='stylesheet'">
-
-
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/styles/base16/solarized-light.min.css"
-   media="print"
-  onload="this.media='all';this.onload=null" crossorigin>
-<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/highlight.min.js"
-   crossorigin></script>
-  <script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/languages/dart.min.js"
-     crossorigin></script>
-<link rel="stylesheet" href="/css/highlightjs.min.2958991528e43eb6fc9b8c4f2b8e052f79c4010718e1d1e888a777620e9ee63021c2c57ec7417a3108019bb8c41943e6.css" media="print" onload="this.media='all';this.onload=null">
-
-
-<script defer type="text/javascript" src="/js/fontawesome.min.d9ba21a4e7c7dbe0ba1f8b62ea1dda063fb92d88bd994ccb206ced4f4c9081fe517f9b61b57efd649e9edbdff33a2114.js"></script>
-
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"
-   integrity="sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ"  media="print"
-  onload="this.media='all';this.onload=null" crossorigin>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js" 
-  integrity="sha384-VQ8d8WVFw0yHhCk5E8I86oOhv48xLpnDZx5T9GogA/Y84DcCKWXDmSDfn13bzFZY"  crossorigin></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js"
-   integrity="sha384-&#43;XBljXPPiv&#43;OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR"  crossorigin></script>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    renderMathInElement(document.body, {
-      delimiters: [
-        { left: "$$", right: "$$", display: true },
-        { left: "$", right: "$", display: false },
-        { left: "\\(", right: "\\)", display: false },
-        { left: "\\[", right: "\\]", display: true }
-      ],
-    });
-  });
-</script>
-
-
-<script defer src="https://cdn.jsdelivr.net/npm/mermaid@8.14.0/dist/mermaid.min.js" 
-  integrity="sha384-atOyb0FxAgN9LyAc6PEf9BjgwLISyansgdH8/VXQH8p2o5vfrRgmGIJ2Sg22L0A0"  crossorigin></script>
-
-
-<link rel="icon" type="image/png" sizes="32x32" href="/images/avatar_hubecf9d80b8b876872272a68886c75e90_327995_32x32_fill_box_center_3.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/images/avatar_hubecf9d80b8b876872272a68886c75e90_327995_180x180_fill_box_center_3.png">
-
-<meta name="description"
-  content="Elitedj&#39;s Blog">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [{
-      "@type": "ListItem",
-      "position": 1 ,
-      "name":"Posts",
-      "item":"/posts/"},{
-      "@type": "ListItem",
-      "position": 2 ,
-      "name":"除法分块",
-      "item":"/posts/division-block/"}]
-}
-</script>
-
-
-
-<script type="application/ld+json">
-{
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "/posts/division-block/"
-    },
-    "headline": "除法分块 | Elitedj\u0027s Blog","datePublished": "2020-02-08T21:29:29+00:00",
-    "dateModified": "2020-02-08T21:29:29+00:00",
-    "wordCount":  748 ,
-    "publisher": {
-        "@type": "Person",
-        "name": "Elitedj",
-        "logo": {
-            "@type": "ImageObject",
-            "url": "/images/avatar.png"
-        }
-        },
-    "description": "Elitedj\u0027s Blog"
-}
-</script><meta property="og:title" content="除法分块 | Elitedj&#39;s Blog" />
-<meta property="og:type" content="article" />
-
-
-<meta property="og:image" content="/images/avatar.png">
-
-
-<meta property="og:url" content="/posts/division-block/" />
-
-
-
-
-<meta property="og:description" content="" />
-
-
-
-
-<meta property="og:locale" content="zh" />
-
-
-
-
-<meta property="og:site_name" content="Elitedj&#39;s Blog" />
-
-
-
-
-
-
-<meta property="article:published_time" content="2020-02-08T21:29:29&#43;00:00" />
-
-
-<meta property="article:modified_time" content="2020-02-08T21:29:29&#43;00:00" />
-
-
-
-<meta property="article:section" content="posts" />
-
-
-<meta property="article:tag" content="Algorithm" />
-
-<meta property="article:tag" content="Math" />
-
-
-
-
-
-<meta property="og:see_also" content="/posts/kmp/" />
-
-<meta property="og:see_also" content="/posts/trie/" />
-
-<meta property="og:see_also" content="/posts/string-hash/" />
-
-<meta property="og:see_also" content="/posts/dinic/" />
-
-<meta property="og:see_also" content="/posts/tarjan/" />
-
-<meta property="og:see_also" content="/posts/lca/" />
-
-
-
-
-  <body class="flex min-h-screen flex-col">
-    <header
-      class="min-h-16 pl-scrollbar bg-secondary-bg fixed z-50 flex w-full items-center shadow-sm"
-    >
-      <div class="mx-auto w-full max-w-screen-xl"><script>
-    let storageColorScheme = localStorage.getItem("lightDarkMode")
-    if (((storageColorScheme == 'Auto' || storageColorScheme == null) && window.matchMedia("(prefers-color-scheme: dark)").matches) || storageColorScheme == "Dark") {
-        document.getElementsByTagName('html')[0].classList.add('dark')
-    }
-</script>
-<nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0">
-    <a href="/" class="me-6 text-primary-text text-xl font-bold">Elitedj&#39;s Blog</a>
-    <button id="navbar-btn" class="md:hidden flex items-center px-3 py-2" aria-label="Open Navbar">
-        <i class="fas fa-bars"></i>
-    </button>
-
-    <div id="target"
-        class="hidden block md:flex md:grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20">
-        <div class="md:flex md:h-16 text-sm md:grow pb-4 md:pb-0 border-b md:border-b-0">
-            <a href="/about" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  me-4">About</a>
-        </div>
-
-        <div class="flex">
-            <div class="relative pt-4 md:pt-0">
-                <div class="cursor-pointer hover:text-eureka" id="lightDarkMode">
-                    <i class="fas fa-adjust"></i>
-                </div>
-                <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id="is-open">
-                </div>
-                <div class="absolute flex flex-col start-0 md:start-auto end-auto md:end-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40"
-                    id='lightDarkOptions'>
-                    <span class="px-4 py-1 hover:text-eureka" name="Light">浅色</span>
-                    <span class="px-4 py-1 hover:text-eureka" name="Dark">深色</span>
-                    <span class="px-4 py-1 hover:text-eureka" name="Auto">自动</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id="is-open-mobile">
-    </div>
-
-</nav>
-<script>
-    
-    let element = document.getElementById('lightDarkMode')
-    if (storageColorScheme == null || storageColorScheme == 'Auto') {
-        document.addEventListener('DOMContentLoaded', () => {
-            window.matchMedia("(prefers-color-scheme: dark)").addEventListener('change', switchDarkMode)
-        })
-    } else if (storageColorScheme == "Light") {
-        element.firstElementChild.classList.remove('fa-adjust')
-        element.firstElementChild.setAttribute("data-icon", 'sun')
-        element.firstElementChild.classList.add('fa-sun')
-    } else if (storageColorScheme == "Dark") {
-        element.firstElementChild.classList.remove('fa-adjust')
-        element.firstElementChild.setAttribute("data-icon", 'moon')
-        element.firstElementChild.classList.add('fa-moon')
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-        getcolorscheme();
-        switchBurger();
-    });
-</script>
-</div>
-    </header>
-    <main class="grow pt-16">
-        <div class="pl-scrollbar">
-          <div class="mx-auto w-full max-w-screen-xl lg:px-4 xl:px-8">
-  
-  
-  <div class="grid grid-cols-2 gap-4 lg:grid-cols-8 lg:pt-12">
-    <div
-      class="lg:col-start-2 bg-secondary-bg col-span-2 rounded px-6 py-8 lg:col-span-6"
-    >
-      <article class="prose">
-  <h1 class="mb-4">除法分块</h1>
-
-  <div
-  class="text-tertiary-text not-prose mt-2 flex flex-row flex-wrap items-center"
->
-  <div class="me-6 my-2">
-    <i class="fas fa-calendar me-1"></i>
-    <span
-      >2020-02-08</span
-    >
-  </div>
-  <div class="me-6 my-2">
-    <i class="fas fa-clock me-1"></i>
-    <span>2分钟阅读时长</span>
-  </div>
-
-  
-    <div class="me-6 my-2">
-      <i class="fas fa-folder me-1"></i>
-      
-        <a href="/categories/algorithm/" class="hover:text-eureka"
-          >Algorithm</a
-        >
-      
-        
-          <span>, </span>
-        <a href="/categories/math/" class="hover:text-eureka"
-          >Math</a
-        >
-      
-    </div>
-  
-
-  
-</div>
-
-
-  
-  
-
-  <h2 id="背景">背景</h2>
-<p>定义一个函数f，f(x)表示x的所有因子和，比如f(6)=12</p>
-<p>对于求单个的f(x)很简单，但是如果求sum(f(i)) i in [a, b]呢？</p>
-<h2 id="朴素做法">朴素做法</h2>
-<p>最暴力的做法很容易就想到</p>
-<pre><code class="language-c++">ll sum = 0;
+<!doctype html><html lang=zh dir=ltr><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>除法分块 | Elitedj's Blog</title><meta name=generator content="Hugo Eureka 0.9.3"><link rel=stylesheet href=/css/eureka.min.9cec6350e37e534b0338fa9a085bf06855de3b0f2dcf857e792e5e97b07ea905d4d5513db554cbc26a9c3da622bae92d.css><script defer src=/js/eureka.min.fa9a6bf6d7a50bb635b4cca7d2ba5cf3dfb095ae3798773f1328f7950028b48c17d06276594e1b5f244a25a6c969a705.js></script>
+<link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=preload href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" as=style onload='this.onload=null,this.rel="stylesheet"'><link rel=stylesheet href=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/styles/base16/solarized-light.min.css media=print onload='this.media="all",this.onload=null' crossorigin><script defer src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/highlight.min.js crossorigin></script>
+<script defer src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/languages/dart.min.js crossorigin></script>
+<link rel=stylesheet href=/css/highlightjs.min.2958991528e43eb6fc9b8c4f2b8e052f79c4010718e1d1e888a777620e9ee63021c2c57ec7417a3108019bb8c41943e6.css media=print onload='this.media="all",this.onload=null'><script defer type=text/javascript src=/js/fontawesome.min.d9ba21a4e7c7dbe0ba1f8b62ea1dda063fb92d88bd994ccb206ced4f4c9081fe517f9b61b57efd649e9edbdff33a2114.js></script>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css integrity=sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ media=print onload='this.media="all",this.onload=null' crossorigin><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js integrity=sha384-VQ8d8WVFw0yHhCk5E8I86oOhv48xLpnDZx5T9GogA/Y84DcCKWXDmSDfn13bzFZY crossorigin></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin></script>
+<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}]})})</script><script defer src=https://cdn.jsdelivr.net/npm/mermaid@8.14.0/dist/mermaid.min.js integrity=sha384-atOyb0FxAgN9LyAc6PEf9BjgwLISyansgdH8/VXQH8p2o5vfrRgmGIJ2Sg22L0A0 crossorigin></script>
+<link rel=icon type=image/png sizes=32x32 href=/images/avatar_hubecf9d80b8b876872272a68886c75e90_327995_32x32_fill_box_center_3.png><link rel=apple-touch-icon sizes=180x180 href=/images/avatar_hubecf9d80b8b876872272a68886c75e90_327995_180x180_fill_box_center_3.png><meta name=description content="Elitedj's Blog"><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"/posts/"},{"@type":"ListItem","position":2,"name":"除法分块","item":"/posts/division-block/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"/posts/division-block/"},"headline":"除法分块 | Elitedj\u0027s Blog","datePublished":"2020-02-08T21:29:29+00:00","dateModified":"2020-02-08T21:29:29+00:00","wordCount":748,"publisher":{"@type":"Person","name":"Elitedj","logo":{"@type":"ImageObject","url":"/images/avatar.png"}},"description":"Elitedj\u0027s Blog"}</script><meta property="og:title" content="除法分块 | Elitedj's Blog"><meta property="og:type" content="article"><meta property="og:image" content="/images/avatar.png"><meta property="og:url" content="/posts/division-block/"><meta property="og:description" content><meta property="og:locale" content="zh"><meta property="og:site_name" content="Elitedj's Blog"><meta property="article:published_time" content="2020-02-08T21:29:29+00:00"><meta property="article:modified_time" content="2020-02-08T21:29:29+00:00"><meta property="article:section" content="posts"><meta property="article:tag" content="Algorithm"><meta property="article:tag" content="Math"><meta property="og:see_also" content="/posts/kmp/"><meta property="og:see_also" content="/posts/trie/"><meta property="og:see_also" content="/posts/string-hash/"><meta property="og:see_also" content="/posts/dinic/"><meta property="og:see_also" content="/posts/tarjan/"><meta property="og:see_also" content="/posts/lca/"><body class="flex min-h-screen flex-col"><header class="min-h-16 pl-scrollbar bg-secondary-bg fixed z-50 flex w-full items-center shadow-sm"><div class="mx-auto w-full max-w-screen-xl"><script>let storageColorScheme=localStorage.getItem("lightDarkMode");((storageColorScheme=="Auto"||storageColorScheme==null)&&window.matchMedia("(prefers-color-scheme: dark)").matches||storageColorScheme=="Dark")&&document.getElementsByTagName("html")[0].classList.add("dark")</script><nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0"><a href=/ class="me-6 text-primary-text text-xl font-bold">Elitedj's Blog</a>
+<button id=navbar-btn class="md:hidden flex items-center px-3 py-2" aria-label="Open Navbar">
+<i class="fas fa-bars"></i></button><div id=target class="hidden block md:flex md:grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20"><div class="md:flex md:h-16 text-sm md:grow pb-4 md:pb-0 border-b md:border-b-0"><a href=/about class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 border-transparent me-4">About</a></div><div class=flex><div class="relative pt-4 md:pt-0"><div class="cursor-pointer hover:text-eureka" id=lightDarkMode><i class="fas fa-adjust"></i></div><div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id=is-open></div><div class="absolute flex flex-col start-0 md:start-auto end-auto md:end-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40" id=lightDarkOptions><span class="px-4 py-1 hover:text-eureka" name=Light>浅色</span>
+<span class="px-4 py-1 hover:text-eureka" name=Dark>深色</span>
+<span class="px-4 py-1 hover:text-eureka" name=Auto>自动</span></div></div></div></div><div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id=is-open-mobile></div></nav><script>let element=document.getElementById("lightDarkMode");storageColorScheme==null||storageColorScheme=="Auto"?document.addEventListener("DOMContentLoaded",()=>{window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change",switchDarkMode)}):storageColorScheme=="Light"?(element.firstElementChild.classList.remove("fa-adjust"),element.firstElementChild.setAttribute("data-icon","sun"),element.firstElementChild.classList.add("fa-sun")):storageColorScheme=="Dark"&&(element.firstElementChild.classList.remove("fa-adjust"),element.firstElementChild.setAttribute("data-icon","moon"),element.firstElementChild.classList.add("fa-moon")),document.addEventListener("DOMContentLoaded",()=>{getcolorscheme(),switchBurger()})</script></div></header><main class="grow pt-16"><div class=pl-scrollbar><div class="mx-auto w-full max-w-screen-xl lg:px-4 xl:px-8"><div class="grid grid-cols-2 gap-4 lg:grid-cols-8 lg:pt-12"><div class="lg:col-start-2 bg-secondary-bg col-span-2 rounded px-6 py-8 lg:col-span-6"><article class=prose><h1 class=mb-4>除法分块</h1><div class="text-tertiary-text not-prose mt-2 flex flex-row flex-wrap items-center"><div class="me-6 my-2"><i class="fas fa-calendar me-1"></i>
+<span>2020-02-08</span></div><div class="me-6 my-2"><i class="fas fa-clock me-1"></i>
+<span>2分钟阅读时长</span></div><div class="me-6 my-2"><i class="fas fa-folder me-1"></i>
+<a href=/categories/algorithm/ class=hover:text-eureka>Algorithm</a>
+<span>,</span>
+<a href=/categories/math/ class=hover:text-eureka>Math</a></div></div><h2 id=背景>背景</h2><p>定义一个函数f，f(x)表示x的所有因子和，比如f(6)=12</p><p>对于求单个的f(x)很简单，但是如果求sum(f(i)) i in [a, b]呢？</p><h2 id=朴素做法>朴素做法</h2><p>最暴力的做法很容易就想到</p><pre><code class=language-c++>ll sum = 0;
 for(int i=a; i&lt;=b; i++)
 {
     for(int j=1; j*j&lt;=i; j++)
@@ -310,12 +25,7 @@ for(int i=a; i&lt;=b; i++)
             sum += j/i;
     }
 }
-</code></pre>
-<p>这种做法实在是太慢了，时间复杂度是O(n*sqrt(n))</p>
-<h2 id="线性做法">线性做法</h2>
-<p>对于一个因子L，在1～n这个范围里面，包含L这个因子的数字只有n/L(除法向下取整)这么多个</p>
-<p>且1～n里面，最大的因子是n，所以我们枚举一下因子，每次累加L*n/L即可</p>
-<pre><code class="language-c++">int cal(int n)
+</code></pre><p>这种做法实在是太慢了，时间复杂度是O(n*sqrt(n))</p><h2 id=线性做法>线性做法</h2><p>对于一个因子L，在1～n这个范围里面，包含L这个因子的数字只有n/L(除法向下取整)这么多个</p><p>且1～n里面，最大的因子是n，所以我们枚举一下因子，每次累加L*n/L即可</p><pre><code class=language-c++>int cal(int n)
 {
     int sum = 0;
     for(int i=1; i&lt;=n; i++)
@@ -326,16 +36,7 @@ for(int i=a; i&lt;=b; i++)
 }
 
 cout&lt;&lt;cal(a) - cal(b-1)&lt;&lt;endl;
-</code></pre>
-<h2 id="除法分块">除法分块</h2>
-<p>当n非常大的时候，即便是线性做法也是不够快的，我们考虑求sum(f(i)) i in[1, 12]</p>
-<p>根据上面说道，每个因子的出现次数为n/L，所以对于1~12这个范围来说，1~12因子出现的次数为[12, 6, 4, 3, 2, 2, 1, 1, 1, 1, 1, 1]</p>
-<p>我们注意到有连续的因子区间出现的次数是一样的，那么我们可不可以将出现次数相同的因子一起算呢？</p>
-<p>我们只需要知道区间的左右端点就可以做到了</p>
-<p>左端点l是容易的求的，左端点等于上一个右端点+1，左端点初始化为1</p>
-<p>右端点呢？右端点为n/(n/l)(除法皆为向下取整)，为什么右端点是这样的？当然是<del>打表找规律啦</del>看看这篇<a href="https://zhuanlan.zhihu.com/p/26020672">证明</a>。</p>
-<p>所以我们很容易就能求得1～n的每个数字的因子和</p>
-<pre><code class="language-c++">ll cal(ll n)
+</code></pre><h2 id=除法分块>除法分块</h2><p>当n非常大的时候，即便是线性做法也是不够快的，我们考虑求sum(f(i)) i in[1, 12]</p><p>根据上面说道，每个因子的出现次数为n/L，所以对于1~12这个范围来说，1~12因子出现的次数为[12, 6, 4, 3, 2, 2, 1, 1, 1, 1, 1, 1]</p><p>我们注意到有连续的因子区间出现的次数是一样的，那么我们可不可以将出现次数相同的因子一起算呢？</p><p>我们只需要知道区间的左右端点就可以做到了</p><p>左端点l是容易的求的，左端点等于上一个右端点+1，左端点初始化为1</p><p>右端点呢？右端点为n/(n/l)(除法皆为向下取整)，为什么右端点是这样的？当然是<del>打表找规律啦</del>看看这篇<a href=https://zhuanlan.zhihu.com/p/26020672>证明</a>。</p><p>所以我们很容易就能求得1～n的每个数字的因子和</p><pre><code class=language-c++>ll cal(ll n)
 {
     ll sum = 0;
     for(ll L=1, R; L&lt;=n; L=R+1)
@@ -355,11 +56,7 @@ cout&lt;&lt;cal(a) - cal(b-1)&lt;&lt;endl;
 ll a, b;
 cin&gt;&gt;a&gt;&gt;b;
 cout&lt;&lt;cal(b) - cal(a-1)&lt;&lt;endl;
-</code></pre>
-<h2 id="例题">例题</h2>
-<p><a href="https://codeforces.com/gym/101652">codeforces gym101652 Fear Factoring</a></p>
-<p><img src="1.png" alt="1"></p>
-<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
+</code></pre><h2 id=例题>例题</h2><p><a href=https://codeforces.com/gym/101652>codeforces gym101652 Fear Factoring</a></p><p><img src=1.png alt=1></p><pre><code class=language-c++>#include&lt;bits/stdc++.h&gt;
 using namespace std;
 typedef long long ll;
 typedef unsigned long long ull;
@@ -390,110 +87,9 @@ int main()
 	cout&lt;&lt;cal(b) - cal(a-1)&lt;&lt;&quot;\n&quot;;
 	return 0;
 }
-</code></pre>
-</article>
-
-
-      
-        <div class="my-4">
-    
-    <a href="/tags/algorithm/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 me-2 hover:text-eureka">#Algorithm</a>
-    
-    <a href="/tags/math/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 me-2 hover:text-eureka">#Math</a>
-    
-</div>
-      
-
-      
-
-
-
-      
-
-      
-  <div
-    class="-mx-2 mt-4 flex flex-col border-t px-2 pt-4 md:flex-row md:justify-between"
-  >
-    <div>
-      
-        <span class="text-primary-text block font-bold"
-          >上一页</span
-        >
-        <a href="/posts/exkmp/" class="block">扩展KMP</a>
-      
-    </div>
-    <div class="mt-4 md:mt-0 md:text-right">
-      
-        <span class="text-primary-text block font-bold">下一页</span>
-        <a href="/posts/kmp/" class="block">KMP</a>
-      
-    </div>
-  </div>
-
-
-      
-
-
-
-  <div id="valine-comments" class="mt-4"></div>
-<script defer src="https://cdn.jsdelivr.net/npm/valine@1.4.16/dist/Valine.min.js" 
-  integrity="sha384-e0&#43;DNUCJo75aOAzHQbFWYBCM9/S4f0BhRJXvEgbE3mMS85RM20MSSGStHuNdY2QK"  crossorigin></script>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    new Valine({
-      el: "#valine-comments",
-    })
-  });
-</script>
-
-    </div>
-    
-
-    
-    
-      <div
-        class="lg:col-start-2 bg-secondary-bg prose col-span-2 rounded p-6 lg:col-span-6"
-      >
-        <h3>相关</h3>
-        
-          <a href="/posts/kmp/" class="no-underline">KMP</a>
-          <br />
-        
-          <a href="/posts/trie/" class="no-underline">字典树(Trie)</a>
-          <br />
-        
-          <a href="/posts/string-hash/" class="no-underline">字符串哈希</a>
-          <br />
-        
-          <a href="/posts/dinic/" class="no-underline">网络流之dinic</a>
-          <br />
-        
-          <a href="/posts/tarjan/" class="no-underline">Tarjan求解强连通分量、割点、桥</a>
-          <br />
-        
-          <a href="/posts/lca/" class="no-underline">[LCA]最近公共祖先</a>
-          <br />
-        
-      </div>
-    
-  </div>
-
-  
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        hljs.highlightAll();
-      });
-    </script>
-
-          </div>
-        </div>
-      
-    </main>
-    <footer class="pl-scrollbar">
-      <div class="mx-auto w-full max-w-screen-xl"><div class="text-center p-6 pin-b">
-    <p class="text-sm text-tertiary-text">&copy; 2019 <a href="https://github.com/Elitedj">Elitedj</a>
- &middot;  Powered by the <a href="https://github.com/wangchucheng/hugo-eureka" class="hover:text-eureka">Eureka</a> theme for <a href="https://gohugo.io" class="hover:text-eureka">Hugo</a></p>
-</div></div>
-    </footer>
-  </body>
-</html>
+</code></pre></article><div class=my-4><a href=/tags/algorithm/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 me-2 hover:text-eureka">#Algorithm</a>
+<a href=/tags/math/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 me-2 hover:text-eureka">#Math</a></div><div class="-mx-2 mt-4 flex flex-col border-t px-2 pt-4 md:flex-row md:justify-between"><div><span class="text-primary-text block font-bold">上一页</span>
+<a href=/posts/exkmp/ class=block>扩展KMP</a></div><div class="mt-4 md:mt-0 md:text-right"><span class="text-primary-text block font-bold">下一页</span>
+<a href=/posts/kmp/ class=block>KMP</a></div></div><div id=valine-comments class=mt-4></div><script defer src=https://cdn.jsdelivr.net/npm/valine@1.4.16/dist/Valine.min.js integrity=sha384-e0+DNUCJo75aOAzHQbFWYBCM9/S4f0BhRJXvEgbE3mMS85RM20MSSGStHuNdY2QK crossorigin></script>
+<script>document.addEventListener("DOMContentLoaded",function(){new Valine({el:"#valine-comments"})})</script></div><div class="lg:col-start-2 bg-secondary-bg prose col-span-2 rounded p-6 lg:col-span-6"><h3>相关</h3><a href=/posts/kmp/ class=no-underline>KMP</a><br><a href=/posts/trie/ class=no-underline>字典树(Trie)</a><br><a href=/posts/string-hash/ class=no-underline>字符串哈希</a><br><a href=/posts/dinic/ class=no-underline>网络流之dinic</a><br><a href=/posts/tarjan/ class=no-underline>Tarjan求解强连通分量、割点、桥</a><br><a href=/posts/lca/ class=no-underline>[LCA]最近公共祖先</a><br></div></div><script>document.addEventListener("DOMContentLoaded",()=>{hljs.highlightAll()})</script></div></div></main><footer class=pl-scrollbar><div class="mx-auto w-full max-w-screen-xl"><div class="text-center p-6 pin-b"><p class="text-sm text-tertiary-text">&copy; 2019 <a href=https://github.com/Elitedj>Elitedj</a>
+&#183; Powered by the <a href=https://github.com/wangchucheng/hugo-eureka class=hover:text-eureka>Eureka</a> theme for <a href=https://gohugo.io class=hover:text-eureka>Hugo</a></p></div></div></footer></body></html>

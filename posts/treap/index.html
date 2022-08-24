@@ -1,304 +1,20 @@
-<!DOCTYPE html>
-<html
-  lang="zh"
-  dir="ltr"
-  
-><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-<title>Treap | Elitedj&#39;s Blog</title>
-
-<meta name="generator" content="Hugo Eureka 0.9.3" />
-<link rel="stylesheet" href="/css/eureka.min.9cec6350e37e534b0338fa9a085bf06855de3b0f2dcf857e792e5e97b07ea905d4d5513db554cbc26a9c3da622bae92d.css">
-<script defer src="/js/eureka.min.fa9a6bf6d7a50bb635b4cca7d2ba5cf3dfb095ae3798773f1328f7950028b48c17d06276594e1b5f244a25a6c969a705.js"></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload"
-  href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&amp;family=Noto&#43;Serif&#43;SC:wght@400;600;700&amp;display=swap"
-  as="style" onload="this.onload=null;this.rel='stylesheet'">
-
-
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/styles/base16/solarized-light.min.css"
-   media="print"
-  onload="this.media='all';this.onload=null" crossorigin>
-<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/highlight.min.js"
-   crossorigin></script>
-  <script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/languages/dart.min.js"
-     crossorigin></script>
-<link rel="stylesheet" href="/css/highlightjs.min.2958991528e43eb6fc9b8c4f2b8e052f79c4010718e1d1e888a777620e9ee63021c2c57ec7417a3108019bb8c41943e6.css" media="print" onload="this.media='all';this.onload=null">
-
-
-<script defer type="text/javascript" src="/js/fontawesome.min.d9ba21a4e7c7dbe0ba1f8b62ea1dda063fb92d88bd994ccb206ced4f4c9081fe517f9b61b57efd649e9edbdff33a2114.js"></script>
-
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"
-   integrity="sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ"  media="print"
-  onload="this.media='all';this.onload=null" crossorigin>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js" 
-  integrity="sha384-VQ8d8WVFw0yHhCk5E8I86oOhv48xLpnDZx5T9GogA/Y84DcCKWXDmSDfn13bzFZY"  crossorigin></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js"
-   integrity="sha384-&#43;XBljXPPiv&#43;OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR"  crossorigin></script>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    renderMathInElement(document.body, {
-      delimiters: [
-        { left: "$$", right: "$$", display: true },
-        { left: "$", right: "$", display: false },
-        { left: "\\(", right: "\\)", display: false },
-        { left: "\\[", right: "\\]", display: true }
-      ],
-    });
-  });
-</script>
-
-
-<script defer src="https://cdn.jsdelivr.net/npm/mermaid@8.14.0/dist/mermaid.min.js" 
-  integrity="sha384-atOyb0FxAgN9LyAc6PEf9BjgwLISyansgdH8/VXQH8p2o5vfrRgmGIJ2Sg22L0A0"  crossorigin></script>
-
-
-<link rel="icon" type="image/png" sizes="32x32" href="/images/avatar_hubecf9d80b8b876872272a68886c75e90_327995_32x32_fill_box_center_3.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/images/avatar_hubecf9d80b8b876872272a68886c75e90_327995_180x180_fill_box_center_3.png">
-
-<meta name="description"
-  content="Elitedj&#39;s Blog">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [{
-      "@type": "ListItem",
-      "position": 1 ,
-      "name":"Posts",
-      "item":"/posts/"},{
-      "@type": "ListItem",
-      "position": 2 ,
-      "name":"Treap",
-      "item":"/posts/treap/"}]
-}
-</script>
-
-
-
-<script type="application/ld+json">
-{
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "/posts/treap/"
-    },
-    "headline": "Treap | Elitedj\u0027s Blog","datePublished": "2020-09-15T10:55:37+00:00",
-    "dateModified": "2020-09-15T10:55:37+00:00",
-    "wordCount":  3930 ,
-    "publisher": {
-        "@type": "Person",
-        "name": "Elitedj",
-        "logo": {
-            "@type": "ImageObject",
-            "url": "/images/avatar.png"
-        }
-        },
-    "description": "Elitedj\u0027s Blog"
-}
-</script><meta property="og:title" content="Treap | Elitedj&#39;s Blog" />
-<meta property="og:type" content="article" />
-
-
-<meta property="og:image" content="/images/avatar.png">
-
-
-<meta property="og:url" content="/posts/treap/" />
-
-
-
-
-<meta property="og:description" content="" />
-
-
-
-
-<meta property="og:locale" content="zh" />
-
-
-
-
-<meta property="og:site_name" content="Elitedj&#39;s Blog" />
-
-
-
-
-
-
-<meta property="article:published_time" content="2020-09-15T10:55:37&#43;00:00" />
-
-
-<meta property="article:modified_time" content="2020-09-15T10:55:37&#43;00:00" />
-
-
-
-<meta property="article:section" content="posts" />
-
-
-<meta property="article:tag" content="Algorithm" />
-
-<meta property="article:tag" content="Data Structure" />
-
-
-
-
-
-<meta property="og:see_also" content="/posts/scapegoat-tree/" />
-
-<meta property="og:see_also" content="/posts/persistent-set-union/" />
-
-<meta property="og:see_also" content="/posts/persistent-array/" />
-
-<meta property="og:see_also" content="/posts/trie/" />
-
-<meta property="og:see_also" content="/posts/persistent-seg-tree/" />
-
-<meta property="og:see_also" content="/posts/seg-tree/" />
-
-
-
-
-  <body class="flex min-h-screen flex-col">
-    <header
-      class="min-h-16 pl-scrollbar bg-secondary-bg fixed z-50 flex w-full items-center shadow-sm"
-    >
-      <div class="mx-auto w-full max-w-screen-xl"><script>
-    let storageColorScheme = localStorage.getItem("lightDarkMode")
-    if (((storageColorScheme == 'Auto' || storageColorScheme == null) && window.matchMedia("(prefers-color-scheme: dark)").matches) || storageColorScheme == "Dark") {
-        document.getElementsByTagName('html')[0].classList.add('dark')
-    }
-</script>
-<nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0">
-    <a href="/" class="me-6 text-primary-text text-xl font-bold">Elitedj&#39;s Blog</a>
-    <button id="navbar-btn" class="md:hidden flex items-center px-3 py-2" aria-label="Open Navbar">
-        <i class="fas fa-bars"></i>
-    </button>
-
-    <div id="target"
-        class="hidden block md:flex md:grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20">
-        <div class="md:flex md:h-16 text-sm md:grow pb-4 md:pb-0 border-b md:border-b-0">
-            <a href="/about" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  me-4">About</a>
-        </div>
-
-        <div class="flex">
-            <div class="relative pt-4 md:pt-0">
-                <div class="cursor-pointer hover:text-eureka" id="lightDarkMode">
-                    <i class="fas fa-adjust"></i>
-                </div>
-                <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id="is-open">
-                </div>
-                <div class="absolute flex flex-col start-0 md:start-auto end-auto md:end-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40"
-                    id='lightDarkOptions'>
-                    <span class="px-4 py-1 hover:text-eureka" name="Light">浅色</span>
-                    <span class="px-4 py-1 hover:text-eureka" name="Dark">深色</span>
-                    <span class="px-4 py-1 hover:text-eureka" name="Auto">自动</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id="is-open-mobile">
-    </div>
-
-</nav>
-<script>
-    
-    let element = document.getElementById('lightDarkMode')
-    if (storageColorScheme == null || storageColorScheme == 'Auto') {
-        document.addEventListener('DOMContentLoaded', () => {
-            window.matchMedia("(prefers-color-scheme: dark)").addEventListener('change', switchDarkMode)
-        })
-    } else if (storageColorScheme == "Light") {
-        element.firstElementChild.classList.remove('fa-adjust')
-        element.firstElementChild.setAttribute("data-icon", 'sun')
-        element.firstElementChild.classList.add('fa-sun')
-    } else if (storageColorScheme == "Dark") {
-        element.firstElementChild.classList.remove('fa-adjust')
-        element.firstElementChild.setAttribute("data-icon", 'moon')
-        element.firstElementChild.classList.add('fa-moon')
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-        getcolorscheme();
-        switchBurger();
-    });
-</script>
-</div>
-    </header>
-    <main class="grow pt-16">
-        <div class="pl-scrollbar">
-          <div class="mx-auto w-full max-w-screen-xl lg:px-4 xl:px-8">
-  
-  
-  <div class="grid grid-cols-2 gap-4 lg:grid-cols-8 lg:pt-12">
-    <div
-      class=" bg-secondary-bg col-span-2 rounded px-6 py-8 lg:col-span-6"
-    >
-      <article class="prose">
-  <h1 class="mb-4">Treap</h1>
-
-  <div
-  class="text-tertiary-text not-prose mt-2 flex flex-row flex-wrap items-center"
->
-  <div class="me-6 my-2">
-    <i class="fas fa-calendar me-1"></i>
-    <span
-      >2020-09-15</span
-    >
-  </div>
-  <div class="me-6 my-2">
-    <i class="fas fa-clock me-1"></i>
-    <span>8分钟阅读时长</span>
-  </div>
-
-  
-    <div class="me-6 my-2">
-      <i class="fas fa-folder me-1"></i>
-      
-        <a href="/categories/algorithm/" class="hover:text-eureka"
-          >Algorithm</a
-        >
-      
-        
-          <span>, </span>
-        <a href="/categories/data-structure/" class="hover:text-eureka"
-          >Data Structure</a
-        >
-      
-    </div>
-  
-
-  
-</div>
-
-
-  
-  
-
-  <h1 id="treap">Treap</h1>
-<p>Treap是由Tree和Heap一起组合而成的数据结构，是一种平衡二叉搜索树。每一个数由一个二元组<code>&lt;val, key&gt;</code>表示，其中<code>val</code>表示数的值，而<code>key</code>存储的是一个随机值，Treap对于<code>val</code>来说满足二叉搜索树的性质，对于<code>key</code>来说满足堆的性质(但不满足完全二叉树这一性质)。</p>
-<p>为什么二叉搜索树要结合堆的性质呢？在按照<code>1、2、3、4、5</code>这个顺序插入构成一颗二叉搜索树的时候，会退化成一个链表，所以我们给每一个结点加一个随机值，然后随机值满足堆的性质，这样就可以避免最坏情况，使得树基本平衡。</p>
-<h2 id="数据结构定义">数据结构定义</h2>
-<pre><code class="language-cpp">// val重复的在一个结点记录，由cnt表示， size表示以该结点为根的子树的大小，son[0]表示左儿子，son[1]表示右儿子
+<!doctype html><html lang=zh dir=ltr><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Treap | Elitedj's Blog</title><meta name=generator content="Hugo Eureka 0.9.3"><link rel=stylesheet href=/css/eureka.min.9cec6350e37e534b0338fa9a085bf06855de3b0f2dcf857e792e5e97b07ea905d4d5513db554cbc26a9c3da622bae92d.css><script defer src=/js/eureka.min.fa9a6bf6d7a50bb635b4cca7d2ba5cf3dfb095ae3798773f1328f7950028b48c17d06276594e1b5f244a25a6c969a705.js></script>
+<link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=preload href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" as=style onload='this.onload=null,this.rel="stylesheet"'><link rel=stylesheet href=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/styles/base16/solarized-light.min.css media=print onload='this.media="all",this.onload=null' crossorigin><script defer src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/highlight.min.js crossorigin></script>
+<script defer src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/languages/dart.min.js crossorigin></script>
+<link rel=stylesheet href=/css/highlightjs.min.2958991528e43eb6fc9b8c4f2b8e052f79c4010718e1d1e888a777620e9ee63021c2c57ec7417a3108019bb8c41943e6.css media=print onload='this.media="all",this.onload=null'><script defer type=text/javascript src=/js/fontawesome.min.d9ba21a4e7c7dbe0ba1f8b62ea1dda063fb92d88bd994ccb206ced4f4c9081fe517f9b61b57efd649e9edbdff33a2114.js></script>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css integrity=sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ media=print onload='this.media="all",this.onload=null' crossorigin><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js integrity=sha384-VQ8d8WVFw0yHhCk5E8I86oOhv48xLpnDZx5T9GogA/Y84DcCKWXDmSDfn13bzFZY crossorigin></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin></script>
+<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}]})})</script><script defer src=https://cdn.jsdelivr.net/npm/mermaid@8.14.0/dist/mermaid.min.js integrity=sha384-atOyb0FxAgN9LyAc6PEf9BjgwLISyansgdH8/VXQH8p2o5vfrRgmGIJ2Sg22L0A0 crossorigin></script>
+<link rel=icon type=image/png sizes=32x32 href=/images/avatar_hubecf9d80b8b876872272a68886c75e90_327995_32x32_fill_box_center_3.png><link rel=apple-touch-icon sizes=180x180 href=/images/avatar_hubecf9d80b8b876872272a68886c75e90_327995_180x180_fill_box_center_3.png><meta name=description content="Elitedj's Blog"><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"/posts/"},{"@type":"ListItem","position":2,"name":"Treap","item":"/posts/treap/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"/posts/treap/"},"headline":"Treap | Elitedj\u0027s Blog","datePublished":"2020-09-15T10:55:37+00:00","dateModified":"2020-09-15T10:55:37+00:00","wordCount":3930,"publisher":{"@type":"Person","name":"Elitedj","logo":{"@type":"ImageObject","url":"/images/avatar.png"}},"description":"Elitedj\u0027s Blog"}</script><meta property="og:title" content="Treap | Elitedj's Blog"><meta property="og:type" content="article"><meta property="og:image" content="/images/avatar.png"><meta property="og:url" content="/posts/treap/"><meta property="og:description" content><meta property="og:locale" content="zh"><meta property="og:site_name" content="Elitedj's Blog"><meta property="article:published_time" content="2020-09-15T10:55:37+00:00"><meta property="article:modified_time" content="2020-09-15T10:55:37+00:00"><meta property="article:section" content="posts"><meta property="article:tag" content="Algorithm"><meta property="article:tag" content="Data Structure"><meta property="og:see_also" content="/posts/scapegoat-tree/"><meta property="og:see_also" content="/posts/persistent-set-union/"><meta property="og:see_also" content="/posts/persistent-array/"><meta property="og:see_also" content="/posts/trie/"><meta property="og:see_also" content="/posts/persistent-seg-tree/"><meta property="og:see_also" content="/posts/seg-tree/"><body class="flex min-h-screen flex-col"><header class="min-h-16 pl-scrollbar bg-secondary-bg fixed z-50 flex w-full items-center shadow-sm"><div class="mx-auto w-full max-w-screen-xl"><script>let storageColorScheme=localStorage.getItem("lightDarkMode");((storageColorScheme=="Auto"||storageColorScheme==null)&&window.matchMedia("(prefers-color-scheme: dark)").matches||storageColorScheme=="Dark")&&document.getElementsByTagName("html")[0].classList.add("dark")</script><nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0"><a href=/ class="me-6 text-primary-text text-xl font-bold">Elitedj's Blog</a>
+<button id=navbar-btn class="md:hidden flex items-center px-3 py-2" aria-label="Open Navbar">
+<i class="fas fa-bars"></i></button><div id=target class="hidden block md:flex md:grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20"><div class="md:flex md:h-16 text-sm md:grow pb-4 md:pb-0 border-b md:border-b-0"><a href=/about class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 border-transparent me-4">About</a></div><div class=flex><div class="relative pt-4 md:pt-0"><div class="cursor-pointer hover:text-eureka" id=lightDarkMode><i class="fas fa-adjust"></i></div><div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id=is-open></div><div class="absolute flex flex-col start-0 md:start-auto end-auto md:end-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40" id=lightDarkOptions><span class="px-4 py-1 hover:text-eureka" name=Light>浅色</span>
+<span class="px-4 py-1 hover:text-eureka" name=Dark>深色</span>
+<span class="px-4 py-1 hover:text-eureka" name=Auto>自动</span></div></div></div></div><div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id=is-open-mobile></div></nav><script>let element=document.getElementById("lightDarkMode");storageColorScheme==null||storageColorScheme=="Auto"?document.addEventListener("DOMContentLoaded",()=>{window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change",switchDarkMode)}):storageColorScheme=="Light"?(element.firstElementChild.classList.remove("fa-adjust"),element.firstElementChild.setAttribute("data-icon","sun"),element.firstElementChild.classList.add("fa-sun")):storageColorScheme=="Dark"&&(element.firstElementChild.classList.remove("fa-adjust"),element.firstElementChild.setAttribute("data-icon","moon"),element.firstElementChild.classList.add("fa-moon")),document.addEventListener("DOMContentLoaded",()=>{getcolorscheme(),switchBurger()})</script></div></header><main class="grow pt-16"><div class=pl-scrollbar><div class="mx-auto w-full max-w-screen-xl lg:px-4 xl:px-8"><div class="grid grid-cols-2 gap-4 lg:grid-cols-8 lg:pt-12"><div class="bg-secondary-bg col-span-2 rounded px-6 py-8 lg:col-span-6"><article class=prose><h1 class=mb-4>Treap</h1><div class="text-tertiary-text not-prose mt-2 flex flex-row flex-wrap items-center"><div class="me-6 my-2"><i class="fas fa-calendar me-1"></i>
+<span>2020-09-15</span></div><div class="me-6 my-2"><i class="fas fa-clock me-1"></i>
+<span>8分钟阅读时长</span></div><div class="me-6 my-2"><i class="fas fa-folder me-1"></i>
+<a href=/categories/algorithm/ class=hover:text-eureka>Algorithm</a>
+<span>,</span>
+<a href=/categories/data-structure/ class=hover:text-eureka>Data Structure</a></div></div><h1 id=treap>Treap</h1><p>Treap是由Tree和Heap一起组合而成的数据结构，是一种平衡二叉搜索树。每一个数由一个二元组<code>&lt;val, key></code>表示，其中<code>val</code>表示数的值，而<code>key</code>存储的是一个随机值，Treap对于<code>val</code>来说满足二叉搜索树的性质，对于<code>key</code>来说满足堆的性质(但不满足完全二叉树这一性质)。</p><p>为什么二叉搜索树要结合堆的性质呢？在按照<code>1、2、3、4、5</code>这个顺序插入构成一颗二叉搜索树的时候，会退化成一个链表，所以我们给每一个结点加一个随机值，然后随机值满足堆的性质，这样就可以避免最坏情况，使得树基本平衡。</p><h2 id=数据结构定义>数据结构定义</h2><pre><code class=language-cpp>// val重复的在一个结点记录，由cnt表示， size表示以该结点为根的子树的大小，son[0]表示左儿子，son[1]表示右儿子
 struct node {
 	int son[2];
 	int val, key;
@@ -308,23 +24,10 @@ struct node {
 int tot, root;
 
 mt19937 rnd(233);
-</code></pre>
-<h2 id="更新">更新</h2>
-<p>因为Treap是通过旋转操作来维护树的平衡的，所以需要更新一下结点的size值</p>
-<pre><code class="language-cpp">void pushup(int p) {
+</code></pre><h2 id=更新>更新</h2><p>因为Treap是通过旋转操作来维护树的平衡的，所以需要更新一下结点的size值</p><pre><code class=language-cpp>void pushup(int p) {
 	tree[p].size = tree[tree[p].son[0]].size + tree[tree[p].son[1]].size + tree[p].cnt;
 }
-</code></pre>
-<h2 id="旋转">旋转</h2>
-<p>普通的Treap是通过旋转操作来维护树的平衡的，先来了解一下旋转操作吧。</p>
-<h3 id="左旋">左旋</h3>
-<p>对A结点进行左旋，以A结点的右儿子为轴，A结点左旋。</p>
-<p><img src="zuo.png" alt="left rotate"></p>
-<h3 id="右旋">右旋</h3>
-<p>对A结点进行右旋，以A结点的左儿子为轴，A结点右旋。</p>
-<p><img src="you.png" alt="right rotate"></p>
-<h3 id="代码">代码</h3>
-<pre><code class="language-cpp">// d = 0表示左旋，d = 1表示右旋
+</code></pre><h2 id=旋转>旋转</h2><p>普通的Treap是通过旋转操作来维护树的平衡的，先来了解一下旋转操作吧。</p><h3 id=左旋>左旋</h3><p>对A结点进行左旋，以A结点的右儿子为轴，A结点左旋。</p><p><img src=zuo.png alt="left rotate"></p><h3 id=右旋>右旋</h3><p>对A结点进行右旋，以A结点的左儿子为轴，A结点右旋。</p><p><img src=you.png alt="right rotate"></p><h3 id=代码>代码</h3><pre><code class=language-cpp>// d = 0表示左旋，d = 1表示右旋
 void rotate(int &amp;p, int d) {
 	int k = tree[p].son[d^1];
 	tree[p].son[d^1] = tree[k].son[d];
@@ -333,9 +36,7 @@ void rotate(int &amp;p, int d) {
 	pushup(k);
 	p = k;
 }
-</code></pre>
-<h2 id="插入">插入</h2>
-<pre><code class="language-cpp">void insert(int &amp;p, int x) {
+</code></pre><h2 id=插入>插入</h2><pre><code class=language-cpp>void insert(int &amp;p, int x) {
     // 到一个空结点，直接新建一个
 	if (!p) {
 		p = ++tot;
@@ -357,9 +58,7 @@ void rotate(int &amp;p, int d) {
 	if (tree[p].key &lt; tree[tree[p].son[d]].key) rotate(p, d^1);
 	pushup(p);
 }
-</code></pre>
-<h2 id="删除">删除</h2>
-<pre><code class="language-cpp">void del(int &amp;p, int x) {
+</code></pre><h2 id=删除>删除</h2><pre><code class=language-cpp>void del(int &amp;p, int x) {
     // 找到空结点返回就好
 	if (!p) return;
     // 根据二叉搜索树的性质往下找
@@ -390,46 +89,31 @@ void rotate(int &amp;p, int d) {
 	}
 	pushup(p);
 }
-</code></pre>
-<h2 id="获取排名">获取排名</h2>
-<p>排名定义为比<code>val</code>小的数的个数+1</p>
-<pre><code class="language-cpp">int getrank(int p, int x) {
+</code></pre><h2 id=获取排名>获取排名</h2><p>排名定义为比<code>val</code>小的数的个数+1</p><pre><code class=language-cpp>int getrank(int p, int x) {
 	if (!p) return 0;
 	if (tree[p].val == x) return tree[tree[p].son[0]].size + 1;
 	else if (tree[p].val &lt; x)
 		return tree[tree[p].son[0]].size + tree[p].cnt + getrank(tree[p].son[1], x);
 	else return getrank(tree[p].son[0], x);
 }
-</code></pre>
-<h2 id="根据排名获取值">根据排名获取值</h2>
-<pre><code class="language-cpp">int getnum(int p, int x) {
+</code></pre><h2 id=根据排名获取值>根据排名获取值</h2><pre><code class=language-cpp>int getnum(int p, int x) {
 	if (!p) return 0;
 	if (tree[tree[p].son[0]].size &gt;= x) return getnum(tree[p].son[0], x);
 	else if (tree[tree[p].son[0]].size + tree[p].cnt &lt; x)
 		return getnum(tree[p].son[1], x - tree[tree[p].son[0]].size - tree[p].cnt);
 	else return tree[p].val;
 }
-</code></pre>
-<h2 id="获取前驱">获取前驱</h2>
-<p>前驱是比<code>val</code>小的最大值</p>
-<pre><code class="language-cpp">int getpre(int p, int x) {
+</code></pre><h2 id=获取前驱>获取前驱</h2><p>前驱是比<code>val</code>小的最大值</p><pre><code class=language-cpp>int getpre(int p, int x) {
 	if (!p) return -inf;
 	if (tree[p].val &gt;= x) return getpre(tree[p].son[0], x);
 	else return max(tree[p].val, getpre(tree[p].son[1], x));
 }
-</code></pre>
-<h2 id="获取后继">获取后继</h2>
-<p>后继是比<code>val</code>大的最小值</p>
-<pre><code class="language-cpp">int getnxt(int p, int x) {
+</code></pre><h2 id=获取后继>获取后继</h2><p>后继是比<code>val</code>大的最小值</p><pre><code class=language-cpp>int getnxt(int p, int x) {
 	if (!p) return inf;
 	if (tree[p].val &lt;= x) return getnxt(tree[p].son[1], x);
 	else return min(tree[p].val, getnxt(tree[p].son[0], x));
 }
-</code></pre>
-<h2 id="洛谷p3369">洛谷P3369</h2>
-<p>模板题<a href="https://www.luogu.com.cn/problem/P3369">洛谷P3369</a></p>
-<p><img src="p3369.png" alt="p3369"></p>
-<pre><code class="language-cpp">// 输入样例
+</code></pre><h2 id=洛谷p3369>洛谷P3369</h2><p>模板题<a href=https://www.luogu.com.cn/problem/P3369>洛谷P3369</a></p><p><img src=p3369.png alt=p3369></p><pre><code class=language-cpp>// 输入样例
 10
 1 106465
 4 1
@@ -446,8 +130,7 @@ void rotate(int &amp;p, int d) {
 106465
 84185
 492737
-</code></pre>
-<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+</code></pre><pre><code class=language-cpp>#include&lt;bits/stdc++.h&gt;
 using namespace std;
 typedef long long ll;
 typedef unsigned long long ull;
@@ -571,11 +254,7 @@ int main() {
 	}
 	return 0;
 }
-</code></pre>
-<h1 id="无旋-treap">无旋 Treap</h1>
-<p>无旋Treap也叫fhq Treap，是由范浩强发明的数据结构，顾名思义，无旋Treap不需要旋转操作便能维护树的平衡，主要是通过分裂和合并两个操作。</p>
-<h2 id="数据结构定义-1">数据结构定义</h2>
-<pre><code class="language-cpp">struct node {
+</code></pre><h1 id=无旋-treap>无旋 Treap</h1><p>无旋Treap也叫fhq Treap，是由范浩强发明的数据结构，顾名思义，无旋Treap不需要旋转操作便能维护树的平衡，主要是通过分裂和合并两个操作。</p><h2 id=数据结构定义-1>数据结构定义</h2><pre><code class=language-cpp>struct node {
 	int l, r;
 	int val, key;
 	int size;
@@ -585,34 +264,17 @@ int root, cnt;
 mt19937 rnd(233);
 
 int x, y, z;	// 用于分裂时存储树的结点
-</code></pre>
-<h2 id="创建新结点">创建新结点</h2>
-<pre><code class="language-cpp">int newnode(int val) {
+</code></pre><h2 id=创建新结点>创建新结点</h2><pre><code class=language-cpp>int newnode(int val) {
 	++cnt;
 	tree[cnt].val = val;
 	tree[cnt].size = 1;
 	tree[cnt].key = rnd();
 	return cnt;
 }
-</code></pre>
-<h2 id="更新-1">更新</h2>
-<p>更新操作与普通的Treap相同</p>
-<pre><code class="language-cpp">void update(int now) {
+</code></pre><h2 id=更新-1>更新</h2><p>更新操作与普通的Treap相同</p><pre><code class=language-cpp>void update(int now) {
 	tree[now].size = tree[tree[now].l].size + tree[tree[now].r].size + 1;
 }
-</code></pre>
-<h2 id="分裂">分裂</h2>
-<p>分裂主要有两种方式</p>
-<ul>
-<li>按值<code>value</code>分裂，将树分为两颗，一颗树上的<code>val</code>小于等于<code>value</code>，另一棵树大于<code>value</code></li>
-<li>按大小<code>sz</code>分裂，将一颗子树分为<code>sz</code>大小，另一颗子树为<code>n-sz</code>大小</li>
-</ul>
-<p>这里先讲按值分裂，按大小分裂之后会结合例题看。</p>
-<p>假设有下面这样一颗树</p>
-<p><img src="split1.png" alt="split1"></p>
-<p>我们对它按值<code>17</code>进行分裂，得到的结果如下</p>
-<p><img src="split2.png" alt="split2"></p>
-<pre><code class="language-cpp">// 当前结点序号为now，按照val分裂，分裂成两颗子树，根节点为x和y，因为x和y的值会改变，所以传引用
+</code></pre><h2 id=分裂>分裂</h2><p>分裂主要有两种方式</p><ul><li>按值<code>value</code>分裂，将树分为两颗，一颗树上的<code>val</code>小于等于<code>value</code>，另一棵树大于<code>value</code></li><li>按大小<code>sz</code>分裂，将一颗子树分为<code>sz</code>大小，另一颗子树为<code>n-sz</code>大小</li></ul><p>这里先讲按值分裂，按大小分裂之后会结合例题看。</p><p>假设有下面这样一颗树</p><p><img src=split1.png alt=split1></p><p>我们对它按值<code>17</code>进行分裂，得到的结果如下</p><p><img src=split2.png alt=split2></p><pre><code class=language-cpp>// 当前结点序号为now，按照val分裂，分裂成两颗子树，根节点为x和y，因为x和y的值会改变，所以传引用
 // 其中以x为根的子树是小于等于val，y为大于val
 void split(int now, int val, int &amp;x, int &amp;y) {
     // now为空，则让x和y都为空就好
@@ -632,10 +294,7 @@ void split(int now, int val, int &amp;x, int &amp;y) {
 		update(now);
 	}
 }
-</code></pre>
-<h2 id="合并">合并</h2>
-<p>合并操作就是分裂的逆操作，将两颗子树合并为一颗。</p>
-<pre><code class="language-cpp">// 两颗子树的根为x和y
+</code></pre><h2 id=合并>合并</h2><p>合并操作就是分裂的逆操作，将两颗子树合并为一颗。</p><pre><code class=language-cpp>// 两颗子树的根为x和y
 // 需要注意的是，x子树的值一定一定一定要小于y的值
 int merge(int x, int y) {
     // 当有一个为空时，直接返回另一个的值，两个都为空则返回0
@@ -653,17 +312,13 @@ int merge(int x, int y) {
 		return y;
 	}
 }
-</code></pre>
-<h2 id="插入-1">插入</h2>
-<pre><code class="language-cpp">// 先按照val进行分裂，其中x子树小于等于val
+</code></pre><h2 id=插入-1>插入</h2><pre><code class=language-cpp>// 先按照val进行分裂，其中x子树小于等于val
 // 让x和新结点进行合并，再和y子树合并即可
 void insert(int val) {
 	split(root, val, x, y);
 	root = merge(merge(x, newnode(val)), y);
 }
-</code></pre>
-<h2 id="删除-1">删除</h2>
-<pre><code class="language-cpp">// 先按照val进行分裂，分为x和z子树，其中x子树的值小于等于val
+</code></pre><h2 id=删除-1>删除</h2><pre><code class=language-cpp>// 先按照val进行分裂，分为x和z子树，其中x子树的值小于等于val
 // 再将x子树按照val-1进行分裂，分裂成x和y子树，其中x子树的值小于等于val-1，而y子树的值都为val
 // 我们删除y子树的根节点，相当于直接让y子树的左子树和右子树合并成y，之后再将x、y、z合并回去即可
 void del(int val) {
@@ -672,9 +327,7 @@ void del(int val) {
 	y = merge(tree[y].l, tree[y].r);
 	root = merge(merge(x, y), z);
 }
-</code></pre>
-<h2 id="获取排名-1">获取排名</h2>
-<pre><code class="language-cpp">// 按照val-1分裂成x和y子树，返回x子树的size+1即可
+</code></pre><h2 id=获取排名-1>获取排名</h2><pre><code class=language-cpp>// 按照val-1分裂成x和y子树，返回x子树的size+1即可
 int getrank(int val) {
 	int res;
 	split(root, val-1, x, y);
@@ -682,9 +335,7 @@ int getrank(int val) {
 	root = merge(x, y);
 	return res;
 }
-</code></pre>
-<h2 id="根据排名获取值-1">根据排名获取值</h2>
-<pre><code class="language-cpp">// 与普通Treap没什么两样
+</code></pre><h2 id=根据排名获取值-1>根据排名获取值</h2><pre><code class=language-cpp>// 与普通Treap没什么两样
 int getnum(int rank) {
 	int now = root;
 	while (now) {
@@ -699,9 +350,7 @@ int getnum(int rank) {
 	}
 	return tree[now].val;
 }
-</code></pre>
-<h2 id="获取前驱-1">获取前驱</h2>
-<pre><code class="language-cpp">// 将树按照val-1进行分裂，然后返回x子树最右边的值即可
+</code></pre><h2 id=获取前驱-1>获取前驱</h2><pre><code class=language-cpp>// 将树按照val-1进行分裂，然后返回x子树最右边的值即可
 int getpre(int val) {
 	split(root, val-1, x, y);
 	int now = x;
@@ -711,9 +360,7 @@ int getpre(int val) {
 	root = merge(x, y);
 	return res;
 }
-</code></pre>
-<h2 id="获取后继-1">获取后继</h2>
-<pre><code class="language-cpp">// 按照val进行分裂，再返回y子树最左边的值
+</code></pre><h2 id=获取后继-1>获取后继</h2><pre><code class=language-cpp>// 按照val进行分裂，再返回y子树最左边的值
 int getnxt(int val) {
 	split(root, val, x, y);
 	int now = y;
@@ -723,10 +370,7 @@ int getnxt(int val) {
 	root = merge(x, y);
 	return res;
 }
-</code></pre>
-<h2 id="洛谷p3369-1">洛谷P3369</h2>
-<p>对于上面的模板题，通过无旋Treap的解法如下</p>
-<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+</code></pre><h2 id=洛谷p3369-1>洛谷P3369</h2><p>对于上面的模板题，通过无旋Treap的解法如下</p><pre><code class=language-cpp>#include&lt;bits/stdc++.h&gt;
 using namespace std;
 typedef long long ll;
 typedef unsigned long long ull;
@@ -861,12 +505,7 @@ int main() {
 	}
 	return 0;
 }
-</code></pre>
-<h1 id="无旋treap维护区间信息">无旋Treap维护区间信息</h1>
-<p>无旋Treap还能和线段树那样维护区间信息，结合例题来看</p>
-<p><a href="https://www.luogu.com.cn/problem/P3391">洛谷P3391</a></p>
-<p><img src="p3391.png" alt="P3391"></p>
-<pre><code class="language-cpp">// 样例输入
+</code></pre><h1 id=无旋treap维护区间信息>无旋Treap维护区间信息</h1><p>无旋Treap还能和线段树那样维护区间信息，结合例题来看</p><p><a href=https://www.luogu.com.cn/problem/P3391>洛谷P3391</a></p><p><img src=p3391.png alt=P3391></p><pre><code class=language-cpp>// 样例输入
 5 3
 1 3
 1 3
@@ -874,10 +513,7 @@ int main() {
 
 // 样例输出
 4 3 2 1 5
-</code></pre>
-<p>对于这种反转问题，暴力去翻肯定是会超时的，结合线段树<code>lazy tag</code>的思想，通过标记区间翻转标记，来降低时间复杂度。为了解决这个问题，无旋Treap将按大小进行分裂</p>
-<h2 id="数据结构定义-2">数据结构定义</h2>
-<pre><code class="language-cpp">struct node {
+</code></pre><p>对于这种反转问题，暴力去翻肯定是会超时的，结合线段树<code>lazy tag</code>的思想，通过标记区间翻转标记，来降低时间复杂度。为了解决这个问题，无旋Treap将按大小进行分裂</p><h2 id=数据结构定义-2>数据结构定义</h2><pre><code class=language-cpp>struct node {
 	int l, r;
 	int val, key;
 	int size;
@@ -887,18 +523,13 @@ int main() {
 int cnt, root;
 mt19937 rnd(233);
 int x, y, z;
-</code></pre>
-<h2 id="标记下传">标记下传</h2>
-<p>因为Treap在分裂和合并的时候，有可能改变结点的位置，所以我们需要将<code>reverse</code>标记下传，以防丢失信息</p>
-<pre><code class="language-cpp">void pushdown(int now) {
+</code></pre><h2 id=标记下传>标记下传</h2><p>因为Treap在分裂和合并的时候，有可能改变结点的位置，所以我们需要将<code>reverse</code>标记下传，以防丢失信息</p><pre><code class=language-cpp>void pushdown(int now) {
 	swap(tree[now].l, tree[now].r);
 	tree[tree[now].l].reverse ^= 1;
 	tree[tree[now].r].reverse ^= 1;
 	tree[now].reverse = 0;
 }
-</code></pre>
-<h2 id="分裂-1">分裂</h2>
-<pre><code class="language-cpp">void split(int now, int sz, int &amp;x, int &amp;y) {
+</code></pre><h2 id=分裂-1>分裂</h2><pre><code class=language-cpp>void split(int now, int sz, int &amp;x, int &amp;y) {
 	if (!now) x = y = 0;
 	else {
         // 标记下传
@@ -914,9 +545,7 @@ int x, y, z;
 		update(now);
 	}
 }
-</code></pre>
-<h2 id="合并-1">合并</h2>
-<pre><code class="language-cpp">// 分裂只需要加一步标记下传即可
+</code></pre><h2 id=合并-1>合并</h2><pre><code class=language-cpp>// 分裂只需要加一步标记下传即可
 int merge(int x, int y) {
 	if (!x || !y) return x + y;
 	if (tree[x].key &lt; tree[y].key) {
@@ -931,9 +560,7 @@ int merge(int x, int y) {
 		return y;
 	}
 }
-</code></pre>
-<h2 id="反转">反转</h2>
-<pre><code class="language-cpp">// 将树按照l-1大小进行分裂，其中y子树的大小为n-l+1
+</code></pre><h2 id=反转>反转</h2><pre><code class=language-cpp>// 将树按照l-1大小进行分裂，其中y子树的大小为n-l+1
 // 再将y子树按照r-l+1大小进行分裂，分裂出来的y子树就是我们需要反转的区间，改变标记即可
 void reverse(int l, int r) {
 	int x, y, z;
@@ -942,9 +569,7 @@ void reverse(int l, int r) {
 	tree[y].reverse ^= 1;
 	root = merge(merge(x, y), z);
 }
-</code></pre>
-<h2 id="ac代码">AC代码</h2>
-<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+</code></pre><h2 id=ac代码>AC代码</h2><pre><code class=language-cpp>#include&lt;bits/stdc++.h&gt;
 using namespace std;
 typedef long long ll;
 typedef unsigned long long ull;
@@ -1048,177 +673,10 @@ int main() {
 	printf(&quot;\n&quot;);
 	return 0;
 }
-</code></pre>
-</article>
-
-
-      
-        <div class="my-4">
-    
-    <a href="/tags/algorithm/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 me-2 hover:text-eureka">#Algorithm</a>
-    
-    <a href="/tags/data-structure/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 me-2 hover:text-eureka">#Data Structure</a>
-    
-</div>
-      
-
-      
-
-
-
-      
-
-      
-  <div
-    class="-mx-2 mt-4 flex flex-col border-t px-2 pt-4 md:flex-row md:justify-between"
-  >
-    <div>
-      
-        <span class="text-primary-text block font-bold"
-          >上一页</span
-        >
-        <a href="/posts/optimization-of-quadrilateral-inequality/" class="block">区间DP四边形不等式优化</a>
-      
-    </div>
-    <div class="mt-4 md:mt-0 md:text-right">
-      
-        <span class="text-primary-text block font-bold">下一页</span>
-        <a href="/posts/modui/" class="block">莫队算法</a>
-      
-    </div>
-  </div>
-
-
-      
-
-
-
-  <div id="valine-comments" class="mt-4"></div>
-<script defer src="https://cdn.jsdelivr.net/npm/valine@1.4.16/dist/Valine.min.js" 
-  integrity="sha384-e0&#43;DNUCJo75aOAzHQbFWYBCM9/S4f0BhRJXvEgbE3mMS85RM20MSSGStHuNdY2QK"  crossorigin></script>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    new Valine({
-      el: "#valine-comments",
-    })
-  });
-</script>
-
-    </div>
-    
-      <div class="col-span-2">
-        
-        
-          <div
-  class="
-    bg-primary-bg
-   prose sticky top-16 z-10 hidden px-6 py-4 lg:block"
->
-  <h3>本页内容</h3>
-</div>
-<div
-  class="sticky-toc  hidden px-6 pb-6 lg:block"
->
-  <nav id="TableOfContents">
-  <ul>
-    <li><a href="#数据结构定义">数据结构定义</a></li>
-    <li><a href="#更新">更新</a></li>
-    <li><a href="#旋转">旋转</a>
-      <ul>
-        <li><a href="#左旋">左旋</a></li>
-        <li><a href="#右旋">右旋</a></li>
-        <li><a href="#代码">代码</a></li>
-      </ul>
-    </li>
-    <li><a href="#插入">插入</a></li>
-    <li><a href="#删除">删除</a></li>
-    <li><a href="#获取排名">获取排名</a></li>
-    <li><a href="#根据排名获取值">根据排名获取值</a></li>
-    <li><a href="#获取前驱">获取前驱</a></li>
-    <li><a href="#获取后继">获取后继</a></li>
-    <li><a href="#洛谷p3369">洛谷P3369</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#数据结构定义-1">数据结构定义</a></li>
-    <li><a href="#创建新结点">创建新结点</a></li>
-    <li><a href="#更新-1">更新</a></li>
-    <li><a href="#分裂">分裂</a></li>
-    <li><a href="#合并">合并</a></li>
-    <li><a href="#插入-1">插入</a></li>
-    <li><a href="#删除-1">删除</a></li>
-    <li><a href="#获取排名-1">获取排名</a></li>
-    <li><a href="#根据排名获取值-1">根据排名获取值</a></li>
-    <li><a href="#获取前驱-1">获取前驱</a></li>
-    <li><a href="#获取后继-1">获取后继</a></li>
-    <li><a href="#洛谷p3369-1">洛谷P3369</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#数据结构定义-2">数据结构定义</a></li>
-    <li><a href="#标记下传">标记下传</a></li>
-    <li><a href="#分裂-1">分裂</a></li>
-    <li><a href="#合并-1">合并</a></li>
-    <li><a href="#反转">反转</a></li>
-    <li><a href="#ac代码">AC代码</a></li>
-  </ul>
-</nav>
-</div>
-<script>
-  window.addEventListener("DOMContentLoaded", () => {
-    enableStickyToc();
-  });
-</script>
-
-        
-      </div>
-    
-
-    
-    
-      <div
-        class=" bg-secondary-bg prose col-span-2 rounded p-6 lg:col-span-6"
-      >
-        <h3>相关</h3>
-        
-          <a href="/posts/scapegoat-tree/" class="no-underline">替罪羊树</a>
-          <br />
-        
-          <a href="/posts/persistent-set-union/" class="no-underline">可持久化并查集</a>
-          <br />
-        
-          <a href="/posts/persistent-array/" class="no-underline">可持久化数组</a>
-          <br />
-        
-          <a href="/posts/trie/" class="no-underline">字典树(Trie)</a>
-          <br />
-        
-          <a href="/posts/persistent-seg-tree/" class="no-underline">可持久化线段树(主席树)</a>
-          <br />
-        
-          <a href="/posts/seg-tree/" class="no-underline">线段树基础</a>
-          <br />
-        
-      </div>
-    
-  </div>
-
-  
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        hljs.highlightAll();
-      });
-    </script>
-
-          </div>
-        </div>
-      
-    </main>
-    <footer class="pl-scrollbar">
-      <div class="mx-auto w-full max-w-screen-xl"><div class="text-center p-6 pin-b">
-    <p class="text-sm text-tertiary-text">&copy; 2019 <a href="https://github.com/Elitedj">Elitedj</a>
- &middot;  Powered by the <a href="https://github.com/wangchucheng/hugo-eureka" class="hover:text-eureka">Eureka</a> theme for <a href="https://gohugo.io" class="hover:text-eureka">Hugo</a></p>
-</div></div>
-    </footer>
-  </body>
-</html>
+</code></pre></article><div class=my-4><a href=/tags/algorithm/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 me-2 hover:text-eureka">#Algorithm</a>
+<a href=/tags/data-structure/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 me-2 hover:text-eureka">#Data Structure</a></div><div class="-mx-2 mt-4 flex flex-col border-t px-2 pt-4 md:flex-row md:justify-between"><div><span class="text-primary-text block font-bold">上一页</span>
+<a href=/posts/optimization-of-quadrilateral-inequality/ class=block>区间DP四边形不等式优化</a></div><div class="mt-4 md:mt-0 md:text-right"><span class="text-primary-text block font-bold">下一页</span>
+<a href=/posts/modui/ class=block>莫队算法</a></div></div><div id=valine-comments class=mt-4></div><script defer src=https://cdn.jsdelivr.net/npm/valine@1.4.16/dist/Valine.min.js integrity=sha384-e0+DNUCJo75aOAzHQbFWYBCM9/S4f0BhRJXvEgbE3mMS85RM20MSSGStHuNdY2QK crossorigin></script>
+<script>document.addEventListener("DOMContentLoaded",function(){new Valine({el:"#valine-comments"})})</script></div><div class=col-span-2><div class="bg-primary-bg
+prose sticky top-16 z-10 hidden px-6 py-4 lg:block"><h3>本页内容</h3></div><div class="sticky-toc hidden px-6 pb-6 lg:block"><nav id=TableOfContents><ul><li><a href=#数据结构定义>数据结构定义</a></li><li><a href=#更新>更新</a></li><li><a href=#旋转>旋转</a><ul><li><a href=#左旋>左旋</a></li><li><a href=#右旋>右旋</a></li><li><a href=#代码>代码</a></li></ul></li><li><a href=#插入>插入</a></li><li><a href=#删除>删除</a></li><li><a href=#获取排名>获取排名</a></li><li><a href=#根据排名获取值>根据排名获取值</a></li><li><a href=#获取前驱>获取前驱</a></li><li><a href=#获取后继>获取后继</a></li><li><a href=#洛谷p3369>洛谷P3369</a></li></ul><ul><li><a href=#数据结构定义-1>数据结构定义</a></li><li><a href=#创建新结点>创建新结点</a></li><li><a href=#更新-1>更新</a></li><li><a href=#分裂>分裂</a></li><li><a href=#合并>合并</a></li><li><a href=#插入-1>插入</a></li><li><a href=#删除-1>删除</a></li><li><a href=#获取排名-1>获取排名</a></li><li><a href=#根据排名获取值-1>根据排名获取值</a></li><li><a href=#获取前驱-1>获取前驱</a></li><li><a href=#获取后继-1>获取后继</a></li><li><a href=#洛谷p3369-1>洛谷P3369</a></li></ul><ul><li><a href=#数据结构定义-2>数据结构定义</a></li><li><a href=#标记下传>标记下传</a></li><li><a href=#分裂-1>分裂</a></li><li><a href=#合并-1>合并</a></li><li><a href=#反转>反转</a></li><li><a href=#ac代码>AC代码</a></li></ul></nav></div><script>window.addEventListener("DOMContentLoaded",()=>{enableStickyToc()})</script></div><div class="bg-secondary-bg prose col-span-2 rounded p-6 lg:col-span-6"><h3>相关</h3><a href=/posts/scapegoat-tree/ class=no-underline>替罪羊树</a><br><a href=/posts/persistent-set-union/ class=no-underline>可持久化并查集</a><br><a href=/posts/persistent-array/ class=no-underline>可持久化数组</a><br><a href=/posts/trie/ class=no-underline>字典树(Trie)</a><br><a href=/posts/persistent-seg-tree/ class=no-underline>可持久化线段树(主席树)</a><br><a href=/posts/seg-tree/ class=no-underline>线段树基础</a><br></div></div><script>document.addEventListener("DOMContentLoaded",()=>{hljs.highlightAll()})</script></div></div></main><footer class=pl-scrollbar><div class="mx-auto w-full max-w-screen-xl"><div class="text-center p-6 pin-b"><p class="text-sm text-tertiary-text">&copy; 2019 <a href=https://github.com/Elitedj>Elitedj</a>
+&#183; Powered by the <a href=https://github.com/wangchucheng/hugo-eureka class=hover:text-eureka>Eureka</a> theme for <a href=https://gohugo.io class=hover:text-eureka>Hugo</a></p></div></div></footer></body></html>
