@@ -1,0 +1,303 @@
+<!doctype html><html lang=zh dir=ltr><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>MIT6.S081 Xv6 and Unix utilities | Elitedj's Blog</title><meta name=generator content="Hugo Eureka 0.9.3"><link rel=stylesheet href=/css/eureka.min.9cec6350e37e534b0338fa9a085bf06855de3b0f2dcf857e792e5e97b07ea905d4d5513db554cbc26a9c3da622bae92d.css><script defer src=/js/eureka.min.fa9a6bf6d7a50bb635b4cca7d2ba5cf3dfb095ae3798773f1328f7950028b48c17d06276594e1b5f244a25a6c969a705.js></script>
+<link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=preload href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" as=style onload='this.onload=null,this.rel="stylesheet"'><link rel=stylesheet href=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/styles/base16/solarized-light.min.css media=print onload='this.media="all",this.onload=null' crossorigin><script defer src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/highlight.min.js crossorigin></script>
+<script defer src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/languages/dart.min.js crossorigin></script>
+<link rel=stylesheet href=/css/highlightjs.min.2958991528e43eb6fc9b8c4f2b8e052f79c4010718e1d1e888a777620e9ee63021c2c57ec7417a3108019bb8c41943e6.css media=print onload='this.media="all",this.onload=null'><script defer type=text/javascript src=/js/fontawesome.min.d9ba21a4e7c7dbe0ba1f8b62ea1dda063fb92d88bd994ccb206ced4f4c9081fe517f9b61b57efd649e9edbdff33a2114.js></script>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css integrity=sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ media=print onload='this.media="all",this.onload=null' crossorigin><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js integrity=sha384-VQ8d8WVFw0yHhCk5E8I86oOhv48xLpnDZx5T9GogA/Y84DcCKWXDmSDfn13bzFZY crossorigin></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin></script>
+<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}]})})</script><script defer src=https://cdn.jsdelivr.net/npm/mermaid@8.14.0/dist/mermaid.min.js integrity=sha384-atOyb0FxAgN9LyAc6PEf9BjgwLISyansgdH8/VXQH8p2o5vfrRgmGIJ2Sg22L0A0 crossorigin></script>
+<link rel=icon type=image/png sizes=32x32 href=/images/avatar_hubecf9d80b8b876872272a68886c75e90_327995_32x32_fill_box_center_3.png><link rel=apple-touch-icon sizes=180x180 href=/images/avatar_hubecf9d80b8b876872272a68886c75e90_327995_180x180_fill_box_center_3.png><meta name=description content="MIT 6.S081 Fall 2020 Lab Utilities"><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"/posts/"},{"@type":"ListItem","position":2,"name":"MIT6.S081 Xv6 and Unix utilities","item":"/posts/s6081-lab1/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"/posts/s6081-lab1/"},"headline":"MIT6.S081 Xv6 and Unix utilities | Elitedj\u0027s Blog","datePublished":"2021-08-18T23:42:38+00:00","dateModified":"2021-08-18T23:42:38+00:00","wordCount":1611,"publisher":{"@type":"Person","name":"Elitedj","logo":{"@type":"ImageObject","url":"/images/avatar.png"}},"description":"MIT 6.S081 Fall 2020 Lab Utilities"}</script><meta property="og:title" content="MIT6.S081 Xv6 and Unix utilities | Elitedj's Blog"><meta property="og:type" content="article"><meta property="og:image" content="/images/avatar.png"><meta property="og:url" content="/posts/s6081-lab1/"><meta property="og:description" content="MIT 6.S081 Fall 2020 Lab Utilities"><meta property="og:locale" content="zh"><meta property="og:site_name" content="Elitedj's Blog"><meta property="article:published_time" content="2021-08-18T23:42:38+00:00"><meta property="article:modified_time" content="2021-08-18T23:42:38+00:00"><meta property="article:section" content="posts"><meta property="article:tag" content="MIT"><meta property="article:tag" content="6.S081"><meta property="article:tag" content="OS"><meta property="og:see_also" content="/posts/s6081-lab2/"><meta property="og:see_also" content="/posts/start-xv6/"><body class="flex min-h-screen flex-col"><header class="min-h-16 pl-scrollbar bg-secondary-bg fixed z-50 flex w-full items-center shadow-sm"><div class="mx-auto w-full max-w-screen-xl"><script>let storageColorScheme=localStorage.getItem("lightDarkMode");((storageColorScheme=="Auto"||storageColorScheme==null)&&window.matchMedia("(prefers-color-scheme: dark)").matches||storageColorScheme=="Dark")&&document.getElementsByTagName("html")[0].classList.add("dark")</script><nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0"><a href=/ class="me-6 text-primary-text text-xl font-bold">Elitedj's Blog</a>
+<button id=navbar-btn class="md:hidden flex items-center px-3 py-2" aria-label="Open Navbar">
+<i class="fas fa-bars"></i></button><div id=target class="hidden block md:flex md:grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20"><div class="md:flex md:h-16 text-sm md:grow pb-4 md:pb-0 border-b md:border-b-0"><a href=/about class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 border-transparent me-4">About</a></div><div class=flex><div class="relative pt-4 md:pt-0"><div class="cursor-pointer hover:text-eureka" id=lightDarkMode><i class="fas fa-adjust"></i></div><div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id=is-open></div><div class="absolute flex flex-col start-0 md:start-auto end-auto md:end-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40" id=lightDarkOptions><span class="px-4 py-1 hover:text-eureka" name=Light>浅色</span>
+<span class="px-4 py-1 hover:text-eureka" name=Dark>深色</span>
+<span class="px-4 py-1 hover:text-eureka" name=Auto>自动</span></div></div></div></div><div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id=is-open-mobile></div></nav><script>let element=document.getElementById("lightDarkMode");storageColorScheme==null||storageColorScheme=="Auto"?document.addEventListener("DOMContentLoaded",()=>{window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change",switchDarkMode)}):storageColorScheme=="Light"?(element.firstElementChild.classList.remove("fa-adjust"),element.firstElementChild.setAttribute("data-icon","sun"),element.firstElementChild.classList.add("fa-sun")):storageColorScheme=="Dark"&&(element.firstElementChild.classList.remove("fa-adjust"),element.firstElementChild.setAttribute("data-icon","moon"),element.firstElementChild.classList.add("fa-moon")),document.addEventListener("DOMContentLoaded",()=>{getcolorscheme(),switchBurger()})</script></div></header><main class="grow pt-16"><div class=pl-scrollbar><div class="mx-auto w-full max-w-screen-xl lg:px-4 xl:px-8"><div class="grid grid-cols-2 gap-4 lg:grid-cols-8 lg:pt-12"><div class="bg-secondary-bg col-span-2 rounded px-6 py-8 lg:col-span-6"><article class=prose><h1 class=mb-4>MIT6.S081 Xv6 and Unix utilities</h1><div class="text-tertiary-text not-prose mt-2 flex flex-row flex-wrap items-center"><div class="me-6 my-2"><i class="fas fa-calendar me-1"></i>
+<span>2021-08-18</span></div><div class="me-6 my-2"><i class="fas fa-clock me-1"></i>
+<span>4分钟阅读时长</span></div><div class="me-6 my-2"><i class="fas fa-folder me-1"></i>
+<a href=/categories/6.s081/ class=hover:text-eureka>6.S081</a></div><div class="me-6 my-2"><i class="fas fa-th-list me-1"></i>
+<a href=/series/mit-s6.081/ class=hover:text-eureka>MIT S6.081</a></div></div><h1 id=lab-xv6-and-unix-utilities>Lab: Xv6 and Unix utilities</h1><p><a href=https://pdos.csail.mit.edu/6.828/2020/schedule.html#>MIT6.S081(Fall 2020): Operating System Engineering Schedule</a></p><p><a href=https://pdos.csail.mit.edu/6.828/2020/labs/util.html>实验主页</a></p><p>环境：CentOS 8</p><h2 id=boot-xv6>Boot xv6</h2><p>首先需要准备环境</p><h3 id=lab-tools>Lab Tools</h3><p><a href=https://pdos.csail.mit.edu/6.S081/2020/tools.html>Lab Tools Page</a></p><pre><code class=language-shell>git clone --recursive https://github.com/riscv/riscv-gnu-toolchain
+# 官网是通过apt安装的，而yum会导致下面的包有一些会装失败，请自行搜索失败包的安装方法
+yum install autoconf automake autotools-dev curl libmpc-dev libmpfr-dev libgmp-dev gawk build-essential bison flex texinfo gperf libtool patchutils bc zlib1g-dev libexpat-dev
+
+cd riscv-gnu-toolchain
+./configure --prefix=/usr/local
+sudo make
+cd ..
+</code></pre><p>Lab Tools的github仓库特别多子模块，疯狂套娃，下载起来非常的慢，而且非常大，有6G多，也非常容易连接断开。我是通过公司网下到本地再用scp传到服务器上的，这一步可能比较麻烦。</p><h3 id=qemu>Qemu</h3><pre><code class=language-shell>wget https://download.qemu.org/qemu-5.1.0.tar.xz
+tar xf qemu-5.1.0.tar.xz
+
+cd qemu-5.1.0
+./configure --disable-kvm --disable-werror --prefix=/usr/local --target-list=&quot;riscv64-softmmu&quot;
+make
+sudo make install
+cd ..
+</code></pre><p>这个过程可能也会有一些包没装好，自己看失败信息装一下就好了</p><h3 id=检查lab-tools和qemu安装结果>检查Lab Tools和Qemu安装结果</h3><pre><code class=language-shell>riscv64-unknown-elf-gcc --version
+# 显示如下
+riscv64-unknown-elf-gcc (GCC) 11.1.0
+Copyright (C) 2021 Free Software Foundation, Inc.
+
+qemu-system-riscv64 --version
+# 显示如下
+QEMU emulator version 5.1.0
+Copyright (c) 2003-2020 Fabrice Bellard and the QEMU Project developers
+</code></pre><h3 id=xv6>xv6</h3><pre><code class=language-shell>git clone git://g.csail.mit.edu/xv6-labs-2020
+cd xv6-labs-2020
+git checkout util
+
+make qemu
+
+# 输出如下
+xv6 kernel is booting
+
+hart 2 starting
+hart 1 starting
+init: starting sh
+</code></pre><p>这样就成功进入xv6的shell中了，如果需要退出的话，按<code>Ctrl + a x</code></p><h3 id=编译>编译</h3><p>对于每一个小的实验，将代码写到指定的位置，然后在Makefile文件中的UPROGS段下加上自己的程序进行编译，再次进入xv6的shell就会看到自己程序的可执行文件。比如写了一个sleep程序，通过下面的方式注册函数即可。</p><pre><code class=language-makefile># Makefile
+
+UPROGS=\
+	...
+	$U/_sleep\
+</code></pre><h3 id=测试>测试</h3><p>在xv6根目录下，注意不是xv6的shell环境中，通过下面的方式对自己写的程序进行测试即可。</p><pre><code class=language-shell>./grade-lab-util program_name
+
+# example
+# ./grade-lab-util sleep
+</code></pre><p>到这一步环境就准备好了，可以开始做实验了。</p><h2 id=sleep>sleep</h2><blockquote><p>Implement the UNIX program sleep for xv6; your sleep should pause for a user-specified number of ticks. A tick is a notion of time defined by the xv6 kernel, namely the time between two interrupts from the timer chip. Your solution should be in the file user/sleep.c.</p></blockquote><h3 id=code>Code</h3><pre><code class=language-c>#include &quot;kernel/types.h&quot;
+#include &quot;user/user.h&quot;
+
+int main(int argc, char *argv[]) {
+    if (argc &lt;= 1) {
+        fprintf(2, &quot;usage: sleep ticks\n&quot;);
+        exit(1);
+    }
+    int sleep_ticks = atoi(argv[1]);
+    sleep(sleep_ticks);
+    exit(0);
+}
+</code></pre><h2 id=pingpong>pingpong</h2><blockquote><p>Write a program that uses UNIX system calls to &lsquo;&lsquo;ping-pong&rsquo;&rsquo; a byte between two processes over a pair of pipes, one for each direction. The parent should send a byte to the child; the child should print &ldquo;<pid>: received ping&rdquo;, where <pid>is its process ID, write the byte on the pipe to the parent, and exit; the parent should read the byte from the child, print &ldquo;<pid>: received pong&rdquo;, and exit. Your solution should be in the file user/pingpong.c.</p></blockquote><h3 id=code-1>Code</h3><pre><code class=language-c>#include &quot;kernel/types.h&quot;
+#include &quot;user/user.h&quot;
+
+int main(int argc, char *argv[]) {
+    if (argc != 1) {
+        fprintf(2, &quot;usage: pingpong\n&quot;);
+        exit(1);
+    }
+
+    char buf[8];
+    int p[2];
+    if (pipe(p) &lt; 0) {
+        fprintf(2, &quot;pipe error...\n&quot;);
+        exit(1);
+    }
+
+    if (fork() == 0) {
+        read(p[0], buf, 5);
+        fprintf(1, &quot;%d: received %s&quot;, getpid(), buf);
+        close(p[0]);
+
+        write(p[1], &quot;pong\n&quot;, 5);
+        close(p[1]);
+        exit(0);
+    } else {
+        write(p[1], &quot;ping\n&quot;, 5);
+        close(p[1]);
+
+        wait(0);
+
+        read(p[0], buf, 5);
+        fprintf(1, &quot;%d: received %s&quot;, getpid(), buf);
+        close(p[0]);
+    }
+    exit(0);
+}
+</code></pre><h2 id=primes>primes</h2><blockquote><p>Write a concurrent version of prime sieve using pipes. This idea is due to Doug McIlroy, inventor of Unix pipes. The picture halfway down <a href=https://swtch.com/~rsc/thread/>this page</a> and the surrounding text explain how to do it. Your solution should be in the file user/primes.c.</p></blockquote><p><img src=primes.gif alt=primes></p><p>实验要求输出35之前的素数，要求的做法和素数筛法很像。实验要求主进程通过pipe向它的一个子进程顺序传递2~35的数字，这个子进程接收到的第一个数字（这里是2）就是一个素数，然后将其输出，之后接收到的数字（3~35），能够被这个素数（这里是2）整除的，都抛弃掉不处理，其余的数通过同样的方式传递给它的子进程，就是一个疯狂套娃的过程，直到最后一个子进程没有数字需要传递时，就exit回去。</p><h3 id=code-2>Code</h3><pre><code class=language-c>#include &quot;kernel/types.h&quot;
+#include &quot;user/user.h&quot;
+
+#define R 0
+#define W 1
+
+void wait_for_number(int p[]) {
+    close(p[W]);
+    int num;
+    if (read(p[R], &amp;num, sizeof(num))) {
+        fprintf(W, &quot;prime %d\n&quot;, num);
+
+        int pd[2];
+        if (pipe(pd) != 0) {
+            fprintf(2, &quot;primes: pipe error\n&quot;);
+            exit(1);
+        }
+
+        if (fork() == 0) {
+            wait_for_number(pd);
+        } else {
+            close(pd[R]);
+            int other_num;
+            while (read(p[R], &amp;other_num, sizeof(other_num))) {
+                if (other_num % num != 0) {
+                    write(pd[W], &amp;other_num, sizeof(other_num));
+                }
+            }
+            close(pd[W]);
+            wait(0);
+        }
+    }
+    close(p[R]);
+    exit(0);
+}
+
+int main(int argc, char *argv[]) {
+    if (argc != 1) {
+        fprintf(2, &quot;usage: primes\n&quot;);
+        exit(1);
+    }
+
+    int p[2];
+    if (pipe(p) != 0) {
+        fprintf(2, &quot;primes: pipe error\n&quot;);
+        exit(1);
+    }
+
+    if (fork() == 0) {
+        wait_for_number(p);
+    } else {
+        close(p[R]);
+        for (int i = 2; i &lt;= 35; i++) {
+            write(p[W], &amp;i, sizeof(i));
+        }
+        close(p[W]);
+        wait(0);
+    }
+    exit(0);
+}
+</code></pre><h2 id=find>find</h2><blockquote><p>Write a simple version of the UNIX find program: find all the files in a directory tree with a specific name. Your solution should be in the file user/find.c.</p></blockquote><h3 id=code-3>Code</h3><pre><code class=language-c>#include &quot;kernel/types.h&quot;
+#include &quot;kernel/stat.h&quot;
+#include &quot;kernel/fs.h&quot;
+#include &quot;user/user.h&quot;
+
+void find(char *path, char *file_name) {
+    char buf[512], *pos;
+    int fd;
+    struct dirent de;
+    struct stat st;
+
+    if ((fd = open(path, 0)) &lt; 0) {
+        fprintf(2, &quot;find: cannot open %s\n&quot;, path);
+        exit(1);
+    }
+
+    if (fstat(fd, &amp;st) &lt; 0) {
+        fprintf(2, &quot;find: cannot stat %s\n&quot;, path);
+        close(fd);
+        exit(1);
+    }
+
+    if (st.type != T_DIR) {
+        fprintf(2, &quot;find: %s is not a directory\n&quot;, path);
+        close(fd);
+        exit(1);
+    }
+
+    if (strlen(path) + 1 + DIRSIZ + 1 &gt; sizeof buf) {
+        fprintf(2, &quot;find: path too long\n&quot;);
+        close(fd);
+        exit(1);
+    }
+
+    strcpy(buf, path);
+    pos = buf + strlen(buf) - 1;
+    if (*pos++ != '/') {
+        *pos++ = '/';
+    }
+
+    while (read(fd, &amp;de, sizeof(de)) == sizeof(de)) {
+	// 一开始没判断inum为0导致爆栈
+        if (de.inum == 0 || !strcmp(de.name, &quot;.&quot;) || !strcmp(de.name, &quot;..&quot;))
+            continue;
+        memmove(pos, de.name, DIRSIZ);
+        pos[DIRSIZ] = 0;
+        if (stat(buf, &amp;st) &lt; 0) {
+            fprintf(2, &quot;find: cannot stat %s\n&quot;, buf);
+            close(fd);
+            exit(1);
+        }
+        if (st.type == T_FILE &amp;&amp; !strcmp(de.name, file_name)) {
+            fprintf(1, &quot;%s\n&quot;, buf);
+        } else if (st.type == T_DIR) {
+            find(buf, file_name);
+        }
+    }
+    close(fd);
+}
+
+int main(int argc, char *argv[]) {
+    if (argc != 3) {
+        fprintf(2, &quot;usage: find path filename\n&quot;);
+        exit(1);
+    }
+    find(argv[1], argv[2]);
+    exit(0);
+}
+</code></pre><h2 id=xargs>xargs</h2><blockquote><p>Write a simple version of the UNIX xargs program: read lines from the standard input and run a command for each line, supplying the line as arguments to the command. Your solution should be in the file user/xargs.c.</p></blockquote><h3 id=code-4>Code</h3><pre><code class=language-c>#include &quot;kernel/types.h&quot;
+#include &quot;kernel/param.h&quot;
+#include &quot;user/user.h&quot;
+
+#define BUF_SIZE 1024
+
+int main(int argc, char *argv[]) {
+    if (argc &lt; 2) {
+        fprintf(2, &quot;usage: xargs command\n&quot;);
+        exit(1);
+    }
+
+    int can_read = 1;
+    char *_argv[MAXARG];
+    char buf[BUF_SIZE];
+
+    for (int i = 1; i &lt; argc; ++i) {
+        _argv[i - 1] = argv[i];
+    }
+
+    while (can_read) {
+        char c;
+        int _argv_cnt = argc - 1;
+        int buf_idx = 0;
+        int buf_begin = 0;
+        while (1) {
+            can_read = read(0, &amp;c, sizeof(c));
+            if (!can_read)
+                exit(0);
+            if (c == ' ' || c == '\n') {
+                buf[buf_idx++] = 0;
+                _argv[_argv_cnt++] = &amp;buf[buf_begin];
+                buf_begin = buf_idx;
+                if (c == '\n')
+                    break;
+            } else {
+                buf[buf_idx++] = c;
+            }
+        }
+
+        _argv[_argv_cnt] = 0;
+
+        if (fork() == 0) {
+            exec(_argv[0], _argv);
+        } else {
+            wait(0);
+        }
+    }
+    exit(0);
+}
+</code></pre><h3 id=test>Test</h3><pre><code class=language-shell>make clean
+make qemu
+
+$ sh &lt; xargstest.sh
+$ $ $ $ $ $ hello
+hello
+hello
+$ $
+</code></pre></article><div class=my-4><a href=/tags/mit/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 me-2 hover:text-eureka">#MIT</a>
+<a href=/tags/6.s081/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 me-2 hover:text-eureka">#6.S081</a>
+<a href=/tags/os/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 me-2 hover:text-eureka">#OS</a></div><div class="-mx-2 mt-4 flex flex-col border-t px-2 pt-4 md:flex-row md:justify-between"><div><span class="text-primary-text block font-bold">上一页</span>
+<a href=/posts/start-xv6/ class=block>Starting xv6 and the first process</a></div><div class="mt-4 md:mt-0 md:text-right"><span class="text-primary-text block font-bold">下一页</span>
+<a href=/posts/retired/ class=block>退役之旅</a></div></div><div id=valine-comments class=mt-4></div><script defer src=https://cdn.jsdelivr.net/npm/valine@1.4.16/dist/Valine.min.js integrity=sha384-e0+DNUCJo75aOAzHQbFWYBCM9/S4f0BhRJXvEgbE3mMS85RM20MSSGStHuNdY2QK crossorigin></script>
+<script>document.addEventListener("DOMContentLoaded",function(){new Valine({el:"#valine-comments"})})</script></div><div class=col-span-2><div class="bg-secondary-bg prose max-w-none rounded p-6"><h3>系列文章</h3><a href=/posts/s6081-lab2/ class=no-underline>MIT6.S081 System Calls</a><br><a href=/posts/start-xv6/ class=no-underline>Starting xv6 and the first process</a><br><a href=/posts/s6081-lab1/ class=no-underline>MIT6.S081 Xv6 and Unix utilities</a><br></div><div class="bg-primary-bg
+prose sticky top-16 z-10 hidden px-6 py-4 lg:block"><h3>本页内容</h3></div><div class="sticky-toc hidden px-6 pb-6 lg:block"><nav id=TableOfContents><ul><li><a href=#boot-xv6>Boot xv6</a><ul><li><a href=#lab-tools>Lab Tools</a></li><li><a href=#qemu>Qemu</a></li><li><a href=#检查lab-tools和qemu安装结果>检查Lab Tools和Qemu安装结果</a></li><li><a href=#xv6>xv6</a></li><li><a href=#编译>编译</a></li><li><a href=#测试>测试</a></li></ul></li><li><a href=#sleep>sleep</a><ul><li><a href=#code>Code</a></li></ul></li><li><a href=#pingpong>pingpong</a><ul><li><a href=#code-1>Code</a></li></ul></li><li><a href=#primes>primes</a><ul><li><a href=#code-2>Code</a></li></ul></li><li><a href=#find>find</a><ul><li><a href=#code-3>Code</a></li></ul></li><li><a href=#xargs>xargs</a><ul><li><a href=#code-4>Code</a></li><li><a href=#test>Test</a></li></ul></li></ul></nav></div><script>window.addEventListener("DOMContentLoaded",()=>{enableStickyToc()})</script></div></div><script>document.addEventListener("DOMContentLoaded",()=>{hljs.highlightAll()})</script></div></div></main><footer class=pl-scrollbar><div class="mx-auto w-full max-w-screen-xl"><div class="text-center p-6 pin-b"><p class="text-sm text-tertiary-text">&copy; 2019 <a href=https://github.com/Elitedj>Elitedj</a>
+&#183; Powered by the <a href=https://github.com/wangchucheng/hugo-eureka class=hover:text-eureka>Eureka</a> theme for <a href=https://gohugo.io class=hover:text-eureka>Hugo</a></p></div></div></footer></body></html>
