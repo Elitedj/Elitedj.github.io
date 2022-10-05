@@ -1,0 +1,209 @@
+<!doctype html><html lang=zh dir=ltr><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>浅谈函数调用 | Elitedj's Blog</title><meta name=generator content="Hugo Eureka 0.9.3"><link rel=stylesheet href=/css/eureka.min.9cec6350e37e534b0338fa9a085bf06855de3b0f2dcf857e792e5e97b07ea905d4d5513db554cbc26a9c3da622bae92d.css><script defer src=/js/eureka.min.fa9a6bf6d7a50bb635b4cca7d2ba5cf3dfb095ae3798773f1328f7950028b48c17d06276594e1b5f244a25a6c969a705.js></script>
+<link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=preload href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" as=style onload='this.onload=null,this.rel="stylesheet"'><link rel=stylesheet href=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/styles/base16/solarized-light.min.css media=print onload='this.media="all",this.onload=null' crossorigin><script defer src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/highlight.min.js crossorigin></script>
+<script defer src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/languages/dart.min.js crossorigin></script>
+<link rel=stylesheet href=/css/highlightjs.min.2958991528e43eb6fc9b8c4f2b8e052f79c4010718e1d1e888a777620e9ee63021c2c57ec7417a3108019bb8c41943e6.css media=print onload='this.media="all",this.onload=null'><script defer type=text/javascript src=/js/fontawesome.min.a975d08212c5439f29e6074e7ad58e159ae1ef5efb6a31962fa3b6885557e794dd9315f4a8a16d705066d023f4eaaf07.js></script>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css integrity=sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ media=print onload='this.media="all",this.onload=null' crossorigin><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js integrity=sha384-VQ8d8WVFw0yHhCk5E8I86oOhv48xLpnDZx5T9GogA/Y84DcCKWXDmSDfn13bzFZY crossorigin></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin></script>
+<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}]})})</script><script defer src=https://cdn.jsdelivr.net/npm/mermaid@8.14.0/dist/mermaid.min.js integrity=sha384-atOyb0FxAgN9LyAc6PEf9BjgwLISyansgdH8/VXQH8p2o5vfrRgmGIJ2Sg22L0A0 crossorigin></script>
+<link rel=icon type=image/png sizes=32x32 href=/images/avatar_hubecf9d80b8b876872272a68886c75e90_327995_32x32_fill_box_center_3.png><link rel=apple-touch-icon sizes=180x180 href=/images/avatar_hubecf9d80b8b876872272a68886c75e90_327995_180x180_fill_box_center_3.png><meta name=description content="
+函数是编程里非常基础的知识，也是日常非常常用的编程封装方式，于是浅浅探索一下函数调用的底层实现。
+"><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"/posts/"},{"@type":"ListItem","position":2,"name":"浅谈函数调用","item":"/posts/function-call/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"/posts/function-call/"},"headline":"浅谈函数调用 | Elitedj\u0027s Blog","datePublished":"2022-10-05T17:06:43+08:00","dateModified":"2022-10-05T17:06:43+08:00","wordCount":2929,"publisher":{"@type":"Person","name":"Elitedj","logo":{"@type":"ImageObject","url":"/images/avatar.png"}},"description":"\u003cblockquote\u003e\n\u003cp\u003e函数是编程里非常基础的知识，也是日常非常常用的编程封装方式，于是浅浅探索一下函数调用的底层实现。\u003c\/p\u003e\n\u003c\/blockquote\u003e"}</script><meta property="og:title" content="浅谈函数调用 | Elitedj's Blog"><meta property="og:type" content="article"><meta property="og:image" content="/images/avatar.png"><meta property="og:url" content="/posts/function-call/"><meta property="og:description" content="
+函数是编程里非常基础的知识，也是日常非常常用的编程封装方式，于是浅浅探索一下函数调用的底层实现。
+"><meta property="og:locale" content="zh"><meta property="og:site_name" content="Elitedj's Blog"><meta property="article:published_time" content="2022-10-05T17:06:43+08:00"><meta property="article:modified_time" content="2022-10-05T17:06:43+08:00"><meta property="article:section" content="posts"><meta property="article:tag" content="C/C++"><meta property="article:tag" content="函数"><meta property="article:tag" content="汇编"><meta property="article:tag" content="x86-64"><meta property="og:see_also" content="/posts/c-io/"><body class="flex min-h-screen flex-col"><header class="min-h-16 pl-scrollbar bg-secondary-bg fixed z-50 flex w-full items-center shadow-sm"><div class="mx-auto w-full max-w-screen-xl"><script>let storageColorScheme=localStorage.getItem("lightDarkMode");((storageColorScheme=="Auto"||storageColorScheme==null)&&window.matchMedia("(prefers-color-scheme: dark)").matches||storageColorScheme=="Dark")&&document.getElementsByTagName("html")[0].classList.add("dark")</script><nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0"><a href=/ class="me-6 text-primary-text text-xl font-bold">Elitedj's Blog</a>
+<button id=navbar-btn class="md:hidden flex items-center px-3 py-2" aria-label="Open Navbar">
+<i class="fas fa-bars"></i></button><div id=target class="hidden block md:flex md:grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20"><div class="md:flex md:h-16 text-sm md:grow pb-4 md:pb-0 border-b md:border-b-0"><a href=/about class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 border-transparent me-4">About</a></div><div class=flex><div class="relative pt-4 md:pt-0"><div class="cursor-pointer hover:text-eureka" id=lightDarkMode><i class="fas fa-adjust"></i></div><div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id=is-open></div><div class="absolute flex flex-col start-0 md:start-auto end-auto md:end-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40" id=lightDarkOptions><span class="px-4 py-1 hover:text-eureka" name=Light>浅色</span>
+<span class="px-4 py-1 hover:text-eureka" name=Dark>深色</span>
+<span class="px-4 py-1 hover:text-eureka" name=Auto>自动</span></div></div></div></div><div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id=is-open-mobile></div></nav><script>let element=document.getElementById("lightDarkMode");storageColorScheme==null||storageColorScheme=="Auto"?document.addEventListener("DOMContentLoaded",()=>{window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change",switchDarkMode)}):storageColorScheme=="Light"?(element.firstElementChild.classList.remove("fa-adjust"),element.firstElementChild.setAttribute("data-icon","sun"),element.firstElementChild.classList.add("fa-sun")):storageColorScheme=="Dark"&&(element.firstElementChild.classList.remove("fa-adjust"),element.firstElementChild.setAttribute("data-icon","moon"),element.firstElementChild.classList.add("fa-moon")),document.addEventListener("DOMContentLoaded",()=>{getcolorscheme(),switchBurger()})</script></div></header><main class="grow pt-16"><div class=pl-scrollbar><div class="mx-auto w-full max-w-screen-xl lg:px-4 xl:px-8"><div class="grid grid-cols-2 gap-4 lg:grid-cols-8 lg:pt-12"><div class="lg:col-start-2 bg-secondary-bg col-span-2 rounded px-6 py-8 lg:col-span-6"><article class=prose><h1 class=mb-4>浅谈函数调用</h1><div class="text-tertiary-text not-prose mt-2 flex flex-row flex-wrap items-center"><div class="me-6 my-2"><i class="fas fa-calendar me-1"></i>
+<span>2022-10-05</span></div><div class="me-6 my-2"><i class="fas fa-clock me-1"></i>
+<span>6分钟阅读时长</span></div><div class="me-6 my-2"><i class="fas fa-folder me-1"></i>
+<a href=/categories/%E7%BC%96%E7%A8%8B/ class=hover:text-eureka>编程</a></div></div><blockquote><p>函数是编程里非常基础的知识，也是日常非常常用的编程封装方式，于是浅浅探索一下函数调用的底层实现。</p></blockquote><h2 id=寄存器>寄存器</h2><p>深入探究函数调用原理，避免不了需要了解汇编知识以及部分寄存器的作用。本文所讲是基于<a href=https://en.wikipedia.org/wiki/X86-64>X86-64</a> 架构。</p><h3 id=通用寄存器>通用寄存器</h3><table><thead><tr><th>64-bit</th><th>32-bit</th><th>16-bit</th><th>8 high bits of lower 16 bits</th><th>8-bit</th><th>Description</th></tr></thead><tbody><tr><td>RAX</td><td>EAX</td><td>AX</td><td>AH</td><td>AL</td><td>Accumulator</td></tr><tr><td>RBX</td><td>EBX</td><td>BX</td><td>BH</td><td>BL</td><td>Base</td></tr><tr><td>RCX</td><td>ECX</td><td>CX</td><td>CH</td><td>CL</td><td>Counter</td></tr><tr><td>RDX</td><td>EDX</td><td>DX</td><td>DH</td><td>DL</td><td>Data (commonly extends the A register)</td></tr><tr><td>RSI</td><td>ESI</td><td>SI</td><td>N/A</td><td>SIL</td><td>Source index for string operations</td></tr><tr><td>RDI</td><td>EDI</td><td>DI</td><td>N/A</td><td>DIL</td><td>Destination index for string operations</td></tr><tr><td>RSP</td><td>ESP</td><td>SP</td><td>N/A</td><td>SPL</td><td>Stack Pointer</td></tr><tr><td>RBP</td><td>EBP</td><td>BP</td><td>N/A</td><td>BPL</td><td>Base Pointer (meant for stack frames)</td></tr><tr><td>R8</td><td>R8D</td><td>R8W</td><td>N/A</td><td>R8B</td><td>General purpose</td></tr><tr><td>R9</td><td>R9D</td><td>R9W</td><td>N/A</td><td>R9B</td><td>General purpose</td></tr><tr><td>R10</td><td>R10D</td><td>R10W</td><td>N/A</td><td>R10B</td><td>General purpose</td></tr><tr><td>R11</td><td>R11D</td><td>R11W</td><td>N/A</td><td>R11B</td><td>General purpose</td></tr><tr><td>R12</td><td>R12D</td><td>R12W</td><td>N/A</td><td>R12B</td><td>General purpose</td></tr><tr><td>R13</td><td>R13D</td><td>R13W</td><td>N/A</td><td>R13B</td><td>General purpose</td></tr><tr><td>R14</td><td>R14D</td><td>R14W</td><td>N/A</td><td>R14B</td><td>General purpose</td></tr><tr><td>R15</td><td>R15D</td><td>R15W</td><td>N/A</td><td>R15B</td><td>General purpose</td></tr></tbody></table><p><code>RAX</code>通常还被用来存放函数返回值
+<code>RCX</code>通常用作循环计数
+<code>RSP</code>指向栈的顶部
+<code>RBP</code>指向栈的底部，通常使用基址指针+偏移量的方式获取入参以及本地变量</p><p>除了通用寄存器还有非常多寄存器，比如RIP指令寄存器，段寄存器等等，但这里并不继续深入。</p><h2 id=函数调用>函数调用</h2><p><img src=Slice1.png alt="Slice 1.png"></p><p>函数调用主要有以下步骤</p><ul><li>上下文保存</li><li>数据传递</li><li>控制转移</li><li>上下文恢复</li></ul><p>下面会通过具体的汇编代码来看每一步到底是怎么实现的。所有的汇编代码都是<code>AT&T</code>格式。</p><h3 id=上下文保存>上下文保存</h3><p>在进行函数调用前，肯定是需要对一些数据进行保存的，比如当前函数保存在寄存器内的值，如果不提前保存好，就可能会被调用的函数使用并且覆盖里面的数据，当调用结束后，寄存器里面的值将是脏数据，会导致程序运行出错。</p><p>每个寄存器的值由调用方(caller)保存还是由被调用方(callee)保存是有约定的，叫做<code>Calling Convention</code>。<code>Calling Convention</code>是一些规则的集合，是通俗的约定，编译器对高级语言编译后生成的汇编代码都是符合这些约定的，在写汇编程序的时候遵守这些规定可以认为是必须的。</p><p>更多关于<code>Calling Convention</code>的细节可以参考<a href=https://aaronbloomfield.github.io/pdr/book/x86-64bit-ccc-chapter.pdf>The 64 bit x86 C Calling Convention</a> 这篇文章，这里不继续展开。</p><p>下面看一个简单的例子</p><pre><code class=language-c>#include &lt;stdio.h&gt;
+
+int add(int a, int b) {
+    int c = a + b;
+    return c;
+}
+
+int main() {
+    int a = 1, b = 2;
+    int ret = add(a, b);
+    ret += a;
+    ret += b;
+    printf(&quot;%d\n&quot;, ret);
+    return 0;
+}
+</code></pre><pre><code class=language-x86asm>0000000000400596 &lt;add&gt;:
+  400596:	55                   	push   %rbp
+  400597:	48 89 e5             	mov    %rsp,%rbp
+  40059a:	89 7d ec             	mov    %edi,-0x14(%rbp)
+  40059d:	89 75 e8             	mov    %esi,-0x18(%rbp)
+  4005a0:	8b 55 ec             	mov    -0x14(%rbp),%edx
+  4005a3:	8b 45 e8             	mov    -0x18(%rbp),%eax
+  4005a6:	01 d0                	add    %edx,%eax
+  4005a8:	89 45 fc             	mov    %eax,-0x4(%rbp)
+  4005ab:	8b 45 fc             	mov    -0x4(%rbp),%eax
+  4005ae:	5d                   	pop    %rbp
+  4005af:	c3                   	retq
+
+00000000004005b0 &lt;main&gt;:
+  4005b0:	55                   	push   %rbp
+  4005b1:	48 89 e5             	mov    %rsp,%rbp
+  4005b4:	48 83 ec 10          	sub    $0x10,%rsp
+  4005b8:	c7 45 fc 01 00 00 00 	movl   $0x1,-0x4(%rbp)
+  4005bf:	c7 45 f8 02 00 00 00 	movl   $0x2,-0x8(%rbp)
+  4005c6:	8b 55 f8             	mov    -0x8(%rbp),%edx
+  4005c9:	8b 45 fc             	mov    -0x4(%rbp),%eax
+  4005cc:	89 d6                	mov    %edx,%esi
+  4005ce:	89 c7                	mov    %eax,%edi
+  4005d0:	e8 c1 ff ff ff       	callq  400596 &lt;add&gt;
+  4005d5:	89 45 f4             	mov    %eax,-0xc(%rbp)
+  4005d8:	8b 45 fc             	mov    -0x4(%rbp),%eax
+  4005db:	01 45 f4             	add    %eax,-0xc(%rbp)
+  4005de:	8b 45 f8             	mov    -0x8(%rbp),%eax
+  4005e1:	01 45 f4             	add    %eax,-0xc(%rbp)
+  4005e4:	8b 45 f4             	mov    -0xc(%rbp),%eax
+  4005e7:	89 c6                	mov    %eax,%esi
+  4005e9:	bf 98 06 40 00       	mov    $0x400698,%edi
+  4005ee:	b8 00 00 00 00       	mov    $0x0,%eax
+  4005f3:	e8 a8 fe ff ff       	callq  4004a0 &lt;printf@plt&gt;
+  4005f8:	b8 00 00 00 00       	mov    $0x0,%eax
+  4005fd:	c9                   	leaveq
+  4005fe:	c3                   	retq
+  4005ff:	90                   	nop
+</code></pre><p>我们定义了一个加法函数<code>add()</code>并且在<code>main</code>函数中进行调用。在<code>main</code>函数中定义了两个局部变量<code>a</code>和<code>b</code>，查看汇编代码看到首先将栈指针<code>rsp</code>减小16，申请了16字节的栈空间，并且前4个字节存放值1，接下来的4个字节存放值2，分别对应局部变量<code>a</code>和<code>b</code>。在调用完<code>add()</code>函数之后，分别将保存在栈内的局部变量分别存储到<code>eax</code>并且相加到<code>-0xc(%rbp)</code>中，对应<code>main</code>函数中<code>ret += a; ret += b;</code></p><p>可以发现虽然申请了16字节的栈空间，但实际上并没有使用到这么多，为什么不用多少就申请多少？这样不是更节约内存吗？这里主要是为了<code>内存对齐</code>。</p><h3 id=数据传递>数据传递</h3><p>在调用<code>add()</code>函数时需要传递两个参数，看汇编代码可以发现是将<code>%edi</code>和<code>%esi</code>中的两个变量相加并且将结果放在了<code>%eax</code>，查看<code>main</code>函数的汇编代码，可以发现传递的参数恰好是放在<code>%edi</code>和<code>%esi</code>中，并且调用结束后也是从<code>%eax</code>中取出结果并且加上局部变量的值。</p><p>下面看一个传递6个参数的例子。</p><pre><code class=language-c>#include &lt;stdio.h&gt;
+
+int add(int a, int b, int c, int d, int e, int f) {
+    int sum = a + b + c + d + e + f;
+    return sum;
+}
+
+int main() {
+    int ret = add(1, 2, 3, 4, 5, 6);
+    printf(&quot;%d\n&quot;, ret);
+    return 0;
+}
+</code></pre><pre><code class=language-x86asm>0000000000400596 &lt;add&gt;:
+  400596:	55                   	push   %rbp
+  400597:	48 89 e5             	mov    %rsp,%rbp
+  40059a:	89 7d ec             	mov    %edi,-0x14(%rbp)
+  40059d:	89 75 e8             	mov    %esi,-0x18(%rbp)
+  4005a0:	89 55 e4             	mov    %edx,-0x1c(%rbp)
+  4005a3:	89 4d e0             	mov    %ecx,-0x20(%rbp)
+  4005a6:	44 89 45 dc          	mov    %r8d,-0x24(%rbp)
+  4005aa:	44 89 4d d8          	mov    %r9d,-0x28(%rbp)
+  4005ae:	8b 55 ec             	mov    -0x14(%rbp),%edx
+  4005b1:	8b 45 e8             	mov    -0x18(%rbp),%eax
+  4005b4:	01 c2                	add    %eax,%edx
+  4005b6:	8b 45 e4             	mov    -0x1c(%rbp),%eax
+  4005b9:	01 c2                	add    %eax,%edx
+  4005bb:	8b 45 e0             	mov    -0x20(%rbp),%eax
+  4005be:	01 c2                	add    %eax,%edx
+  4005c0:	8b 45 dc             	mov    -0x24(%rbp),%eax
+  4005c3:	01 c2                	add    %eax,%edx
+  4005c5:	8b 45 d8             	mov    -0x28(%rbp),%eax
+  4005c8:	01 d0                	add    %edx,%eax
+  4005ca:	89 45 fc             	mov    %eax,-0x4(%rbp)
+  4005cd:	8b 45 fc             	mov    -0x4(%rbp),%eax
+  4005d0:	5d                   	pop    %rbp
+  4005d1:	c3                   	retq
+
+00000000004005d2 &lt;main&gt;:
+  4005d2:	55                   	push   %rbp
+  4005d3:	48 89 e5             	mov    %rsp,%rbp
+  4005d6:	48 83 ec 10          	sub    $0x10,%rsp
+  4005da:	41 b9 06 00 00 00    	mov    $0x6,%r9d
+  4005e0:	41 b8 05 00 00 00    	mov    $0x5,%r8d
+  4005e6:	b9 04 00 00 00       	mov    $0x4,%ecx
+  4005eb:	ba 03 00 00 00       	mov    $0x3,%edx
+  4005f0:	be 02 00 00 00       	mov    $0x2,%esi
+  4005f5:	bf 01 00 00 00       	mov    $0x1,%edi
+  4005fa:	e8 97 ff ff ff       	callq  400596 &lt;add&gt;
+  4005ff:	89 45 fc             	mov    %eax,-0x4(%rbp)
+  400602:	8b 45 fc             	mov    -0x4(%rbp),%eax
+  400605:	89 c6                	mov    %eax,%esi
+  400607:	bf b8 06 40 00       	mov    $0x4006b8,%edi
+  40060c:	b8 00 00 00 00       	mov    $0x0,%eax
+  400611:	e8 8a fe ff ff       	callq  4004a0 &lt;printf@plt&gt;
+  400616:	b8 00 00 00 00       	mov    $0x0,%eax
+  40061b:	c9                   	leaveq
+  40061c:	c3                   	retq
+  40061d:	0f 1f 00             	nopl   (%rax)
+</code></pre><p>可以发现传递六个参数的时候借助了<code>%edi %esi %edx %ecx %r8d %r9d</code>这六个寄存器，毕竟寄存器的数量是有限的，如果传递更多的参数呢？</p><p>下面是一个传递9个参数的例子。</p><pre><code class=language-c>#include &lt;stdio.h&gt;
+
+int add(int a, int b, int c, int d, int e, int f, int g, int h, int i) {
+    int sum = a + b + c + d + e + f + g + h + i;
+    return sum;
+}
+
+int main() {
+    int ret = add(1, 2, 3, 4, 5, 6, 7, 8, 9);
+    printf(&quot;%d\n&quot;, ret);
+    return 0;
+}
+</code></pre><pre><code class=language-x86asm>0000000000400596 &lt;add&gt;:
+  400596:	55                   	push   %rbp
+  400597:	48 89 e5             	mov    %rsp,%rbp
+  40059a:	89 7d ec             	mov    %edi,-0x14(%rbp)
+  40059d:	89 75 e8             	mov    %esi,-0x18(%rbp)
+  4005a0:	89 55 e4             	mov    %edx,-0x1c(%rbp)
+  4005a3:	89 4d e0             	mov    %ecx,-0x20(%rbp)
+  4005a6:	44 89 45 dc          	mov    %r8d,-0x24(%rbp)
+  4005aa:	44 89 4d d8          	mov    %r9d,-0x28(%rbp)
+  4005ae:	8b 55 ec             	mov    -0x14(%rbp),%edx
+  4005b1:	8b 45 e8             	mov    -0x18(%rbp),%eax
+  4005b4:	01 c2                	add    %eax,%edx
+  4005b6:	8b 45 e4             	mov    -0x1c(%rbp),%eax
+  4005b9:	01 c2                	add    %eax,%edx
+  4005bb:	8b 45 e0             	mov    -0x20(%rbp),%eax
+  4005be:	01 c2                	add    %eax,%edx
+  4005c0:	8b 45 dc             	mov    -0x24(%rbp),%eax
+  4005c3:	01 c2                	add    %eax,%edx
+  4005c5:	8b 45 d8             	mov    -0x28(%rbp),%eax
+  4005c8:	01 c2                	add    %eax,%edx
+  4005ca:	8b 45 10             	mov    0x10(%rbp),%eax
+  4005cd:	01 c2                	add    %eax,%edx
+  4005cf:	8b 45 18             	mov    0x18(%rbp),%eax
+  4005d2:	01 c2                	add    %eax,%edx
+  4005d4:	8b 45 20             	mov    0x20(%rbp),%eax
+  4005d7:	01 d0                	add    %edx,%eax
+  4005d9:	89 45 fc             	mov    %eax,-0x4(%rbp)
+  4005dc:	8b 45 fc             	mov    -0x4(%rbp),%eax
+  4005df:	5d                   	pop    %rbp
+  4005e0:	c3                   	retq
+
+00000000004005e1 &lt;main&gt;:
+  4005e1:	55                   	push   %rbp
+  4005e2:	48 89 e5             	mov    %rsp,%rbp
+  4005e5:	48 83 ec 10          	sub    $0x10,%rsp
+  4005e9:	6a 09                	pushq  $0x9
+  4005eb:	6a 08                	pushq  $0x8
+  4005ed:	6a 07                	pushq  $0x7
+  4005ef:	41 b9 06 00 00 00    	mov    $0x6,%r9d
+  4005f5:	41 b8 05 00 00 00    	mov    $0x5,%r8d
+  4005fb:	b9 04 00 00 00       	mov    $0x4,%ecx
+  400600:	ba 03 00 00 00       	mov    $0x3,%edx
+  400605:	be 02 00 00 00       	mov    $0x2,%esi
+  40060a:	bf 01 00 00 00       	mov    $0x1,%edi
+  40060f:	e8 82 ff ff ff       	callq  400596 &lt;add&gt;
+  400614:	48 83 c4 18          	add    $0x18,%rsp
+  400618:	89 45 fc             	mov    %eax,-0x4(%rbp)
+  40061b:	8b 45 fc             	mov    -0x4(%rbp),%eax
+  40061e:	89 c6                	mov    %eax,%esi
+  400620:	bf d8 06 40 00       	mov    $0x4006d8,%edi
+  400625:	b8 00 00 00 00       	mov    $0x0,%eax
+  40062a:	e8 71 fe ff ff       	callq  4004a0 &lt;printf@plt&gt;
+  40062f:	b8 00 00 00 00       	mov    $0x0,%eax
+  400634:	c9                   	leaveq
+  400635:	c3                   	retq
+  400636:	66 2e 0f 1f 84 00 00 	nopw   %cs:0x0(%rax,%rax,1)
+  40063d:	00 00 00
+</code></pre><p>可以看到最后三个参数不再是通过寄存器传递给<code>add()</code>函数了，而是通过<code>pushq</code>指令压入栈中，而且压栈顺序是请求参数的逆序。在<code>add()</code>函数中是如何取栈中的参数呢？查看汇编代码发现分别取了<code>0x10(%rbp) 0x18(%rbp) 0x20(%rbp</code>，三个地址的差值都是8字节，这个倒是没疑问，但为什么第一个参数的地址是<code>0x10(%rbp)</code>呢？跳过的16个字节保存的是什么内容呢？在使用<code>callq</code>指令调用<code>add()</code>函数的时候，会将返回地址<code>0x400614</code>压入栈中，占用8字节，在<code>add()</code>函数开头将<code>%rbp</code>压入栈中，同样占用8个字节，所以取参数时需要跳过16个字节，通过gdb查看栈中保存的内容发现确实如此。</p><p><img src=20221005162111.png alt="Pasted image 20221005162111.png"></p><p><img src=Slice2.png alt="Slice 1 2 1.png">
+虽然可以通过栈传递更多函数参数，但是访问内存的速度不如访问寄存器，所以在设计函数时要尽可能减少函数参数的个数。</p><h3 id=控制转移>控制转移</h3><p><code>rip</code>寄存器保存的是指令的地址，cpu每次执行指令都从指令寄存器内获取要执行的指令地址，所以控制转移其实就是修改<code>rip</code>寄存器的值，指向<code>add()</code>函数的代码段地址即可。通过<code>gdb</code>单步汇编代码跟踪就可以发现在调用之前<code>%rip</code>内保存的地址是<code>0x40060f</code>，之后修改为<code>0x400596</code>跳转到<code>add()</code>函数。当<code>add()</code>函数执行完之后，<code>retq</code>指令会将栈中保存的返回地址<code>0x400614</code>赋给<code>%rip</code>，完成函数调用，并且继续执行<code>main</code>中的指令。</p><h3 id=上下文恢复>上下文恢复</h3><p>在完成函数调用之后，需要将之前保存的寄存器等恢复成和函数调用前一模一样，上面的汇编代码在完成函数调用后，执行了<code>add $0x18,%rsp</code>指令，通过修改<code>rsp</code>寄存器的值清空调用函数前压入栈中的三个参数，可以发现<code>0x18</code>刚好就是24个字节，对应参数栈中<code>7 8 9</code>的大小。</p><h2 id=参考资料>参考资料</h2><p><a href=https://en.wikipedia.org/wiki/X86-64>X86-84 wiki</a><br><a href=https://wiki.osdev.org/CPU_Registers_x86-64>CPU Registers x86-64</a><br><a href=https://aaronbloomfield.github.io/pdr/book/x86-64bit-ccc-chapter.pdf>The 64 bit x86 C Calling Convention</a></p></article><div class=my-4><a href=/tags/c/c++/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 me-2 hover:text-eureka">#C/C++</a>
+<a href=/tags/%E5%87%BD%E6%95%B0/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 me-2 hover:text-eureka">#函数</a>
+<a href=/tags/%E6%B1%87%E7%BC%96/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 me-2 hover:text-eureka">#汇编</a>
+<a href=/tags/x86-64/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 me-2 hover:text-eureka">#x86-64</a></div><div class="-mx-2 mt-4 flex flex-col border-t px-2 pt-4 md:flex-row md:justify-between"><div></div><div class="mt-4 md:mt-0 md:text-right"><span class="text-primary-text block font-bold">下一页</span>
+<a href=/posts/blog-migration/ class=block>从Hexo迁移到Hugo</a></div></div><div id=valine-comments class=mt-4></div><script defer src=https://cdn.jsdelivr.net/npm/valine@1.4.16/dist/Valine.min.js integrity=sha384-e0+DNUCJo75aOAzHQbFWYBCM9/S4f0BhRJXvEgbE3mMS85RM20MSSGStHuNdY2QK crossorigin></script>
+<script>document.addEventListener("DOMContentLoaded",function(){new Valine({el:"#valine-comments",appId:"zOEvCRaHczqQkvn7g5bk2d9c-gzGzoHsz",appKey:"JJQvXVH4XIDyjJaIK2HWeTY3"})})</script></div><div class="lg:col-start-2 bg-secondary-bg prose col-span-2 rounded p-6 lg:col-span-6"><h3>相关</h3><a href=/posts/c-io/ class=no-underline>[c/c++]关于输入输出</a><br></div></div><script>document.addEventListener("DOMContentLoaded",()=>{hljs.highlightAll()})</script></div></div></main><footer class=pl-scrollbar><div class="mx-auto w-full max-w-screen-xl"><div class="text-center p-6 pin-b"><p class="text-sm text-tertiary-text">&copy; 2019 - 2022 <a href=https://github.com/Elitedj>Elitedj</a>
+&#183; Powered by the <a href=https://github.com/wangchucheng/hugo-eureka class=hover:text-eureka>Eureka</a> theme for <a href=https://gohugo.io class=hover:text-eureka>Hugo</a></p></div></div></footer></body></html>
