@@ -1,0 +1,532 @@
+<!doctype html><html lang=zh dir=ltr><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>从2-4树到红黑树 | Elitedj's Blog</title><meta name=generator content="Hugo Eureka 0.9.3"><link rel=stylesheet href=/css/eureka.min.9cec6350e37e534b0338fa9a085bf06855de3b0f2dcf857e792e5e97b07ea905d4d5513db554cbc26a9c3da622bae92d.css><script defer src=/js/eureka.min.fa9a6bf6d7a50bb635b4cca7d2ba5cf3dfb095ae3798773f1328f7950028b48c17d06276594e1b5f244a25a6c969a705.js></script>
+<link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=preload href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&amp;family=Noto+Serif+SC:wght@400;600;700&amp;display=swap" as=style onload='this.onload=null,this.rel="stylesheet"'><link rel=stylesheet href=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/styles/base16/solarized-light.min.css media=print onload='this.media="all",this.onload=null' crossorigin><script defer src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/highlight.min.js crossorigin></script>
+<script defer src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/languages/dart.min.js crossorigin></script>
+<link rel=stylesheet href=/css/highlightjs.min.2958991528e43eb6fc9b8c4f2b8e052f79c4010718e1d1e888a777620e9ee63021c2c57ec7417a3108019bb8c41943e6.css media=print onload='this.media="all",this.onload=null'><script defer type=text/javascript src=/js/fontawesome.min.8c77c7521b1f95ec2031c2a79f5c6a698aa4a0dba5ba649dfbc7f73994cddf3f494be6aac7e5724f35cbf72cfde09703.js></script>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css integrity=sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ media=print onload='this.media="all",this.onload=null' crossorigin><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js integrity=sha384-VQ8d8WVFw0yHhCk5E8I86oOhv48xLpnDZx5T9GogA/Y84DcCKWXDmSDfn13bzFZY crossorigin></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin></script>
+<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}]})})</script><script defer src=https://cdn.jsdelivr.net/npm/mermaid@8.14.0/dist/mermaid.min.js integrity=sha384-atOyb0FxAgN9LyAc6PEf9BjgwLISyansgdH8/VXQH8p2o5vfrRgmGIJ2Sg22L0A0 crossorigin></script>
+<link rel=icon type=image/png sizes=32x32 href=/images/avatar_hubecf9d80b8b876872272a68886c75e90_327995_32x32_fill_box_center_3.png><link rel=apple-touch-icon sizes=180x180 href=/images/avatar_hubecf9d80b8b876872272a68886c75e90_327995_180x180_fill_box_center_3.png><meta name=description content="对于一般的二叉搜索树来说，查找、插入、删除的平均时间复杂度都是$O(logN)$，但最坏情况是$O(N)$。而平衡树可以保证这三种方法的复杂度都是$O"><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"/posts/"},{"@type":"ListItem","position":2,"name":"从2-4树到红黑树","item":"/posts/redblacktree/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"/posts/redblacktree/"},"headline":"从2-4树到红黑树 | Elitedj\u0027s Blog","datePublished":"2023-04-30T16:13:11+08:00","dateModified":"2023-04-30T16:13:11+08:00","wordCount":4395,"publisher":{"@type":"Person","name":"Elitedj","logo":{"@type":"ImageObject","url":"/images/avatar.png"}},"description":"对于一般的二叉搜索树来说，查找、插入、删除的平均时间复杂度都是$O(logN)$，但最坏情况是$O(N)$。而平衡树可以保证这三种方法的复杂度都是$O"}</script><meta property="og:title" content="从2-4树到红黑树 | Elitedj's Blog"><meta property="og:type" content="article"><meta property="og:image" content="/images/avatar.png"><meta property="og:url" content="/posts/redblacktree/"><meta property="og:description" content="对于一般的二叉搜索树来说，查找、插入、删除的平均时间复杂度都是$O(logN)$，但最坏情况是$O(N)$。而平衡树可以保证这三种方法的复杂度都是$O"><meta property="og:locale" content="zh"><meta property="og:site_name" content="Elitedj's Blog"><meta property="article:published_time" content="2023-04-30T16:13:11+08:00"><meta property="article:modified_time" content="2023-04-30T16:13:11+08:00"><meta property="article:section" content="posts"><meta property="article:tag" content="Algorithm"><meta property="article:tag" content="Data Structure"><meta property="article:tag" content="Red Black Tree"><meta property="article:tag" content="Tree"><meta property="og:see_also" content="/posts/treap/"><meta property="og:see_also" content="/posts/scapegoat-tree/"><meta property="og:see_also" content="/posts/persistent-set-union/"><meta property="og:see_also" content="/posts/persistent-array/"><meta property="og:see_also" content="/posts/trie/"><meta property="og:see_also" content="/posts/persistent-seg-tree/"><body class="flex min-h-screen flex-col"><header class="min-h-16 pl-scrollbar bg-secondary-bg fixed z-50 flex w-full items-center shadow-sm"><div class="mx-auto w-full max-w-screen-xl"><script>let storageColorScheme=localStorage.getItem("lightDarkMode");((storageColorScheme=="Auto"||storageColorScheme==null)&&window.matchMedia("(prefers-color-scheme: dark)").matches||storageColorScheme=="Dark")&&document.getElementsByTagName("html")[0].classList.add("dark")</script><nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0"><a href=/ class="me-6 text-primary-text text-xl font-bold">Elitedj's Blog</a>
+<button id=navbar-btn class="md:hidden flex items-center px-3 py-2" aria-label="Open Navbar">
+<i class="fas fa-bars"></i></button><div id=target class="hidden block md:flex md:grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20"><div class="md:flex md:h-16 text-sm md:grow pb-4 md:pb-0 border-b md:border-b-0"><a href=/about class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 border-transparent me-4">About</a></div><div class=flex><div class="relative pt-4 md:pt-0"><div class="cursor-pointer hover:text-eureka" id=lightDarkMode><i class="fas fa-adjust"></i></div><div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id=is-open></div><div class="absolute flex flex-col start-0 md:start-auto end-auto md:end-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40" id=lightDarkOptions><span class="px-4 py-1 hover:text-eureka" name=Light>浅色</span>
+<span class="px-4 py-1 hover:text-eureka" name=Dark>深色</span>
+<span class="px-4 py-1 hover:text-eureka" name=Auto>自动</span></div></div></div></div><div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id=is-open-mobile></div></nav><script>let element=document.getElementById("lightDarkMode");storageColorScheme==null||storageColorScheme=="Auto"?document.addEventListener("DOMContentLoaded",()=>{window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change",switchDarkMode)}):storageColorScheme=="Light"?(element.firstElementChild.classList.remove("fa-adjust"),element.firstElementChild.setAttribute("data-icon","sun"),element.firstElementChild.classList.add("fa-sun")):storageColorScheme=="Dark"&&(element.firstElementChild.classList.remove("fa-adjust"),element.firstElementChild.setAttribute("data-icon","moon"),element.firstElementChild.classList.add("fa-moon")),document.addEventListener("DOMContentLoaded",()=>{getcolorscheme(),switchBurger()})</script></div></header><main class="grow pt-16"><div class=pl-scrollbar><div class="mx-auto w-full max-w-screen-xl lg:px-4 xl:px-8"><div class="grid grid-cols-2 gap-4 lg:grid-cols-8 lg:pt-12"><div class="lg:col-start-2 bg-secondary-bg col-span-2 rounded px-6 py-8 lg:col-span-6"><article class=prose><h1 class=mb-4>从2-4树到红黑树</h1><div class="text-tertiary-text not-prose mt-2 flex flex-row flex-wrap items-center"><div class="me-6 my-2"><i class="fas fa-calendar me-1"></i>
+<span>2023-04-30</span></div><div class="me-6 my-2"><i class="fas fa-clock me-1"></i>
+<span>9分钟阅读时长</span></div><div class="me-6 my-2"><i class="fas fa-folder me-1"></i>
+<a href=/categories/data-structure/ class=hover:text-eureka>Data Structure</a></div></div><p>对于一般的二叉搜索树来说，查找、插入、删除的平均时间复杂度都是$O(logN)$，但最坏情况是$O(N)$。而平衡树可以保证这三种方法的复杂度都是$O(logN)$，平衡树通过重构使得树的高度是平衡的，不会退化成单链。红黑树就是平衡树的一种。</p><p>本文将先介绍2-3-4树，通过2-3-4树引入到红黑树。</p><h2 id=2-3-4树>2-3-4树</h2><p><a href=https://en.wikipedia.org/wiki/2%E2%80%933%E2%80%934_tree>2-3-4树</a>也叫2-4树，是一种自平衡的数据结构。之所以这么叫是因为2-4树的节点类型有以下三种</p><ul><li>2-node：存储一个key，有两个儿子节点</li><li>3-node：存储两个key，有三个儿子节点</li><li>4-node：存储三个key，有四个儿子节点</li></ul><p>2-4树是4阶B树，查找、插入、删除的时间复杂度都是$O(logN)$。2-4树有一个重要的性质就是每一个叶子节点的深度都是相同的。</p><p><img src=2-4tree.png alt=2-4tree></p><div align=center><font size=2 color=#808080>2-4 Tree</font></div><p>对于2-node来说，左儿子表示的范围是$(-\infty, v)$，右儿子表示的范围是$(v, +\infty)$，其他类型的节点也是同理。</p><h3 id=为什么是2-3-4>为什么是2-3-4</h3><p>为什么不最大化儿子节点的数量来让树的高度最小？假设所有节点都是d-node的话，查询的时间复杂度会更低吗？</p><p>假设$d = N^{1/2}$，意味着树的高度是2，那么我们在每一层通过二分查找查询正确节点的时间复杂度是$O(logN^{1/2})$，而$2logN^{1/2} = O(logN)$，并没有得到优化。2-3-4树会保证树的高度在$O(logN)$。</p><h3 id=插入>插入</h3><p>对于2-node和3-node，都是直接插入即可。</p><p><img src=ins2-3node.png alt=ins2-3node></p><div align=center><font size=2 color=#808080>insert 2 node & 3 node</font></div><p>对于4-node的插入则要麻烦一些。因为4-node已经没法直接存入值了。首先需要将中间值提取出来，存储到父节点中，剩下的左值和右值以及4个儿子节点分裂成两个2-node挂在父节点下，然后再根据上面的情况插入新值即可。</p><p><img src=ins4-node.png alt=ins4-node></p><div align=center><font size=2 color=#808080>insert 4 node</font></div><p>假如该4-node的父节点也是4-node节点怎么办？继续向上分裂即可。</p><h3 id=删除>删除</h3><p>2-3-4树删除节点分比较多种情况。</p><ol><li><p>如果k是在叶子结点，并且该叶子节点至少存储了两个key，则直接删除即可</p></li><li><p>如果k是在当前节点内，则执行以下三种操作之一</p><ol><li>如果左儿子至少有两个key，则用值最大的key替换掉k，并删除左儿子中最大的key</li><li>如果右儿子至少有两个key，则用值最小的key替换掉k，并删除右儿子中最小的key</li><li>如果左右儿子都只有一个key，则将左儿子、右儿子和k合并成4-node，并从原节点删除k，新的4-node节点为原节点的左儿子，然后从4-node节点中删除k即可</li></ol></li><li><p>如果k不在当前节点内，则根据正确的路径找到向下找。在这个过程中，需要保证经过的节点都至少包含两个key，因此过程中可能需要执行以下两种操作之一</p><ol><li>如果即将去到的节点仅有一个key，并且兄弟节点至少有两个key，则从当前节点移动一个key到目标路径节点，从兄弟节点移动一个key到当前节点。</li><li>如果即将去到的节点仅有一个key，并且兄弟节点也只有一个key，则和当前节点的一个key进行合并成一个4-node，并且这个值在中间。</li></ol></li></ol><p><img src=case1.png alt=case1></p><p><img src=case2a.png alt=case2a></p><p><img src=case2b.png alt=case2b></p><p><img src=case2c.png alt=case2c></p><p><img src=case3a.png alt=case3a></p><p><img src=case3b.png alt=case3b></p><h2 id=red-black-tree>Red Black Tree</h2><p>红黑树和2-4树是等价的，任何一颗2-4树都可以转换成红黑树。红黑树是二叉搜索树，只有2-node节点。每个节点要么是黑色，要么是红色，通过颜色可以表示2-4树中的3-node和4-node。</p><p><img src=2-4tree2rbt.png alt=2-4tree2rbt></p><div align=center><font size=2 color=#808080>2-4 tree to rbt</font></div><p>红黑树的高度最多会是2-4树的两倍，例如下面这个case，整体的高度还是$O(logN)$</p><p><img src=2h.png alt=2h></p><h3 id=性质>性质</h3><ol><li>从root到leaf的路径上不会有连续的红色节点，即父节点和儿子节点不会都是红色（red property）</li><li>从root到所有leaf的路径上，黑色节点的数量是相同的（black property）</li><li>root节点永远都是黑色（root property）</li><li>每一个NIL节点可以看作是黑色节点，black property需要计算上黑色NIL节点的数量</li></ol><h3 id=插入-1>插入</h3><p>插入操作是将值k插入到红黑树中，并且维持红黑树的性质。如果是一颗空树的话，则生成一个黑节点，存储k即可。若是一颗非空树，则需要执行以下操作：</p><ol><li>找到合适的叶子结点位置</li><li>将k插入到该叶子结点的位置，并且为红色节点</li><li>必要时候通过旋转、变色操作来维护红黑树性质。</li></ol><p>现在来分析一下插入到非空树的情况，假设我们要插入的节点为k，父节点为p，祖父节点为g。</p><ul><li>Case1：p是黑节点</li></ul><p>如果k的父节点p是黑节点，那么直接插入即可，什么也不需要调整，性质都不会被破坏。从2-4树来看，就是2-node变成3-node的过程。</p><ul><li>Case2：p是红节点</li></ul><p>如果k的父节点p是红节点，则出现了<code>double-red</code>的情况，破坏了red property，此时p的父节点g（k的祖父节点）为黑节点，为了解除double-red的情况，我们需要考虑g的另一个儿子节点s（即p的兄弟节点）的颜色。</p><ul><li>Case2a：s是黑节点或nil</li></ul><p>如果s是黑节点或者nil，则我们需要将k、p和g这三个节点重组。首先按照k、p、g三个节点的值进行从小到大的排序，假设排序结果是a、b、c，则将a和c设置为b的儿子节点，涂为红色，b为黑节点，同时考虑p的子树以及s是在合适的位置。</p><p><img src=rbt-ins-black.png alt=rbt-ins-black></p><div align=center><font size=2 color=#808080>rbt insert Case 2a</font></div><ul><li>Case2b：s是红节点</li></ul><p>如果s是红节点，则将p和s的颜色改变成黑色，g节点的颜色改成红色（如果g节点是root则保持黑色不变）。由于g节点变成了红色，g和g的父节点可能出现double-red的情况，则根据case2a的方法调整即可。</p><p><img src=rbt-ins-red.png alt=rbt-ins-red></p><div align=center><font size=2 color=#808080>rbt insert Case 2b</font></div><h3 id=删除-1>删除</h3><p>删除操作是从红黑树中找到要删除的节点x，将节点移除的过程。删除操作和插入操作一样可能会破坏红黑树的性质，删除后通过旋转和变色操作修复破坏的性质。</p><p>二叉搜索树的删除，通常不是直接删除节点本身，而是找到前驱或者后继节点，将值替换到原本要删除的节点，然后将问题转换成删除前驱或者后继节点。且前驱和后继节点只多只有一个子节点。</p><ul><li><p>当前是红色节点</p><ul><li><p>是红色叶子节点则直接删除即可，不影响任何性质</p></li><li><p>有一个子节点（不可能的情况）</p><ul><li>有一个红色子节点，出现<code>double-red</code>情况</li><li>有一个黑色子节点，破坏了black property性质</li></ul></li></ul></li><li><p>当前是黑色节点</p><ul><li><p>是黑色叶子节点，这是最复杂的情况，下面会详细讨论</p><ul><li>Case1：兄弟节点是红色的</li><li>Case2：兄弟节点是黑色的且有两个黑色节点儿子</li><li>Case3：兄弟节点是黑色的且兄弟节点左儿子是红色，右儿子是黑色的</li><li>Case4：兄弟节点是黑色的且兄弟节点右儿子是红色的</li></ul></li><li><p>有一个黑色子节点（不可能的情况）</p><ul><li>破坏了black property性质</li></ul></li><li><p>有一个红色子节点</p><ul><li>将这个红色子节点替换自己的位置，并且变色成黑色即可</li></ul></li></ul></li></ul><div align=center><img src=del-road-map.png width=50%>
+<font size=2 color=#808080>rbt deletion</font></div><ul><li>Case1：当前是黑色叶子节点，且兄弟节点是红色的</li></ul><p>首先将父节点和兄弟节点的颜色变换一下，然后父节点相对于兄弟节点进行旋转操作。当前仍然没有完全恢复红黑树的性质，但是转换成了Case2或Case3的情况，将根据Case2或者Case3的操作继续恢复。</p><p><img src=rbt-del-case1.png alt=rbt-del-case1></p><ul><li>Case2： 当前是黑色叶子节点，兄弟节点是黑色且有两个黑色儿子</li></ul><p>首先将sibling变色成红色，然后将current移动到parent节点，这时候会有两种情况，parent是红色的或者是黑色的。如果parent是红色的，则变色成黑色即可结束。否则根据情况继续修复。</p><p><img src=del-case2.png alt=del-case2></p><ul><li>Case3：兄弟节点是黑色的且兄弟节点左儿子是红色，右儿子是黑色的</li></ul><p>将兄弟节点的左儿子变色成黑色，兄弟节点变色成红色，对兄弟节点进行右旋，并用case4的方法继续修复。</p><p><img src=del-case3.png alt=del-case3></p><ul><li>Case4：兄弟节点是黑色的且兄弟节点右儿子是红色的</li></ul><p>将sibling变色成parent的颜色，将parent变成黑色，将sibling的右儿子变成黑色，对parent进行左旋，将current移至root并且变色成黑色。</p><p><img src=del-case4.png alt=del-case4></p><h2 id=代码>代码</h2><p><a href=https://github.com/Elitedj/RBTree>Red Black Tree implemented by Go</a></p><pre><code class=language-go>type Color byte
+
+const (
+	Red Color = iota
+	Black
+)
+
+type Direction byte
+
+const (
+	DirRoot Direction = iota
+	DirLeft
+	DirRight
+)
+
+type RBNode[T constraints.Ordered] struct {
+	Val    T
+	parent *RBNode[T]
+	left   *RBNode[T]
+	right  *RBNode[T]
+	color  Color
+}
+
+func newRBNode[T constraints.Ordered](v T) *RBNode[T] {
+	return &amp;RBNode[T]{
+		Val:    v,
+		parent: nil,
+		left:   nil,
+		right:  nil,
+		color:  Red,
+	}
+}
+
+func (n *RBNode[T]) isLeaf() bool {
+	return (n.left == nil &amp;&amp; n.right == nil)
+}
+
+func (n *RBNode[T]) isRoot() bool {
+	return n.parent == nil
+}
+
+func (n *RBNode[T]) isRed() bool {
+	return n.color == Red
+}
+
+func (n *RBNode[T]) isBlack() bool {
+	return n.color == Black
+}
+
+func (n *RBNode[T]) direction() Direction {
+	if n.parent != nil {
+		if n == n.parent.left {
+			return DirLeft
+		} else {
+			return DirRight
+		}
+	} else {
+		return DirRoot
+	}
+}
+
+func (n *RBNode[T]) sibling() *RBNode[T] {
+	if n.direction() == DirLeft {
+		return n.parent.right
+	} else {
+		return n.parent.left
+	}
+}
+
+func (n *RBNode[T]) hasSibling() bool {
+	return (!n.isRoot() &amp;&amp; n.sibling() != nil)
+}
+
+func (n *RBNode[T]) uncle() *RBNode[T] {
+	return n.parent.sibling()
+}
+
+func (n *RBNode[T]) hasUncle() bool {
+	return (!n.isRoot() &amp;&amp; n.parent.hasSibling())
+}
+
+func (n *RBNode[T]) grandParent() *RBNode[T] {
+	return n.parent.parent
+}
+
+func (n *RBNode[T]) hasGrandParent() bool {
+	return (!n.isRoot() &amp;&amp; !n.parent.isRoot())
+}
+
+func (n *RBNode[T]) release() {
+	n.parent = nil
+	if n.left != nil {
+		n.left.release()
+	}
+	if n.right != nil {
+		n.right.release()
+	}
+}
+
+type RBTree[T constraints.Ordered] struct {
+	root *RBNode[T]
+	cnt  uint
+}
+
+func NewRBTree[T constraints.Ordered]() *RBTree[T] {
+	return &amp;RBTree[T]{
+		root: nil,
+		cnt:  0,
+	}
+}
+
+func (t *RBTree[T]) Size() uint {
+	return t.cnt
+}
+
+func (t *RBTree[T]) Empty() bool {
+	return t.cnt == 0
+}
+
+func (t *RBTree[T]) Clear() {
+	if t.root != nil {
+		t.root.release()
+		t.root = nil
+	}
+	t.cnt = 0
+}
+
+func search[T constraints.Ordered](n *RBNode[T], v T) (*RBNode[T], bool) {
+	if n == nil {
+		return nil, false
+	}
+
+	if n.Val == v {
+		return n, true
+	}
+	if n.Val &lt; v {
+		return search(n.right, v)
+	}
+	return search(n.left, v)
+}
+
+func (t *RBTree[T]) Get(v T) (*RBNode[T], bool) {
+	return search(t.root, v)
+}
+
+func (t *RBTree[T]) Has(v T) bool {
+	_, ok := search(t.root, v)
+	return ok
+}
+
+func (t *RBTree[T]) Insert(v T) {
+	if t.root == nil {
+		t.root = newRBNode(v)
+		t.root.color = Black
+		t.cnt++
+	} else {
+		t.insert(t.root, v)
+	}
+}
+
+func (n *RBNode[T]) maintainRelationship() {
+	if n.left != nil {
+		n.left.parent = n
+	}
+	if n.right != nil {
+		n.right.parent = n
+	}
+}
+
+func (t *RBTree[T]) leftRotate(n *RBNode[T]) {
+	if n == nil || n.right == nil {
+		return
+	}
+
+	parent := n.parent
+	dir := n.direction()
+
+	successor := n.right
+	n.right = successor.left
+	successor.left = n
+
+	n.maintainRelationship()
+	successor.maintainRelationship()
+
+	switch dir {
+	case DirRoot:
+		t.root = successor
+		break
+	case DirLeft:
+		parent.left = successor
+		break
+	case DirRight:
+		parent.right = successor
+		break
+	}
+
+	successor.parent = parent
+}
+
+func (t *RBTree[T]) rightRotate(n *RBNode[T]) {
+	if n == nil || n.left == nil {
+		return
+	}
+
+	parent := n.parent
+	dir := n.direction()
+
+	successor := n.left
+	n.left = successor.right
+	successor.right = n
+
+	n.maintainRelationship()
+	successor.maintainRelationship()
+
+	switch dir {
+	case DirRoot:
+		t.root = successor
+		break
+	case DirLeft:
+		parent.left = successor
+		break
+	case DirRight:
+		parent.right = successor
+		break
+	}
+
+	successor.parent = parent
+}
+
+func (t *RBTree[T]) insert(n *RBNode[T], v T) {
+	if n.Val == v {
+		return
+	}
+
+	if v &lt; n.Val {
+		if n.left == nil {
+			n.left = newRBNode(v)
+			n.left.parent = n
+			t.insertFixUp(n.left)
+			t.cnt++
+		} else {
+			t.insert(n.left, v)
+		}
+	} else {
+		if n.right == nil {
+			n.right = newRBNode(v)
+			n.right.parent = n
+			t.insertFixUp(n.right)
+			t.cnt++
+		} else {
+			t.insert(n.right, v)
+		}
+	}
+}
+
+func (t *RBTree[T]) insertFixUp(n *RBNode[T]) {
+	if n.isRoot() {
+		n.color = Black
+		return
+	}
+
+	if n.parent.isBlack() {
+		// case 1: parent is black
+		return
+	}
+
+	if n.parent.isRoot() {
+		n.parent.color = Black
+		return
+	}
+
+	if !n.hasUncle() || n.uncle().isBlack() {
+		// case 2a: uncle is nil or black
+		if n.direction() != n.parent.direction() {
+			parent := n.parent
+			if n.direction() == DirLeft {
+				t.rightRotate(n.parent)
+			} else {
+				t.leftRotate(n.parent)
+			}
+			n = parent
+		}
+
+		if n.parent.direction() == DirLeft {
+			t.rightRotate(n.grandParent())
+		} else {
+			t.leftRotate(n.grandParent())
+		}
+
+		n.parent.color = Black
+		n.sibling().color = Red
+		return
+	}
+
+	if n.hasUncle() &amp;&amp; n.uncle().isRed() {
+		// case 2b: uncle is red
+		n.parent.color = Black
+		n.uncle().color = Black
+		n.grandParent().color = Red
+		t.insertFixUp(n.grandParent())
+		return
+	}
+}
+
+func (t *RBTree[T]) Delete(v T) {
+	if t.root == nil {
+		return
+	} else {
+		t.delete(t.root, v)
+	}
+}
+
+func (t *RBTree[T]) delete(n *RBNode[T], v T) {
+	if n == nil {
+		return
+	}
+
+	if n.Val != v {
+		if v &lt; n.Val {
+			left := n.left
+			t.delete(left, v)
+		} else {
+			right := n.right
+			t.delete(right, v)
+		}
+		n.maintainRelationship()
+		return
+	}
+
+	// only root
+	if t.Size() == 1 {
+		t.Clear()
+		return
+	}
+
+	if n.left != nil &amp;&amp; n.right != nil {
+		successor := n.right
+		parent := n
+		// find successor of current
+		for successor.left != nil {
+			parent = successor
+			successor = parent.left
+		}
+		// swap current and successor
+		n.Val, successor.Val = successor.Val, n.Val
+		n, successor = successor, n
+		parent.maintainRelationship()
+	}
+
+	if n.isLeaf() {
+		// black leaf node
+		if n.isBlack() {
+			t.deleteFixUp(n)
+		}
+		// delete
+		if n.direction() == DirLeft {
+			n.parent.left = nil
+		} else {
+			n.parent.right = nil
+		}
+	} else {
+		// current node has a signle child
+		// replace current with its child
+		parent := n.parent
+		var replacement *RBNode[T]
+		if n.left != nil {
+			replacement = n.left
+		} else {
+			replacement = n.right
+		}
+		switch n.direction() {
+		case DirRoot:
+			t.root = replacement
+			break
+		case DirLeft:
+			parent.left = replacement
+			break
+		case DirRight:
+			parent.right = replacement
+			break
+		}
+
+		if !n.isRoot() {
+			replacement.parent = parent
+		}
+
+		if n.isBlack() {
+			if replacement.isRed() {
+				replacement.color = Black
+			} else {
+				t.deleteFixUp(replacement)
+			}
+		}
+
+		n = nil
+	}
+
+	t.cnt--
+}
+
+func (t *RBTree[T]) deleteFixUp(n *RBNode[T]) {
+	if n.isRoot() {
+		n.color = Black
+		return
+	}
+
+	dir := n.direction()
+	sibling := n.sibling()
+	if sibling.isRed() {
+		// case 1: current is black and sibling is red
+		// step 1: recolor parent and sibling
+		// step 2: rotate parent
+		parent := n.parent
+		parent.color = Red
+		sibling.color = Black
+		if dir == DirLeft {
+			t.leftRotate(parent)
+		} else {
+			t.rightRotate(parent)
+		}
+		sibling = n.sibling()
+	}
+
+	var closeNephew, distantNephew *RBNode[T]
+	var isCloseNephewBlack, isDistantNephewBlack bool
+	if dir == DirLeft {
+		closeNephew = sibling.left
+		distantNephew = sibling.right
+	} else {
+		closeNephew = sibling.right
+		distantNephew = sibling.left
+	}
+	if closeNephew == nil || closeNephew.isBlack() {
+		isCloseNephewBlack = true
+	}
+	if distantNephew == nil || distantNephew.isBlack() {
+		isDistantNephewBlack = true
+	}
+
+	if isCloseNephewBlack &amp;&amp; isDistantNephewBlack {
+		// case 2: sibling is black and has two black childs
+		if n.parent.isRed() {
+			n.parent.color = Black
+			sibling.color = Red
+		} else {
+			sibling.color = Red
+			t.deleteFixUp(n.parent)
+		}
+		return
+	} else {
+		if closeNephew != nil &amp;&amp; closeNephew.isRed() {
+			// case 3: sibling is black and close nephew is red
+			closeNephew.color = Black
+			sibling.color = Red
+			if dir == DirLeft {
+				t.rightRotate(sibling)
+			} else {
+				t.leftRotate(sibling)
+			}
+			sibling = n.sibling()
+			if dir == DirLeft {
+				closeNephew = sibling.left
+				distantNephew = sibling.right
+			} else {
+				closeNephew = sibling.right
+				distantNephew = sibling.left
+			}
+		}
+
+		// case 4: sibling is black and distant nephew is red
+		sibling.color = n.parent.color
+		n.parent.color = Black
+		if distantNephew != nil {
+			distantNephew.color = Black
+		}
+		if dir == DirLeft {
+			t.leftRotate(n.parent)
+		} else {
+			t.rightRotate(n.parent)
+		}
+		t.root.color = Black
+		return
+	}
+}
+
+func (t *RBTree[T]) InOrder() []T {
+	res := make([]T, 0)
+	t.inOrder(t.root, &amp;res)
+	return res
+}
+
+func (t *RBTree[T]) inOrder(n *RBNode[T], res *[]T) {
+	if n == nil {
+		return
+	}
+
+	if n.left != nil {
+		t.inOrder(n.left, res)
+	}
+	*res = append(*res, n.Val)
+	if n.right != nil {
+		t.inOrder(n.right, res)
+	}
+}
+</code></pre><h3 id=benchmark>Benchmark</h3><pre><code>goos: linux
+goarch: amd64
+pkg: github.com/elitedj/rbtree
+cpu: AMD EPYC 7K62 48-Core Processor
+BenchmarkInsert          4255707               324.2 ns/op
+BenchmarkDelete         10957584               113.8 ns/op
+</code></pre><h2 id=参考>参考</h2><p><a href=https://en.wikipedia.org/wiki/2%E2%80%933%E2%80%934_tree>2-3-4 Tree &ndash;wiki</a></p><p><a href=https://azrael.digipen.edu/~mmead/www/Courses/CS280/Trees-2-3-4-delete.html>2-4 Tree Deletion</a></p><p><a href=https://en.wikipedia.org/wiki/Red%E2%80%93black_tree>Red Black Tree &ndash;wiki</a></p><p><a href=https://pages.cs.wisc.edu/~paton/readings/Red-Black-Trees/>Red Black Tree &ndash;Paton, James</a></p><p><a href=http://gauss.ececs.uc.edu/Courses/c110/lectures/Week2/RedBlack/redblack.html>Red Black Tree Demo</a></p><p><a href=http://alrightchiu.github.io/SecondRound/red-black-tree-deleteshan-chu-zi-liao-yu-fixupxiu-zheng.html>Red Black Tree: Delete(删除资料)与Fixup(修正)</a></p></article><div class=my-4><a href=/tags/algorithm/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 me-2 hover:text-eureka">#Algorithm</a>
+<a href=/tags/data-structure/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 me-2 hover:text-eureka">#Data Structure</a>
+<a href=/tags/red-black-tree/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 me-2 hover:text-eureka">#Red Black Tree</a>
+<a href=/tags/tree/ class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 me-2 hover:text-eureka">#Tree</a></div><div class="-mx-2 mt-4 flex flex-col border-t px-2 pt-4 md:flex-row md:justify-between"><div></div><div class="mt-4 md:mt-0 md:text-right"><span class="text-primary-text block font-bold">下一页</span>
+<a href=/posts/berrykv/ class=block>BerryKV: 基于Bitcask模型的KV存储</a></div></div><div id=valine-comments class=mt-4></div><script defer src=https://cdn.jsdelivr.net/npm/valine@1.4.16/dist/Valine.min.js integrity=sha384-e0+DNUCJo75aOAzHQbFWYBCM9/S4f0BhRJXvEgbE3mMS85RM20MSSGStHuNdY2QK crossorigin></script>
+<script>document.addEventListener("DOMContentLoaded",function(){new Valine({el:"#valine-comments",appId:"zOEvCRaHczqQkvn7g5bk2d9c-gzGzoHsz",appKey:"JJQvXVH4XIDyjJaIK2HWeTY3"})})</script></div><div class="lg:col-start-2 bg-secondary-bg prose col-span-2 rounded p-6 lg:col-span-6"><h3>相关</h3><a href=/posts/treap/ class=no-underline>Treap</a><br><a href=/posts/scapegoat-tree/ class=no-underline>替罪羊树</a><br><a href=/posts/persistent-set-union/ class=no-underline>可持久化并查集</a><br><a href=/posts/persistent-array/ class=no-underline>可持久化数组</a><br><a href=/posts/trie/ class=no-underline>字典树(Trie)</a><br><a href=/posts/persistent-seg-tree/ class=no-underline>可持久化线段树(主席树)</a><br></div></div><script>document.addEventListener("DOMContentLoaded",()=>{hljs.highlightAll()})</script></div></div></main><footer class=pl-scrollbar><div class="mx-auto w-full max-w-screen-xl"><div class="text-center p-6 pin-b"><p class="text-sm text-tertiary-text">&copy; 2019 - 2023 <a href=https://github.com/Elitedj>Elitedj</a>
+&#183; Powered by the <a href=https://github.com/wangchucheng/hugo-eureka class=hover:text-eureka>Eureka</a> theme for <a href=https://gohugo.io class=hover:text-eureka>Hugo</a></p></div></div></footer></body></html>
